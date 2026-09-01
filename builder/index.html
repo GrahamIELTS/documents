@@ -1298,7 +1298,7 @@ function buildReport(S){
   const advs = akeys.map(k=>ADVANTAGES[k]).filter(Boolean);
 
   const first = S.name ? esc(S.name) : '';
-  const hwUrl = (S.site||'').replace(/\/+$/,'') + '/' + (S.slug || slugify(S.name)) + '/homework.html';
+  const hwUrl = (S.site||'').replace(/\/+$/,'') + '/' + (S.slug || slugify(S.name)) + '/homework';
 
   /* ---------- date line ---------- */
   let dateline;
@@ -2008,7 +2008,7 @@ const REPORT_JS = [
       + 'github.com/GrahamIELTS/documents/upload/main/' + esc(slug) + '</a> '
       + 'and drag <b>both</b> files onto it at once. That link makes the folder for you.'
       + '<br><br>Report: <b>' + esc(site + '/' + slug + '/') + '</b>'
-      + '<br>Homework: <b>' + esc(site + '/' + slug + '/homework.html') + '</b>';
+      + '<br>Homework: <b>' + esc(site + '/' + slug + '/homework') + '</b>';
 
     try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){}
   }
@@ -2065,7 +2065,7 @@ const REPORT_JS = [
   $('#b-copyurl').addEventListener('click', () => {
     const S = collect();
     const base = (S.site || 'https://yoursite.workers.dev').replace(/\/+$/,'') + '/' + currentSlug() + '/';
-    copy('Report: ' + base + '\nHomework: ' + base + 'homework.html', 'Both links copied');
+    copy('Report: ' + base + '\nHomework: ' + base + 'homework', 'Both links copied');
   });
 
   $('#b-mail').addEventListener('click', () => {
@@ -2082,7 +2082,7 @@ const REPORT_JS = [
         : 'Thank you for the lesson. I have written up what I heard, what it is costing you, and what I would do about it.',
       '',
       'Your report:   ' + base,
-      'Your homework: ' + base + 'homework.html',
+      'Your homework: ' + base + 'homework',
       '',
       'Open the report on a laptop if you can. The daily planner near the bottom is interactive, and what you tick is saved in your own browser.',
       '',
