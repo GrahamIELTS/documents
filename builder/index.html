@@ -120,6 +120,9 @@
     font-weight:500;padding:3px 6px;border:1.5px solid var(--line);border-radius:6px;
     background:var(--surface);color:var(--ink);cursor:pointer}
   .wk-opts select:focus{border-color:var(--gold);outline:none}
+  .cbadge{display:inline-block;margin-left:7px;padding:1px 6px;border-radius:4px;
+    background:var(--gold-soft);color:var(--gold-ink);font-size:.62rem;font-weight:700;
+    letter-spacing:.04em;vertical-align:1px}
   .catlab{margin:10px 0 3px;font-size:.63rem;font-weight:700;letter-spacing:.15em;
     text-transform:uppercase;color:var(--gold-ink)}
   .catlab:first-child{margin-top:0}
@@ -278,7 +281,7 @@
     <button class="btn ghost" type="button" id="b-print">Save as PDF</button>
     <button class="btn ghost" type="button" id="b-mail">Email student</button>
     <button class="btn ghost" type="button" id="b-copyurl">Copy live URL</button>
-    <button class="btn" type="button" id="b-download">Download report</button>
+    <button class="btn" type="button" id="b-download">Download both files</button>
   </div>
 </div>
 
@@ -327,6 +330,15 @@ const COMMON = {
 
 /* ---------- research library ---------- */
 const RESEARCH = {
+  corpuslex:{t:'Three quarters of what I correct is word choice',
+    b:'I went back through my own teaching records: 261 student documents and 16,488 comments I had written. When I sorted every correction by type, about three quarters were lexical, meaning the wrong word rather than a broken rule. Grammar was the remaining quarter, and inside that quarter prepositions outnumbered articles roughly two to one. This is why your plan leads on word partners rather than on grammar drills. It is where the marks actually are.',
+    src:'GrahamIELTS teaching corpus, 261 documents'},
+  corpuspart3:{t:'Part 3 is where corrections thin out',
+    b:'In my own records, Part 3 draws about half the corrections per comment that Parts 1 and 2 do, while the amount of teaching I do holds steady. Two readings are possible: either abstract answers genuinely produce fewer isolable errors, or the errors get absorbed into the argument and stop being separable. Either way it means Part 3 needs a different kind of preparation, built around shape rather than around accuracy.',
+    src:'GrahamIELTS teaching corpus, 261 documents'},
+  corpuspart2:{t:'Part 2 is where the work concentrates',
+    b:'Across my own records Part 2 attracts the most comments, the longest ones, and the highest share of notes about structure, linking and strategy. It is the part where preparation pays back most per minute, which is why it appears early in every plan I write.',
+    src:'GrahamIELTS teaching corpus, 261 documents'},
   skehan:{t:'Attention is a fixed budget',
     b:'Speaking research describes a trade off between three things you cannot all maximise at once: how complex your language is, how accurate it is, and how fluent it sounds. Push hard on one and the other two drop. This is not a personal weakness. It is how attention works under time pressure.'},
   automatic:{t:'Practice moves work off the front desk',
@@ -453,7 +465,7 @@ const WEAK_LANG = [
       C1:['Put the ambitious word in the second or third sentence, once the shape of the answer is safe.',
           'Judge a word by whether it is the exact one, not the rare one. Examiners are marking fit.',
           'Where two words are equally exact, take the shorter one and spend the time on the clause instead.']},
- res:['skehan','descriptors','density','formulaic'], drills:['countdown'], adv:'density'},
+ res:['skehan','corpuslex','descriptors','density','formulaic'], drills:['countdown'], adv:'density'},
 
 {id:'collocation', cat:'Vocabulary', skill:'Lexical resource', n:'Word partners',
  meta:'Right word, wrong partner', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
@@ -463,7 +475,7 @@ const WEAK_LANG = [
  fix:{d:['Record new words with their partner and never alone.',
          'Collect the five verbs that appear most in your own answers and learn what each one takes.',
          'When you read, notice the pair rather than the noun.']},
- res:['verbchoice','colloacc','density','formulaic'], drills:[], adv:'density'},
+ res:['corpuslex','verbchoice','colloacc','density','formulaic'], drills:[], adv:'density'},
 
 {id:'saferotation', cat:'Vocabulary', skill:'Lexical resource', n:'The same safe words on rotation',
  meta:'A small set, used often and correctly', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
@@ -533,7 +545,7 @@ const WEAK_LANG = [
  fix:{d:['Three part shape for every Part 3 answer: position, reason, example.',
          'Add "for example" out loud even when it feels unnecessary.',
          'Practise talking for forty five seconds on a boring topic on purpose.']},
- res:['warrant','descriptors','shyness'], drills:['countdown']},
+ res:['warrant','corpuspart3','descriptors','shyness'], drills:['countdown']},
 
 {id:'hedging', cat:'Discourse', skill:'Lexical resource', n:'Everything stated as absolute',
  meta:'No room left to move', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
@@ -573,7 +585,7 @@ const WEAK_LANG = [
 
 /* ---------------- GRAMMAR ---------------- */
 {id:'copula', cat:'Grammar', skill:'Grammatical range and accuracy', n:'The missing BE verb',
- meta:'Am, is, are dropping out', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ meta:'Am, is, are dropping out', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many', corpus:{d:47,h:66},
  heard:{d:'"My hometown very beautiful." "The weather cold today." "I very tired yesterday." The meaning is completely clear, and the verb is not there.',
         C1:'It has almost gone and it returns under pressure, on the long Part 3 answers where your attention is on the argument rather than on the sentence.'},
  why:{d:'In {L1} an adjective can be the whole predicate. 很 hen plus an adjective is a complete sentence, and no verb is required, so 我很累 is grammatical and finished. English will not allow this: the adjective needs a verb to attach to. You are not forgetting a word. You are applying a correct rule from another language.',
@@ -597,7 +609,7 @@ const WEAK_LANG = [
  res:['transfer','noticing'], drills:['playback']},
 
 {id:'passive', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Passive structures',
- meta:'Rarely used, though the machinery is there', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ meta:'Rarely used, though the machinery is there', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many', corpus:{d:43,h:65,n:'the only pattern that peaks in Part 3'},
  heard:{d:'Almost everything is active. Where English would say "the building was completed in 2019" you say "they completed the building in 2019", which is correct and gives away a mark for range.',
         C1:'You produce passives accurately when the topic pushes you into one. You rarely choose one, so the range point goes unclaimed.'},
  why:{d:'This one comes with good news attached. Your first language has passives and uses them far less, often reserving them for unpleasant events, so the preference you carry into English is for the active. But research comparing bilinguals like you with people who speak only English found that when a passive is called for, you build it the same way they do, responding to the same underlying cues, and the researchers described that ability as looking built in rather than learned. The structure is not missing. The habit of reaching for it is.'},
@@ -608,7 +620,7 @@ const WEAK_LANG = [
  res:['bilingual','priming','syntactic','descriptors'], drills:['shadow'], adv:'passive'},
 
 {id:'relative', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Relative clauses',
- meta:'Which, who and that doing no work', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ meta:'Which, who and that doing no work', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many', corpus:{d:44,h:49},
  heard:{d:'Descriptions are delivered as separate sentences. "I have a friend. He lives in Kaohsiung. He is a teacher." Three correct sentences where English would use one.',
         B2:'Relative clauses appear, and almost always at the end of a sentence. The kind that interrupts the middle, the one that would show real range, is missing.'},
  why:{d:'{L1} puts the describing part before the noun and marks it with 的 de, so "the friend who lives in Kaohsiung" is built in the opposite order and needs no relative pronoun at all. English reverses the order and adds a word that has no equivalent in your first language. Producing one means running the sentence backwards while you speak.'},
@@ -670,9 +682,10 @@ const WEAK_LANG = [
  res:['transfer','automatic','clusters'], drills:['slowmo']},
 
 {id:'articles', cat:'Grammar', skill:'Grammatical range and accuracy', n:'A, an and the',
- meta:'Missing, added, or swapped', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
- heard:{d:'"I went to cinema." "The my friend." Articles appear and disappear without a pattern.'},
- why:{d:'{L1} has no articles at all. There is no equivalent decision to transfer, so every article is a new judgement made in real time, which is why they fail under pressure rather than on paper.'},
+ meta:'Missing, added, or swapped', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many', corpus:{d:22,h:26,n:'over-specification, not omission'},
+ heard:{d:'"I went to cinema." "The my friend." Articles appear and disappear without a pattern.',
+        B2:'The pattern in your speech is not the one most textbooks drill. You are not leaving articles out. You are reaching for "the" when you introduce something for the first time, where English wants "a": upload the video for upload a video, be the international sports star for be an international sports star.'},
+ why:{d:'{L1} has no articles at all. There is no equivalent decision to transfer, so every article is a new judgement made in real time, which is why they fail under pressure rather than on paper. Worth knowing that when I sorted my own teaching records, article errors from students who speak your first language were more often over-specification than omission: reaching for "the" on something the listener has not met yet. Almost all published practice material drills the opposite error, so the exercises you have probably already done were aimed somewhere else.'},
  cost:'Frequent, and individually small. Worth fixing after the bigger patterns, not before.',
  fix:{d:['Learn it as one question: does the listener already know which one.',
          'Fix the fifteen fixed phrases first: go to school, at home, in the morning, on the internet.',
@@ -680,7 +693,7 @@ const WEAK_LANG = [
  res:['transfer'], drills:[]},
 
 {id:'sva', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Third person s',
- meta:'He go, she like', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ meta:'He go, she like', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many', corpus:{d:50,h:70},
  heard:{d:'The verb stays in its base form when the subject is he, she or it.'},
  why:{d:'{L1} verbs do not change for the subject at all. One form serves everybody, which is a simpler and arguably better system. English asks for an ending that carries no meaning, so it is the first thing dropped under load.'},
  cost:'Very visible to examiners because it is taught early. It reads as a lower level than you are.',
@@ -717,7 +730,7 @@ const WEAK_LANG = [
  res:['transfer','syntactic'], drills:[]},
 
 {id:'there-is', cat:'Grammar', skill:'Grammatical range and accuracy', n:'There is and there are',
- meta:'Here have many people', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ meta:'Here have many people', tags:['cmn-tw','cmn-cn','yue-hk'], common:'some', corpus:{d:1,h:2,n:'one document in 261'},
  heard:{d:'Existence expressed with have: "In my city have a lot of night markets."'},
  why:{d:'Mandarin uses 有 for both possession and existence, so "there is" and "have" are a single word in your first language and two in English. The split is arbitrary and it has to be learned as a fixed pattern.',
       'yue-hk':'Cantonese uses 有 jau5 for both possession and existence, so "there is" and "have" are a single word in your first language and two in English. The split is arbitrary and it has to be learned as a fixed pattern.'},
@@ -746,16 +759,16 @@ const WEAK_LANG = [
  res:['transfer'], drills:[]},
 
 {id:'count', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Countable and uncountable',
- meta:'Many informations, an advice', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ meta:'Many informations, an advice', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most', corpus:{d:76,h:128,n:'the most widespread grammar pattern in your corpus'},
  heard:{d:'Nouns English treats as uncountable get a plural or an article: informations, advices, a furniture.'},
  why:{d:'{L1} counts everything with a measure word, so the noun itself carries no information about whether it can be counted. English hides that property inside the noun and expects you to know it word by word. There is no rule to derive. It is a list.'},
- cost:'Small, and it clusters in academic topics, so it shows up in exactly the Part 3 and Task 2 language you are trying to score with.',
+ cost:'Larger than it looks. When I sorted my own teaching records across 261 student documents, this was the single most widespread grammar pattern I correct, ahead of subject verb agreement and the missing BE verb. It also rises as topics get more abstract, so it lands hardest in Part 3 and Task 2, which is exactly where you are trying to score.',
  fix:{d:['Learn the twelve that matter: information, advice, news, research, equipment, furniture, luggage, knowledge, progress, traffic, weather, work.',
          'Use a measure phrase: a piece of advice, an item of luggage.']},
  res:['transfer'], drills:[]},
 
 {id:'preps', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Prepositions',
- meta:'In, on, at and the rest', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ meta:'In, on, at and the rest', tags:['cmn-tw','cmn-cn','yue-hk'], common:'some', corpus:{d:28,h:39,n:'for plus noun against to plus verb'},
  heard:{d:'Prepositions are chosen by meaning rather than by the fixed pattern English uses.'},
  why:{d:'{L1} maps space and time onto a different set of words, and no rule transfers. In learner corpora prepositions account for around a tenth of collocation errors, which is real but small next to verb choice.'},
  cost:'Low individually and noticeable in bulk. Worth doing in the background, never as the main project.',
@@ -1178,16 +1191,12 @@ const HW = [
    {n:'How to structure and brainstorm Part 2', u:'https://docs.google.com/document/d/1eFPY-aXSdiyomlWOOLza_k2NK2S95DCH8f__ZNScKIc/edit?usp=sharing',
     d:'The shape of a long turn, and how to find something to say when the card is unhelpful.'},
    {n:'Choose your topics', u:'https://ieltsbro.com/experience?type=0',
-    d:'Pick the topics you want to cover with me. This is how the course gets built around you rather than around a syllabus.'},
-   {n:'Random topic generator', u:'http://www.ratespeeches.com/t=Toastmaster-Table-Topics',
-    d:'Generate five topics, pick one, speak for as long as you can. Expand the suggestion if you need ideas.'}]},
+    d:'Pick the topics you want to cover with me. This is how the course gets built around you rather than around a syllabus.'}]},
  {cat:'Vocabulary', items:[
    {n:'Vocabulary you need for Task 2', u:'https://drive.google.com/open?id=1DLmJl9mOZGsWAN6hjV7IzdghECvMT9MT',
     d:'The core set. Learn these with their partners, never alone.'},
    {n:'Vocabulary for coherence and cohesion', u:'https://drive.google.com/file/d/1fZyzVKdYW9keveIZVgKFI2EQhAXfqcSz/view?usp=sharing',
-    d:'The words that hold an answer together. This is the quarter most students ignore.'},
-   {n:'Words in context', u:'https://context.reverso.net',
-    d:'Look a word up, read one real sentence, then write your own. Sentences are how words stick.'}]},
+    d:'The words that hold an answer together. This is the quarter most students ignore.'}]},
  {cat:'Writing', items:[
    {n:'How to pass Academic Writing Task 1', u:'https://drive.google.com/file/d/14fSg29RCSCeQ6ANhwqRiCLSKL9uijK1h/view?usp=sharing',
     d:'The full method for describing data.'},
@@ -1215,11 +1224,7 @@ const HW = [
     d:'The most enjoyable listening practice there is. Fifteen minutes counts.'},
    {n:'Any word, in real speech', u:'https://youglish.com',
     d:'Type a word and hear real people say it in context. The fastest way to check stress.'},
-   {n:'Short talks with transcripts', u:'https://ed.ted.com', d:'Good for shadowing, because the transcript is right there.'},
-   {n:'Listening practice', u:'https://voicetube.com', d:'Graded by level, with subtitles you can switch off.'}]},
- {cat:'Reading', items:[
-   {n:'Summarise a difficult text', u:'https://quillbot.com/summarize',
-    d:'Paste something too hard, read the summary, then go back to the original. Use it as a way in, not as a substitute.'}]}
+   {n:'Short talks with transcripts', u:'https://ed.ted.com', d:'Good for shadowing, because the transcript is right there.'}]}
 ];
 
 /* ============================================================
@@ -1293,7 +1298,7 @@ function buildReport(S){
   const advs = akeys.map(k=>ADVANTAGES[k]).filter(Boolean);
 
   const first = S.name ? esc(S.name) : '';
-  const hwUrl = (S.site||'').replace(/\/+$/,'') + '/' + (S.slug || slugify(S.name)) + '/homework/';
+  const hwUrl = (S.site||'').replace(/\/+$/,'') + '/' + (S.slug || slugify(S.name)) + '/homework.html';
 
   /* ---------- date line ---------- */
   let dateline;
@@ -1575,10 +1580,7 @@ function buildHomework(S){
       + '<div class="cards">'
       + [['Music','lyricstraining.com','The most enjoyable listening practice there is.'],
          ['Any word, spoken','youglish.com','Type a word, hear real people say it. The fastest way to check stress.'],
-         ['Short talks','ed.ted.com','Good for shadowing, because the transcript is right there.'],
-         ['Graded listening','voicetube.com','Subtitles you can switch off when you are ready.'],
-         ['Words in context','context.reverso.net','One real sentence, then write your own.'],
-         ['Speaking topics','ratespeeches.com','Five random topics. Pick one and talk until you run out.']]
+         ['Short talks','ed.ted.com','Good for shadowing, because the transcript is right there.']]
         .map(x=>'<div class="card"><h3>'+esc(x[0])+'</h3><p><b>'+esc(x[1])+'</b><br>'+esc(x[2])+'</p></div>').join('')
       + '</div></section>';
   }
@@ -1908,7 +1910,9 @@ const REPORT_JS = [
         return '<label class="wk-item"><div class="wk-top">'
           + '<input type="checkbox" data-w="' + w.id + '"' + (on ? ' checked' : '') + '>'
           + '<div style="min-width:0"><div class="wk-name">' + w.n + '</div>'
-          + '<div class="wk-meta">' + w.meta + '</div>'
+          + '<div class="wk-meta">' + w.meta
+          + (w.corpus ? '<span class="cbadge" title="' + (w.corpus.n || 'from your teaching corpus') + '">'
+              + w.corpus.d + ' docs</span>' : '') + '</div>'
           + '<div class="wk-opts">'
           + '<label>Level <select data-lv="' + w.id + '">'
           + LEVEL_ORDER.map(l => '<option value="' + l + '"' + (lv[w.id]===l?' selected':'') + '>' + l + '</option>').join('')
@@ -1999,12 +2003,12 @@ const REPORT_JS = [
 
     const slug = S.slug || slugify(S.name);
     const site = (S.site || 'https://yoursite.workers.dev').replace(/\/+$/,'');
-    $('#pubsteps').innerHTML = '<b>Two pages per student.</b> Download both files below, then upload each into its own folder.'
-      + '<br><br><b>1. The report.</b> <a href="https://github.com/GrahamIELTS/documents/upload/main/' + esc(slug) + '" target="_blank" rel="noopener">'
-      + 'upload/main/' + esc(slug) + '</a> → lives at <b>' + esc(site + '/' + slug + '/') + '</b>'
-      + '<br><b>2. The homework.</b> <a href="https://github.com/GrahamIELTS/documents/upload/main/' + esc(slug) + '/homework" target="_blank" rel="noopener">'
-      + 'upload/main/' + esc(slug) + '/homework</a> → lives at <b>' + esc(site + '/' + slug + '/homework/') + '</b>'
-      + '<br><br>Both links make the folder for you. Each file is named index.html.';
+    $('#pubsteps').innerHTML = '<b>One upload per student.</b> Press <b>Download both files</b>, then open '
+      + '<a href="https://github.com/GrahamIELTS/documents/upload/main/' + esc(slug) + '" target="_blank" rel="noopener">'
+      + 'github.com/GrahamIELTS/documents/upload/main/' + esc(slug) + '</a> '
+      + 'and drag <b>both</b> files onto it at once. That link makes the folder for you.'
+      + '<br><br>Report: <b>' + esc(site + '/' + slug + '/') + '</b>'
+      + '<br>Homework: <b>' + esc(site + '/' + slug + '/homework.html') + '</b>';
 
     try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){}
   }
@@ -2023,23 +2027,25 @@ const REPORT_JS = [
     b.setAttribute('aria-pressed','true');
     showing = b.dataset.doc;
     prev.srcdoc = showing === 'report' ? lastReport : lastHw;
-    $('#b-download').textContent = showing === 'report' ? 'Download report' : 'Download homework';
   }));
 
   /* ---------- actions ---------- */
   function currentSlug(){ const S = collect(); return S.slug || slugify(S.name); }
-  function download(html, msg){
+  function download(html, filename){
     const blob = new Blob([html], {type:'text/html'});
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob); a.download = 'index.html';
+    a.href = URL.createObjectURL(blob); a.download = filename;
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
-    toast(msg);
   }
 
   $('#b-download').addEventListener('click', () => {
-    if(showing === 'report') download(lastReport, 'Report downloaded. Folder: ' + currentSlug());
-    else download(lastHw, 'Homework downloaded. Folder: ' + currentSlug() + '/homework');
+    if(!lastReport) return;
+    download(lastReport, 'index.html');
+    setTimeout(() => {
+      download(lastHw, 'homework.html');
+      toast('Both files downloaded. Drag them together into the ' + currentSlug() + ' folder.');
+    }, 600);
   });
 
   $('#b-print').addEventListener('click', () => {
@@ -2059,7 +2065,7 @@ const REPORT_JS = [
   $('#b-copyurl').addEventListener('click', () => {
     const S = collect();
     const base = (S.site || 'https://yoursite.workers.dev').replace(/\/+$/,'') + '/' + currentSlug() + '/';
-    copy('Report: ' + base + '\nHomework: ' + base + 'homework/', 'Both links copied');
+    copy('Report: ' + base + '\nHomework: ' + base + 'homework.html', 'Both links copied');
   });
 
   $('#b-mail').addEventListener('click', () => {
@@ -2076,7 +2082,7 @@ const REPORT_JS = [
         : 'Thank you for the lesson. I have written up what I heard, what it is costing you, and what I would do about it.',
       '',
       'Your report:   ' + base,
-      'Your homework: ' + base + 'homework/',
+      'Your homework: ' + base + 'homework.html',
       '',
       'Open the report on a laptop if you can. The daily planner near the bottom is interactive, and what you tick is saved in your own browser.',
       '',
