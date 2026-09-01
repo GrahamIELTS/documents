@@ -97,7 +97,7 @@
     border-width:0 2px 2px 0;transform:rotate(43deg) translate(-1px,-1px)}
   .chip:has(input:checked){border-color:var(--gold);background:var(--gold-soft)}
 
-  .wk-list{display:flex;flex-direction:column;gap:7px;max-height:min(58vh,600px);overflow-y:auto;
+  .wk-list{display:flex;flex-direction:column;gap:7px;max-height:min(62vh,680px);overflow-y:auto;
     padding-right:4px}
   .wk-item{border:1.5px solid var(--line);border-radius:9px;background:var(--surface);
     padding:10px 12px;cursor:pointer;transition:border-color .13s,background .13s}
@@ -111,6 +111,18 @@
     border-width:0 2.2px 2.2px 0;transform:rotate(43deg) translate(-1px,-1px)}
   .wk-name{font-weight:600;font-size:.9rem}
   .wk-meta{font-size:.76rem;color:var(--muted);margin-top:2px}
+  .wk-opts{display:none;gap:10px;flex-wrap:wrap;margin-top:9px;padding-top:8px;
+    border-top:1px dashed var(--line)}
+  .wk-item:has(input[type=checkbox]:checked) .wk-opts{display:flex}
+  .wk-opts label{display:flex;align-items:center;gap:5px;font-size:.72rem;font-weight:600;
+    letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+  .wk-opts select{font:inherit;font-size:.78rem;text-transform:none;letter-spacing:0;
+    font-weight:500;padding:3px 6px;border:1.5px solid var(--line);border-radius:6px;
+    background:var(--surface);color:var(--ink);cursor:pointer}
+  .wk-opts select:focus{border-color:var(--gold);outline:none}
+  .catlab{margin:10px 0 3px;font-size:.63rem;font-weight:700;letter-spacing:.15em;
+    text-transform:uppercase;color:var(--gold-ink)}
+  .catlab:first-child{margin-top:0}
   .tagline{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
   .tg{font-size:.6rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
     padding:2px 6px;border-radius:4px;background:var(--surface-2);color:var(--muted)}
@@ -195,6 +207,14 @@
               <option value="enrolled">Enrolled, give full detail</option>
             </select>
           </label>
+          <label class="f"><span>Working level</span>
+            <select class="inp" id="f-level">
+              <option value="A2">A2, around 4.0 to 4.5</option>
+              <option value="B1" selected>B1, around 5.0 to 5.5</option>
+              <option value="B2">B2, around 6.0 to 6.5</option>
+              <option value="C1">C1, 7.0 and above</option>
+            </select>
+          </label>
           <label class="f"><span>How they feel about the test</span>
             <select class="inp" id="f-mood">
               <option value="nervous">Nervous or anxious</option>
@@ -236,6 +256,10 @@
   <section class="panel">
     <h2>Preview</h2>
     <div class="prev-tools">
+      <div class="seg docseg" role="group" aria-label="Which document">
+        <button type="button" data-doc="report" aria-pressed="true">Report</button>
+        <button type="button" data-doc="homework" aria-pressed="false">Homework</button>
+      </div>
       <div class="seg" role="group" aria-label="Preview width">
         <button type="button" data-pw="390" aria-pressed="false">Phone</button>
         <button type="button" data-pw="820" aria-pressed="false">Tablet</button>
@@ -254,7 +278,7 @@
     <button class="btn ghost" type="button" id="b-print">Save as PDF</button>
     <button class="btn ghost" type="button" id="b-mail">Email student</button>
     <button class="btn ghost" type="button" id="b-copyurl">Copy live URL</button>
-    <button class="btn" type="button" id="b-download">Download index.html</button>
+    <button class="btn" type="button" id="b-download">Download report</button>
   </div>
 </div>
 
@@ -262,11 +286,10 @@
 
 <script>
 /* ============================================================
-   CONTENT BANK
-   Everything the report can say lives here.
-   Nothing in this file talks about regions or politics.
-   A language background only decides which patterns appear
-   and which example words are used.
+   CONTENT BANK  v2
+   Sources are named in RESEARCH. Nothing here states a number
+   about Graham's own students: how common a pattern is in his
+   teaching is set per report, by him, in the builder.
    ============================================================ */
 
 const LANGS = {
@@ -275,58 +298,709 @@ const LANGS = {
   'yue-hk': { l1:'Cantonese', ex:'jyutping' }
 };
 
+/* CEFR bands */
+const LEVELS = {
+  A2:{n:'A2', ielts:'around 4.0 to 4.5'},
+  B1:{n:'B1', ielts:'around 5.0 to 5.5'},
+  B2:{n:'B2', ielts:'around 6.0 to 6.5'},
+  C1:{n:'C1', ielts:'7.0 and above'}
+};
+const LEVEL_ORDER = ['A2','B1','B2','C1'];
+
+/* pick a level-keyed value: exact band, else nearest lower band, else d */
+function byLevel(field, lvl){
+  if(field == null) return '';
+  if(typeof field === 'string' || Array.isArray(field)) return field;
+  if(lvl && field[lvl] != null) return field[lvl];
+  const i = LEVEL_ORDER.indexOf(lvl);
+  for(let j = i - 1; j >= 0; j--){ if(field[LEVEL_ORDER[j]] != null) return field[LEVEL_ORDER[j]]; }
+  return field.d != null ? field.d : '';
+}
+
+/* how common, set per report by Graham. Only 'most' earns the solidarity line. */
+const COMMON = {
+  most:{label:'Most of my students',
+        line:'Worth saying plainly: this is one of the most common things I hear from students who speak your first language. You are in the majority here, not the exception, and the majority is the group I have the most practice moving.'},
+  many:{label:'Plenty of my students', line:''},
+  some:{label:'Only some of my students', line:''}
+};
+
 /* ---------- research library ---------- */
 const RESEARCH = {
   skehan:{t:'Attention is a fixed budget',
-    b:'Speaking research describes a trade off between three things you cannot all maximise at once: how complex your language is, how accurate it is, and how fluent it sounds. Push hard on one and the other two drop. This is not a personal weakness. It is how the mind allocates attention under time pressure.'},
+    b:'Speaking research describes a trade off between three things you cannot all maximise at once: how complex your language is, how accurate it is, and how fluent it sounds. Push hard on one and the other two drop. This is not a personal weakness. It is how attention works under time pressure.'},
   automatic:{t:'Practice moves work off the front desk',
     b:'A structure you have to think about consumes working memory. The same structure, practised until it is automatic, consumes almost none. The aim of drilling is not to learn the rule. It is to stop the rule costing you anything.'},
   formulaic:{t:'Fluent speakers reuse whole chunks',
-    b:'Studies of natural speech show a large share of it is built from ready made sequences rather than assembled word by word. Learners who store more of these chunks sound faster and pause in more natural places, because they are retrieving instead of constructing.'},
-  collocation:{t:'Word partners, not single words',
-    b:'Corpus studies of learners with a Mandarin or Cantonese first language find that errors cluster in which words go together rather than in which words are known. The word is right and the partner is wrong. Examiners hear this as limited range even when the vocabulary is large.'},
+    b:'A large share of natural speech is built from ready made sequences rather than assembled word by word. Learners who store more of these sound faster and pause in more natural places, because they are retrieving instead of constructing.'},
+  density:{t:'You already use more word pairs than native speakers do',
+    b:'A corpus comparison found second language learners producing 31.3 collocations per thousand words against 19.4 for native speakers. The learners used more, drawn from a much smaller set: 639 different types against 1628. So the issue is not that you avoid word partnerships. It is that you rotate a small number of safe ones. That is a range problem, and range builds faster than a habit.',
+    src:'Tsai, reported in Gao, Zhu and Luo, 2019'},
+  colloacc:{t:'Word partners do not fix themselves as your level rises',
+    b:'In a study drawing on ten thousand learner compositions from students with your language background, middle school writers produced 79 percent correct collocations and university writers 83 percent. The difference was not statistically significant. Accuracy with word partners does not improve just because everything else does, which is why it has to be worked on directly rather than waited out.',
+    src:'Gao, Zhu and Luo, 2019, TECCL corpus'},
+  verbchoice:{t:'It is almost always the verb',
+    b:'When learner collocation errors were sorted by type, the wrong choice of verb was the largest single category at 42 to 46 percent, ahead of nouns, prepositions and determiners. The noun you want is usually right. The verb you attach to it is where the mark goes.',
+    src:'Gao, Zhu and Luo, 2019'},
+  burden:{t:'Who carries the work of being clear',
+    b:'Research on the rhetorical tradition behind your first language describes a norm where the reader is expected to work to reach the meaning, and where stating something too explicitly can read as an insult, because it leaves the reader no room to think. English academic and test discourse runs on the opposite contract: the burden of clarity sits with the speaker. Neither is better. They are different agreements about who does the work, and the test is marked under the English one.',
+    src:'Chien, on Kaplan and Connor'},
+  indirection:{t:'The shape of a good argument is not universal',
+    b:'The traditional pattern behind your first language builds from evidence towards a point, circling the topic and arriving at the thesis late, or leaving it to be inferred. That is a rhetorical tradition with five centuries of examination history behind it, not a mistake. English expects the point first and the evidence after. Learning the English shape does not mean the other one was wrong.',
+    src:'Chien, on Kaplan 1966 and Connor 1996'},
+  warrant:{t:'The gap between having evidence and using it',
+    b:'A study of 542 timed argumentative essays by undergraduates with your language background found the pattern changes with level. Weaker texts are assertion heavy and example light. Middle texts have plenty of evidence but stack it in a list without the bridging sentence that says why it counts. Only the strongest texts make that link explicit. Once you can supply evidence, further marks come from explaining it, not from adding more.',
+    src:'Yang, 2025'},
+  cfe:{t:'Claim, frame, evidence',
+    b:'The same study proposes a three step order that fixes this directly. State the claim. Set the frame, meaning the standard by which it should be judged. Then give the evidence, and close with one sentence saying why that evidence supports that claim. The closing sentence is the one that is usually missing.',
+    src:'Yang, 2025'},
+  priming:{t:'Structures you have just heard become available',
+    b:'Speakers reuse a structure they have recently encountered, with different words. Hear a passive and you are more likely to produce one, even on an unrelated topic. This is why the fix for a structure you rarely use is not a grammar rule. It is exposure immediately before you speak.',
+    src:'Bock, 1986; Luo, 2023'},
+  bilingual:{t:'Your English machinery is not second hand',
+    b:'A study comparing English and Mandarin bilinguals against people who speak only English found the bilinguals build full passive sentences in the same way, responding to the same underlying cues, and described that ability as looking built in rather than merely learned from exposure. Bilinguals used fewer passives overall, because Mandarin prefers active sentences, but the machinery was the same. What is missing is a habit, not an ability.',
+    src:'Luo, 2023'},
+  perception:{t:'You cannot say a sound you cannot hear',
+    b:'Where a sound distinction does not change meaning in your first language, you may not register it at all. As one analysis puts it, if you cannot hear it you cannot even attempt it, so perception has to be fixed before production. This is why the work starts with listening in pairs rather than with your own mouth.',
+    src:'Zhang and Yin, 2009'},
+  clusters:{t:'Your mouth was trained for a different shape',
+    b:'A syllable in your first language normally opens with a consonant and closes on a vowel, and only a very small set of consonants can close one. English piles up to four consonants at the end of a syllable. Learners regularly add a small vowel to resolve it, so hot becomes hotta, good becomes gooda, map becomes mapoo. Every mouth simplifies an unfamiliar shape. Yours is doing exactly that.',
+    src:'Han, 2013; Zhang and Yin, 2009'},
+  voicing:{t:'English contrasts voice, your first language contrasts breath',
+    b:'English separates eight consonant pairs by voicing: p and b, t and d, k and g, s and z, and so on. Your first language separates its pairs by aspiration, by how much breath follows, and voicing carries no meaning at all. So the feature English leans on is one your ear was never trained to treat as important. It is not carelessness. It is a distinction that has never had to matter before.',
+    src:'Zhang and Yin, 2009'},
+  theta:{t:'TH is a rare sound, not a basic one',
+    b:'The th in think is absent from more than 95 percent of the world languages. In a study of adult learners from your language background the average accuracy was 37 percent, and the only participants near 100 percent had lived for years in an English speaking country. Treat this as a low priority polish item. It almost never stops anyone understanding you, and the effort buys more elsewhere.',
+    src:'Wu, 2022'},
+  stresspitch:{t:'Stress in English is not loudness',
+    b:'An acoustic study of learners from your language background found stress does improve as proficiency rises, but the first language influence does not disappear: learners mark the strong syllable with extra length and higher pitch while leaving the weak syllables at full value. English does the opposite. It reduces everything around the strong syllable. The missing half of stress is the quiet part.',
+    src:'Liu, 2022'},
+  legato:{t:'Beads on a string, or water',
+    b:'One description puts it well: sentences in your first language are like beads strung together, where every boundary is easy to hear, and English is like water flowing, where the boundaries are hard to find. English words run into each other on purpose. Speaking English with a clean gap between every word is accurate and still sounds effortful to listen to.',
+    src:'Zhang and Yin, 2009'},
+  rudeness:{t:'Intonation can misrepresent you',
+    b:'Analyses of first language transfer note that carrying first language intonation into English can make a speaker be heard as abrupt or indifferent, and that this affects how listeners judge credibility. That is worth knowing precisely because it has nothing to do with what you meant. It is a mechanical carry over and it is fixable in weeks.',
+    src:'Zhang and Yin, 2009; Morley, 1998'},
+  pitch:{t:'Pitch range carries meaning in English',
+    b:'Second language speakers commonly use a narrower pitch range in English than in their own language. Listeners read a narrow range as low interest or low confidence, even when the speaker is neither. Widening it changes how you are heard without changing a single word.'},
+  shadowing:{t:'Copying the tune before the words',
+    b:'Repeating audio a beat behind the speaker, matching the melody rather than translating, improves rhythm and intonation faster than isolated sound exercises, because it trains the whole pattern rather than single pieces.'},
+  syntactic:{t:'Range is measured in clauses, not in long words',
+    b:'Studies tracking learner development find growth shows up as more subordination and more varied clause types, not as longer vocabulary. Two ideas joined properly score above two ideas placed side by side.'},
   fourthreetwo:{t:'The same story, three times, faster',
-    b:'Tell the same short story for four minutes, then three, then two, to three different listeners. Content stays fixed while time shrinks, so the pressure lands on delivery rather than on thinking. Studies of this technique report gains in speech rate and reductions in pausing after very few sessions.'},
+    b:'Tell one short story for four minutes, then three, then two, to three different listeners. The content is fixed while the time shrinks, so the pressure lands on delivery rather than on thinking. Studies report gains in speech rate and drops in pausing after very few sessions.'},
   spaced:{t:'Spread it out, do not stack it',
     b:'Reviews of hundreds of studies find the same thing: practice spread across days beats the same total time in one block, often by a wide margin. Twenty minutes on six days does more than two hours on Sunday.'},
   retrieval:{t:'Pulling out beats putting in',
-    b:'Trying to recall something, and failing, then checking, builds stronger memory than rereading it. This is why your homework asks you to say things from memory before you look.'},
+    b:'Trying to recall something, failing, then checking, builds stronger memory than rereading it. This is why your homework asks you to say things from memory before you look.'},
   production:{t:'Saying it out loud marks it',
-    b:'Material that is spoken aloud is remembered better than material read silently. The act of producing it makes it distinctive. Silent reading feels efficient and is not.'},
+    b:'Material spoken aloud is remembered better than material read silently. Producing it makes it distinctive. Silent reading feels efficient and is not.'},
   noticing:{t:'You cannot fix what you cannot hear',
-    b:'Change in a second language begins with noticing the gap between what you said and what a proficient speaker would say. Recording yourself is not vanity. It is the only way to hear your own gap, because in the moment of speaking your attention is elsewhere.'},
-  pitch:{t:'Pitch range carries meaning in English',
-    b:'Research comparing first and second language speech finds that second language speakers often use a narrower pitch range in English than in their own language. Listeners read a narrow range as low interest or low confidence, even when the speaker is neither. Widening the range changes how you are heard without changing a single word.'},
-  shadowing:{t:'Copying the tune before the words',
-    b:'Repeating audio a beat behind the speaker, matching the melody rather than translating, improves rhythm and intonation faster than isolated pronunciation exercises, because it trains the whole pattern rather than single sounds.'},
-  anxiety:{t:'Anxiety costs you a real band, and it is trainable',
-    b:'Reviews across many studies find a consistent negative relationship between speaking anxiety and speaking performance. Anxiety takes up working memory that grammar needs. Rehearsal under realistic conditions lowers it, because most of the fear is fear of the unfamiliar.'},
-  selfefficacy:{t:'Believing it is possible predicts the result',
-    b:'How capable a learner believes they are predicts performance beyond their actual level. That belief is built from small completed tasks, not from encouragement. This is why the plan is broken into pieces you will finish.'},
+    b:'Change begins with noticing the gap between what you said and what a proficient speaker would say. Recording yourself is not vanity. It is the only way to hear your own gap, because in the moment of speaking your attention is elsewhere.'},
+  anxiety:{t:'Anxiety costs a real band, and it is trainable',
+    b:'Reviews across many studies find a consistent negative relationship between speaking anxiety and speaking performance. Anxiety occupies the working memory that grammar needs. Rehearsal under realistic conditions lowers it, because most of the fear is fear of the unfamiliar.'},
+  taiwananx:{t:'The emotional part is documented, not imagined',
+    b:'A study of learners with your language background found five themes running through their accounts, and two were emotional: anxiety and self doubt appeared as persistent obstacles alongside the language itself. The learners who moved forward were not the ones without those feelings. They were the ones who kept exposure and practice going anyway.',
+    src:'Galela and Bagood, 2025'},
+  shyness:{t:'Quiet is not the same as unable',
+    b:'A long standing observation in this field is that learners from this background are often described as quiet and reluctant in class, afraid of mistakes, of laughter, of being wrong in front of others, and that this works against them in speaking assessments specifically. The reticence is a response to how speaking has been taught and marked. It is not evidence about your English.',
+    src:'Xu, cited in Zhang and Yin, 2009'},
+  written:{t:'You were taught English as a written subject',
+    b:'Exam focused instruction leaves learners confined largely to English on paper, with little systematic pronunciation teaching. If your reading and grammar knowledge run well ahead of your speaking, that is the predictable outcome of the syllabus you sat, not a measure of your ability.',
+    src:'Wu, 2022'},
   descriptors:{t:'What the marking actually rewards',
-    b:'Speaking is scored on four equal parts: fluency and coherence, lexical resource, grammatical range and accuracy, and pronunciation. Each is a quarter of the score. A brilliant word list cannot lift a quarter it does not touch, and a broken quarter drags the whole result down.'},
-  syntactic:{t:'Range is measured in clauses, not in long words',
-    b:'Studies tracking learner development find that growth shows up as more subordination and more varied clause types, not as longer vocabulary. Two sentences joined properly score above two sentences placed side by side.'},
-  rhetoric:{t:'Answers need a shape',
-    b:'Research on learners from a Mandarin or Cantonese background finds a pattern of stating a position and then moving on, where higher scoring answers state, support, and illustrate. The knowledge is there. The habit of unpacking it is what is missing.'},
+    b:'Speaking is scored on four equal parts: fluency and coherence, lexical resource, grammatical range and accuracy, and pronunciation. Each is a quarter. A brilliant word list cannot lift a quarter it does not touch, and a broken quarter drags the whole result down.'},
   transfer:{t:'Your first language is not the enemy',
-    b:'Every predictable error in this report has a cause in the structure of your first language. That is what makes it predictable, and predictable is exactly what can be trained. A random error is a problem. A systematic one is a schedule.'}
+    b:'Every predictable error in this report has a cause in the structure of your first language. That is what makes it predictable, and predictable is exactly what can be trained. A random error is a problem. A systematic one is a schedule.'},
+  selfefficacy:{t:'Believing it is possible predicts the result',
+    b:'How capable a learner believes they are predicts performance beyond their actual level, and that belief is built from small completed tasks rather than from encouragement. This is why the plan is broken into pieces you will finish.'}
 };
 
-/* ---------- named voice drills ---------- */
+/* ---------- what the student already has ---------- */
+const ADVANTAGES = {
+  passive:{t:'The structures are already built',
+    b:'Research comparing bilinguals like you against people who speak only English found that when it comes to building full passive sentences, you do it the same way they do, responding to the same underlying cues, and the researchers described that ability as looking built in rather than learned. Bilinguals simply use fewer of them, because your other language prefers active sentences. This is a habit to switch on, not a skill to acquire.'},
+  density:{t:'You use more word partnerships than native speakers',
+    b:'A corpus study found learners producing more collocations per thousand words than native speakers did, drawn from a smaller pool. You are not avoiding natural word pairs. You are recycling a safe set of them. Widening a pool is a much smaller job than building one.'},
+  rare:{t:'The sounds you find hard are the rare ones',
+    b:'The th in think does not exist in more than 95 percent of the world languages. When you struggle with it you are in company with most of the planet, and it is close to the least valuable item on your list to fix.'},
+  reader:{t:'You already speak for a listener',
+    b:'The habit of leaving space for the other person to draw their own conclusion is a real skill, and in your first language it is the polite and sophisticated choice. English simply runs on the opposite agreement, where the speaker carries the work of being clear. You are not learning to think better. You are learning which agreement you are working under.'},
+  twolang:{t:'You are doing all of this in your second language',
+    b:'Whatever band you are at, you are being examined on your ability to argue, give examples and handle abstract topics in a language that is not your first. Most people cannot do that at all. The gap in front of you is between you and a target score, not between you and competence.'},
+  written:{t:'The knowledge is already in you',
+    b:'You studied English for years as a written subject, with little systematic speaking or pronunciation teaching. That means what looks like a gap in ability is usually a gap in access: the grammar and vocabulary are already stored, they have just never been asked to come out at speed. Getting at what you already own is a far shorter job than acquiring it.'}
+};
+
+/* ============================================================
+   WEAKNESS BANK, part 1: vocabulary, discourse, grammar
+   heard / why / cost / fix may be plain, or keyed by CEFR band.
+   why may also be keyed by language background.
+   ============================================================ */
+
+const WEAK_LANG = [
+
+/* ---------------- VOCABULARY ---------------- */
+{id:'vocab-overreach', cat:'Vocabulary', skill:'Lexical resource', n:'Reaching for advanced vocabulary',
+ meta:'Big words slowing everything else down', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'You stop mid sentence to search for an impressive word. The search is visible, the sentence loses its shape, and the word that arrives is often not the one that fits.',
+        C1:'The vocabulary is genuinely wide and you reach for the top of it in the first sentence of an answer, where you have the least planning time. The word usually lands, and the sentence around it pays for it.'},
+ why:{d:'This is a taught habit rather than a language one. Study materials and word lists reward rarity, so effort goes there. The cost stays invisible until you are timed.'},
+ cost:'It damages three of the four quarters at once. Fluency drops because of the pause, grammar drops because the sentence was abandoned, and vocabulary itself drops, because the marking rewards words used naturally and accurately rather than words that are rare. A rare word used slightly wrongly scores below a common word used exactly.',
+ fix:{d:['Answer with the first word that is true. Precision beats rarity in the marking.',
+         'Build partners, not words. Learn "make a decision", not "decision".',
+         'Reserve ambition for the second sentence of an answer, never the first.'],
+      C1:['Put the ambitious word in the second or third sentence, once the shape of the answer is safe.',
+          'Judge a word by whether it is the exact one, not the rare one. Examiners are marking fit.',
+          'Where two words are equally exact, take the shorter one and spend the time on the clause instead.']},
+ res:['skehan','descriptors','density','formulaic'], drills:['countdown'], adv:'density'},
+
+{id:'collocation', cat:'Vocabulary', skill:'Lexical resource', n:'Word partners',
+ meta:'Right word, wrong partner', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'The vocabulary is correct and the combination is not. "Do a mistake", "very delicious", "open the light", "learn knowledge".'},
+ why:{d:'Words are usually learned one at a time against a translation, and the partner does not travel across languages. In {L1} the natural partner is a different verb, so the sentence is built correctly by {L1} logic and lands wrongly in English. Error analysis of learner corpora puts the wrong verb at 42 to 46 percent of all collocation errors: the noun you want is usually right, the verb attached to it is not.'},
+ cost:'Examiners hear it as limited range, which is unfair given how many words you know, and it is what the descriptors describe.',
+ fix:{d:['Record new words with their partner and never alone.',
+         'Collect the five verbs that appear most in your own answers and learn what each one takes.',
+         'When you read, notice the pair rather than the noun.']},
+ res:['verbchoice','colloacc','density','formulaic'], drills:[], adv:'density'},
+
+{id:'saferotation', cat:'Vocabulary', skill:'Lexical resource', n:'The same safe words on rotation',
+ meta:'A small set, used often and correctly', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'Good, important, convenient, a lot of. Nothing is wrong. The same twenty words carry every answer, so the range never shows.'},
+ why:{d:'This is a rational strategy under pressure: you use what you are certain about. Corpus work finds learners actually produce more word pairs per thousand words than native speakers do, from roughly a third as many different types. The instinct to bind words together is strong. The pool is narrow.'},
+ cost:'Lexical resource is a quarter of the marking and it is measured on range and precision together. Accurate and narrow sits in the middle of that quarter.',
+ fix:{d:['Ban your three most used adjectives for one week. The replacements arrive quickly.',
+         'Keep a list of words you understood while reading but would not have produced. That list is your real range.',
+         'Once per answer, replace a general word with the specific noun underneath it.']},
+ res:['density','colloacc'], drills:[], adv:'density'},
+
+{id:'memorised', cat:'Vocabulary', skill:'Lexical resource', n:'Memorised answers',
+ meta:'Prepared scripts that stop working', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'Some answers arrive complete and polished, then the next question breaks the script and the level drops sharply.'},
+ why:{d:'Memorising is a rational response to fear, and to an education that rewarded reproducing correct text. The problem is that it is audible: rhythm, vocabulary and fluency all change at the seam, and the drop afterwards is more visible than the polish before it.'},
+ cost:'Examiners are trained to hear this and the answer is discounted. It also removes the chance to score on the one thing memorising cannot fake, which is responding.',
+ fix:{d:['Memorise ideas and examples, never sentences.',
+         'Prepare five personal stories that can be bent to fit fifty questions.',
+         'Practise answering questions you have not seen, badly, on purpose.']},
+ res:['formulaic','anxiety','written'], drills:['countdown'], adv:'written'},
+
+{id:'detail', cat:'Vocabulary', skill:'Lexical resource', n:'Concrete detail',
+ meta:'General words where specifics score', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'Answers stay at the level of "it is very convenient" and "the environment is good" without the specific thing that makes it convenient or good.',
+        B2:'The specifics are there. What is missing is the sentence that says what they prove. See the finding on making the connection visible, which is the more accurate description of what I heard.'},
+ why:{d:'General adjectives are safe and always available. Specific nouns are riskier and score higher, so the safe choice is the expensive one.'},
+ cost:'Vocabulary is judged on precision. Three general adjectives score below one exact noun.',
+ fix:{d:['Add one number, one name or one place to every answer.',
+         'Replace "good" and "convenient" with the reason underneath them.',
+         'Practise the follow up sentence: "For example, last week..."']},
+ res:['warrant','descriptors'], drills:[]},
+
+/* ---------------- DISCOURSE ---------------- */
+{id:'explicitlink', cat:'Discourse', skill:'Fluency and coherence', n:'Making the connection visible',
+ meta:'Good details, with the link left for the listener', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'You give a claim and then real, specific detail, and you stop there. The detail is genuinely good. What is missing is the short sentence that says what it proves.',
+        B2:'This one is worth reading carefully because it looks like a strength and is scored as a gap. Take an answer like: "Taipei is incredibly convenient. There are two convenience stores near my home. I can take a bus or the MRT almost anywhere." Every sentence is true, specific and well chosen. The claim is there, the evidence is there, and the sentence that ties them together is not. You are asking the listener to work out that two shops and two transport options are what convenient means to you. An examiner will make that connection, and will not give you credit for it, because you did not make it.',
+        C1:'The claim and the evidence are both strong and the warrant is intermittent. It appears when you are comfortable and disappears on abstract Part 3 topics, which is exactly where it is worth the most.'},
+ why:{d:'This is a rhetorical norm, not a thinking gap, and it is one of the best documented differences between how an argument is built in your first language and in English. In that tradition the listener is expected to do part of the work of reaching the meaning, and spelling something out too plainly can read as an insult, because it leaves the other person no room. English runs the opposite contract: the burden of clarity sits with the speaker. Studies of argumentative writing by learners with your background find exactly this shape, evidence stacked in a list without the bridging sentence, and find that adding more evidence does not raise the score. Adding the bridge does.'},
+ cost:'It sits in fluency and coherence, which is a full quarter. Coherence is not about connectors like "moreover". It is about whether the listener can see why one sentence follows another. Research on this specific pattern found that once a speaker can supply evidence at all, further marks come from explaining it rather than from adding more, so this is the highest value single change available to you.',
+ fix:{d:['One extra sentence per answer, starting with "which means" or "so".',
+         'Say the claim, give the example, then say why the example proves the claim. Three steps, every time.',
+         'When you finish an answer, ask yourself: did I say the obvious part out loud.'],
+      B2:['Use the three step order: claim, then the standard you are judging by, then the evidence. Close with one sentence of the form "which is what I mean by convenient".',
+          'Practise the closing sentence alone. Take five of your own good answers and add only the last line to each.',
+          'The test phrase: could a listener disagree with my conclusion because I never said it. If yes, say it.'],
+      C1:['Hold the warrant on abstract topics, where it is worth most and disappears first.',
+          'Add one concession per Part 3 answer, then return to your position. That is the highest scored shape.',
+          'End the paragraph where it started: name the claim again in different words.']},
+ res:['burden','warrant','cfe','indirection','descriptors'], drills:[], adv:'reader'},
+
+{id:'thesislate', cat:'Discourse', skill:'Fluency and coherence', n:'The point arrives last',
+ meta:'Evidence first, position at the end or never', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'You circle a topic, give background and examples, and the position appears at the very end, or is left for the listener to assemble.'},
+ why:{d:'This is a described feature of the rhetorical organisation behind your first language, sometimes called indirection: the discourse turns around the subject and views it from several positions before arriving. It has a long formal history, including five centuries of examination essays built on exactly that shape. It is not disorganisation. It is a different organisation, and English expects the reverse order.'},
+ cost:'An examiner marking coherence is listening for the position early. If it comes at the end, the middle of the answer sounds like it is wandering, even when every sentence is relevant.',
+ fix:{d:['Answer the question in the first sentence. Then justify it. This will feel blunt and it is correct here.',
+         'If you are undecided, say that first: "It depends, and mainly on..." That is still a position.',
+         'Practise the reversal deliberately: take an answer you gave and move the last sentence to the front.']},
+ res:['indirection','burden','warrant'], drills:[], adv:'reader'},
+
+{id:'part3', cat:'Discourse', skill:'Fluency and coherence', n:'Answers that stop too early',
+ meta:'Correct, complete, and too short', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'You answer the question, accurately, and then stop, because the question has been answered.'},
+ why:{d:'This is a conversational norm, not a language gap. In {L1} conversation, giving a short answer and leaving space for the other person is polite and appropriate. The test inverts that rule: it wants the long turn, and silence is read as inability rather than as courtesy.'},
+ cost:'Fluency and coherence is a quarter of the score and it is partly measured on sustained speech. A short answer gives the examiner nothing to mark.',
+ fix:{d:['Three part shape for every Part 3 answer: position, reason, example.',
+         'Add "for example" out loud even when it feels unnecessary.',
+         'Practise talking for forty five seconds on a boring topic on purpose.']},
+ res:['warrant','descriptors','shyness'], drills:['countdown']},
+
+{id:'hedging', cat:'Discourse', skill:'Lexical resource', n:'Everything stated as absolute',
+ meta:'No room left to move', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'Positions arrive as facts: "People must do this." There is no might, tend to, in most cases, or it depends.'},
+ why:{d:'Hedging exists in {L1} and is carried differently, often by particles and by tone rather than by verbs. Translating directly produces English that sounds far more absolute than you intended.'},
+ cost:'Part 3 rewards nuance. Absolute statements are easy to challenge and leave you defending a position you do not actually hold.',
+ fix:{d:['Learn six hedges and use two per Part 3 answer: tend to, in most cases, it depends on, arguably, to some extent, might.',
+         'Answer one opinion question a day with a deliberate "it depends".']},
+ res:['warrant','descriptors'], drills:[]},
+
+{id:'selfcorrect', cat:'Discourse', skill:'Fluency and coherence', n:'Over correcting',
+ meta:'Restarting sentences mid way', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'A sentence begins, an error is noticed, and the sentence restarts. Sometimes twice.'},
+ why:{d:'The awareness is good and the timing is expensive. Every restart is scored as a break in fluency, and the original error was usually smaller than the repair. Learners who were taught in a system where a written mistake was the thing that cost marks tend to carry that reflex into speech, where the economics are reversed.'},
+ cost:'A repaired sentence costs more than an uncorrected small error. Two repairs cost more than the error was ever worth.',
+ fix:{d:['One repair rule: fix it once, then continue whatever happens.',
+         'Finish the sentence you started, even badly.',
+         'Save the correction for the recording, afterwards.']},
+ res:['skehan','noticing','written'], drills:['onebreath']},
+
+{id:'pausing', cat:'Discourse', skill:'Fluency and coherence', n:'Silent gaps',
+ meta:'Silence where a thinking phrase belongs', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'Thinking time arrives as complete silence, which sounds much longer to a listener than filled time does.'},
+ why:{d:'Fillers are often taught as bad habits, so they are suppressed. English speakers use them constantly and hear them as normal thinking.'},
+ cost:'Silence is scored as hesitation. The same pause with a natural phrase in it is not.',
+ fix:{d:['Learn four thinking phrases and use them: that is a good question, I have never thought about that, let me think for a second, it depends really.',
+         'Deliberate pause drill, so silence stops feeling dangerous.']},
+ res:['formulaic','anxiety'], drills:['pause']},
+
+{id:'speed', cat:'Discourse', skill:'Fluency and coherence', n:'Speaking too fast',
+ meta:'Speed used to cover uncertainty', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'The pace rises when the topic is difficult, and accuracy falls at exactly the same moment.'},
+ why:{d:'Speed feels like fluency and is not. Rushing removes the planning time your grammar needs, so the harder the question the more the speed costs.'},
+ cost:'It damages fluency and grammar together, which is the worst trade available.',
+ fix:{d:['One breath, one sentence.','Deliberate two second pauses at commas.','Slow to eighty percent on Part 3 and watch accuracy rise.']},
+ res:['skehan'], drills:['pause','onebreath']},
+
+/* ---------------- GRAMMAR ---------------- */
+{id:'copula', cat:'Grammar', skill:'Grammatical range and accuracy', n:'The missing BE verb',
+ meta:'Am, is, are dropping out', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'"My hometown very beautiful." "The weather cold today." "I very tired yesterday." The meaning is completely clear, and the verb is not there.',
+        C1:'It has almost gone and it returns under pressure, on the long Part 3 answers where your attention is on the argument rather than on the sentence.'},
+ why:{d:'In {L1} an adjective can be the whole predicate. 很 hen plus an adjective is a complete sentence, and no verb is required, so 我很累 is grammatical and finished. English will not allow this: the adjective needs a verb to attach to. You are not forgetting a word. You are applying a correct rule from another language.',
+      'yue-hk':'In Cantonese an adjective can be the whole predicate. 好 hou2 plus an adjective is a complete sentence with no verb, so 我好攰 is grammatical and finished. English will not allow this: the adjective needs a verb to attach to. You are not forgetting a word. You are applying a correct rule from another language.'},
+ cost:'It is the single most noticeable error in this group, because it appears in short high frequency sentences where the examiner is listening closely. It reads as a basic accuracy problem even when the rest of the grammar is far above that level.',
+ fix:{d:['Before an adjective, ask one question: where is the verb.',
+         'Drill the six forms out loud daily until they cost nothing: I am, you are, he is, we are, they are, it is.',
+         'Record one minute and count the missing ones. The count falls quickly once you can hear it.'],
+      C1:['Track it only on long answers. That is where it survives.',
+          'Slow the first two seconds of a Part 3 answer. The verb reappears when the opening is unhurried.']},
+ res:['transfer','automatic','noticing'], drills:['slowmo','playback']},
+
+{id:'doublesubject', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Double subjects',
+ meta:'My hometown, it is very beautiful', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'The topic is named, then a pronoun repeats it inside the sentence. "My father he works in Taipei." "This problem it is very serious."'},
+ why:{d:'{L1} is a topic first language. You announce what the sentence is about, then comment on it, and the comment is a complete clause of its own. That structure is correct and normal in {L1}. English merges the two: the topic has to become the grammatical subject, and repeating it leaves a spare pronoun. You are not adding a word by accident. You are keeping a slot that English deleted.'},
+ cost:'Small individually, very audible in bulk, and it appears in the opening sentence of answers where it colours the first impression.',
+ fix:{d:['One subject per clause. When you hear yourself name a topic, do not repeat it.',
+         'Use the pause instead: name the topic, take a breath, then start the sentence properly.',
+         'Record and count. This is one of the fastest patterns on the list to remove once you can hear it.']},
+ res:['transfer','noticing'], drills:['playback']},
+
+{id:'passive', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Passive structures',
+ meta:'Rarely used, though the machinery is there', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'Almost everything is active. Where English would say "the building was completed in 2019" you say "they completed the building in 2019", which is correct and gives away a mark for range.',
+        C1:'You produce passives accurately when the topic pushes you into one. You rarely choose one, so the range point goes unclaimed.'},
+ why:{d:'This one comes with good news attached. Your first language has passives and uses them far less, often reserving them for unpleasant events, so the preference you carry into English is for the active. But research comparing bilinguals like you with people who speak only English found that when a passive is called for, you build it the same way they do, responding to the same underlying cues, and the researchers described that ability as looking built in rather than learned. The structure is not missing. The habit of reaching for it is.'},
+ cost:'Grammatical range is half of a quarter of the marking, and it is counted in the variety of structures you use, not in whether you could use them. A speaker who never produces a passive caps that half.',
+ fix:{d:['Learn three fixed frames and use one per answer: it is said that, it was built in, it is often thought that.',
+         'Exposure primes structure. Read five passive sentences aloud immediately before you practise, and they will start appearing in your own speech.',
+         'Task 1 writing is the natural home for this. Describe one chart a day using passives only.']},
+ res:['bilingual','priming','syntactic','descriptors'], drills:['shadow'], adv:'passive'},
+
+{id:'relative', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Relative clauses',
+ meta:'Which, who and that doing no work', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'Descriptions are delivered as separate sentences. "I have a friend. He lives in Kaohsiung. He is a teacher." Three correct sentences where English would use one.',
+        B2:'Relative clauses appear, and almost always at the end of a sentence. The kind that interrupts the middle, the one that would show real range, is missing.'},
+ why:{d:'{L1} puts the describing part before the noun and marks it with 的 de, so "the friend who lives in Kaohsiung" is built in the opposite order and needs no relative pronoun at all. English reverses the order and adds a word that has no equivalent in your first language. Producing one means running the sentence backwards while you speak.'},
+ cost:'This is one of the specific structures examiners listen for when marking range. Its absence caps that half of the quarter even when accuracy is perfect.',
+ fix:{d:['Join two of your own sentences with who or which, once per answer.',
+         'Drill the pattern out loud: a place where, a time when, the person who, the thing that.',
+         'Describe one photo a day in single sentences containing a relative clause.'],
+      B2:['Push one relative clause into the middle of a sentence: "My friend, who studied in Australia, thinks..." That is the version that scores.',
+          'Practise non defining clauses with commas, which are rarer in learner speech and easy to add.']},
+ res:['syntactic','transfer','descriptors'], drills:['onebreath']},
+
+{id:'participle', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Participle clauses',
+ meta:'Having finished, walking home, built in 1920', tags:['cmn-tw','cmn-cn','yue-hk'], common:'some',
+ heard:{d:'Every clause is a full clause with its own subject and verb. The compressed forms that English uses to join ideas quickly do not appear.'},
+ why:{d:'{L1} joins clauses by putting them next to each other and letting the relationship be understood, so there is no equivalent of a reduced clause carrying its own tense information. English compresses instead, and the compressed form has to be learned as a pattern rather than derived.'},
+ cost:'This is a genuine band 7 and above marker. It is not required at 6, so treat it as a stretch item unless you are aiming higher.',
+ fix:{d:['Learn two frames only: "Having lived there for ten years, I..." and "Built in 1920, the station..."',
+         'Convert one of your own two clause sentences per day into a participle version, in writing first.',
+         'Do not chase this under exam pressure. Build it in writing, and it will appear in speech later.']},
+ res:['syntactic','descriptors'], drills:[]},
+
+{id:'tenses', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Narrative tenses',
+ meta:'Everything told in one tense', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'Past stories are told mostly in the present, or in the simple past only, with no shift between what was happening and what happened.',
+        B2:'The simple past is solid. What is missing is the second layer: the past continuous for the background and the past perfect for what came before, which is what turns a list of events into a story.'},
+ why:{d:'{L1} does not mark time on the verb. Time is set once, with a word like yesterday or with a particle such as 了, and the verb never changes afterwards. English asks you to re mark time on every single verb. That is a genuinely heavier load, not a harder idea.'},
+ cost:'Grammatical range is measured on variety, not only on correctness. A whole story in one tense caps that half no matter how accurate it is.',
+ fix:{d:['Learn three tenses as one set for storytelling: I was doing, I did, I had done.',
+         'Tell one true story a day, out loud, sixty seconds, in the past.',
+         'Mark the frame first: "Last year, while I was living in..." then continue.']},
+ res:['transfer','syntactic','production'], drills:['onebreath','countdown']},
+
+{id:'perfect', cat:'Grammar', skill:'Grammatical range and accuracy', n:'The present perfect',
+ meta:'I live here for five years', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'Duration up to now comes out in the present or the simple past: "I live here for five years", "I study English since I was ten".'},
+ why:{d:'{L1} handles this with a time phrase and a particle, and the verb form does not change. English encodes the same meaning in the verb itself, and the tense it uses does not map onto any single {L1} form, so there is nothing to translate it from.'},
+ cost:'High frequency in Part 1, where every candidate is asked how long they have done something. It is one of the first things an examiner hears.',
+ fix:{d:['Drill the frame until it is automatic: I have lived here for, I have been studying since.',
+         'Any sentence with for or since about your own life takes this tense. Make that a rule and stop deciding.',
+         'Five sentences a day about your life, out loud, in this tense only.']},
+ res:['transfer','automatic'], drills:['slowmo']},
+
+{id:'past-ed', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Past endings disappearing',
+ meta:'Walked, asked, finished losing their ending', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'The tense is chosen correctly and the ending is not heard. "I walk to school yesterday", where you knew it was past.'},
+ why:{d:'This is a sound problem wearing a grammar costume. English past endings land as consonant clusters, and clusters of that shape do not occur at the end of a syllable in {L1}, so the ending is dropped by the mouth rather than by the grammar.'},
+ cost:'It is marked as a grammar error even though you know the rule, which makes it one of the cheapest things on this list to fix.',
+ fix:{d:['Practise the ending as a sound, not a rule: walk t, need id, play d.',
+         'Slow motion drill: say the sentence at half speed hitting every ending.',
+         'Read aloud two minutes daily and exaggerate every final consonant.']},
+ res:['clusters','automatic','noticing'], drills:['slowmo','cork']},
+
+{id:'plural', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Plural endings',
+ meta:'Two book, many student', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'The number is already in the sentence, so the ending on the noun does no work and disappears.'},
+ why:{d:'{L1} does not mark plural on the noun. Number comes from a number word and a measure word, and marking it twice would be redundant. Your instinct is efficient. English is not.'},
+ cost:'High frequency, easy to hear, and it accumulates across an answer.',
+ fix:{d:['Whenever a number appears, check the noun behind it.','Drill the s as a sound rather than a rule.','Read aloud and exaggerate every plural for two weeks.']},
+ res:['transfer','automatic','clusters'], drills:['slowmo']},
+
+{id:'articles', cat:'Grammar', skill:'Grammatical range and accuracy', n:'A, an and the',
+ meta:'Missing, added, or swapped', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'"I went to cinema." "The my friend." Articles appear and disappear without a pattern.'},
+ why:{d:'{L1} has no articles at all. There is no equivalent decision to transfer, so every article is a new judgement made in real time, which is why they fail under pressure rather than on paper.'},
+ cost:'Frequent, and individually small. Worth fixing after the bigger patterns, not before.',
+ fix:{d:['Learn it as one question: does the listener already know which one.',
+         'Fix the fifteen fixed phrases first: go to school, at home, in the morning, on the internet.',
+         'Do not chase perfection here. Accept a percentage improvement and spend the time elsewhere.']},
+ res:['transfer'], drills:[]},
+
+{id:'sva', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Third person s',
+ meta:'He go, she like', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'The verb stays in its base form when the subject is he, she or it.'},
+ why:{d:'{L1} verbs do not change for the subject at all. One form serves everybody, which is a simpler and arguably better system. English asks for an ending that carries no meaning, so it is the first thing dropped under load.'},
+ cost:'Very visible to examiners because it is taught early. It reads as a lower level than you are.',
+ fix:{d:['Drill he, she and it separately from I, you and they.','Say five sentences a day about one other person out loud.','When you self correct, correct the whole sentence, not the word.']},
+ res:['transfer','automatic'], drills:['slowmo']},
+
+{id:'parataxis', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Short clauses joined by and',
+ meta:'Sentences placed side by side', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'"I go there and it is very beautiful and I take many photos and then I go home." Each piece is correct. Nothing shows how they relate.'},
+ why:{d:'{L1} allows clauses to sit next to each other with the relationship left for the listener to infer, and this is normal, high quality style. English carries the relationship in explicit words: because, although, which, after. The information is not missing from your thinking. It is missing from the sentence.'},
+ cost:'This limits grammatical range more than any single error does. Range is counted in clause types, and a chain of short clauses only ever shows one.',
+ fix:{d:['Learn five joiners and use one per answer: although, which, because, after, even though.',
+         'Take any two of your own sentences and force them into one.',
+         'Aim for one long sentence per answer, not for all of them.']},
+ res:['syntactic','transfer','descriptors','burden'], drills:['onebreath']},
+
+{id:'conditionals', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Conditionals',
+ meta:'If I have money, I will buy', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'The real conditional works. The unreal ones flatten into it, so hypothetical Part 3 questions get answered as though they were about the actual future.'},
+ why:{d:'{L1} marks hypothetical meaning with words like 如果 and with context, not by shifting the tense backwards. English signals unreality by moving the verb into the past, which is counter intuitive if your first language never does it.'},
+ cost:'Part 3 is full of hypothetical questions. Answering them in the wrong conditional both loses a range mark and slightly changes what you appear to be claiming.',
+ fix:{d:['Drill the second conditional as a fixed frame: if I had, I would.',
+         'Answer one "what would happen if" question a day out loud.',
+         'Notice the trigger words: would, imagine, suppose. They all take the shifted tense.']},
+ res:['transfer','syntactic'], drills:[]},
+
+{id:'reported', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Reported speech',
+ meta:'He said he is tired', tags:['cmn-tw','cmn-cn','yue-hk'], common:'some',
+ heard:{d:'The tense does not step back when you report what someone said, and the question word order stays as a direct question inside the sentence.'},
+ why:{d:'{L1} reports speech without changing anything: you say what the person said, unaltered. English shifts the tense back a step and reorders questions, which is two rules for one operation.'},
+ cost:'Low frequency in Part 1, higher in Part 2 narratives and in writing. A stretch item rather than a priority.',
+ fix:{d:['Drill the pair aloud: "I am tired" becomes "he said he was tired".',
+         'Retell one conversation a day in reported speech.']},
+ res:['transfer','syntactic'], drills:[]},
+
+{id:'there-is', cat:'Grammar', skill:'Grammatical range and accuracy', n:'There is and there are',
+ meta:'Here have many people', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'Existence expressed with have: "In my city have a lot of night markets."'},
+ why:{d:'Mandarin uses 有 for both possession and existence, so "there is" and "have" are a single word in your first language and two in English. The split is arbitrary and it has to be learned as a fixed pattern.',
+      'yue-hk':'Cantonese uses 有 jau5 for both possession and existence, so "there is" and "have" are a single word in your first language and two in English. The split is arbitrary and it has to be learned as a fixed pattern.'},
+ cost:'Immediately audible, and it appears in exactly the descriptive answers Part 1 asks for.',
+ fix:{d:['Drill the frame: there is a, there are some, there was a.',
+         'Describe your room, your street and your office out loud using only that frame.',
+         'Catch the word have before it arrives.']},
+ res:['transfer','automatic'], drills:[]},
+
+{id:'prodrop', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Dropped subjects and objects',
+ meta:'Is very good, I like very much', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'"Is very interesting." "I like very much." The thing being talked about is left out because it is obvious.'},
+ why:{d:'{L1} drops anything the context already supplies, and repeating it sounds clumsy. English requires the slot to be filled even when the word carries no information at all, which is why "it" appears so often in English and feels empty to you.'},
+ cost:'It produces sentences that are technically incomplete, which is scored more harshly than a wrong word.',
+ fix:{d:['Check every sentence has a subject, even a meaningless one.',
+         'Drill the empty it: it is raining, it takes an hour, it depends.',
+         'After a verb like like, want or enjoy, always name the thing.']},
+ res:['transfer'], drills:[]},
+
+{id:'questions', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Question formation',
+ meta:'You know where is the station', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'Direct and indirect questions use the same word order.'},
+ why:{d:'{L1} forms questions by adding a particle and leaving the word order alone. English inverts the order for a direct question and then un inverts it inside a longer sentence, which is two opposite rules for one idea.'},
+ cost:'Small in Speaking, where you answer more than you ask. It appears in Part 3 hypotheticals and in writing.',
+ fix:{d:['Drill the pair: "Where is it" against "I do not know where it is".','Say five embedded questions a day out loud.']},
+ res:['transfer'], drills:[]},
+
+{id:'count', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Countable and uncountable',
+ meta:'Many informations, an advice', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'Nouns English treats as uncountable get a plural or an article: informations, advices, a furniture.'},
+ why:{d:'{L1} counts everything with a measure word, so the noun itself carries no information about whether it can be counted. English hides that property inside the noun and expects you to know it word by word. There is no rule to derive. It is a list.'},
+ cost:'Small, and it clusters in academic topics, so it shows up in exactly the Part 3 and Task 2 language you are trying to score with.',
+ fix:{d:['Learn the twelve that matter: information, advice, news, research, equipment, furniture, luggage, knowledge, progress, traffic, weather, work.',
+         'Use a measure phrase: a piece of advice, an item of luggage.']},
+ res:['transfer'], drills:[]},
+
+{id:'preps', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Prepositions',
+ meta:'In, on, at and the rest', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'Prepositions are chosen by meaning rather than by the fixed pattern English uses.'},
+ why:{d:'{L1} maps space and time onto a different set of words, and no rule transfers. In learner corpora prepositions account for around a tenth of collocation errors, which is real but small next to verb choice.'},
+ cost:'Low individually and noticeable in bulk. Worth doing in the background, never as the main project.',
+ fix:{d:['Learn them attached to the noun: on Monday, in July, at six.','Fix the ten that appear most in your own speech and ignore the rest for now.']},
+ res:['formulaic','verbchoice'], drills:[]},
+
+{id:'wordorder', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Where the time phrase goes',
+ meta:'I yesterday went to the market', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'Time and frequency expressions sit between the subject and the verb, where English wants them at the front or the end.'},
+ why:{d:'{L1} places time before the verb as standard, and often before the subject too. That is the neutral order. English moved it, and the {L1} order survives because it is the one that feels unmarked to you.'},
+ cost:'It rarely blocks meaning and it is very audible, so it colours an examiner impression of accuracy more than its size deserves.',
+ fix:{d:['Front or back, never the middle: "Yesterday I went" or "I went yesterday".',
+         'Adverbs of frequency are the exception and go before the main verb: I often go.']},
+ res:['transfer'], drills:[]},
+
+{id:'runon', cat:'Grammar', skill:'Grammatical range and accuracy', n:'Sentences that do not close',
+ meta:'Commas doing the work of full stops', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'In writing, independent clauses are joined with commas and the sentence runs on. In speech, the same thing happens with and, and the answer never lands.'},
+ why:{d:'A sentence boundary in your first language is looser and a comma legitimately joins what English would separate. You are punctuating by a rule that is correct in your first language.'},
+ cost:'In Task 2 this is marked directly under grammatical accuracy. In speaking it costs coherence, because the listener cannot hear where one idea ends.',
+ fix:{d:['One idea, one full stop. Read your writing aloud and stop where you breathe.',
+         'In speech, the one breath rule does the same job.',
+         'If a comma joins two things that could stand alone, it needs a full stop or a joining word.']},
+ res:['syntactic','burden'], drills:['onebreath']}
+];
+
+/* ============================================================
+   WEAKNESS BANK, part 2: pronunciation and delivery
+   Markers drawn from Han 2013, Zhang and Yin 2009,
+   Wu 2022 and Liu 2022.
+   ============================================================ */
+
+const WEAK_PRON = [
+
+/* ---- suprasegmental: the expensive half ---- */
+{id:'intonation', cat:'Delivery', skill:'Pronunciation', n:'Flat intonation',
+ meta:'A narrow pitch range in English', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'Sounds are clear and the melody is level. Sentences finish on the note they started on, so a listener cannot hear which part matters or when you have finished.',
+        C1:'The range opens up when you are enjoying the topic and closes again on anything abstract or rehearsed, which is where most of the marking happens.'},
+ why:{d:'{L1} uses pitch to distinguish words. Pitch is lexical: change it and you change which word you said, so 買 mǎi and 賣 mài differ by nothing else. English uses pitch across the whole sentence instead, to mark emphasis, attitude and completion. Moving your voice freely feels risky because in {L1} it would break the word. That caution is correct in one language and expensive in the other.',
+      'yue-hk':'Cantonese uses pitch to distinguish words across six tones. Pitch is lexical: change it and you change which word you said. English uses pitch across the whole sentence instead, to mark emphasis, attitude and completion. Moving your voice freely feels risky because in Cantonese it would break the word. That caution is correct in one language and expensive in the other.'},
+ cost:'Pronunciation is a full quarter of the score and it is not only about individual sounds. Clear sounds with a flat melody sits in the middle of that quarter. There is a band available here that costs no new vocabulary and no new grammar. Worth knowing too: analyses of first language transfer note that flat or falling English intonation can make a speaker be heard as abrupt or uninterested, which affects how a listener rates their credibility. That has nothing to do with what you meant.',
+ fix:{d:['Do the voice set below daily. Five minutes, before anything else.',
+         'Listen back for melody only, ignoring the words.',
+         'Choose one word per sentence to lift. One is enough to change the whole line.']},
+ res:['pitch','rudeness','shadowing','noticing','descriptors'], drills:['siren','story','fivefeelings','playback','shadow']},
+
+{id:'yesno', cat:'Delivery', skill:'Pronunciation', n:'Question intonation',
+ meta:'Yes and no questions falling instead of rising', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'Questions that need a rise at the end come out falling, so they land as statements. The opposite also happens after correction, with wh questions rising when they should fall.'},
+ why:{d:'Both languages use a rising then falling contour for statements and wh questions. {L1} applies the same contour to yes and no questions, where English rises instead. So the one pattern English treats differently is the one your first language treats the same. Learners who are drilled on it often over correct afterwards and start lifting wh questions too, which is a sign of progress rather than a new problem.'},
+ cost:'Small in the test, where you answer far more than you ask, and larger in real conversation, where a falling question can read as a demand.',
+ fix:{d:['Two rules only: yes or no questions go up, wh questions come down.',
+         'Say five of each aloud daily as a pair, so the contrast is trained rather than the rule memorised.']},
+ res:['rudeness','transfer'], drills:['fivefeelings']},
+
+{id:'stress', cat:'Delivery', skill:'Pronunciation', n:'Word stress',
+ meta:'The strong syllable marked, the weak ones not reduced', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'Longer words carry the stress on the wrong syllable, so a word you know well is not recognised.',
+        B2:'You do mark the strong syllable, and you mark it by making it longer and higher. What is missing is the other half: English does not just raise one syllable, it flattens the rest almost to nothing. Your strong syllable is right and your weak ones are still at full value, which is why the word can still sound unfamiliar.'},
+ why:{d:'{L1} gives every syllable a fixed tone and roughly equal weight, so there is no machinery for reducing one. English marks a syllable by lengthening it, and marks the others by hollowing them out into a schwa. An acoustic study of learners at two proficiency levels found stress accuracy does improve as your English improves, but the first language influence never fully goes: even advanced learners keep signalling stress with extra length and higher pitch instead of reducing what sits around it.'},
+ cost:'This causes the only genuinely expensive pronunciation problem, which is not being understood. Misplacing stress makes a word unintelligible more reliably than mispronouncing one of its sounds. A change of stress can also change the word class: the noun record against the verb record, the noun subject against the verb subject.',
+ fix:{d:['Learn stress with the word, marked, from the first day you meet it.',
+         'Say the word as a rhythm before saying it as a word: da DA da.',
+         'Fix the twenty longest words you actually use.'],
+      B2:['Work on the weak syllables, not the strong one. Say the word with the unstressed parts almost swallowed.',
+          'Practise the schwa on its own until it is comfortable. It is the most common sound in English and the one your first language never asks for.',
+          'Record a word list and check whether your unstressed syllables are shorter, not just quieter.']},
+ res:['stresspitch','automatic','shadowing','perception'], drills:['shadow']},
+
+{id:'rhythm', cat:'Delivery', skill:'Pronunciation', n:'Rhythm',
+ meta:'Every syllable given equal time', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'Speech is even and steady, like a metronome, where English rises and falls with strong and weak beats.'},
+ why:{d:'This is a structural difference between the two languages rather than a habit. {L1} is syllable timed: the length of a sentence depends on how many syllables it has, and each one takes roughly the same time. English is stress timed: the length depends on how many stressed syllables there are, and everything between them gets compressed to fit. Speaking English syllable by syllable is not sloppy. It is the correct rhythm of a different language.'},
+ cost:'It is the main reason clear speech can still be tiring to listen to, and it sits directly in the pronunciation quarter.',
+ fix:{d:['Shadow thirty seconds of audio daily, copying the beat rather than the words.',
+         'Read a sentence tapping only the strong beats, and let the rest fall where it falls.',
+         'Deliberately swallow the small words: the, of, to, and, a.']},
+ res:['legato','stresspitch','shadowing','automatic'], drills:['shadow','story']},
+
+{id:'linking', cat:'Delivery', skill:'Pronunciation', n:'Connected speech',
+ meta:'Clean gaps where English runs words together', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'Every word is produced separately and correctly, with an audible boundary between each one. Nothing is wrong and nothing joins.'},
+ why:{d:'The clearest description of this compares the two languages to music: {L1} is staccato, where the boundary between syllables is meant to be heard, and English is legato, where the flow is continuous and the boundaries are deliberately hard to find. Another version of the same image is that a sentence in your first language is beads strung on a thread and an English sentence is water. You are producing beads, accurately, in a language that wants water.'},
+ cost:'It reads as effortful rather than as incorrect, which caps the pronunciation quarter at the middle. It also hurts your listening, because native speakers are linking and you are listening for separate words.',
+ fix:{d:['Learn three linking patterns: consonant into vowel (pick it up), vowel into vowel (go on), and the disappearing t (wan(t) to).',
+         'Shadow audio and copy the joins rather than the words.',
+         'Read one paragraph aloud daily with no gaps at all, deliberately overdone.']},
+ res:['legato','shadowing','perception'], drills:['shadow','story']},
+
+{id:'weakforms', cat:'Delivery', skill:'Pronunciation', n:'Weak forms',
+ meta:'Small words given full value', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'To, of, and, for, can, are all pronounced fully and clearly, every time. English reduces them to almost nothing.'},
+ why:{d:'{L1} has no reduced vowels, so there is no equivalent of the schwa to transfer. Every syllable arrives at full quality. English hides most of its grammar in exactly these hollowed out words, which is also why fast English is hard to hear.'},
+ cost:'It is the other half of rhythm, and it works in both directions: producing full forms sounds heavy, and expecting full forms makes native speech harder to follow.',
+ fix:{d:['Learn five reduced forms and use them: to becomes ta, of becomes uh, and becomes n, for becomes fer, can becomes kn.',
+         'Practise the contrast in one sentence: I can go, where can is almost silent, against I CAN go, where it is not.']},
+ res:['stresspitch','legato','perception'], drills:['shadow']},
+
+/* ---- segmental: vowels ---- */
+{id:'vowellength', cat:'Delivery', skill:'Pronunciation', n:'Long and short vowels',
+ meta:'Sheep and ship, cart and cut', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'Pairs that English keeps apart come out the same: sheep and ship, feel and fill, cart and cut.'},
+ why:{d:'English has around fifteen vowels and {L1} has five. Worse, where a pair does exist, length is not doing the same job: in {L1} making a vowel longer or shorter never changes which word you said, so your ear was never trained to treat it as meaningful. There is a second trap inside this one. English does not only lengthen the vowel in cart, it moves the tongue to a different place, while learners tend to keep one tongue position and only stretch the sound. That is why the pair can still collide even when you are trying.'},
+ cost:'It creates real misunderstandings rather than just an accent, and it is the pronunciation item that most often forces a listener to ask you to repeat.',
+ fix:{d:['Fix perception first. Listen to minimal pairs and identify which one you heard, without speaking. You cannot produce a difference you cannot hear.',
+         'Then produce them: ten pairs a day, out loud, exaggerated.',
+         'For cart against cut, move the tongue rather than stretching the sound.']},
+ res:['perception','noticing','automatic'], drills:['slowmo','playback']},
+
+{id:'aeva', cat:'Delivery', skill:'Pronunciation', n:'Bad, bed and bade',
+ meta:'The vowel in cat has no home', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'The vowel in bad drifts towards bed, or towards the vowel in bide, so three different words arrive sounding alike.'},
+ why:{d:'The English vowel in cat does not exist in {L1} at all, so the nearest available sound gets substituted, usually the one in bed. Some regional backgrounds merge these two more strongly than others, which is why this varies so much between students from the same country.'},
+ cost:'Moderate. It rarely blocks a whole sentence and it does block individual words, particularly in topics about people and feelings.',
+ fix:{d:['Open the mouth wider than feels natural for cat, man, bad. The feeling of exaggeration is the target.',
+         'Contrast pairs daily: bad bed, sad said, man men.']},
+ res:['perception','automatic'], drills:['slowmo','cork']},
+
+{id:'diphthong', cat:'Delivery', skill:'Pronunciation', n:'Diphthongs',
+ meta:'House and horse, bide and bed', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'Two part vowels flatten into one. House moves towards horse, and bide towards bad or bed.'},
+ why:{d:'A diphthong is built from two vowels sliding together, so if either piece is already off target the whole glide lands somewhere else. Because the single vowels in {L1} sit in different places from their English near equivalents, the errors compound rather than adding up.'},
+ cost:'Moderate, and worth fixing after the single vowels rather than before, since the single vowels are the cause.',
+ fix:{d:['Fix the two single vowels first. The diphthong usually corrects itself.',
+         'Slow the glide right down, then speed it up: ah ee, ah ee, aye.']},
+ res:['perception','automatic'], drills:['slowmo']},
+
+/* ---- segmental: consonants ---- */
+{id:'clusters', cat:'Delivery', skill:'Pronunciation', n:'Final consonant clusters',
+ meta:'Endings falling off, or growing a vowel', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'Words like asked, texts, finished and world lose their last sounds, or gain a small extra vowel: hot becomes hotta, good becomes gooda, map becomes mapoo.'},
+ why:{d:'{L1} syllables end in a vowel or in a very small set of consonants, and only a couple of them can close a syllable at all. English piles up to four consonants at the end. Your mouth is doing something it was never trained to do and it resolves the problem the way every mouth does, by simplifying or by adding a vowel to make the shape legal. This is documented so consistently that researchers can predict which vowel gets added: a small uh after t, d, k and g, and a small oo after p and b.'},
+ cost:'It creates grammar errors it never intended, because English hides its tense and plural information in exactly these endings. Fixing the sound fixes two things at once, which makes this one of the highest value items on the list.',
+ fix:{d:['Practise the cluster on its own, then attach the word.',
+         'The cork drill for two minutes daily.',
+         'Slow motion sentences hitting every ending, then the same sentence at normal speed.']},
+ res:['clusters','automatic','noticing'], drills:['cork','slowmo']},
+
+{id:'voicing', cat:'Delivery', skill:'Pronunciation', n:'Voiced and voiceless endings',
+ meta:'Bag and back, seed and seat', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'The final consonant in bag sounds like back, and seed like seat. The vowel before it is also shorter than English expects.'},
+ why:{d:'This is a whole feature your ear has never needed. English separates eight consonant pairs by voicing, whether the vocal cords are running: p and b, t and d, k and g, s and z, f and v, and so on. {L1} separates its pairs by aspiration instead, by how much breath follows, and voicing never changes a meaning. So English is asking you to hear and produce a contrast that has been irrelevant your whole life. Native English speakers have the mirror version of this problem and cannot hear aspiration.'},
+ cost:'Moderate on its own, and it compounds with the plural and past endings, so it pays twice.',
+ fix:{d:['Feel it rather than hear it. Hand on the throat: buzzing for b, d, g, z, and nothing for p, t, k, s.',
+         'Lengthen the vowel before a voiced ending. English marks bag mostly by making the a longer, not by the g.',
+         'Ten pairs a day.']},
+ res:['voicing','perception','automatic'], drills:['slowmo','cork']},
+
+{id:'th', cat:'Delivery', skill:'Pronunciation', n:'The TH sounds',
+ meta:'Think, this, three', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'TH becomes s, z, t, d or f depending on the word: think becomes sink, this becomes zis.'},
+ why:{d:'The sound does not exist in {L1}, so the nearest available one is substituted, and the research is consistent about which: s for the sound in think and z for the sound in this. Here is the part worth holding on to. This sound is missing from more than 95 percent of the world languages. You are not failing at a basic sound. You are struggling with a rare one, along with most of the planet. In one study of adult learners the average accuracy was 37 percent, and the only people near perfect had lived for years in an English speaking country.'},
+ cost:'Small. It very rarely blocks understanding and it is the least valuable pronunciation item on this list. It is included so you can stop worrying about it.',
+ fix:{d:['Tongue tip lightly between the teeth, blow air. Thirty seconds a day.',
+         'Fix it in the ten words you say most and leave the rest.',
+         'Do not spend real practice time here while anything else on this list is open.']},
+ res:['theta'], drills:[], adv:'rare'},
+
+{id:'vw', cat:'Delivery', skill:'Pronunciation', n:'V and W',
+ meta:'Village and window swapping', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'The two are used interchangeably, so village can come out as willage and window as vindow.'},
+ why:{d:'In {L1} the v sound exists only as a variant of w. Swapping them never changes a meaning, so they were never stored as two different things. English treats them as separate words and expects you to keep them apart.'},
+ cost:'Occasionally blocks a word, which makes it worth a few minutes even though the number of affected words is small.',
+ fix:{d:['V touches the teeth to the lip. W does not touch at all. Feel the difference rather than listening for it.',
+         'Ten pairs a day: vine wine, vest west, veil wail.']},
+ res:['perception','automatic'], drills:['slowmo']},
+
+{id:'nl', cat:'Delivery', skill:'Pronunciation', n:'N and L',
+ meta:'Night and light merging', tags:['yue-hk','cmn-cn'], common:'many',
+ heard:{d:'Initial n and l are used interchangeably, so night and light, or knife and life, sound alike.'},
+ why:{d:'This is a well documented feature of everyday speech in several southern varieties, where initial n has largely shifted to l for many speakers. It is a natural sound change in your own language, not an error in it, and it carries straight into English.'},
+ cost:'Occasionally blocks a word, which makes it worth a few minutes even though the total number of affected words is small.',
+ fix:{d:['Contrast pairs out loud daily: night light, no low, name lame, knife life.',
+         'Feel the difference: n sends air through the nose, l does not. Pinch your nose and try both.',
+         'Ten pairs a day for two weeks is usually enough.']},
+ res:['perception','noticing'], drills:['slowmo']},
+
+{id:'ngn', cat:'Delivery', skill:'Pronunciation', n:'NG and N',
+ meta:'Thing and thin', tags:['cmn-tw','cmn-cn','yue-hk'], common:'some',
+ heard:{d:'Word final ng and n collapse together, so thing and thin, or sing and sin, are hard to tell apart.'},
+ why:{d:'Both sounds can end a syllable in {L1}, which is why this one is less common than the other consonant items, but several regional varieties merge them and the merge transfers.'},
+ cost:'Small, and it shows up in the present continuous, which you use constantly, so it accumulates.',
+ fix:{d:['The back of the tongue lifts for ng and the tip lifts for n. Say both with the mouth held open to feel which part moves.',
+         'Drill the ing ending across ten verbs a day.']},
+ res:['perception'], drills:['slowmo']},
+
+{id:'finall', cat:'Delivery', skill:'Pronunciation', n:'Final L',
+ meta:'Pool and poor sounding the same', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'The l at the end of a word turns into a vowel, so pool moves towards poor and feel towards fear.'},
+ why:{d:'In {L1} the l sound only occurs at the beginning of a syllable, never at the end, so the mouth has no stored shape for a final one and substitutes the nearest comfortable vowel. English also uses a different, darker l in that position than the one at the start of a word, so even the sound you do have is not the right version.'},
+ cost:'Moderate, and it interacts with plural and past endings after an l, so it pays twice.',
+ fix:{d:['Hold the final l for a full second in practice, tongue tip firmly up, then shorten it.',
+         'Cork drill on word lists ending in l: feel, small, hotel, careful.']},
+ res:['clusters','automatic'], drills:['cork','slowmo']},
+
+{id:'retroflex', cat:'Delivery', skill:'Pronunciation', n:'The extra R',
+ meta:'An r added where none belongs', tags:['cmn-tw','cmn-cn'], common:'some',
+ heard:{d:'An r appears at the end of syllables that do not have one, so early can come out with an extra curl, and the vowel before it slides backwards.'},
+ why:{d:'{L1} has an r like sound that can sit at the end of a syllable, and it is a strong feature of some northern varieties. When a learner is aiming at an American accent, that stored ending gets applied more widely than English uses it. This is over application of a real sound rather than a missing one, which makes it unusually quick to correct.'},
+ cost:'Small, and audible, and it tends to appear in exactly the words a student has practised hardest.',
+ fix:{d:['Identify the ten words where you add it and drill those only.',
+         'Say the word with no r at all first, then add the correct amount back.']},
+ res:['transfer','noticing'], drills:['playback']},
+
+{id:'perception', cat:'Delivery', skill:'Pronunciation', n:'Hearing the difference',
+ meta:'Production blocked by perception', tags:['cmn-tw','cmn-cn','yue-hk'], common:'many',
+ heard:{d:'When I say a pair of words that differ by one sound, you cannot reliably tell me which one I said, even though you can define both words.'},
+ why:{d:'Where a distinction does not change meaning in {L1}, your ear filtered it out years ago as noise, and it has been doing that efficiently ever since. As one analysis puts it, if you cannot hear a sound you cannot even attempt to pronounce it, so the perception problem has to be solved before any production work will hold. This is also why practising in front of a mirror does not fix it: the problem is on the way in, not on the way out.'},
+ cost:'It is upstream of every other sound item here. Time spent on production while perception is still off is time spent training a target you cannot see.',
+ fix:{d:['Minimal pair listening, two minutes daily, no speaking. Just decide which word you heard and check.',
+         'Use audio of several different voices, not one, so you learn the contrast rather than a person.',
+         'Only start producing a pair once you can hear it at 90 percent.']},
+ res:['perception','noticing','automatic'], drills:['playback']},
+
+{id:'exposure', cat:'Delivery', skill:'Pronunciation', n:'Never taught out loud',
+ meta:'English learned as a written subject', tags:['cmn-tw','cmn-cn','yue-hk'], common:'most',
+ heard:{d:'Your reading and grammar knowledge run well ahead of your speaking. You know rules you cannot yet use at speed, and words you have never once said aloud.'},
+ why:{d:'This is a syllabus outcome, not an ability one. Exam focused instruction leaves learners largely confined to English on paper, with little systematic pronunciation teaching, and studies of learners from this background name that directly as the reason speaking lags. If you have never been asked to say a word out loud, the fact that you cannot say it smoothly tells you nothing about your ability. It tells you about the lessons.'},
+ cost:'It makes every other item on this list look worse than it is, because it puts your visible performance below your actual knowledge.',
+ fix:{d:['Read aloud daily. Anything. This is the single highest return habit for someone in your position.',
+         'Say new words out loud the first time you meet them, before you write them down.',
+         'Move material you already know from the page into your mouth. That is a much shorter job than learning it.']},
+ res:['written','production','automatic'], drills:['story','shadow'], adv:'written'}
+];
+
+const WEAK = WEAK_LANG.concat(WEAK_PRON);
+
+/* ============================================================
+   DRILLS, STRENGTHS, MOODS, PLANS, PLANNER, HOMEWORK LIBRARY
+   ============================================================ */
+
 const DRILLS = {
   siren:{n:'The siren', p:'Slide your voice from the lowest comfortable note to the highest and back down on one breath, on a hum, then on the word "no". Thirty seconds.',
     o:'Most speakers use a fraction of the range they own. This finds the edges, so normal speech sits in the middle of a wide range instead of at the top of a narrow one.'},
   story:{n:'The story voice', p:'Read one paragraph of a children’s book out loud, to an imaginary six year old who is losing interest. Exaggerate everything.',
-    o:'It removes the fear of sounding excessive. Recorded and played back, the exaggerated version almost always sounds normal, which tells you how much room you have.'},
+    o:'It removes the fear of sounding excessive. Played back, the exaggerated version almost always sounds normal, which tells you how much room you actually have.'},
   fivefeelings:{n:'One line, five feelings', p:'Take one sentence, for example "I did not say that". Say it five times: bored, excited, suspicious, amused, exhausted. Same words every time.',
     o:'It separates meaning from vocabulary. You learn that tone carries a large part of the message, so you stop trying to carry all of it with words.'},
   cork:{n:'The cork', p:'Hold a cork or a clean finger between your front teeth. Read a paragraph aloud, forcing clarity. Remove it and read the same paragraph again.',
-    o:'The second reading is noticeably clearer with no extra effort. It resets how much articulation feels normal, which matters most on the endings of English words.'},
+    o:'The second reading is noticeably clearer for no extra effort. It resets how much articulation feels normal, which matters most on the endings of English words.'},
   pause:{n:'The deliberate pause', p:'Read a paragraph and stop completely for two full seconds at every comma. Do not fill the gap with any sound.',
     o:'Silence feels much longer to the speaker than to the listener. This trains pauses that sound like thinking rather than like stalling, and it removes the pressure that produces filler noises.'},
-  playback:{n:'The playback', p:'Record sixty seconds of yourself answering any question. Listen once for content, once for melody only, ignoring the words.',
-    o:'The second listen is the one that changes things. You cannot hear your own tune while producing it, and you cannot fix what you have never heard.'},
+  playback:{n:'The playback', p:'Record sixty seconds of yourself answering any question. Listen once for content, then once for melody only, ignoring the words. Then delete it.',
+    o:'The second listen is the one that changes things. You cannot hear your own tune while producing it, and you cannot fix what you have never heard. This is for your ears only.'},
   countdown:{n:'The countdown', p:'Answer the same question three times, in ninety seconds, then sixty, then forty five. Same content, less time.',
     o:'Fixing the content forces all the improvement into delivery. Speed rises and pausing falls without you thinking about either.'},
   shadow:{n:'The shadow', p:'Play thirty seconds of a native speaker and talk along one beat behind, copying the melody and rhythm, not the meaning.',
@@ -337,11 +1011,11 @@ const DRILLS = {
     o:'It stops sentences running on until they collapse, which is the most common cause of grammar breaking down mid answer.'}
 };
 
-/* ---------- strengths bank ---------- */
 const STRENGTHS = [
   {id:'range', n:'Wide vocabulary', s:'You already know far more words than you are able to use under pressure. That is a good problem, because the words do not have to be learned again. They have to be made available faster.'},
   {id:'clarity', n:'Clear pronunciation', s:'Individual sounds are clear and easy to follow. A listener never has to ask you to repeat a word. That is a real advantage and it protects a quarter of your score.'},
   {id:'ideas', n:'Strong ideas', s:'You have opinions and you can find something to say on almost any topic. Many candidates lose marks because they have nothing to say. That is not your problem, which means the work is about delivery rather than about thinking.'},
+  {id:'detail-good', n:'Specific, concrete detail', s:'You reach for real examples rather than general adjectives. Numbers, places, things that actually happened. That is the raw material examiners are looking for, and most candidates do not bring it.'},
   {id:'willing', n:'Willing to keep talking', s:'You keep going rather than stopping when something is difficult. That single habit is worth more than it looks, because the marking rewards sustained speech.'},
   {id:'grammar-base', n:'Solid grammar foundation', s:'The basic structures are there and correct. What is missing is variety, not knowledge, and variety is quicker to build than knowledge.'},
   {id:'listening', n:'Strong listening', s:'You understand questions the first time and answer what was actually asked. Examiners notice this immediately, and it makes the whole conversation easier for both people.'},
@@ -350,295 +1024,18 @@ const STRENGTHS = [
   {id:'pace', n:'Comfortable pace', s:'Your speed is easy to follow, neither rushed nor slow. This is worth protecting when the other work starts.'},
   {id:'organised', n:'Organised answers', s:'Your answers have a beginning and an end rather than trailing off. Structure is one of the things fluency and coherence is actually measuring.'},
   {id:'humour', n:'Personality comes through', s:'You are interesting to listen to. The test is a conversation with a human being, and a human being who is enjoying the conversation is a friendlier marker.'},
-  {id:'selfaware', n:'You hear your own mistakes', s:'You notice when something comes out wrong. That awareness is the foundation of every correction that follows, and many students do not have it.'}
+  {id:'selfaware', n:'You hear your own mistakes', s:'You notice when something comes out wrong. That awareness is the foundation of every correction that follows, and many students do not have it.'},
+  {id:'reading', n:'Reading and grammar knowledge', s:'You know a great deal of English that has never been asked to come out of your mouth at speed. That is a storage problem rather than a knowledge problem, and it is a far shorter job.'}
 ];
 
-/* ---------- weakness bank ----------
-   tags: which language backgrounds this pattern is documented for
-   heard: what happened in the lesson, in plain words
-   why: cause in the first language. {d} is default, keyed overrides per language
-   cost: what it costs against the marking
-   fix: the steps
-   res: research keys
-   drills: drill keys
-------------------------------------- */
-const WEAK = [
-  {id:'vocab-overreach', cat:'Vocabulary', n:'Reaching for advanced vocabulary', meta:'Big words slowing everything else down',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'You stop mid sentence to search for an impressive word. The search is visible, the sentence loses its shape, and the word that arrives is often not the one that fits.',
-   why:{d:'This is a taught habit rather than a language one. Study materials reward rare words, so effort goes there. The cost is invisible until you are timed.'},
-   cost:'It damages three of the four quarters at once. Fluency drops because of the pause, grammar drops because the sentence was abandoned, and vocabulary itself drops, because the scoring rewards words used naturally and accurately rather than words that are rare. A rare word used slightly wrongly scores below a common word used exactly.',
-   fix:['Answer with the first word that is true. Precision beats rarity in the marking.',
-        'Build partners, not words. Learn "make a decision", not "decision".',
-        'Reserve ambition for the second sentence of an answer, never the first.'],
-   res:['skehan','descriptors','collocation','formulaic'], drills:['countdown']},
-
-  {id:'collocation', cat:'Vocabulary', n:'Word partners', meta:'Right word, wrong partner',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'The vocabulary is correct but the combination is not. "Do a mistake", "very delicious", "open the light", "learn knowledge".',
-   why:{d:'Words are usually learned one at a time with a translation, and the partner does not travel across languages. In {L1} the natural partner is a different verb, so the sentence is built correctly by {L1} logic and lands wrongly in English.'},
-   cost:'Examiners hear it as limited range, which is unfair given how many words you know, but it is what the descriptors describe.',
-   fix:['Record new words with their partner and never alone.',
-        'Collect the four or five verbs that appear most in your own answers and learn what each one takes.',
-        'When you read, notice the pair rather than the noun.'],
-   res:['collocation','formulaic'], drills:[]},
-
-  {id:'memorised', cat:'Vocabulary', n:'Memorised answers', meta:'Prepared scripts that stop working',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'Some answers arrive complete and polished, then the next question breaks the script and the level drops sharply.',
-   why:{d:'Memorising is a rational response to fear. The problem is that it is audible: rhythm, vocabulary and fluency all change at the seam, and the drop afterwards is more visible than the polish before it.'},
-   cost:'Examiners are trained to hear this, and the answer is discounted. It also removes the chance to score on the one thing memorising cannot fake, which is responding.',
-   fix:['Memorise ideas and examples, never sentences.',
-        'Prepare five personal stories that can be bent to fit fifty questions.',
-        'Practise answering questions you have not seen, badly, on purpose.'],
-   res:['formulaic','anxiety'], drills:['countdown']},
-
-  {id:'detail', cat:'Vocabulary', n:'Concrete detail', meta:'General words where specifics score',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'Answers stay at the level of "it is very convenient" and "the environment is good" without the specific thing that makes it convenient or good.',
-   why:{d:'General adjectives are safe and always available. Specific nouns are riskier and score higher, so the safe choice is the expensive one.'},
-   cost:'Vocabulary is judged on precision. Three general adjectives score below one exact noun.',
-   fix:['Add one number, one name or one place to every answer.',
-        'Replace "good" and "convenient" with the reason underneath them.',
-        'Practise the follow up sentence: "For example, last week..."'],
-   res:['rhetoric','descriptors'], drills:[]},
-
-  {id:'copula', cat:'Grammar', n:'The missing BE verb', meta:'Am, is, are dropping out',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'"My hometown very beautiful." "The weather cold today." "I very tired yesterday." The meaning is completely clear, and the verb is not there.',
-   why:{d:'In {L1} an adjective can be the whole predicate. 很 hen plus an adjective is a complete sentence, and no verb is required, so 我很累 is grammatical and finished. English will not allow this: the adjective needs a verb to attach to. You are not forgetting a word. You are applying a correct rule from another language.',
-      'yue-hk':'In Cantonese an adjective can be the whole predicate. 好 hou2 plus an adjective is a complete sentence with no verb, so 我好攰 is grammatical and finished. English will not allow this: the adjective needs a verb to attach to. You are not forgetting a word. You are applying a correct rule from another language.'},
-   cost:'It is the single most noticeable error in this group, because it appears in short high frequency sentences where the examiner is listening closely. It reads as a basic accuracy problem even when the rest of the grammar is far above that level.',
-   fix:['Before an adjective, ask one question: where is the verb.',
-        'Drill the six forms out loud daily until they cost nothing: I am, you are, he is, we are, they are, it is.',
-        'Record one minute and count the missing ones. The count falls quickly once you can hear it.'],
-   res:['transfer','automatic','noticing'], drills:['slowmo','playback']},
-
-  {id:'tenses', cat:'Grammar', n:'Narrative tenses', meta:'Everything told in one tense',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'Past stories are told mostly in the present, or in the simple past only, with no shift between what was happening and what happened.',
-   why:{d:'{L1} does not mark time on the verb. Time is set once, with a word like yesterday or with a particle, and then the verb never changes. English asks you to re mark time on every single verb, which is a genuinely heavier load, not a harder idea.'},
-   cost:'Grammatical range is a quarter of the score and range means variety, not just correctness. A whole story in one tense caps that quarter no matter how accurate it is.',
-   fix:['Learn three tenses as one set for storytelling: I was doing, I did, I had done.',
-        'Tell one true story a day, out loud, sixty seconds, in the past.',
-        'Mark the frame first: "Last year, while I was living in..." then continue.'],
-   res:['transfer','syntactic','production'], drills:['onebreath','countdown']},
-
-  {id:'past-ed', cat:'Grammar', n:'Past endings disappearing', meta:'Walked, asked, finished losing their ending',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'The tense is chosen correctly and the ending is not heard. "I walk to school yesterday", where you knew it was past.',
-   why:{d:'This is a sound problem wearing a grammar costume. English past endings land as consonant clusters, and clusters of that shape do not occur at the end of syllables in {L1}, so the ending is dropped by the mouth rather than by the grammar.'},
-   cost:'It is marked as a grammar error even though you know the rule, which makes it one of the cheapest things on this list to fix.',
-   fix:['Practise the ending as a sound, not a rule: walk t, need id, play d.',
-        'Slow motion drill: say the sentence at half speed hitting every ending.',
-        'Read aloud two minutes daily and exaggerate every final consonant.'],
-   res:['automatic','noticing'], drills:['slowmo','cork']},
-
-  {id:'plural', cat:'Grammar', n:'Plural endings', meta:'Two book, many student',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'The number is already in the sentence, so the ending on the noun does no work and disappears.',
-   why:{d:'{L1} does not mark plural on the noun. Number comes from a number word and a measure word, and marking it twice would be redundant. Your instinct is efficient and English is not.'},
-   cost:'High frequency, easy to hear, and it accumulates across an answer.',
-   fix:['Whenever a number appears, check the noun behind it.',
-        'Drill the s as a sound rather than a rule.',
-        'Read aloud and exaggerate every plural for two weeks.'],
-   res:['transfer','automatic'], drills:['slowmo']},
-
-  {id:'articles', cat:'Grammar', n:'A, an and the', meta:'Missing, added, or swapped',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'"I went to cinema." "The my friend." Articles appear and disappear without a pattern.',
-   why:{d:'{L1} has no articles at all. There is no equivalent decision to transfer, so every article is a new judgement made in real time, which is why they fail under pressure rather than in writing.'},
-   cost:'Frequent, but individually small. It is worth fixing after the bigger patterns, not before.',
-   fix:['Learn it as one question: does the listener already know which one.',
-        'Fix the fifteen fixed phrases first: go to school, at home, in the morning, on the internet.',
-        'Do not chase perfection here. Accept a percentage improvement.'],
-   res:['transfer'], drills:[]},
-
-  {id:'sva', cat:'Grammar', n:'Third person s', meta:'He go, she like',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'The verb stays in its base form when the subject is he, she or it.',
-   why:{d:'{L1} verbs do not change for the subject at all. One form serves everybody, which is a simpler and arguably better system. English asks for an ending that carries no meaning, so it is the first thing dropped under load.'},
-   cost:'Very visible to examiners because it is taught early. It reads as a lower level than you are.',
-   fix:['Drill he, she and it separately from I, you and they.',
-        'Say five sentences a day about one other person out loud.',
-        'When you self correct, correct the whole sentence, not the word.'],
-   res:['transfer','automatic'], drills:['slowmo']},
-
-  {id:'parataxis', cat:'Grammar', n:'Short clauses joined by and', meta:'Sentences placed side by side',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'"I go there and it is very beautiful and I take many photos and then I go home." Each piece is correct. Nothing shows how they relate.',
-   why:{d:'{L1} allows clauses to sit next to each other with the relationship left for the listener to infer, and this is normal, high quality style. English carries the relationship in explicit words: because, although, which, after. The information is not missing from your thinking. It is missing from the sentence.'},
-   cost:'This is what limits grammatical range more than any single error does. Range is measured in clause types, and a chain of short clauses only ever shows one.',
-   fix:['Learn five joiners and use one per answer: although, which, because, after, even though.',
-        'Take any two of your own sentences and force them into one.',
-        'Aim for one long sentence per answer, not for all of them.'],
-   res:['syntactic','transfer','descriptors'], drills:['onebreath']},
-
-  {id:'there-is', cat:'Grammar', n:'There is and there are', meta:'Here have many people',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'Existence expressed with have: "In my city have a lot of night markets."',
-   why:{d:'{L1} uses one verb of possession and existence together, 有 for Mandarin and 有 jau5 for Cantonese, so "there is" and "have" are one word in your first language and two in English. The split is arbitrary and it has to be learned as a fixed pattern.',
-      'yue-hk':'Cantonese uses 有 jau5 for both possession and existence, so "there is" and "have" are one word in your first language and two in English. The split is arbitrary and it has to be learned as a fixed pattern.'},
-   cost:'Immediately audible, and it appears in exactly the descriptive answers Part 1 asks for.',
-   fix:['Drill the frame: there is a, there are some, there was a.',
-        'Describe your room, your street and your office out loud using only that frame.',
-        'Catch the word have before it arrives.'],
-   res:['transfer','automatic'], drills:[]},
-
-  {id:'prodrop', cat:'Grammar', n:'Dropped subjects and objects', meta:'Is very good, I like very much',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'"Is very interesting." "I like very much." The thing being talked about is left out because it is obvious.',
-   why:{d:'{L1} drops anything the context already supplies, and repeating it sounds clumsy. English requires the slot to be filled even when the word carries no new information, which is why "it" appears so often in English and feels empty to you.'},
-   cost:'It produces sentences that are technically incomplete, which is scored more harshly than a wrong word.',
-   fix:['Check every sentence has a subject, even a meaningless one.',
-        'Drill the empty it: it is raining, it takes an hour, it depends.',
-        'After a verb like like, want or enjoy, always name the thing.'],
-   res:['transfer'], drills:[]},
-
-  {id:'questions', cat:'Grammar', n:'Question formation', meta:'Word order in questions',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'"You know where is the station?" Direct and indirect questions use the same order.',
-   why:{d:'{L1} forms questions by adding a particle and leaving the word order alone. English inverts the order for a direct question and then un inverts it inside a longer sentence, which is two opposite rules for one idea.'},
-   cost:'Small in Speaking, where you answer more than you ask, but it appears in Part 3 hypotheticals and in Writing.',
-   fix:['Drill the pair: "Where is it" against "I do not know where it is".',
-        'Say five embedded questions a day out loud.'],
-   res:['transfer'], drills:[]},
-
-  {id:'modals', cat:'Grammar', n:'Hedging and modality', meta:'Everything stated as absolute',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'Positions arrive as facts: "People must do this." There is no might, tend to, in most cases, or it depends.',
-   why:{d:'Hedging exists in {L1} but is carried differently, often by particles and tone rather than by verbs. Translating directly produces English that sounds more absolute than you intended.'},
-   cost:'Part 3 rewards nuance. Absolute statements are easy to challenge and leave you defending a position you do not hold.',
-   fix:['Learn six hedges and use two per Part 3 answer: tend to, in most cases, it depends on, arguably, to some extent, might.',
-        'Answer one opinion question a day with a deliberate "it depends".'],
-   res:['rhetoric','descriptors'], drills:[]},
-
-  {id:'preps', cat:'Grammar', n:'Prepositions', meta:'In, on, at and the rest',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'Prepositions are chosen by meaning rather than by the fixed pattern English uses.',
-   why:{d:'{L1} maps space and time onto a different set of words, and there is no rule that transfers. These are learned as fixed pairs in every language.'},
-   cost:'Low individually and noticeable in bulk. Worth doing in the background, never as the main project.',
-   fix:['Learn them attached to the noun: on Monday, in July, at six.',
-        'Fix the ten that appear in your own speech most, and ignore the rest for now.'],
-   res:['formulaic'], drills:[]},
-
-  {id:'intonation', cat:'Delivery', n:'Flat intonation', meta:'A narrow pitch range in English',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'Sounds are clear and the melody is level. Sentences finish on the same note they started, so a listener cannot hear which part matters or when you have finished.',
-   why:{d:'{L1} uses pitch to distinguish words. Pitch is lexical: change the pitch and you change the meaning of the word. English uses pitch at the level of the sentence instead, to mark emphasis, attitude and completion. Moving your voice freely feels risky because in {L1} it would break the word, so the safest strategy is to keep it level. That strategy is correct in one language and costly in the other.',
-      'yue-hk':'Cantonese uses pitch to distinguish words across six tones. Pitch is lexical: change the pitch and you change the word. English uses pitch at the level of the sentence instead, to mark emphasis, attitude and completion. Moving your voice freely feels risky because in Cantonese it would break the word, so the safest strategy is to keep it level. That strategy is correct in one language and costly in the other.'},
-   cost:'Pronunciation is a full quarter of the score, and it is not only about individual sounds. Clear sounds with a flat melody sits in the middle of that quarter. There is a band available here that costs no new vocabulary and no new grammar.',
-   fix:['Do the voice set below daily. Five minutes, before anything else.',
-        'Record and listen for melody only, ignoring the words.',
-        'Choose one word per sentence to lift. One is enough to change the whole line.'],
-   res:['pitch','shadowing','noticing','descriptors'], drills:['siren','story','fivefeelings','playback','shadow']},
-
-  {id:'clusters', cat:'Delivery', n:'Final consonant clusters', meta:'Endings falling off words',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'Words like asked, texts, finished and world lose their last sounds.',
-   why:{d:'{L1} syllables end in a vowel or in a very small set of consonants. English piles up to four consonants at the end of a syllable. Your mouth is doing something it was never trained to do, and it simplifies, which is what every mouth does with unfamiliar shapes.'},
-   cost:'It creates grammar errors it did not intend, because English hides its tense and plural information in exactly those endings.',
-   fix:['Practise the cluster on its own, then attach the word.',
-        'The cork drill for two minutes daily.',
-        'Slow motion sentences, hitting every ending, then normal speed.'],
-   res:['automatic','noticing'], drills:['cork','slowmo']},
-
-  {id:'stress', cat:'Delivery', n:'Word stress', meta:'The strong syllable in the wrong place',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'Longer words carry the stress on the wrong syllable, so a known word is not recognised.',
-   why:{d:'{L1} gives roughly equal weight to each syllable. English makes one syllable strong and reduces the others almost to nothing, and listeners identify the word largely by that shape.'},
-   cost:'It causes the only truly expensive pronunciation problem, which is not being understood. A single word can stop the conversation.',
-   fix:['Learn stress with the word, marked, from the first day you meet it.',
-        'Say the word as a rhythm before saying it as a word: da DA da.',
-        'Fix the twenty longest words you actually use.'],
-   res:['automatic','shadowing'], drills:['shadow']},
-
-  {id:'rhythm', cat:'Delivery', n:'Rhythm', meta:'Every syllable given equal time',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'Speech is even and steady, like a metronome, where English rises and falls with strong and weak beats.',
-   why:{d:'{L1} gives each syllable similar length. English compresses the unimportant words almost to nothing and stretches the important ones. The information is carried by the contrast, and even timing removes the contrast.'},
-   cost:'It is the main thing that makes clear speech still sound effortful to listen to.',
-   fix:['Shadow thirty seconds of audio daily, copying the beat rather than the words.',
-        'Read a sentence tapping only the strong beats.',
-        'Deliberately swallow the small words: the, of, to, and, a.'],
-   res:['shadowing','automatic'], drills:['shadow','story']},
-
-  {id:'th', cat:'Delivery', n:'The TH sounds', meta:'Think, this, three',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'TH becomes s, z, t, d or f depending on the word.',
-   why:{d:'The sound does not exist in {L1}, so the nearest available sound is substituted. This is the normal and predictable outcome, not carelessness.'},
-   cost:'Small. It very rarely blocks understanding and it is the least valuable pronunciation item on this list. It is included so you can stop worrying about it.',
-   fix:['Tongue tip lightly between the teeth, blow air. Thirty seconds a day.',
-        'Fix it in the ten words you say most and leave the rest.',
-        'Do not spend real practice time here while anything else on this list is open.'],
-   res:[], drills:[]},
-
-  {id:'nl', cat:'Delivery', n:'N and L', meta:'Night and light merging',
-   tags:['yue-hk'],
-   heard:'Initial n and l are used interchangeably, so "night" and "light" or "you" and "nau" sound similar.',
-   why:{d:'This merger is a well documented feature of everyday Cantonese speech, where initial n has largely shifted to l for many speakers. It is a natural sound change in your first language and it carries straight into English.'},
-   cost:'Occasionally blocks a word, which makes it worth a few minutes even though the total number of affected words is small.',
-   fix:['Contrast pairs out loud daily: night light, no low, name lame.',
-        'Feel the difference: n closes the nose, l does not.',
-        'Ten pairs a day for two weeks is usually enough.'],
-   res:['noticing'], drills:['slowmo']},
-
-  {id:'finall', cat:'Delivery', n:'Final L and R', meta:'Feel, girl, world, car',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'L and R at the end of a word are dropped or replaced by a vowel.',
-   why:{d:'{L1} does not use these consonants in that position, so the mouth substitutes the nearest comfortable shape.'},
-   cost:'Moderate, and it interacts with the plural and past endings, so fixing it pays twice.',
-   fix:['Hold the final sound for a full second in practice, then shorten it.',
-        'Cork drill on word lists ending in l and r.'],
-   res:['automatic'], drills:['cork','slowmo']},
-
-  {id:'part3', cat:'Fluency', n:'Answers that stop too early', meta:'Correct, complete, and too short',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'You answer the question, accurately, and then stop, because the question has been answered.',
-   why:{d:'This is a conversational norm, not a language gap. In {L1} conversation, giving a short answer and letting the other person continue is polite and appropriate. The test inverts that rule: it wants the long turn, and silence is read as inability rather than as courtesy.'},
-   cost:'Fluency and coherence is a quarter of the score and it is partly measured by sustained speech. A short answer gives the examiner nothing to score.',
-   fix:['Three part shape for every Part 3 answer: position, reason, example.',
-        'Add "for example" out loud even when it feels unnecessary.',
-        'Practise talking for forty five seconds on a boring topic on purpose.'],
-   res:['rhetoric','descriptors'], drills:['countdown']},
-
-  {id:'selfcorrect', cat:'Fluency', n:'Over correcting', meta:'Restarting sentences mid way',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'A sentence begins, an error is noticed, and the sentence restarts. Sometimes twice.',
-   why:{d:'The awareness is good and the timing is expensive. Every restart is scored as a break in fluency, and the original error was often smaller than the repair.'},
-   cost:'A repaired sentence costs more than an uncorrected small error. Two repairs cost more than the error was ever worth.',
-   fix:['One repair rule: fix it once, then continue whatever happens.',
-        'Finish the sentence you started, even badly.',
-        'Save the correction for the recording, afterwards.'],
-   res:['skehan','noticing'], drills:['onebreath']},
-
-  {id:'pausing', cat:'Fluency', n:'Silent gaps', meta:'Long silences instead of natural fillers',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'Thinking time arrives as complete silence, which sounds longer to a listener than filled time does.',
-   why:{d:'Fillers are often taught as bad habits, so they are suppressed. English speakers use them constantly and hear them as normal thinking.'},
-   cost:'Silence is scored as hesitation. The same pause with a natural phrase in it is not.',
-   fix:['Learn four thinking phrases and use them: that is a good question, I have never thought about that, let me think for a second, it depends really.',
-        'Deliberate pause drill, so that silence stops feeling dangerous.'],
-   res:['formulaic','anxiety'], drills:['pause']},
-
-  {id:'speed', cat:'Fluency', n:'Speaking too fast', meta:'Speed used to hide uncertainty',
-   tags:['cmn-tw','cmn-cn','yue-hk'],
-   heard:'The pace rises when the topic is difficult, and accuracy falls at exactly the same moment.',
-   why:{d:'Speed feels like fluency and is not. Rushing removes the planning time your grammar needs, so the harder the question the more the speed costs.'},
-   cost:'It damages fluency and grammar together, which is the worst trade available.',
-   fix:['One breath, one sentence.',
-        'Deliberate two second pauses at commas.',
-        'Slow to eighty percent on Part 3 and watch accuracy rise.'],
-   res:['skehan'], drills:['pause','onebreath']}
-];
-
-/* ---------- how the student feels about the test ---------- */
+/* ---------- how the student feels ---------- */
 const MOODS = {
   nervous:{
     t:'On feeling nervous about this',
     lead:'You told me you feel nervous about the test. That is worth answering properly rather than brushing past, because nervousness is not a personality problem here. It is a measurable cost, and it is trainable.',
     body:[
       'Research across a large number of studies finds a consistent negative relationship between speaking anxiety and speaking performance. The mechanism is simple: anxiety occupies working memory, and grammar needs the same working memory. You are not less capable when you are nervous. You have less capacity free.',
+      'It is also documented rather than imagined. A study of learners with your language background found five themes running through their accounts of learning English, and two of them were emotional: anxiety and self doubt appeared as persistent obstacles alongside the language itself. There is a long standing observation in this field that learners from this background are often described as quiet and afraid of mistakes, of laughter, of being wrong in front of people, and that this counts against them in speaking assessments specifically. That is a description of how speaking was taught and marked. It is not a description of your English.',
       'Four principles guide how I will approach speaking with you.',
       'The first: speaking is not performing. It is paying attention to the person in front of you. Nervousness comes almost entirely from watching yourself. Move the attention onto the examiner, onto the actual question, onto what you are describing, and there is less of you left over to be nervous with.',
       'The second: you do not need to win the conversation. You need to keep it alive. Every answer is a pass, not a shot. This removes the idea that any single sentence can ruin the test, which is the belief doing most of the damage.',
@@ -660,15 +1057,15 @@ const MOODS = {
     lead:'You have taken the test before and the score has not moved. That is a specific situation and it needs a specific answer, not more of the same practice.',
     body:[
       'A plateau almost never means you have reached a limit. It means the thing that lifted you to your current band is not the thing that lifts you past it. More practice of the same kind produces more of the same result, which is exactly what you have already observed.',
-      'What usually changes it is not volume. It is a change in what is being practised. If the last attempt was built on vocabulary, the next one is usually built on structure and delivery. If it was built on speaking more, the next one is usually built on speaking more precisely.',
-      'The other thing a plateau needs is measurement. Practice without feedback rehearses the errors along with everything else, so the same answer comes out the same way for months. Everything in this plan asks you to record and listen back, because that is the step that was probably missing.',
-      'The findings in this report are the specific things to change. They are not general advice. They are the reason the score stopped moving.'
+      'There is a good example of this in the research. A study of learner word partnerships found that accuracy with them did not improve significantly between school level and university level students. Some things simply do not come along for the ride as your general level rises. They have to be worked on directly, and if nobody told you which ones, you would have no way of knowing.',
+      'What usually changes a plateau is not volume. It is a change in what is being practised. If the last attempt was built on vocabulary, the next one is usually built on structure and delivery. If it was built on speaking more, the next one is usually built on speaking more precisely.',
+      'The findings below are the specific things to change. They are not general advice. They are the reason the score stopped moving.'
     ]},
   deadline:{
     t:'On the time you have',
     lead:'You are working to a date, so this plan is built around triage rather than around completeness.',
     body:[
-      'With limited time the correct strategy is not to fix everything a little. It is to fix the two or three things that cost the most, completely, and leave the rest alone deliberately.',
+      'With limited time the correct strategy is not to fix everything a little. It is to fix the two or three things that cost the most, completely, and to leave the rest alone deliberately.',
       'The items below are ordered by how much each one is costing you, not by how easy each one is. Work down the list. If time runs out, it runs out at the bottom, where it does the least damage.',
       'One warning about short timelines: the temptation is to add hours in the final week. Research on spaced practice is consistent and unhelpful on this point. Distributed practice beats massed practice by a wide margin, so twenty minutes a day for the remaining weeks will beat two long weekend sessions, even if the total time is lower.',
       'Familiarity with the format is also worth more per hour than anything else in the last ten days, so the final phase of the plan is deliberately full practice tests rather than skill work.'
@@ -679,14 +1076,15 @@ const MOODS = {
     body:[
       'In speaking, the pursuit of a perfect sentence is expensive. Attention is a fixed budget shared between complexity, accuracy and fluency, and pushing hard on accuracy takes the resource the other two need. This is a documented trade off, not a failure of effort.',
       'The most visible version of this is repair. A sentence starts, a small error appears, and the sentence restarts. The restart is scored as a break in fluency, and it usually costs more than the error it was fixing. One repair, then continue, is the rule.',
-      'The second version is silence. Waiting for the right word produces a gap, and a gap is scored as hesitation while a slightly imperfect word is not scored at all in most cases.',
-      'So part of the work is permission. Smaller sentences, finished. Ordinary words, used exactly. The ambition goes into the second sentence of an answer, never the first.'
+      'The second version is silence. Waiting for the right word produces a gap, and a gap is scored as hesitation while a slightly imperfect word usually is not scored at all.',
+      'There is a reason this instinct is so strong, and it is worth naming: you were almost certainly taught English as a written subject, where a visible mistake was the thing that cost marks. In speech the economics are reversed. So part of the work here is permission. Smaller sentences, finished. Ordinary words, used exactly. The ambition goes into the second sentence of an answer, never the first.'
     ]},
   shy:{
     t:'On being a quiet speaker',
     lead:'You are not a loud talker, and there is no reason you should become one. The test does not measure volume. It does measure length, and that part is worth separating out.',
     body:[
       'Being quiet and giving short answers are two different things, and only one of them costs marks. A softly spoken candidate who speaks for forty five seconds scores above a loud one who stops after eight.',
+      'It is also worth knowing that this is a described pattern rather than a personal failing. Learners from your background are frequently characterised in the research as reticent in class and afraid of being laughed at, and that reticence is specifically noted as working against them in speaking, not in English generally. You are being asked to override a habit that was reasonable everywhere it was formed.',
       'Speaking is not performing. It is paying attention to the person in front of you, and that framing is useful here, because it removes the requirement to be a bigger version of yourself. You only have to be interested in the question.',
       'A practical point about the room: examiners will not ask you to repeat yourself unless they have to, and a quiet voice with clear consonants is easier to follow than a loud voice without them. Articulation matters more than volume, so the drills below are about clarity rather than about projection.',
       'The one thing I will push on is length. Every answer gets a reason and an example, whether it feels necessary or not.'
@@ -697,7 +1095,7 @@ const MOODS = {
     body:[
       'Three things shape how I teach. The first: every error in this report has a cause, usually in the structure of your first language, and I will always tell you the cause rather than just the correction. A rule you understand survives pressure. A rule you memorised does not.',
       'The second: practice is spread out, not stacked. Twenty minutes on six days does more than two hours on one, and this is one of the most reliable findings in learning research.',
-      'The third: you record yourself. Not because it is pleasant, but because you cannot hear your own speech while producing it, and change begins with noticing the gap.'
+      'The third: you hear yourself. Not because it is pleasant, but because you cannot hear your own speech while producing it, and change begins with noticing the gap.'
     ]}
 };
 
@@ -705,89 +1103,123 @@ const MOODS = {
 const PLANS = {
   four:{n:'Four weeks', sub:'Short runway. Two problems, fixed properly.',
     weeks:[
-      {t:'Week one', h:'Hear it',
-       b:'The first week is about noticing, because nothing can be corrected until it can be heard. Daily recording starts now, five minutes of speaking and five of listening back.',
-       l:['Record one minute daily and count your top pattern','Voice set, five minutes, every morning','One true story out loud, sixty seconds, in the past']},
-      {t:'Week two', h:'Drill it',
-       b:'The two patterns costing the most get direct daily attention until they stop costing attention.',
-       l:['Twenty minutes on pattern one, out loud','Ten minutes on pattern two','Shadow thirty seconds of audio daily','Keep recording, keep counting']},
-      {t:'Week three', h:'Use it under pressure',
-       b:'The drilled structures move into unscripted speech, which is where they usually fall apart the first time.',
-       l:['The countdown drill on three questions daily','Full Part 2 answers, timed, recorded','Part 3 with the position, reason, example shape']},
-      {t:'Week four', h:'Make it boring',
-       b:'Full format practice so the room holds no surprises. No new material is introduced this week on purpose.',
-       l:['Two full speaking tests, timed, recorded','Review the recordings for melody only','Light drilling only, keep the voice warm']}
+      {t:'Week one', h:'Hear it', b:'The first week is about noticing, because nothing can be corrected until it can be heard.',
+       l:['Two minutes of minimal pair listening daily, no speaking','Voice set, five minutes, every morning','One true story out loud, sixty seconds, in the past']},
+      {t:'Week two', h:'Drill it', b:'The two patterns costing the most get direct daily attention until they stop costing attention.',
+       l:['Twenty minutes on pattern one, out loud','Ten minutes on pattern two, later in the day','Shadow thirty seconds of audio daily']},
+      {t:'Week three', h:'Use it under pressure', b:'The drilled structures move into unscripted speech, which is where they usually fall apart the first time.',
+       l:['The countdown drill on three questions daily','Full Part 2 answers, timed','Part 3 with the claim, evidence, warrant shape']},
+      {t:'Week four', h:'Make it boring', b:'Full format practice so the room holds no surprises. No new material this week on purpose.',
+       l:['Two full speaking tests, timed','Light drilling only, keep the voice warm','Taper in the last three days']}
     ]},
   two:{n:'Two months', sub:'Enough time to fix the causes rather than the symptoms.',
     weeks:[
-      {t:'Weeks one and two', h:'Diagnosis and voice',
-       b:'Recording daily and building the pitch range, which is the fastest available gain and needs no new grammar.',
-       l:['Voice set daily','Baseline recordings of all four parts','Count patterns, do not fix them yet']},
-      {t:'Weeks three and four', h:'Grammar rebuilt at the cause',
-       b:'The structural patterns are drilled with the reason attached, so the rule survives pressure.',
+      {t:'Weeks one and two', h:'Diagnosis and voice', b:'Building the pitch range, which is the fastest available gain and needs no new grammar.',
+       l:['Voice set daily','Minimal pair listening, two minutes daily','Read aloud ten minutes daily']},
+      {t:'Weeks three and four', h:'Grammar rebuilt at the cause', b:'The structural patterns are drilled with the reason attached, so the rule survives pressure.',
        l:['Twenty minutes daily on the main pattern','Narrative tenses, one story per day','Five joiners, one per answer']},
-      {t:'Weeks five and six', h:'Range',
-       b:'Clause variety and word partners, which is where the range half of the score actually lives.',
-       l:['One long sentence per answer','Collocation notebook, partners only','Part 3 depth: position, reason, example']},
-      {t:'Weeks seven and eight', h:'Test conditions',
-       b:'Full tests, feedback, and repetition until the format is dull.',
-       l:['Two full tests weekly','Recording review, melody pass and grammar pass','No new material in the final week']}
+      {t:'Weeks five and six', h:'Range', b:'Clause variety and word partners, which is where the range half of the score lives.',
+       l:['One long sentence per answer','Word partner notebook, partners only','Part 3 depth: claim, evidence, why it counts']},
+      {t:'Weeks seven and eight', h:'Test conditions', b:'Full tests, feedback, and repetition until the format is dull.',
+       l:['Two full tests weekly','No new material in the final week','Keep the voice set going throughout']}
     ]},
-  three:{n:'Three months', sub:'Room to build the habits that hold after the test.',
+  three:{n:'Three months', sub:'Room to build habits that hold after the test.',
     weeks:[
-      {t:'Month one', h:'Foundations and awareness',
-       b:'Voice, recording habit, and the first pattern taken to automatic. Slow on purpose.',
-       l:['Voice set daily, five minutes','One recording daily, one listen back','Pattern one drilled to automatic']},
-      {t:'Month two', h:'Structure and range',
-       b:'Clause variety, narrative tenses, word partners, and Part 3 shape.',
-       l:['Subordination in every answer','A story a day in the past','Collocations collected from your own speech','Part 3 practice three times weekly']},
-      {t:'Month three', h:'Pressure and polish',
-       b:'Everything under time, then full tests, then rest.',
+      {t:'Month one', h:'Foundations and awareness', b:'Voice, listening, and the first pattern taken to automatic. Slow on purpose.',
+       l:['Voice set daily, five minutes','Minimal pairs daily','Pattern one drilled to automatic']},
+      {t:'Month two', h:'Structure and range', b:'Clause variety, narrative tenses, word partners, and Part 3 shape.',
+       l:['Subordination in every answer','A story a day in the past','Word partners collected from your own speech','Part 3 practice three times weekly']},
+      {t:'Month three', h:'Pressure and polish', b:'Everything under time, then full tests, then rest.',
        l:['Countdown drills weekly','Two full tests weekly in the last three weeks','Light maintenance in the final week']}
     ]},
-  six:{n:'Six months', sub:'The version where the level actually changes, not just the score.',
+  six:{n:'Six months', sub:'The version where the level changes, not just the score.',
     weeks:[
-      {t:'Months one and two', h:'Rebuild the base',
-       b:'Voice, the recording habit, and the structural patterns taken one at a time to automatic rather than to understood.',
-       l:['Voice set daily','One pattern at a time, three weeks each','Daily speaking, recorded, no exceptions']},
-      {t:'Months three and four', h:'Range and depth',
-       b:'Clause variety, collocation, narrative tenses, and extended answers. This is where the band moves.',
-       l:['Long sentences by design','Collocation notebook built from your own errors','Extended Part 3 answers three times weekly','Reading aloud daily for rhythm']},
-      {t:'Month five', h:'Full test skills',
-       b:'The format, the timing, and the specific strategies for each part.',
+      {t:'Months one and two', h:'Rebuild the base', b:'Voice, listening, and the structural patterns taken one at a time to automatic rather than to understood.',
+       l:['Voice set daily','One pattern at a time, three weeks each','Daily speaking, no exceptions']},
+      {t:'Months three and four', h:'Range and depth', b:'Clause variety, word partners, narrative tenses and extended answers. This is where the band moves.',
+       l:['Long sentences by design','Word partner notebook built from your own errors','Extended Part 3 answers three times weekly','Reading aloud daily for rhythm']},
+      {t:'Month five', h:'Full test skills', b:'The format, the timing, and the specific strategies for each part.',
        l:['Weekly full tests','Part 2 with no preparation notes','Targeted work on whatever the tests expose']},
-      {t:'Month six', h:'Make it routine',
-       b:'Repetition until the test is uneventful, then taper.',
-       l:['Two full tests weekly','Recording review only','Taper in the final ten days, do not cram']}
+      {t:'Month six', h:'Make it routine', b:'Repetition until the test is uneventful, then taper.',
+       l:['Two full tests weekly','Taper in the final ten days, do not cram','Keep only the voice set in the last week']}
     ]}
 };
 
 function pickPlan(weeks){
-  if(weeks===null||weeks===undefined) return 'two';
-  if(weeks<=5) return 'four';
-  if(weeks<=10) return 'two';
-  if(weeks<=16) return 'three';
+  if(weeks === null || weeks === undefined) return 'two';
+  if(weeks <= 5) return 'four';
+  if(weeks <= 10) return 'two';
+  if(weeks <= 16) return 'three';
   return 'six';
 }
 
-/* ============================================================
-   PLANNER BLOCKS
-   ============================================================ */
+/* ---------- daily planner blocks ---------- */
 const PLANNER = [
-  {id:'voice', n:'The voice set', m:5,  w:'First thing, before anything else', d:'Five minutes of the drills below. This is the highest return per minute on the whole list, and it needs no thinking.'},
-  {id:'shadow', n:'Shadowing', m:5, w:'Straight after the voice set', d:'Thirty seconds of audio, repeated. Copy the melody, not the meaning.'},
-  {id:'record', n:'Record and listen back', m:10, w:'Any fixed point in the day', d:'One minute of speaking, then one listen for content and one for melody. Non negotiable.'},
+  {id:'voice', n:'The voice set', m:5,  w:'First thing, before anything else', d:'Five minutes of the drills in your report. The highest return per minute on the whole list, and it needs no thinking.'},
+  {id:'pairs', n:'Minimal pair listening', m:5, w:'Straight after the voice set', d:'Two sounds, one at a time, decide which you heard. No speaking. This is the step that makes the others work.'},
+  {id:'shadow', n:'Shadowing', m:5, w:'Any fixed point in the day', d:'Thirty seconds of audio, repeated. Copy the melody, not the meaning.'},
   {id:'story', n:'One story out loud', m:5, w:'While making coffee or breakfast', d:'Something that happened yesterday, told in the past, sixty seconds, to nobody.'},
-  {id:'drill1', n:'Main pattern drill', m:15, w:'When your head is clearest', d:'The first item on your list below. Out loud, not on paper.'},
+  {id:'drill1', n:'Main pattern drill', m:15, w:'When your head is clearest', d:'The first finding in your report. Out loud, not on paper.'},
   {id:'drill2', n:'Second pattern drill', m:10, w:'Later in the day, separately', d:'Deliberately separated from the first, because spacing beats stacking.'},
   {id:'read', n:'Reading aloud', m:10, w:'Evening', d:'Anything. Exaggerate every ending sound. This fixes grammar you did not know was a sound problem.'},
   {id:'commute', n:'English on the move', m:15, w:'Commute, walking, gym', d:'A podcast or a video. Repeat one sentence in three out loud if you are alone.'},
   {id:'part1', n:'Part 1 questions', m:10, w:'Any gap', d:'Five questions, answered out loud at full length. Speed is the target here.'},
-  {id:'part2', n:'Part 2 long turn', m:10, w:'A quiet moment', d:'One card, one minute of notes, two minutes of talking, recorded.'},
-  {id:'part3', n:'Part 3 depth', m:15, w:'When you have energy to think', d:'Position, reason, example. Three questions. This is the part that moves the band.'},
-  {id:'collo', n:'Word partners notebook', m:10, w:'Evening, sitting down', d:'Not new words. The partners of the words you already used badly today.'},
+  {id:'part2', n:'Part 2 long turn', m:10, w:'A quiet moment', d:'One card, one minute of notes, two minutes of talking.'},
+  {id:'part3', n:'Part 3 depth', m:15, w:'When you have energy to think', d:'Claim, evidence, and the sentence that says why it counts. Three questions. This is the part that moves the band.'},
+  {id:'collo', n:'Word partners notebook', m:10, w:'Evening, sitting down', d:'Not new words. The partners of words you already used badly today.'},
   {id:'news', n:'One story, retold', m:10, w:'Lunch or evening', d:'Read one short article, close it, retell it out loud from memory.'},
+  {id:'write', n:'One paragraph written', m:15, w:'When you have a desk', d:'Task 1 or Task 2. One paragraph is enough if it is finished and checked.'},
   {id:'last', n:'One minute before bed', m:5, w:'Last thing', d:'Describe your day out loud in the past tense. Sixty seconds. Then stop.'}
+];
+
+/* ---------- the homework library ---------- */
+const HW = [
+ {cat:'Speaking', items:[
+   {n:'How to structure and brainstorm Part 2', u:'https://docs.google.com/document/d/1eFPY-aXSdiyomlWOOLza_k2NK2S95DCH8f__ZNScKIc/edit?usp=sharing',
+    d:'The shape of a long turn, and how to find something to say when the card is unhelpful.'},
+   {n:'Choose your topics', u:'https://ieltsbro.com/experience?type=0',
+    d:'Pick the topics you want to cover with me. This is how the course gets built around you rather than around a syllabus.'},
+   {n:'Random topic generator', u:'http://www.ratespeeches.com/t=Toastmaster-Table-Topics',
+    d:'Generate five topics, pick one, speak for as long as you can. Expand the suggestion if you need ideas.'}]},
+ {cat:'Vocabulary', items:[
+   {n:'Vocabulary you need for Task 2', u:'https://drive.google.com/open?id=1DLmJl9mOZGsWAN6hjV7IzdghECvMT9MT',
+    d:'The core set. Learn these with their partners, never alone.'},
+   {n:'Vocabulary for coherence and cohesion', u:'https://drive.google.com/file/d/1fZyzVKdYW9keveIZVgKFI2EQhAXfqcSz/view?usp=sharing',
+    d:'The words that hold an answer together. This is the quarter most students ignore.'},
+   {n:'Words in context', u:'https://context.reverso.net',
+    d:'Look a word up, read one real sentence, then write your own. Sentences are how words stick.'}]},
+ {cat:'Writing', items:[
+   {n:'How to pass Academic Writing Task 1', u:'https://drive.google.com/file/d/14fSg29RCSCeQ6ANhwqRiCLSKL9uijK1h/view?usp=sharing',
+    d:'The full method for describing data.'},
+   {n:'Easier structure: overall and body', u:'https://docs.google.com/document/d/16MHx-HSpm9xBpLnnsW7_mef4xntpwRmjufxepfOqBA0/edit?usp=sharing',
+    d:'Use this one if the full method feels like too much at once.'},
+   {n:'Your Task 1: population in four Asian countries', u:'https://drive.google.com/file/d/1XTGhYtLlLj6iWJkplWwQlN4fiYpBiieO/view?usp=sharing',
+    d:'A line graph to write up. Bring it to class.'},
+   {n:'Band 9 essay, explained', u:'https://docs.google.com/document/d/1XuB-ewZVPkILb1c_soUIFGpW1aFbWOiGM1wT2mgJu2w/edit?usp=sharing',
+    d:'Not a model to copy. A model with the reasoning shown, so you can see why each part is there.'}]},
+ {cat:'Grammar', items:[
+   {n:'Narrative tenses, advanced', u:'https://drive.google.com/file/d/1rNy9RY5RU8LgwrQCJACHx27gCI35KKT_/view?usp=sharing',
+    d:'The three tense set that turns a list of events into a story.'},
+   {n:'Past rules', u:'https://drive.google.com/file/d/1O3nl2rM2Nb3ibZCG9vgGDibf2lYkEbM1/view?usp=sharing',
+    d:'The reference. Use it when something in your writing comes back marked.'},
+   {n:'Grammar rules', u:'https://docs.google.com/document/d/10pIS2_q2ecxNyzOBdkaA79egKKQa_DdDQDJw6YRGnOQ/edit?usp=sharing',
+    d:'The general reference document.'},
+   {n:'Tense practice for class', u:'https://drive.google.com/file/d/1cRJKaubFlplQ0ucEb76Sy5Kxwl0P8P-O/view?usp=sharing',
+    d:'We will work through this together, so look at it but do not worry about finishing it alone.'}]},
+ {cat:'Pronunciation and listening', items:[
+   {n:'Joining words for fluency', u:'https://drive.google.com/file/d/1NLoV8_U6f9k4LQYUltNfbB1UrOlH60Cj/view?usp=drive_link',
+    d:'Connected speech. The difference between beads on a string and water.'},
+   {n:'Unstressed words, and understanding conversation', u:'https://drive.google.com/open?id=1NJGckGE1gft7lMN52E-_scG5Et3OmEBN',
+    d:'Why fast English is hard to hear, and what to listen for instead.'},
+   {n:'Listening through music', u:'https://www.lyricstraining.com',
+    d:'The most enjoyable listening practice there is. Fifteen minutes counts.'},
+   {n:'Any word, in real speech', u:'https://youglish.com',
+    d:'Type a word and hear real people say it in context. The fastest way to check stress.'},
+   {n:'Short talks with transcripts', u:'https://ed.ted.com', d:'Good for shadowing, because the transcript is right there.'},
+   {n:'Listening practice', u:'https://voicetube.com', d:'Graded by level, with subtitles you can switch off.'}]},
+ {cat:'Reading', items:[
+   {n:'Summarise a difficult text', u:'https://quillbot.com/summarize',
+    d:'Paste something too hard, read the summary, then go back to the original. Use it as a way in, not as a substitute.'}]}
 ];
 
 /* ============================================================
@@ -819,6 +1251,13 @@ function langText(field, lang){
 function fillL1(txt, lang){
   return String(txt||'').replace(/\{L1\}/g, LANGS[lang] ? LANGS[lang].l1 : 'your first language');
 }
+/* level-aware AND language-aware lookup */
+function pick(field, lvl, lang){
+  if(field == null) return '';
+  if(typeof field === 'string' || Array.isArray(field)) return field;
+  if(lang && field[lang] != null) return field[lang];
+  return byLevel(field, lvl);
+}
 
 /* ============================================================
    THE REPORT
@@ -827,33 +1266,42 @@ function buildReport(S){
   const L = LANGS[S.lang] || LANGS['cmn-tw'];
   const full = S.stage === 'enrolled';
   const wk = weeksTo(S.trial, S.test);
-  const planKey = pickPlan(wk ? wk.weeks : null);
+  const planKey = pickPlan(wk && !wk.gone ? wk.weeks : null);
   const plan = PLANS[planKey];
-  const picked = WEAK.filter(w => S.weak.indexOf(w.id) > -1);
+  const picked = S.weak.map(id => WEAK.find(w => w.id === id)).filter(Boolean);
   const strong = STRENGTHS.filter(s => S.strong.indexOf(s.id) > -1);
   const mood = MOODS[S.mood] || MOODS.neutral;
+  const lvlOf = id => (S.levels && S.levels[id]) || S.level || 'B1';
+  const comOf = (w) => (S.commons && S.commons[w.id]) || w.common || 'many';
 
-  /* research keys used by the chosen weaknesses, in order, de-duplicated */
+  /* research keys used, in order */
   const rkeys = [];
   picked.forEach(w => (w.res||[]).forEach(k => { if(rkeys.indexOf(k)<0) rkeys.push(k); }));
   ['transfer','spaced','production'].forEach(k => { if(rkeys.indexOf(k)<0) rkeys.push(k); });
-  const research = (full ? rkeys : rkeys.slice(0,6)).map(k=>RESEARCH[k]).filter(Boolean);
+  const research = (full ? rkeys : rkeys.slice(0,7)).map(k=>RESEARCH[k]).filter(Boolean);
 
-  /* drills used by the chosen weaknesses */
+  /* drills used */
   const dkeys = [];
   picked.forEach(w => (w.drills||[]).forEach(k => { if(dkeys.indexOf(k)<0) dkeys.push(k); }));
   const drills = dkeys.map(k=>DRILLS[k]).filter(Boolean);
 
-  const name = S.name || 'your';
-  const first = S.name ? esc(S.name) : 'there';
+  /* advantages: from the findings, plus one that always applies */
+  const akeys = [];
+  picked.forEach(w => { if(w.adv && akeys.indexOf(w.adv)<0) akeys.push(w.adv); });
+  if(['nervous','shy','plateau','perfectionist'].indexOf(S.mood) > -1 && akeys.indexOf('twolang')<0) akeys.push('twolang');
+  if(akeys.length && akeys.indexOf('twolang')<0) akeys.push('twolang');
+  const advs = akeys.map(k=>ADVANTAGES[k]).filter(Boolean);
+
+  const first = S.name ? esc(S.name) : '';
+  const hwUrl = (S.site||'').replace(/\/+$/,'') + '/' + (S.slug || slugify(S.name)) + '/homework/';
 
   /* ---------- date line ---------- */
-  let dateline = '';
-  if(wk){
-    const wl = wk.weeks === 1 ? '1 week' : wk.weeks + ' weeks';
-    dateline = wk.gone
-      ? 'Your test date, ' + esc(prettyDate(S.test)) + ', has passed. Tell me how it went and I will rebuild this around the next one.'
-      : 'Your test is on ' + esc(prettyDate(S.test)) + '. From your trial lesson that is ' + wl + ', or ' + wk.days + ' days.';
+  let dateline;
+  if(wk && wk.gone){
+    dateline = 'Your test date, ' + esc(prettyDate(S.test)) + ', has passed. Tell me how it went and I will rebuild this around the next one.';
+  } else if(wk){
+    dateline = 'Your test is on ' + esc(prettyDate(S.test)) + '. From your trial lesson that is ' +
+      (wk.weeks===1 ? '1 week' : wk.weeks + ' weeks') + ', or ' + wk.days + ' days.';
   } else {
     dateline = 'You have not fixed a test date yet, so this plan assumes you want the level to move rather than the calendar to decide.';
   }
@@ -862,14 +1310,14 @@ function buildReport(S){
   const nav = [['open','Start here']];
   if(strong.length || S.strongnote) nav.push(['working','Already working']);
   nav.push(['findings','What is costing you']);
+  if(advs.length) nav.push(['advantage','What you have that helps']);
   if(drills.length) nav.push(['voice','Your voice set']);
   nav.push(['plan', plan.n]);
   nav.push(['day','Your day']);
   nav.push(['research','Why this works']);
-  if(full) nav.push(['homework','This week']);
+  nav.push(['homework','Homework']);
   nav.push(['next','What happens next']);
 
-  /* ---------- sections ---------- */
   let H = '';
 
   /* header */
@@ -882,7 +1330,7 @@ function buildReport(S){
     + '<div class="facts">'
     + (S.now ? '<div class="fact"><span>Where you are</span><b>' + esc(S.now) + '</b></div>' : '')
     + (S.target ? '<div class="fact"><span>Where you need to be</span><b>' + esc(S.target) + '</b></div>' : '')
-    + (wk ? '<div class="fact"><span>Time available</span><b>' + (wk.gone ? 'Test date passed' : esc(wk.weeks + (wk.weeks===1?' week':' weeks'))) + '</b></div>' : '')
+    + (wk ? '<div class="fact"><span>Time available</span><b>' + (wk.gone ? 'Test date passed' : esc(wk.weeks===1?'1 week':wk.weeks+' weeks')) + '</b></div>' : '')
     + '<div class="fact"><span>The plan</span><b>' + esc(plan.n) + '</b></div>'
     + '</div></div></header>';
 
@@ -919,17 +1367,23 @@ function buildReport(S){
     + esc(L.l1) + ' does something sensible that English does not allow. That matters, because a random error is a problem and a systematic one is a schedule.</p>';
 
   picked.forEach((w,i)=>{
-    const why = fillL1(langText(w.why, S.lang), S.lang);
+    const lvl = lvlOf(w.id);
+    const heard = pick(w.heard, lvl);
+    const why = fillL1(pick(w.why, lvl, S.lang), S.lang);
+    const cost = pick(w.cost, lvl);
+    const fix = pick(w.fix, lvl) || [];
+    const com = COMMON[comOf(w)] || COMMON.many;
     H += '<article class="find">'
       + '<div class="find-h"><span class="num">' + (i+1) + '</span><div>'
-      + '<h3>' + esc(w.n) + '</h3><div class="find-meta">' + esc(w.cat) + ' &middot; ' + esc(w.meta) + '</div>'
+      + '<h3>' + esc(w.n) + '</h3><div class="find-meta">' + esc(w.skill || w.cat) + ' &middot; ' + esc(w.meta) + '</div>'
       + '</div></div>'
       + '<div class="find-b">'
-      + '<div class="blk heard"><span class="bl">What I heard</span><p>' + esc(w.heard) + '</p></div>'
-      + '<div class="blk why"><span class="bl">Why it happens</span><p>' + esc(why) + '</p></div>'
-      + '<div class="blk cost"><span class="bl">What it costs</span><p>' + esc(w.cost) + '</p></div>'
+      + '<div class="blk heard"><span class="bl">What I heard</span><p>' + esc(heard) + '</p></div>'
+      + '<div class="blk why"><span class="bl">Why it happens</span><p>' + esc(why) + '</p>'
+      + (com.line ? '<p class="solo">' + esc(com.line) + '</p>' : '') + '</div>'
+      + '<div class="blk cost"><span class="bl">What it costs</span><p>' + esc(cost) + '</p></div>'
       + '<div class="blk fix"><span class="bl">What to do about it</span><ol>'
-      + w.fix.map(f=>'<li>'+esc(f)+'</li>').join('')
+      + fix.map(f=>'<li>'+esc(f)+'</li>').join('')
       + '</ol></div>'
       + '</div></article>';
   });
@@ -944,11 +1398,20 @@ function buildReport(S){
     H += '<div class="tease"><h3>There is more underneath each of these</h3>'
       + '<p>Each pattern above has a full drill sequence, a set of example sentences built from your own speech, and a worksheet unit that takes it from understood to automatic. Those are part of the programme rather than part of a trial report, and they are where the actual change happens.</p>'
       + '<ul class="locked">'
-      + ['The full drill protocol for every pattern above','Example banks built from your own recordings','The workbook unit that matches each finding','Weekly written feedback on your recordings','Task 1 and Task 2 writing correction']
+      + ['The full drill protocol for every pattern above','Example banks built from your own lessons','The workbook unit that matches each finding','Written feedback on your Task 1 and Task 2 writing','The complete homework library, opened up unit by unit']
         .map(x=>'<li>'+esc(x)+'</li>').join('')
       + '</ul></div>';
   }
   H += '</section>';
+
+  /* advantages */
+  if(advs.length){
+    H += '<section id="advantage" class="sec"><h2 class="sh">What you have that helps</h2>'
+      + '<p class="sub">These are not encouragement. They are findings from the same research the rest of this document is built on, and they are the reason the list above is shorter than it looks.</p>'
+      + '<div class="advs">'
+      + advs.map(a=>'<div class="adv"><h3>'+esc(a.t)+'</h3><p>'+esc(a.b)+'</p></div>').join('')
+      + '</div></section>';
+  }
 
   /* voice set */
   if(drills.length){
@@ -967,7 +1430,7 @@ function buildReport(S){
   /* plan */
   H += '<section id="plan" class="sec"><h2 class="sh">' + esc(plan.n) + '</h2>'
     + '<p class="sub">' + esc(plan.sub) + ' ' + (wk && !wk.gone
-        ? 'Chosen because you have ' + esc(wk.weeks + (wk.weeks===1?' week':' weeks')) + ' before the test.'
+        ? 'Chosen because you have ' + esc(wk.weeks===1?'1 week':wk.weeks+' weeks') + ' before the test.'
         : 'Chosen because there is no date fixed yet, so the level is the target rather than the calendar.') + '</p>'
     + '<div class="weeks">';
   plan.weeks.forEach((w,i)=>{
@@ -979,9 +1442,7 @@ function buildReport(S){
                 : '<ul>' + w.l.map(x=>'<li>'+esc(x)+'</li>').join('') + '</ul>')
       + '</div>';
   });
-  H += '</div>'
-    + '<p class="micro">This is the shape, not your shape. In the first full lesson it gets rebuilt around your actual week, which is what the next section is for.</p>'
-    + '</section>';
+  H += '</div><p class="micro">This is the shape, not your shape. In the first full lesson it gets rebuilt around your actual week, which is what the next section is for.</p></section>';
 
   /* day planner */
   H += '<section id="day" class="sec"><h2 class="sh">Finding the time you already have</h2>'
@@ -1001,7 +1462,7 @@ function buildReport(S){
     + '<div class="tally" id="tally">'
     + '<div class="tnum"><b id="tmin">0</b><span>minutes a week</span></div>'
     + '<div class="tbar"><i id="tfill"></i></div>'
-    + '<p class="tmsg" id="tmsg">Nothing selected yet. Start with the voice set and one recording.</p>'
+    + '<p class="tmsg" id="tmsg">Nothing selected yet. Start with the voice set and the listening. That is ten minutes and it is enough to begin.</p>'
     + '<button type="button" class="tcopy" id="tcopy">Copy my plan</button>'
     + '</div></section>';
 
@@ -1009,26 +1470,17 @@ function buildReport(S){
   H += '<section id="research" class="sec"><h2 class="sh">Why this plan looks like this</h2>'
     + '<p class="sub">Not opinion. These are the findings the plan is built on, and they are the reason it asks for twenty minutes daily rather than three hours on Sunday.</p>'
     + '<div class="res">'
-    + research.map(r=>'<div class="rc"><h3>'+esc(r.t)+'</h3><p>'+esc(r.b)+'</p></div>').join('')
+    + research.map(r=>'<div class="rc"><h3>'+esc(r.t)+'</h3><p>'+esc(r.b)+'</p>'
+        + (r.src?'<p class="src">'+esc(r.src)+'</p>':'') + '</div>').join('')
     + '</div></section>';
 
-  /* homework, enrolled only */
-  if(full){
-    const top = picked[0], second = picked[1];
-    H += '<section id="homework" class="sec"><h2 class="sh">This week</h2>'
-      + '<div class="hw">'
-      + '<div class="hwi"><span class="hn">1</span><div><h3>Every morning</h3><p>'
-        + (drills.length ? 'The voice set. Five minutes, before any other English.' : 'Five minutes reading aloud, exaggerating every ending sound.')
-        + '</p></div></div>'
-      + '<div class="hwi"><span class="hn">2</span><div><h3>Every day</h3><p>One minute recorded, one minute listened back. Count '
-        + (top ? esc(top.n.toLowerCase()) : 'your main pattern') + '. Write the number down. That number is the homework.</p></div></div>'
-      + (top ? '<div class="hwi"><span class="hn">3</span><div><h3>Fifteen minutes daily</h3><p>'
-        + esc(top.fix[0]) + '</p></div></div>' : '')
-      + (second ? '<div class="hwi"><span class="hn">4</span><div><h3>Ten minutes, separately</h3><p>'
-        + esc(second.fix[0]) + '</p></div></div>' : '')
-      + '<div class="hwi"><span class="hn">' + (second?5:(top?4:3)) + '</span><div><h3>Before the next lesson</h3><p>Send me one recording, sixty seconds, on any question. Do not re record it to make it better. The first take is the useful one.</p></div></div>'
-      + '</div></section>';
-  }
+  /* homework pointer */
+  H += '<section id="homework" class="sec"><div class="hwbox">'
+    + '<h2>Your homework page</h2>'
+    + '<p>Everything you need to work on sits on its own page, so this document stays about you and that one stays about the work. It has the documents, the practice sites, and what to do first.</p>'
+    + '<p><a class="hwlink" href="' + esc(hwUrl) + '">Open your homework page</a></p>'
+    + '<p class="micro" style="color:#9FB8AC">Bookmark it. The link does not change, and I add to it as we go.</p>'
+    + '</div></section>';
 
   /* next */
   H += '<section id="next" class="sec"><div class="closing">'
@@ -1037,29 +1489,120 @@ function buildReport(S){
       ? '<ol class="six">'
         + ['Every correction comes with its cause. A rule you understand survives pressure. A rule you memorised does not.',
            'Practice is spread across days, never stacked into one session.',
-           'You record yourself, because you cannot hear your own speech while producing it.',
+           'Perception before production. If you cannot hear a difference, drilling your mouth will not install it.',
            'Two problems at a time. Not eight. Eight is a list, not a plan.',
-           'The plan changes when the evidence changes, and the evidence is your recordings.',
+           'The plan changes when the evidence changes.',
            'I will tell you what is actually costing you marks, including when it is not what you expected.']
           .map(x=>'<li>'+esc(x)+'</li>').join('') + '</ol>'
-      : '<p>The first full lesson does three things. It rebuilds the plan above around your actual week rather than an imaginary one. It takes the first finding and turns it into a drill you can do without me. And it sets the recording routine, which is the part that makes everything else measurable.</p>'
-        + '<p>Bring one thing: a recording of yourself answering any question, sixty seconds, first take. That is where we start.</p>')
+      : '<p>The first full lesson does three things. It rebuilds the plan above around your actual week rather than an imaginary one. It takes the first finding and turns it into a drill you can do without me. And it opens the homework page properly, so you know which piece to start with rather than facing all of it at once.</p>'
+        + '<p>Nothing to prepare. Come with a question if you have one.</p>')
     + '<div class="sig">Graham</div>'
     + '</div></section>';
 
   H += '</main><footer class="foot"><div class="wrap">GrahamIELTS'
-    + (S.name ? ' &middot; prepared for ' + esc(S.name) : '')
+    + (S.name ? ' &middot; prepared for ' + first : '')
     + (S.trial ? ' &middot; ' + esc(prettyDate(S.trial)) : '')
     + '</div></footer>';
 
-  return REPORT_SHELL(S, H);
+  return REPORT_SHELL(S, H, (S.name ? S.name + ' | ' : '') + 'After your trial | GrahamIELTS');
+}
+
+/* ============================================================
+   THE HOMEWORK PAGE
+   ============================================================ */
+function buildHomework(S){
+  const full = S.stage === 'enrolled';
+  const picked = S.weak.map(id => WEAK.find(w => w.id === id)).filter(Boolean);
+  const lvlOf = id => (S.levels && S.levels[id]) || S.level || 'B1';
+  const repUrl = (S.site||'').replace(/\/+$/,'') + '/' + (S.slug || slugify(S.name)) + '/';
+  const shown = full ? HW : HW.slice(0,3);
+
+  let H = '';
+  H += '<header class="hero small"><div class="wrap">'
+    + '<div class="kicker"><span class="dot"></span>GrahamIELTS</div>'
+    + '<h1>' + (S.name ? esc(S.name) + ', your homework' : 'Your homework') + '</h1>'
+    + '<p class="lede">Everything in one place. Start at the top of the first box and stop when you have done twenty minutes. Finishing the page is not the goal.</p>'
+    + '</div></header>';
+
+  const nav = [['first','Start with this'],['docs','Documents'],['sites','Practice sites'],['ask','Questions']];
+  H += '<nav class="nav"><div class="wrap nav-in">'
+    + nav.map(n=>'<a href="#'+n[0]+'">'+esc(n[1])+'</a>').join('') + '</div></nav>';
+
+  H += '<main class="wrap">';
+
+  /* this week, built from the findings */
+  H += '<section id="first" class="sec"><h2 class="sh">Start with this</h2>'
+    + '<p class="sub">Three things, in this order. Everything further down the page is there when these are comfortable, not before.</p>'
+    + '<div class="hw">';
+  let n = 1;
+  H += '<div class="hwi"><span class="hn">'+(n++)+'</span><div><h3>Every morning, five minutes</h3><p>'
+    + (picked.some(w=>(w.drills||[]).length) ? 'The voice set in your report. Before any other English, before coffee if you can.'
+       : 'Read one paragraph aloud, exaggerating every ending sound.') + '</p></div></div>';
+  if(picked[0]){
+    const f = pick(picked[0].fix, lvlOf(picked[0].id)) || [];
+    H += '<div class="hwi"><span class="hn">'+(n++)+'</span><div><h3>Fifteen minutes daily: ' + esc(picked[0].n.toLowerCase()) + '</h3><p>'
+      + esc(f[0]||'') + '</p></div></div>';
+  }
+  if(picked[1]){
+    const f = pick(picked[1].fix, lvlOf(picked[1].id)) || [];
+    H += '<div class="hwi"><span class="hn">'+(n++)+'</span><div><h3>Ten minutes, later in the day: ' + esc(picked[1].n.toLowerCase()) + '</h3><p>'
+      + esc(f[0]||'') + ' Keep it separate from the first one. Spacing beats stacking.</p></div></div>';
+  }
+  H += '</div></section>';
+
+  /* the library */
+  H += '<section id="docs" class="sec"><h2 class="sh">Your documents</h2>'
+    + '<p class="sub">Click a name and it opens. Nothing here is compulsory in the order it appears. I will tell you which one matters this week.</p>';
+  shown.forEach(g=>{
+    H += '<div class="hwgroup"><h3 class="hwg">'+esc(g.cat)+'</h3><div class="hwlist">'
+      + g.items.map(it=>'<a class="hwrow" href="'+esc(it.u)+'" target="_blank" rel="noopener">'
+          + '<span class="hwn">'+esc(it.n)+'</span><span class="hwd">'+esc(it.d)+'</span></a>').join('')
+      + '</div></div>';
+  });
+  if(!full){
+    H += '<div class="tease"><h3>The rest opens when we start</h3>'
+      + '<p>The grammar reference, the pronunciation and listening set, the reading tools and the workbook units are part of the programme. They are organised by unit rather than dumped in a list, and I hand them over as they become the right thing to be doing.</p>'
+      + '<ul class="locked">'
+      + ['Grammar references and tense practice','Connected speech and listening material','Reading and summarising tools','The workbook units matched to your findings','Marked writing, returned with the reasoning']
+        .map(x=>'<li>'+esc(x)+'</li>').join('') + '</ul></div>';
+  }
+  H += '</section>';
+
+  /* practice sites */
+  if(full){
+    H += '<section id="sites" class="sec"><h2 class="sh">Where to practise</h2>'
+      + '<p class="sub">Fifteen minutes on any of these counts as English. It does not have to feel like study to work.</p>'
+      + '<div class="cards">'
+      + [['Music','lyricstraining.com','The most enjoyable listening practice there is.'],
+         ['Any word, spoken','youglish.com','Type a word, hear real people say it. The fastest way to check stress.'],
+         ['Short talks','ed.ted.com','Good for shadowing, because the transcript is right there.'],
+         ['Graded listening','voicetube.com','Subtitles you can switch off when you are ready.'],
+         ['Words in context','context.reverso.net','One real sentence, then write your own.'],
+         ['Speaking topics','ratespeeches.com','Five random topics. Pick one and talk until you run out.']]
+        .map(x=>'<div class="card"><h3>'+esc(x[0])+'</h3><p><b>'+esc(x[1])+'</b><br>'+esc(x[2])+'</p></div>').join('')
+      + '</div></section>';
+  }
+
+  /* ask */
+  H += '<section id="ask" class="sec"><div class="closing">'
+    + '<h2>If you get stuck</h2>'
+    + '<p>Send questions and finished homework to <a class="mail" href="mailto:gman292@gmail.com">gman292@gmail.com</a>.</p>'
+    + '<p>Remember this is your course. If there is something you want to cover, or something on this page that is not working for you, tell me and we will change it.</p>'
+    + '<p><a class="hwlink" href="' + esc(repUrl) + '">Back to your report</a></p>'
+    + '<div class="sig">Graham</div>'
+    + '</div></section>';
+
+  H += '</main><footer class="foot"><div class="wrap">GrahamIELTS'
+    + (S.name ? ' &middot; homework for ' + esc(S.name) : '') + '</div></footer>';
+
+  return REPORT_SHELL(S, H, (S.name ? S.name + ' | ' : '') + 'Homework | GrahamIELTS', true);
 }
 
 /* ============================================================
    REPORT SHELL: full standalone document
    ============================================================ */
-function REPORT_SHELL(S, inner){
-  const title = (S.name ? S.name + ' | ' : '') + 'After your trial | GrahamIELTS';
+function REPORT_SHELL(S, inner, title, isHw){
+  title = title || ((S.name ? S.name + ' | ' : '') + 'After your trial | GrahamIELTS');
   return '<!doctype html>\n<html lang="en">\n<head>\n'
 + '<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n'
 + '<meta name="robots" content="noindex,nofollow">\n'
@@ -1236,9 +1779,30 @@ const REPORT_CSS = [
 '.sig{margin-top:26px;font-family:Fraunces,Georgia,serif;font-size:1.5rem;color:var(--gold)}',
 '.foot{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);font-size:.82rem}',
 /* print */
+'.solo{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);color:var(--gold-ink);font-size:.93rem;font-weight:500}',
+'.src{margin:9px 0 0;font-size:.76rem;color:var(--muted);font-style:italic}',
+'.advs{display:grid;gap:14px;grid-template-columns:1fr}',
+'@media (min-width:760px){.advs{grid-template-columns:1fr 1fr}}',
+'.adv{background:var(--gold-soft);border:1px solid var(--gold);border-radius:12px;padding:19px 21px}',
+'.adv h3{font-size:1.06rem;font-weight:600;color:var(--gold-ink);margin-bottom:8px}',
+'.adv p{font-size:.95rem;color:var(--ink);margin:0}',
+'.hwbox{background:var(--green-deep);color:#EDE9DC;border-radius:14px;padding:clamp(22px,4vw,36px);border:1px solid rgba(201,162,39,.4)}',
+'.hwbox h2{color:var(--gold);font-size:clamp(1.3rem,3vw,1.8rem);font-weight:600;margin-bottom:12px}',
+'.hwbox p{color:#C6D8CE;max-width:66ch}',
+'a.hwlink{display:inline-block;margin-top:6px;background:var(--gold);color:#10352A;text-decoration:none;font-weight:700;font-size:.92rem;padding:11px 22px;border-radius:99px}',
+'a.hwlink:hover{background:#DDB63C}',
+'a.mail{color:var(--gold);font-weight:600}',
+'.hero.small{padding:clamp(30px,5vw,52px) 0 clamp(24px,4vw,38px)}',
+'.hwgroup{margin-bottom:26px}',
+'.hwg{font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:10px}',
+'.hwlist{display:grid;gap:9px}',
+'.hwrow{display:block;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:14px 17px;text-decoration:none;transition:border-color .14s,transform .14s}',
+'.hwrow:hover{border-color:var(--green-bright);border-left-color:var(--gold);transform:translateX(2px)}',
+'.hwn{display:block;font-family:Fraunces,Georgia,serif;font-size:1.04rem;font-weight:600;color:var(--green)}',
+'.hwd{display:block;font-size:.89rem;color:var(--ink-2);margin-top:3px}',
 '@media print{.nav{display:none}.tcopy{display:none}body{font-size:11.5pt;background:#fff}',
 '.hero{background:#10352A !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}',
-'.tally,.tease,.closing{-webkit-print-color-adjust:exact;print-color-adjust:exact}',
+'.tally,.tease,.closing,.adv,.hwbox{-webkit-print-color-adjust:exact;print-color-adjust:exact}',
 '.sec{break-inside:avoid-page;margin-bottom:22px}.find,.drill,.wkc,.rc,.hwi{break-inside:avoid}',
 '.wrap{max-width:none}}'
 ].join('\n');
@@ -1306,93 +1870,106 @@ const REPORT_JS = [
    ============================================================ */
 (function(){
   const $ = s => document.querySelector(s);
-  const KEY = 'gi-builder-v1';
+  const KEY = 'gi-builder-v2';
   const prev = $('#prev');
   const toastEl = $('#toast');
-  let lastHTML = '';
+  let lastReport = '', lastHw = '', showing = 'report';
 
   function toast(m){ toastEl.textContent = m; toastEl.classList.add('show');
-    clearTimeout(toast._t); toast._t = setTimeout(()=>toastEl.classList.remove('show'), 2200); }
+    clearTimeout(toast._t); toast._t = setTimeout(()=>toastEl.classList.remove('show'), 2400); }
 
-  /* ---------- extra controls injected into the form panel ---------- */
-  const pubHTML =
-    '<fieldset id="pubset">'
-    + '<legend>Publishing</legend>'
+  /* ---------- injected controls ---------- */
+  $('.panel-body').insertAdjacentHTML('beforeend',
+    '<fieldset id="pubset"><legend>Publishing</legend>'
     + '<div class="grid2">'
-    + '<label class="f"><span>Your site address</span><input class="inp" id="f-site" placeholder="https://yoursite.pages.dev"></label>'
+    + '<label class="f"><span>Your site address</span><input class="inp" id="f-site" placeholder="https://yoursite.workers.dev"></label>'
     + '<label class="f"><span>Folder name for this student</span><input class="inp" id="f-slug" placeholder="auto"></label>'
-    + '</div>'
-    + '<div class="note" id="pubsteps"></div>'
+    + '</div><div class="note" id="pubsteps"></div>'
     + '<div class="chips" style="margin-top:12px">'
     + '<button class="chip" type="button" id="b-reset">Start a new student</button>'
     + '<button class="chip" type="button" id="b-save">Save student file</button>'
     + '<button class="chip" type="button" id="b-load">Open student file</button>'
-    + '<input type="file" id="f-file" accept="application/json" hidden>'
-    + '</div>'
-    + '</fieldset>';
-  $('.panel-body').insertAdjacentHTML('beforeend', pubHTML);
+    + '<input type="file" id="f-file" accept="application/json" hidden></div></fieldset>');
 
-  /* ---------- populate strengths ---------- */
+  /* ---------- strengths ---------- */
   $('#strengths').innerHTML = STRENGTHS.map(s =>
     '<label class="chip"><input type="checkbox" data-s="' + s.id + '">' + s.n + '</label>').join('');
 
-  /* ---------- populate weaknesses, filtered by language ---------- */
+  /* ---------- weaknesses, filtered by language ---------- */
   function paintWeak(){
     const lang = $('#f-lang').value;
-    const chosen = readWeak();
+    const keep = readWeak(), lv = readLevels(), cm = readCommons();
     const list = WEAK.filter(w => w.tags.indexOf(lang) > -1);
-    const cats = [];
-    list.forEach(w => { if(cats.indexOf(w.cat) < 0) cats.push(w.cat); });
+    const cats = []; list.forEach(w => { if(cats.indexOf(w.cat) < 0) cats.push(w.cat); });
     $('#weaknesses').innerHTML = cats.map(c =>
-      '<div class="tg" style="margin:6px 0 2px;background:transparent;color:var(--gold-ink);font-size:.63rem">' + c + '</div>'
-      + list.filter(w => w.cat === c).map(w =>
-        '<label class="wk-item"><div class="wk-top">'
-        + '<input type="checkbox" data-w="' + w.id + '"' + (chosen.indexOf(w.id) > -1 ? ' checked' : '') + '>'
-        + '<div><div class="wk-name">' + w.n + '</div><div class="wk-meta">' + w.meta + '</div></div>'
-        + '</div></label>').join('')
+      '<div class="catlab">' + c + '</div>'
+      + list.filter(w => w.cat === c).map(w => {
+        const on = keep.indexOf(w.id) > -1;
+        return '<label class="wk-item"><div class="wk-top">'
+          + '<input type="checkbox" data-w="' + w.id + '"' + (on ? ' checked' : '') + '>'
+          + '<div style="min-width:0"><div class="wk-name">' + w.n + '</div>'
+          + '<div class="wk-meta">' + w.meta + '</div>'
+          + '<div class="wk-opts">'
+          + '<label>Level <select data-lv="' + w.id + '">'
+          + LEVEL_ORDER.map(l => '<option value="' + l + '"' + (lv[w.id]===l?' selected':'') + '>' + l + '</option>').join('')
+          + '</select></label>'
+          + '<label>Seen in <select data-cm="' + w.id + '">'
+          + Object.keys(COMMON).map(k => '<option value="' + k + '"' + ((cm[w.id]||w.common)===k?' selected':'') + '>' + COMMON[k].label + '</option>').join('')
+          + '</select></label></div>'
+          + '</div></div></label>';
+      }).join('')
     ).join('');
-    $('#weaknesses').querySelectorAll('input').forEach(i => i.addEventListener('change', queue));
+    $('#weaknesses').querySelectorAll('input,select').forEach(i => {
+      i.addEventListener('change', queue);
+      if(i.tagName === 'SELECT') i.addEventListener('click', e => e.stopPropagation());
+    });
+    syncLevels();
   }
-  function readWeak(){ return [].slice.call(document.querySelectorAll('[data-w]:checked')).map(i => i.dataset.w); }
-  function readStrong(){ return [].slice.call(document.querySelectorAll('[data-s]:checked')).map(i => i.dataset.s); }
+  function readWeak(){ return [].slice.call(document.querySelectorAll('#weaknesses [data-w]:checked')).map(i => i.dataset.w); }
+  function readStrong(){ return [].slice.call(document.querySelectorAll('#strengths [data-s]:checked')).map(i => i.dataset.s); }
+  function readLevels(){ const o = {}; document.querySelectorAll('[data-lv]').forEach(s => o[s.dataset.lv] = s.value); return o; }
+  function readCommons(){ const o = {}; document.querySelectorAll('[data-cm]').forEach(s => o[s.dataset.cm] = s.value); return o; }
+  /* unticked findings follow the global level */
+  function syncLevels(){
+    const g = $('#f-level').value;
+    document.querySelectorAll('[data-lv]').forEach(sel => {
+      const box = document.querySelector('#weaknesses [data-w="' + sel.dataset.lv + '"]');
+      if(box && !box.checked) sel.value = g;
+    });
+  }
 
   /* ---------- state ---------- */
   function collect(){
     return {
-      name: $('#f-name').value.trim(),
-      email: $('#f-email').value.trim(),
-      trial: $('#f-trial').value,
-      test: $('#f-test').value,
-      now: $('#f-now').value.trim(),
-      target: $('#f-target').value.trim(),
-      lang: $('#f-lang').value,
-      stage: $('#f-stage').value,
-      mood: $('#f-mood').value,
-      strong: readStrong(),
-      strongnote: $('#f-strengthnote').value.trim(),
-      weak: readWeak(),
-      weaknote: $('#f-weaknote').value.trim(),
-      personal: $('#f-personal').value.trim(),
-      site: $('#f-site').value.trim(),
-      slug: $('#f-slug').value.trim()
+      name:$('#f-name').value.trim(), email:$('#f-email').value.trim(),
+      trial:$('#f-trial').value, test:$('#f-test').value,
+      now:$('#f-now').value.trim(), target:$('#f-target').value.trim(),
+      lang:$('#f-lang').value, stage:$('#f-stage').value, mood:$('#f-mood').value,
+      level:$('#f-level').value,
+      strong:readStrong(), strongnote:$('#f-strengthnote').value.trim(),
+      weak:readWeak(), levels:readLevels(), commons:readCommons(),
+      weaknote:$('#f-weaknote').value.trim(), personal:$('#f-personal').value.trim(),
+      site:$('#f-site').value.trim(), slug:$('#f-slug').value.trim()
     };
   }
   function apply(S){
     if(!S) return;
-    ['name','email','trial','test','now','target','lang','stage','mood','site','slug'].forEach(k=>{
-      const el = $('#f-' + (k==='strongnote'?'strengthnote':k)); if(el && S[k] != null) el.value = S[k];
+    ['name','email','trial','test','now','target','lang','stage','mood','level','site','slug'].forEach(k=>{
+      const el = $('#f-' + k); if(el && S[k] != null) el.value = S[k];
     });
     $('#f-strengthnote').value = S.strongnote || '';
     $('#f-weaknote').value = S.weaknote || '';
     $('#f-personal').value = S.personal || '';
     document.querySelectorAll('[data-s]').forEach(i => i.checked = (S.strong||[]).indexOf(i.dataset.s) > -1);
     paintWeak();
-    document.querySelectorAll('[data-w]').forEach(i => i.checked = (S.weak||[]).indexOf(i.dataset.w) > -1);
+    document.querySelectorAll('#weaknesses [data-w]').forEach(i => i.checked = (S.weak||[]).indexOf(i.dataset.w) > -1);
+    if(S.levels) document.querySelectorAll('[data-lv]').forEach(s => { if(S.levels[s.dataset.lv]) s.value = S.levels[s.dataset.lv]; });
+    if(S.commons) document.querySelectorAll('[data-cm]').forEach(s => { if(S.commons[s.dataset.cm]) s.value = S.commons[s.dataset.cm]; });
   }
 
   /* ---------- render ---------- */
   let timer = null;
-  function queue(){ clearTimeout(timer); timer = setTimeout(render, 160); }
+  function queue(){ clearTimeout(timer); timer = setTimeout(render, 170); }
 
   function render(){
     const S = collect();
@@ -1400,37 +1977,39 @@ const REPORT_JS = [
     const wk = weeksTo(S.trial, S.test);
     $('#dateline').textContent = !wk
       ? 'No test date yet. Plan chosen: ' + PLANS[pickPlan(null)].n + '. Add a date and the plan changes to match it.'
-      : wk.gone
-        ? 'That test date has already passed. Check it before you send this.'
-        : wk.days < 0
-          ? 'The test date is before the trial lesson date. One of the two is wrong.'
-          : 'That is ' + wk.days + ' days, or ' + wk.weeks + (wk.weeks===1?' week':' weeks') + '. Plan chosen: ' + PLANS[pickPlan(wk.weeks)].n + '.';
+      : wk.gone ? 'That test date has already passed. Check it before you send this.'
+      : wk.days < 0 ? 'The test date is before the trial lesson date. One of the two is wrong.'
+      : 'That is ' + wk.days + ' days, or ' + (wk.weeks===1?'1 week':wk.weeks+' weeks') + '. Plan chosen: ' + PLANS[pickPlan(wk.weeks)].n + '.';
 
-    lastHTML = buildReport(S);
-    prev.srcdoc = lastHTML;
+    lastReport = buildReport(S);
+    lastHw = buildHomework(S);
+    prev.srcdoc = showing === 'report' ? lastReport : lastHw;
 
-    const kb = Math.round(lastHTML.length / 1024);
+    const solo = S.weak.filter(id => (S.commons||{})[id] === 'most').length;
     $('#meta-out').textContent = S.weak.length + (S.weak.length===1?' finding':' findings')
-      + ' · ' + (S.stage==='enrolled'?'full detail':'trial level') + ' · ' + kb + ' KB';
+      + ' · ' + (S.stage==='enrolled'?'full detail':'trial level')
+      + ' · ' + Math.round(lastReport.length/1024) + ' KB'
+      + (solo ? ' · ' + solo + ' majority' : '');
 
     const n = S.weak.length;
     $('#status').textContent = !S.name ? 'Fill in a name to begin.'
       : n === 0 ? S.name + ': pick at least one finding.'
-      : n > 4 ? S.name + ': ' + n + ' findings is a list, not a plan. Four is the ceiling.'
+      : n > 5 ? S.name + ': ' + n + ' findings is a list, not a plan. Five is the ceiling.'
       : 'Ready for ' + S.name + '.';
 
     const slug = S.slug || slugify(S.name);
-    const site = (S.site || 'https://yoursite.pages.dev').replace(/\/+$/,'');
-    $('#pubsteps').innerHTML = '<b>To put this online.</b> Download the file below, then open '
-      + '<a href="https://github.com/GrahamIELTS/documents/upload/main/' + esc(slug) + '" target="_blank" rel="noopener">'
-      + 'github.com/GrahamIELTS/documents/upload/main/' + esc(slug) + '</a> and drag index.html in. '
-      + 'That link makes the folder for you. Commit, and it is live at <b>'
-      + esc(site + '/' + slug + '/') + '</b> in about a minute.';
+    const site = (S.site || 'https://yoursite.workers.dev').replace(/\/+$/,'');
+    $('#pubsteps').innerHTML = '<b>Two pages per student.</b> Download both files below, then upload each into its own folder.'
+      + '<br><br><b>1. The report.</b> <a href="https://github.com/GrahamIELTS/documents/upload/main/' + esc(slug) + '" target="_blank" rel="noopener">'
+      + 'upload/main/' + esc(slug) + '</a> → lives at <b>' + esc(site + '/' + slug + '/') + '</b>'
+      + '<br><b>2. The homework.</b> <a href="https://github.com/GrahamIELTS/documents/upload/main/' + esc(slug) + '/homework" target="_blank" rel="noopener">'
+      + 'upload/main/' + esc(slug) + '/homework</a> → lives at <b>' + esc(site + '/' + slug + '/homework/') + '</b>'
+      + '<br><br>Both links make the folder for you. Each file is named index.html.';
 
     try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){}
   }
 
-  /* ---------- preview width ---------- */
+  /* ---------- preview controls ---------- */
   document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
     document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed','false'));
     b.setAttribute('aria-pressed','true');
@@ -1439,30 +2018,37 @@ const REPORT_JS = [
     prev.style.marginInline = (w === '100%') ? '0' : 'auto';
     prev.style.border = (w === '100%') ? '0' : '1px solid var(--line)';
   }));
+  document.querySelectorAll('.docseg button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.docseg button').forEach(x => x.setAttribute('aria-pressed','false'));
+    b.setAttribute('aria-pressed','true');
+    showing = b.dataset.doc;
+    prev.srcdoc = showing === 'report' ? lastReport : lastHw;
+    $('#b-download').textContent = showing === 'report' ? 'Download report' : 'Download homework';
+  }));
 
   /* ---------- actions ---------- */
   function currentSlug(){ const S = collect(); return S.slug || slugify(S.name); }
-
-  $('#b-download').addEventListener('click', () => {
-    if(!lastHTML) return;
-    const blob = new Blob([lastHTML], {type:'text/html'});
+  function download(html, msg){
+    const blob = new Blob([html], {type:'text/html'});
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'index.html';
+    a.href = URL.createObjectURL(blob); a.download = 'index.html';
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
-    toast('Downloaded. Put it in a folder called ' + currentSlug());
+    toast(msg);
+  }
+
+  $('#b-download').addEventListener('click', () => {
+    if(showing === 'report') download(lastReport, 'Report downloaded. Folder: ' + currentSlug());
+    else download(lastHw, 'Homework downloaded. Folder: ' + currentSlug() + '/homework');
   });
 
   $('#b-print').addEventListener('click', () => {
-    if(!lastHTML) return;
-    let f = document.getElementById('printer');
-    if(f) f.remove();
-    f = document.createElement('iframe');
-    f.id = 'printer';
+    const html = showing === 'report' ? lastReport : lastHw;
+    if(!html) return;
+    let f = document.getElementById('printer'); if(f) f.remove();
+    f = document.createElement('iframe'); f.id = 'printer';
     f.style.cssText = 'position:fixed;left:-9999px;top:0;width:1100px;height:1400px;border:0';
-    document.body.appendChild(f);
-    f.srcdoc = lastHTML;
+    document.body.appendChild(f); f.srcdoc = html;
     f.onload = () => setTimeout(() => {
       try{ f.contentWindow.focus(); f.contentWindow.print(); }
       catch(e){ toast('Your browser blocked printing. Use the downloaded file instead.'); }
@@ -1472,32 +2058,30 @@ const REPORT_JS = [
 
   $('#b-copyurl').addEventListener('click', () => {
     const S = collect();
-    const url = (S.site || 'https://yoursite.pages.dev').replace(/\/+$/,'') + '/' + currentSlug() + '/';
-    copy(url, 'Link copied');
+    const base = (S.site || 'https://yoursite.workers.dev').replace(/\/+$/,'') + '/' + currentSlug() + '/';
+    copy('Report: ' + base + '\nHomework: ' + base + 'homework/', 'Both links copied');
   });
 
   $('#b-mail').addEventListener('click', () => {
     const S = collect();
-    const url = (S.site || 'https://yoursite.pages.dev').replace(/\/+$/,'') + '/' + currentSlug() + '/';
-    const first = S.name || 'there';
+    const base = (S.site || 'https://yoursite.workers.dev').replace(/\/+$/,'') + '/' + currentSlug() + '/';
+    const nm = S.name || 'there';
     const sub = S.stage === 'enrolled'
-      ? 'Your plan and this week' + (S.name ? ', ' + S.name : '')
+      ? 'Your plan and your homework page' + (S.name ? ', ' + S.name : '')
       : 'After your trial lesson' + (S.name ? ', ' + S.name : '');
     const body = [
-      'Hi ' + first + ',',
-      '',
+      'Hi ' + nm + ',', '',
       S.stage === 'enrolled'
-        ? 'Here is your working document. It has what I heard, what it is costing you, the plan, and this week in full.'
+        ? 'Here is your working document, and your homework page alongside it.'
         : 'Thank you for the lesson. I have written up what I heard, what it is costing you, and what I would do about it.',
       '',
-      url,
+      'Your report:   ' + base,
+      'Your homework: ' + base + 'homework/',
       '',
-      'Two things worth doing before we speak again.',
+      'Open the report on a laptop if you can. The daily planner near the bottom is interactive, and what you tick is saved in your own browser.',
       '',
-      '1. Open it on a laptop if you can. The daily planner near the bottom is interactive, and what you tick is saved in your own browser.',
-      '2. Record yourself for sixty seconds answering any question, and send it to me. First take. Do not re record it to make it better.',
-      '',
-      'Graham'
+      'Start at the top of the homework page and stop after twenty minutes. Finishing the page is not the goal.',
+      '', 'Graham'
     ].join('\n');
     const href = 'mailto:' + encodeURIComponent(S.email || '')
       + '?subject=' + encodeURIComponent(sub) + '&body=' + encodeURIComponent(body);
@@ -1506,9 +2090,8 @@ const REPORT_JS = [
   });
 
   function copy(txt, msg){
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(txt).then(()=>toast(msg), fb);
-    } else fb();
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(()=>toast(msg), fb); }
+    else fb();
     function fb(){
       const ta = document.createElement('textarea');
       ta.value = txt; ta.style.cssText = 'position:fixed;opacity:0';
@@ -1530,16 +2113,13 @@ const REPORT_JS = [
   });
 
   $('#b-save').addEventListener('click', () => {
-    const S = collect();
-    const blob = new Blob([JSON.stringify(S, null, 2)], {type:'application/json'});
+    const blob = new Blob([JSON.stringify(collect(), null, 2)], {type:'application/json'});
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = (currentSlug() || 'student') + '.json';
+    a.href = URL.createObjectURL(blob); a.download = (currentSlug() || 'student') + '.json';
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
-    toast('Saved. Open it later to update this report.');
+    toast('Saved. Open it later to update this student.');
   });
-
   $('#b-load').addEventListener('click', () => $('#f-file').click());
   $('#f-file').addEventListener('change', e => {
     const file = e.target.files[0]; if(!file) return;
@@ -1554,6 +2134,7 @@ const REPORT_JS = [
     el.addEventListener('input', queue); el.addEventListener('change', queue);
   });
   $('#f-lang').addEventListener('change', () => { paintWeak(); queue(); });
+  $('#f-level').addEventListener('change', () => { syncLevels(); queue(); });
 
   paintWeak();
   let saved = null;
