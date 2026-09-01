@@ -1,0 +1,1566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Report Builder | GrahamIELTS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --paper:#FBFAF7; --surface:#FFFFFF; --surface-2:#F3F1E9;
+    --ink:#15211C; --ink-2:#3D4E46; --muted:#6E7F76;
+    --line:#DEDACE; --line-soft:#EAE7DC;
+    --green:#1B4D3A; --green-deep:#10352A; --green-bright:#2C7A5A; --green-wash:#EEF4F0;
+    --gold:#C9A227; --gold-ink:#7A5A0F; --gold-soft:#FBF2D8;
+    --shadow:0 1px 2px rgba(16,53,42,.06), 0 8px 24px rgba(16,53,42,.07);
+    --radius:10px;
+    --pad:clamp(16px,4vw,40px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0E1A15; --surface:#152621; --surface-2:#1B322B;
+      --ink:#EDF2EF; --ink-2:#C3D0CA; --muted:#8FA69C;
+      --line:#2A423A; --line-soft:#223730;
+      --green:#4FB489; --green-deep:#0A231B; --green-bright:#5FC79A; --green-wash:#163026;
+      --gold:#E3BE4F; --gold-ink:#EACD73; --gold-soft:#2B2415;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.28);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0E1A15; --surface:#152621; --surface-2:#1B322B;
+    --ink:#EDF2EF; --ink-2:#C3D0CA; --muted:#8FA69C;
+    --line:#2A423A; --line-soft:#223730;
+    --green:#4FB489; --green-deep:#0A231B; --green-bright:#5FC79A; --green-wash:#163026;
+    --gold:#E3BE4F; --gold-ink:#EACD73; --gold-soft:#2B2415;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.28);
+  }
+  *{box-sizing:border-box}
+  html{color-scheme:light dark}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:Fraunces,Georgia,serif;margin:0;line-height:1.2;text-wrap:balance}
+  p{margin:0}
+  a{color:var(--green-bright)}
+  button,input,select,textarea{font:inherit;color:inherit}
+  :focus-visible{outline:2.5px solid var(--gold);outline-offset:2px;border-radius:6px}
+
+  /* fluid container: steps up on big screens */
+  .wrap{width:100%;max-width:900px;margin-inline:auto;padding-inline:var(--pad)}
+  @media (min-width:1100px){ .wrap{max-width:1080px} }
+  @media (min-width:1500px){ .wrap{max-width:1280px} }
+
+  header.top{background:var(--green-deep);border-bottom:1px solid rgba(201,162,39,.35);
+    position:sticky;top:0;z-index:60}
+  .top-in{display:flex;align-items:center;gap:14px;padding:11px 0;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:9px;color:#F4F1E6;font-weight:700;
+    font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
+  .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--gold)}
+  .top-note{color:#9FB8AC;font-size:.78rem;margin-left:auto}
+
+  .lay{display:grid;gap:22px;padding:24px 0 90px;grid-template-columns:1fr}
+  @media (min-width:1100px){ .lay{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
+    .lay > .panel + .panel{position:sticky;top:60px} }
+
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    box-shadow:var(--shadow);overflow:hidden}
+  .panel > h2{font-size:1.1rem;font-weight:600;padding:15px 18px;
+    background:var(--green-wash);border-bottom:1px solid var(--line)}
+  .panel-body{padding:18px}
+
+  fieldset{border:0;margin:0 0 22px;padding:0}
+  legend{font-size:.66rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--gold-ink);margin-bottom:10px;padding:0}
+  .grid2{display:grid;gap:12px;grid-template-columns:1fr}
+  @media (min-width:560px){ .grid2{grid-template-columns:1fr 1fr} }
+  label.f{display:block}
+  label.f > span{display:block;font-size:.66rem;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+  .inp{width:100%;background:var(--surface);border:1.5px solid var(--line);border-radius:8px;
+    padding:9px 11px;font-size:.94rem;transition:border-color .14s}
+  .inp:focus{border-color:var(--gold);outline:none}
+  textarea.inp{min-height:74px;resize:vertical;line-height:1.5}
+  .hint{font-size:.78rem;color:var(--muted);margin-top:6px}
+
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--line);
+    background:var(--surface);border-radius:99px;padding:6px 12px;font-size:.85rem;
+    cursor:pointer;transition:border-color .13s,background .13s}
+  .chip:hover{border-color:var(--green-bright)}
+  .chip input{appearance:none;width:15px;height:15px;border-radius:4px;margin:0;
+    border:2px solid var(--muted);display:grid;place-items:center;cursor:pointer}
+  .chip input:checked{background:var(--gold);border-color:var(--gold)}
+  .chip input:checked::after{content:"";width:4px;height:8px;border:solid #10352A;
+    border-width:0 2px 2px 0;transform:rotate(43deg) translate(-1px,-1px)}
+  .chip:has(input:checked){border-color:var(--gold);background:var(--gold-soft)}
+
+  .wk-list{display:flex;flex-direction:column;gap:7px;max-height:min(58vh,600px);overflow-y:auto;
+    padding-right:4px}
+  .wk-item{border:1.5px solid var(--line);border-radius:9px;background:var(--surface);
+    padding:10px 12px;cursor:pointer;transition:border-color .13s,background .13s}
+  .wk-item:hover{border-color:var(--green-bright)}
+  .wk-item:has(input:checked){border-color:var(--gold);background:var(--gold-soft)}
+  .wk-top{display:flex;gap:10px;align-items:flex-start}
+  .wk-top input{appearance:none;flex:none;width:17px;height:17px;border-radius:5px;margin:2px 0 0;
+    border:2px solid var(--muted);display:grid;place-items:center;cursor:pointer}
+  .wk-top input:checked{background:var(--gold);border-color:var(--gold)}
+  .wk-top input:checked::after{content:"";width:4px;height:9px;border:solid #10352A;
+    border-width:0 2.2px 2.2px 0;transform:rotate(43deg) translate(-1px,-1px)}
+  .wk-name{font-weight:600;font-size:.9rem}
+  .wk-meta{font-size:.76rem;color:var(--muted);margin-top:2px}
+  .tagline{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+  .tg{font-size:.6rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+    padding:2px 6px;border-radius:4px;background:var(--surface-2);color:var(--muted)}
+
+  .bar{position:fixed;left:0;right:0;bottom:0;background:var(--green-deep);
+    border-top:1px solid rgba(201,162,39,.4);z-index:70;padding:11px 0}
+  .bar-in{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+  .bar .status{color:#A9C0B5;font-size:.8rem;margin-right:auto}
+  .btn{border:1.5px solid var(--gold);background:var(--gold);color:#10352A;font-weight:700;
+    font-size:.85rem;padding:9px 16px;border-radius:99px;cursor:pointer;white-space:nowrap;
+    transition:background .14s}
+  .btn:hover{background:#DDB63C}
+  .btn.ghost{background:transparent;color:#F4F1E6;border-color:rgba(255,255,255,.3)}
+  .btn.ghost:hover{background:rgba(255,255,255,.1)}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+
+  .prev-frame{width:100%;height:min(78vh,900px);border:0;background:var(--paper);display:block}
+  .prev-tools{display:flex;gap:7px;align-items:center;padding:10px 14px;
+    border-bottom:1px solid var(--line);background:var(--surface-2);flex-wrap:wrap}
+  .seg{display:inline-flex;border:1.5px solid var(--line);border-radius:99px;overflow:hidden}
+  .seg button{background:transparent;border:0;padding:5px 12px;font-size:.78rem;font-weight:600;
+    cursor:pointer;color:var(--muted)}
+  .seg button[aria-pressed="true"]{background:var(--green-deep);color:#F4F1E6}
+  .meta-out{font-size:.78rem;color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums}
+
+  .toast{position:fixed;left:50%;bottom:76px;transform:translateX(-50%) translateY(12px);
+    background:var(--green-deep);color:#F6F3E7;padding:11px 20px;border-radius:99px;
+    font-size:.86rem;font-weight:600;opacity:0;pointer-events:none;transition:.22s;z-index:90;
+    border:1px solid rgba(201,162,39,.4);max-width:90vw;text-align:center}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .note{background:var(--gold-soft);border-radius:9px;padding:12px 14px;font-size:.85rem;
+    color:var(--ink);margin-top:14px}
+  .note b{color:var(--gold-ink)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-in">
+    <div class="brand"><span class="dot"></span>GrahamIELTS Report Builder</div>
+    <div class="top-note">Nothing you type leaves this browser</div>
+  </div>
+</header>
+
+<div class="wrap lay">
+
+  <section class="panel">
+    <h2>The student</h2>
+    <div class="panel-body">
+
+      <fieldset>
+        <legend>Who and when</legend>
+        <div class="grid2">
+          <label class="f"><span>Student name</span><input class="inp" id="f-name" placeholder="First name is enough"></label>
+          <label class="f"><span>Student email</span><input class="inp" id="f-email" type="email" placeholder="For the send button"></label>
+          <label class="f"><span>Trial lesson date</span><input class="inp" id="f-trial" type="date"></label>
+          <label class="f"><span>Test date (if booked)</span><input class="inp" id="f-test" type="date"></label>
+          <label class="f"><span>Band now</span><input class="inp" id="f-now" placeholder="Or leave blank"></label>
+          <label class="f"><span>Band needed</span><input class="inp" id="f-target" placeholder="And what it is for"></label>
+        </div>
+        <div class="hint" id="dateline">Add a test date and I will work out the time remaining and pick the plan.</div>
+      </fieldset>
+
+      <fieldset>
+        <legend>First language</legend>
+        <label class="f"><span>Background</span>
+          <select class="inp" id="f-lang">
+            <option value="cmn-tw">Mandarin, Taiwan</option>
+            <option value="cmn-cn">Mandarin, mainland China</option>
+            <option value="yue-hk">Cantonese, Hong Kong</option>
+          </select>
+        </label>
+        <div class="hint">This changes the error patterns, the examples, and how the research is described. Nothing in the report will refer to a region other than the student's own.</div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Where they are with you</legend>
+        <div class="grid2">
+          <label class="f"><span>Detail level</span>
+            <select class="inp" id="f-stage">
+              <option value="trial">Trial only, not enrolled yet</option>
+              <option value="enrolled">Enrolled, give full detail</option>
+            </select>
+          </label>
+          <label class="f"><span>How they feel about the test</span>
+            <select class="inp" id="f-mood">
+              <option value="nervous">Nervous or anxious</option>
+              <option value="confident">Confident, possibly over-confident</option>
+              <option value="plateau">Frustrated, stuck after previous attempts</option>
+              <option value="deadline">Under time pressure</option>
+              <option value="perfectionist">Perfectionist, afraid of mistakes</option>
+              <option value="shy">Shy or quiet</option>
+              <option value="neutral">Steady, no strong feeling</option>
+            </select>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>What is already working</legend>
+        <div class="chips" id="strengths"></div>
+        <label class="f" style="margin-top:12px"><span>In your own words (optional)</span>
+          <textarea class="inp" id="f-strengthnote" placeholder="Anything specific you noticed and want to name."></textarea></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>What is holding the score down</legend>
+        <div class="hint" style="margin:0 0 9px">Filtered to patterns documented for this language background. Pick two to four; more than four stops being a plan.</div>
+        <div class="wk-list" id="weaknesses"></div>
+        <label class="f" style="margin-top:12px"><span>Anything else you heard (optional)</span>
+          <textarea class="inp" id="f-weaknote" placeholder="Written in your voice, added as its own point."></textarea></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>A personal line</legend>
+        <label class="f"><span>Optional opening note to this student</span>
+          <textarea class="inp" id="f-personal" placeholder="One or two sentences. Appears near the top, in your voice."></textarea></label>
+      </fieldset>
+
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Preview</h2>
+    <div class="prev-tools">
+      <div class="seg" role="group" aria-label="Preview width">
+        <button type="button" data-pw="390" aria-pressed="false">Phone</button>
+        <button type="button" data-pw="820" aria-pressed="false">Tablet</button>
+        <button type="button" data-pw="100%" aria-pressed="true">Full</button>
+      </div>
+      <span class="meta-out" id="meta-out"></span>
+    </div>
+    <iframe class="prev-frame" id="prev" title="Report preview"></iframe>
+  </section>
+
+</div>
+
+<div class="bar">
+  <div class="wrap bar-in">
+    <span class="status" id="status">Fill in a name to begin.</span>
+    <button class="btn ghost" type="button" id="b-print">Save as PDF</button>
+    <button class="btn ghost" type="button" id="b-mail">Email student</button>
+    <button class="btn ghost" type="button" id="b-copyurl">Copy live URL</button>
+    <button class="btn" type="button" id="b-download">Download index.html</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   CONTENT BANK
+   Everything the report can say lives here.
+   Nothing in this file talks about regions or politics.
+   A language background only decides which patterns appear
+   and which example words are used.
+   ============================================================ */
+
+const LANGS = {
+  'cmn-tw': { l1:'Mandarin', ex:'pinyin' },
+  'cmn-cn': { l1:'Mandarin', ex:'pinyin' },
+  'yue-hk': { l1:'Cantonese', ex:'jyutping' }
+};
+
+/* ---------- research library ---------- */
+const RESEARCH = {
+  skehan:{t:'Attention is a fixed budget',
+    b:'Speaking research describes a trade off between three things you cannot all maximise at once: how complex your language is, how accurate it is, and how fluent it sounds. Push hard on one and the other two drop. This is not a personal weakness. It is how the mind allocates attention under time pressure.'},
+  automatic:{t:'Practice moves work off the front desk',
+    b:'A structure you have to think about consumes working memory. The same structure, practised until it is automatic, consumes almost none. The aim of drilling is not to learn the rule. It is to stop the rule costing you anything.'},
+  formulaic:{t:'Fluent speakers reuse whole chunks',
+    b:'Studies of natural speech show a large share of it is built from ready made sequences rather than assembled word by word. Learners who store more of these chunks sound faster and pause in more natural places, because they are retrieving instead of constructing.'},
+  collocation:{t:'Word partners, not single words',
+    b:'Corpus studies of learners with a Mandarin or Cantonese first language find that errors cluster in which words go together rather than in which words are known. The word is right and the partner is wrong. Examiners hear this as limited range even when the vocabulary is large.'},
+  fourthreetwo:{t:'The same story, three times, faster',
+    b:'Tell the same short story for four minutes, then three, then two, to three different listeners. Content stays fixed while time shrinks, so the pressure lands on delivery rather than on thinking. Studies of this technique report gains in speech rate and reductions in pausing after very few sessions.'},
+  spaced:{t:'Spread it out, do not stack it',
+    b:'Reviews of hundreds of studies find the same thing: practice spread across days beats the same total time in one block, often by a wide margin. Twenty minutes on six days does more than two hours on Sunday.'},
+  retrieval:{t:'Pulling out beats putting in',
+    b:'Trying to recall something, and failing, then checking, builds stronger memory than rereading it. This is why your homework asks you to say things from memory before you look.'},
+  production:{t:'Saying it out loud marks it',
+    b:'Material that is spoken aloud is remembered better than material read silently. The act of producing it makes it distinctive. Silent reading feels efficient and is not.'},
+  noticing:{t:'You cannot fix what you cannot hear',
+    b:'Change in a second language begins with noticing the gap between what you said and what a proficient speaker would say. Recording yourself is not vanity. It is the only way to hear your own gap, because in the moment of speaking your attention is elsewhere.'},
+  pitch:{t:'Pitch range carries meaning in English',
+    b:'Research comparing first and second language speech finds that second language speakers often use a narrower pitch range in English than in their own language. Listeners read a narrow range as low interest or low confidence, even when the speaker is neither. Widening the range changes how you are heard without changing a single word.'},
+  shadowing:{t:'Copying the tune before the words',
+    b:'Repeating audio a beat behind the speaker, matching the melody rather than translating, improves rhythm and intonation faster than isolated pronunciation exercises, because it trains the whole pattern rather than single sounds.'},
+  anxiety:{t:'Anxiety costs you a real band, and it is trainable',
+    b:'Reviews across many studies find a consistent negative relationship between speaking anxiety and speaking performance. Anxiety takes up working memory that grammar needs. Rehearsal under realistic conditions lowers it, because most of the fear is fear of the unfamiliar.'},
+  selfefficacy:{t:'Believing it is possible predicts the result',
+    b:'How capable a learner believes they are predicts performance beyond their actual level. That belief is built from small completed tasks, not from encouragement. This is why the plan is broken into pieces you will finish.'},
+  descriptors:{t:'What the marking actually rewards',
+    b:'Speaking is scored on four equal parts: fluency and coherence, lexical resource, grammatical range and accuracy, and pronunciation. Each is a quarter of the score. A brilliant word list cannot lift a quarter it does not touch, and a broken quarter drags the whole result down.'},
+  syntactic:{t:'Range is measured in clauses, not in long words',
+    b:'Studies tracking learner development find that growth shows up as more subordination and more varied clause types, not as longer vocabulary. Two sentences joined properly score above two sentences placed side by side.'},
+  rhetoric:{t:'Answers need a shape',
+    b:'Research on learners from a Mandarin or Cantonese background finds a pattern of stating a position and then moving on, where higher scoring answers state, support, and illustrate. The knowledge is there. The habit of unpacking it is what is missing.'},
+  transfer:{t:'Your first language is not the enemy',
+    b:'Every predictable error in this report has a cause in the structure of your first language. That is what makes it predictable, and predictable is exactly what can be trained. A random error is a problem. A systematic one is a schedule.'}
+};
+
+/* ---------- named voice drills ---------- */
+const DRILLS = {
+  siren:{n:'The siren', p:'Slide your voice from the lowest comfortable note to the highest and back down on one breath, on a hum, then on the word "no". Thirty seconds.',
+    o:'Most speakers use a fraction of the range they own. This finds the edges, so normal speech sits in the middle of a wide range instead of at the top of a narrow one.'},
+  story:{n:'The story voice', p:'Read one paragraph of a children’s book out loud, to an imaginary six year old who is losing interest. Exaggerate everything.',
+    o:'It removes the fear of sounding excessive. Recorded and played back, the exaggerated version almost always sounds normal, which tells you how much room you have.'},
+  fivefeelings:{n:'One line, five feelings', p:'Take one sentence, for example "I did not say that". Say it five times: bored, excited, suspicious, amused, exhausted. Same words every time.',
+    o:'It separates meaning from vocabulary. You learn that tone carries a large part of the message, so you stop trying to carry all of it with words.'},
+  cork:{n:'The cork', p:'Hold a cork or a clean finger between your front teeth. Read a paragraph aloud, forcing clarity. Remove it and read the same paragraph again.',
+    o:'The second reading is noticeably clearer with no extra effort. It resets how much articulation feels normal, which matters most on the endings of English words.'},
+  pause:{n:'The deliberate pause', p:'Read a paragraph and stop completely for two full seconds at every comma. Do not fill the gap with any sound.',
+    o:'Silence feels much longer to the speaker than to the listener. This trains pauses that sound like thinking rather than like stalling, and it removes the pressure that produces filler noises.'},
+  playback:{n:'The playback', p:'Record sixty seconds of yourself answering any question. Listen once for content, once for melody only, ignoring the words.',
+    o:'The second listen is the one that changes things. You cannot hear your own tune while producing it, and you cannot fix what you have never heard.'},
+  countdown:{n:'The countdown', p:'Answer the same question three times, in ninety seconds, then sixty, then forty five. Same content, less time.',
+    o:'Fixing the content forces all the improvement into delivery. Speed rises and pausing falls without you thinking about either.'},
+  shadow:{n:'The shadow', p:'Play thirty seconds of a native speaker and talk along one beat behind, copying the melody and rhythm, not the meaning.',
+    o:'It installs English rhythm as a whole pattern instead of as a list of rules about individual sounds.'},
+  slowmo:{n:'The slow motion sentence', p:'Say one sentence at half speed, deliberately hitting every ending sound, then say it at normal speed.',
+    o:'Endings are where accuracy is won or lost. Slow motion makes them audible to you, and normal speed keeps some of that clarity.'},
+  onebreath:{n:'The one breath rule', p:'Answer a question in one sentence per breath. When the breath ends, the sentence ends. Take a new breath and start a new one.',
+    o:'It stops sentences running on until they collapse, which is the most common cause of grammar breaking down mid answer.'}
+};
+
+/* ---------- strengths bank ---------- */
+const STRENGTHS = [
+  {id:'range', n:'Wide vocabulary', s:'You already know far more words than you are able to use under pressure. That is a good problem, because the words do not have to be learned again. They have to be made available faster.'},
+  {id:'clarity', n:'Clear pronunciation', s:'Individual sounds are clear and easy to follow. A listener never has to ask you to repeat a word. That is a real advantage and it protects a quarter of your score.'},
+  {id:'ideas', n:'Strong ideas', s:'You have opinions and you can find something to say on almost any topic. Many candidates lose marks because they have nothing to say. That is not your problem, which means the work is about delivery rather than about thinking.'},
+  {id:'willing', n:'Willing to keep talking', s:'You keep going rather than stopping when something is difficult. That single habit is worth more than it looks, because the marking rewards sustained speech.'},
+  {id:'grammar-base', n:'Solid grammar foundation', s:'The basic structures are there and correct. What is missing is variety, not knowledge, and variety is quicker to build than knowledge.'},
+  {id:'listening', n:'Strong listening', s:'You understand questions the first time and answer what was actually asked. Examiners notice this immediately, and it makes the whole conversation easier for both people.'},
+  {id:'natural', n:'Natural conversational tone', s:'You sound like a person talking rather than a person reciting. That is difficult to teach and you already have it.'},
+  {id:'accuracy', n:'High accuracy', s:'You make very few errors. The next step is not fewer mistakes. It is more ambitious sentences, which is a different kind of work.'},
+  {id:'pace', n:'Comfortable pace', s:'Your speed is easy to follow, neither rushed nor slow. This is worth protecting when the other work starts.'},
+  {id:'organised', n:'Organised answers', s:'Your answers have a beginning and an end rather than trailing off. Structure is one of the things fluency and coherence is actually measuring.'},
+  {id:'humour', n:'Personality comes through', s:'You are interesting to listen to. The test is a conversation with a human being, and a human being who is enjoying the conversation is a friendlier marker.'},
+  {id:'selfaware', n:'You hear your own mistakes', s:'You notice when something comes out wrong. That awareness is the foundation of every correction that follows, and many students do not have it.'}
+];
+
+/* ---------- weakness bank ----------
+   tags: which language backgrounds this pattern is documented for
+   heard: what happened in the lesson, in plain words
+   why: cause in the first language. {d} is default, keyed overrides per language
+   cost: what it costs against the marking
+   fix: the steps
+   res: research keys
+   drills: drill keys
+------------------------------------- */
+const WEAK = [
+  {id:'vocab-overreach', cat:'Vocabulary', n:'Reaching for advanced vocabulary', meta:'Big words slowing everything else down',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'You stop mid sentence to search for an impressive word. The search is visible, the sentence loses its shape, and the word that arrives is often not the one that fits.',
+   why:{d:'This is a taught habit rather than a language one. Study materials reward rare words, so effort goes there. The cost is invisible until you are timed.'},
+   cost:'It damages three of the four quarters at once. Fluency drops because of the pause, grammar drops because the sentence was abandoned, and vocabulary itself drops, because the scoring rewards words used naturally and accurately rather than words that are rare. A rare word used slightly wrongly scores below a common word used exactly.',
+   fix:['Answer with the first word that is true. Precision beats rarity in the marking.',
+        'Build partners, not words. Learn "make a decision", not "decision".',
+        'Reserve ambition for the second sentence of an answer, never the first.'],
+   res:['skehan','descriptors','collocation','formulaic'], drills:['countdown']},
+
+  {id:'collocation', cat:'Vocabulary', n:'Word partners', meta:'Right word, wrong partner',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'The vocabulary is correct but the combination is not. "Do a mistake", "very delicious", "open the light", "learn knowledge".',
+   why:{d:'Words are usually learned one at a time with a translation, and the partner does not travel across languages. In {L1} the natural partner is a different verb, so the sentence is built correctly by {L1} logic and lands wrongly in English.'},
+   cost:'Examiners hear it as limited range, which is unfair given how many words you know, but it is what the descriptors describe.',
+   fix:['Record new words with their partner and never alone.',
+        'Collect the four or five verbs that appear most in your own answers and learn what each one takes.',
+        'When you read, notice the pair rather than the noun.'],
+   res:['collocation','formulaic'], drills:[]},
+
+  {id:'memorised', cat:'Vocabulary', n:'Memorised answers', meta:'Prepared scripts that stop working',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'Some answers arrive complete and polished, then the next question breaks the script and the level drops sharply.',
+   why:{d:'Memorising is a rational response to fear. The problem is that it is audible: rhythm, vocabulary and fluency all change at the seam, and the drop afterwards is more visible than the polish before it.'},
+   cost:'Examiners are trained to hear this, and the answer is discounted. It also removes the chance to score on the one thing memorising cannot fake, which is responding.',
+   fix:['Memorise ideas and examples, never sentences.',
+        'Prepare five personal stories that can be bent to fit fifty questions.',
+        'Practise answering questions you have not seen, badly, on purpose.'],
+   res:['formulaic','anxiety'], drills:['countdown']},
+
+  {id:'detail', cat:'Vocabulary', n:'Concrete detail', meta:'General words where specifics score',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'Answers stay at the level of "it is very convenient" and "the environment is good" without the specific thing that makes it convenient or good.',
+   why:{d:'General adjectives are safe and always available. Specific nouns are riskier and score higher, so the safe choice is the expensive one.'},
+   cost:'Vocabulary is judged on precision. Three general adjectives score below one exact noun.',
+   fix:['Add one number, one name or one place to every answer.',
+        'Replace "good" and "convenient" with the reason underneath them.',
+        'Practise the follow up sentence: "For example, last week..."'],
+   res:['rhetoric','descriptors'], drills:[]},
+
+  {id:'copula', cat:'Grammar', n:'The missing BE verb', meta:'Am, is, are dropping out',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'"My hometown very beautiful." "The weather cold today." "I very tired yesterday." The meaning is completely clear, and the verb is not there.',
+   why:{d:'In {L1} an adjective can be the whole predicate. 很 hen plus an adjective is a complete sentence, and no verb is required, so 我很累 is grammatical and finished. English will not allow this: the adjective needs a verb to attach to. You are not forgetting a word. You are applying a correct rule from another language.',
+      'yue-hk':'In Cantonese an adjective can be the whole predicate. 好 hou2 plus an adjective is a complete sentence with no verb, so 我好攰 is grammatical and finished. English will not allow this: the adjective needs a verb to attach to. You are not forgetting a word. You are applying a correct rule from another language.'},
+   cost:'It is the single most noticeable error in this group, because it appears in short high frequency sentences where the examiner is listening closely. It reads as a basic accuracy problem even when the rest of the grammar is far above that level.',
+   fix:['Before an adjective, ask one question: where is the verb.',
+        'Drill the six forms out loud daily until they cost nothing: I am, you are, he is, we are, they are, it is.',
+        'Record one minute and count the missing ones. The count falls quickly once you can hear it.'],
+   res:['transfer','automatic','noticing'], drills:['slowmo','playback']},
+
+  {id:'tenses', cat:'Grammar', n:'Narrative tenses', meta:'Everything told in one tense',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'Past stories are told mostly in the present, or in the simple past only, with no shift between what was happening and what happened.',
+   why:{d:'{L1} does not mark time on the verb. Time is set once, with a word like yesterday or with a particle, and then the verb never changes. English asks you to re mark time on every single verb, which is a genuinely heavier load, not a harder idea.'},
+   cost:'Grammatical range is a quarter of the score and range means variety, not just correctness. A whole story in one tense caps that quarter no matter how accurate it is.',
+   fix:['Learn three tenses as one set for storytelling: I was doing, I did, I had done.',
+        'Tell one true story a day, out loud, sixty seconds, in the past.',
+        'Mark the frame first: "Last year, while I was living in..." then continue.'],
+   res:['transfer','syntactic','production'], drills:['onebreath','countdown']},
+
+  {id:'past-ed', cat:'Grammar', n:'Past endings disappearing', meta:'Walked, asked, finished losing their ending',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'The tense is chosen correctly and the ending is not heard. "I walk to school yesterday", where you knew it was past.',
+   why:{d:'This is a sound problem wearing a grammar costume. English past endings land as consonant clusters, and clusters of that shape do not occur at the end of syllables in {L1}, so the ending is dropped by the mouth rather than by the grammar.'},
+   cost:'It is marked as a grammar error even though you know the rule, which makes it one of the cheapest things on this list to fix.',
+   fix:['Practise the ending as a sound, not a rule: walk t, need id, play d.',
+        'Slow motion drill: say the sentence at half speed hitting every ending.',
+        'Read aloud two minutes daily and exaggerate every final consonant.'],
+   res:['automatic','noticing'], drills:['slowmo','cork']},
+
+  {id:'plural', cat:'Grammar', n:'Plural endings', meta:'Two book, many student',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'The number is already in the sentence, so the ending on the noun does no work and disappears.',
+   why:{d:'{L1} does not mark plural on the noun. Number comes from a number word and a measure word, and marking it twice would be redundant. Your instinct is efficient and English is not.'},
+   cost:'High frequency, easy to hear, and it accumulates across an answer.',
+   fix:['Whenever a number appears, check the noun behind it.',
+        'Drill the s as a sound rather than a rule.',
+        'Read aloud and exaggerate every plural for two weeks.'],
+   res:['transfer','automatic'], drills:['slowmo']},
+
+  {id:'articles', cat:'Grammar', n:'A, an and the', meta:'Missing, added, or swapped',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'"I went to cinema." "The my friend." Articles appear and disappear without a pattern.',
+   why:{d:'{L1} has no articles at all. There is no equivalent decision to transfer, so every article is a new judgement made in real time, which is why they fail under pressure rather than in writing.'},
+   cost:'Frequent, but individually small. It is worth fixing after the bigger patterns, not before.',
+   fix:['Learn it as one question: does the listener already know which one.',
+        'Fix the fifteen fixed phrases first: go to school, at home, in the morning, on the internet.',
+        'Do not chase perfection here. Accept a percentage improvement.'],
+   res:['transfer'], drills:[]},
+
+  {id:'sva', cat:'Grammar', n:'Third person s', meta:'He go, she like',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'The verb stays in its base form when the subject is he, she or it.',
+   why:{d:'{L1} verbs do not change for the subject at all. One form serves everybody, which is a simpler and arguably better system. English asks for an ending that carries no meaning, so it is the first thing dropped under load.'},
+   cost:'Very visible to examiners because it is taught early. It reads as a lower level than you are.',
+   fix:['Drill he, she and it separately from I, you and they.',
+        'Say five sentences a day about one other person out loud.',
+        'When you self correct, correct the whole sentence, not the word.'],
+   res:['transfer','automatic'], drills:['slowmo']},
+
+  {id:'parataxis', cat:'Grammar', n:'Short clauses joined by and', meta:'Sentences placed side by side',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'"I go there and it is very beautiful and I take many photos and then I go home." Each piece is correct. Nothing shows how they relate.',
+   why:{d:'{L1} allows clauses to sit next to each other with the relationship left for the listener to infer, and this is normal, high quality style. English carries the relationship in explicit words: because, although, which, after. The information is not missing from your thinking. It is missing from the sentence.'},
+   cost:'This is what limits grammatical range more than any single error does. Range is measured in clause types, and a chain of short clauses only ever shows one.',
+   fix:['Learn five joiners and use one per answer: although, which, because, after, even though.',
+        'Take any two of your own sentences and force them into one.',
+        'Aim for one long sentence per answer, not for all of them.'],
+   res:['syntactic','transfer','descriptors'], drills:['onebreath']},
+
+  {id:'there-is', cat:'Grammar', n:'There is and there are', meta:'Here have many people',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'Existence expressed with have: "In my city have a lot of night markets."',
+   why:{d:'{L1} uses one verb of possession and existence together, 有 for Mandarin and 有 jau5 for Cantonese, so "there is" and "have" are one word in your first language and two in English. The split is arbitrary and it has to be learned as a fixed pattern.',
+      'yue-hk':'Cantonese uses 有 jau5 for both possession and existence, so "there is" and "have" are one word in your first language and two in English. The split is arbitrary and it has to be learned as a fixed pattern.'},
+   cost:'Immediately audible, and it appears in exactly the descriptive answers Part 1 asks for.',
+   fix:['Drill the frame: there is a, there are some, there was a.',
+        'Describe your room, your street and your office out loud using only that frame.',
+        'Catch the word have before it arrives.'],
+   res:['transfer','automatic'], drills:[]},
+
+  {id:'prodrop', cat:'Grammar', n:'Dropped subjects and objects', meta:'Is very good, I like very much',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'"Is very interesting." "I like very much." The thing being talked about is left out because it is obvious.',
+   why:{d:'{L1} drops anything the context already supplies, and repeating it sounds clumsy. English requires the slot to be filled even when the word carries no new information, which is why "it" appears so often in English and feels empty to you.'},
+   cost:'It produces sentences that are technically incomplete, which is scored more harshly than a wrong word.',
+   fix:['Check every sentence has a subject, even a meaningless one.',
+        'Drill the empty it: it is raining, it takes an hour, it depends.',
+        'After a verb like like, want or enjoy, always name the thing.'],
+   res:['transfer'], drills:[]},
+
+  {id:'questions', cat:'Grammar', n:'Question formation', meta:'Word order in questions',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'"You know where is the station?" Direct and indirect questions use the same order.',
+   why:{d:'{L1} forms questions by adding a particle and leaving the word order alone. English inverts the order for a direct question and then un inverts it inside a longer sentence, which is two opposite rules for one idea.'},
+   cost:'Small in Speaking, where you answer more than you ask, but it appears in Part 3 hypotheticals and in Writing.',
+   fix:['Drill the pair: "Where is it" against "I do not know where it is".',
+        'Say five embedded questions a day out loud.'],
+   res:['transfer'], drills:[]},
+
+  {id:'modals', cat:'Grammar', n:'Hedging and modality', meta:'Everything stated as absolute',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'Positions arrive as facts: "People must do this." There is no might, tend to, in most cases, or it depends.',
+   why:{d:'Hedging exists in {L1} but is carried differently, often by particles and tone rather than by verbs. Translating directly produces English that sounds more absolute than you intended.'},
+   cost:'Part 3 rewards nuance. Absolute statements are easy to challenge and leave you defending a position you do not hold.',
+   fix:['Learn six hedges and use two per Part 3 answer: tend to, in most cases, it depends on, arguably, to some extent, might.',
+        'Answer one opinion question a day with a deliberate "it depends".'],
+   res:['rhetoric','descriptors'], drills:[]},
+
+  {id:'preps', cat:'Grammar', n:'Prepositions', meta:'In, on, at and the rest',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'Prepositions are chosen by meaning rather than by the fixed pattern English uses.',
+   why:{d:'{L1} maps space and time onto a different set of words, and there is no rule that transfers. These are learned as fixed pairs in every language.'},
+   cost:'Low individually and noticeable in bulk. Worth doing in the background, never as the main project.',
+   fix:['Learn them attached to the noun: on Monday, in July, at six.',
+        'Fix the ten that appear in your own speech most, and ignore the rest for now.'],
+   res:['formulaic'], drills:[]},
+
+  {id:'intonation', cat:'Delivery', n:'Flat intonation', meta:'A narrow pitch range in English',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'Sounds are clear and the melody is level. Sentences finish on the same note they started, so a listener cannot hear which part matters or when you have finished.',
+   why:{d:'{L1} uses pitch to distinguish words. Pitch is lexical: change the pitch and you change the meaning of the word. English uses pitch at the level of the sentence instead, to mark emphasis, attitude and completion. Moving your voice freely feels risky because in {L1} it would break the word, so the safest strategy is to keep it level. That strategy is correct in one language and costly in the other.',
+      'yue-hk':'Cantonese uses pitch to distinguish words across six tones. Pitch is lexical: change the pitch and you change the word. English uses pitch at the level of the sentence instead, to mark emphasis, attitude and completion. Moving your voice freely feels risky because in Cantonese it would break the word, so the safest strategy is to keep it level. That strategy is correct in one language and costly in the other.'},
+   cost:'Pronunciation is a full quarter of the score, and it is not only about individual sounds. Clear sounds with a flat melody sits in the middle of that quarter. There is a band available here that costs no new vocabulary and no new grammar.',
+   fix:['Do the voice set below daily. Five minutes, before anything else.',
+        'Record and listen for melody only, ignoring the words.',
+        'Choose one word per sentence to lift. One is enough to change the whole line.'],
+   res:['pitch','shadowing','noticing','descriptors'], drills:['siren','story','fivefeelings','playback','shadow']},
+
+  {id:'clusters', cat:'Delivery', n:'Final consonant clusters', meta:'Endings falling off words',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'Words like asked, texts, finished and world lose their last sounds.',
+   why:{d:'{L1} syllables end in a vowel or in a very small set of consonants. English piles up to four consonants at the end of a syllable. Your mouth is doing something it was never trained to do, and it simplifies, which is what every mouth does with unfamiliar shapes.'},
+   cost:'It creates grammar errors it did not intend, because English hides its tense and plural information in exactly those endings.',
+   fix:['Practise the cluster on its own, then attach the word.',
+        'The cork drill for two minutes daily.',
+        'Slow motion sentences, hitting every ending, then normal speed.'],
+   res:['automatic','noticing'], drills:['cork','slowmo']},
+
+  {id:'stress', cat:'Delivery', n:'Word stress', meta:'The strong syllable in the wrong place',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'Longer words carry the stress on the wrong syllable, so a known word is not recognised.',
+   why:{d:'{L1} gives roughly equal weight to each syllable. English makes one syllable strong and reduces the others almost to nothing, and listeners identify the word largely by that shape.'},
+   cost:'It causes the only truly expensive pronunciation problem, which is not being understood. A single word can stop the conversation.',
+   fix:['Learn stress with the word, marked, from the first day you meet it.',
+        'Say the word as a rhythm before saying it as a word: da DA da.',
+        'Fix the twenty longest words you actually use.'],
+   res:['automatic','shadowing'], drills:['shadow']},
+
+  {id:'rhythm', cat:'Delivery', n:'Rhythm', meta:'Every syllable given equal time',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'Speech is even and steady, like a metronome, where English rises and falls with strong and weak beats.',
+   why:{d:'{L1} gives each syllable similar length. English compresses the unimportant words almost to nothing and stretches the important ones. The information is carried by the contrast, and even timing removes the contrast.'},
+   cost:'It is the main thing that makes clear speech still sound effortful to listen to.',
+   fix:['Shadow thirty seconds of audio daily, copying the beat rather than the words.',
+        'Read a sentence tapping only the strong beats.',
+        'Deliberately swallow the small words: the, of, to, and, a.'],
+   res:['shadowing','automatic'], drills:['shadow','story']},
+
+  {id:'th', cat:'Delivery', n:'The TH sounds', meta:'Think, this, three',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'TH becomes s, z, t, d or f depending on the word.',
+   why:{d:'The sound does not exist in {L1}, so the nearest available sound is substituted. This is the normal and predictable outcome, not carelessness.'},
+   cost:'Small. It very rarely blocks understanding and it is the least valuable pronunciation item on this list. It is included so you can stop worrying about it.',
+   fix:['Tongue tip lightly between the teeth, blow air. Thirty seconds a day.',
+        'Fix it in the ten words you say most and leave the rest.',
+        'Do not spend real practice time here while anything else on this list is open.'],
+   res:[], drills:[]},
+
+  {id:'nl', cat:'Delivery', n:'N and L', meta:'Night and light merging',
+   tags:['yue-hk'],
+   heard:'Initial n and l are used interchangeably, so "night" and "light" or "you" and "nau" sound similar.',
+   why:{d:'This merger is a well documented feature of everyday Cantonese speech, where initial n has largely shifted to l for many speakers. It is a natural sound change in your first language and it carries straight into English.'},
+   cost:'Occasionally blocks a word, which makes it worth a few minutes even though the total number of affected words is small.',
+   fix:['Contrast pairs out loud daily: night light, no low, name lame.',
+        'Feel the difference: n closes the nose, l does not.',
+        'Ten pairs a day for two weeks is usually enough.'],
+   res:['noticing'], drills:['slowmo']},
+
+  {id:'finall', cat:'Delivery', n:'Final L and R', meta:'Feel, girl, world, car',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'L and R at the end of a word are dropped or replaced by a vowel.',
+   why:{d:'{L1} does not use these consonants in that position, so the mouth substitutes the nearest comfortable shape.'},
+   cost:'Moderate, and it interacts with the plural and past endings, so fixing it pays twice.',
+   fix:['Hold the final sound for a full second in practice, then shorten it.',
+        'Cork drill on word lists ending in l and r.'],
+   res:['automatic'], drills:['cork','slowmo']},
+
+  {id:'part3', cat:'Fluency', n:'Answers that stop too early', meta:'Correct, complete, and too short',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'You answer the question, accurately, and then stop, because the question has been answered.',
+   why:{d:'This is a conversational norm, not a language gap. In {L1} conversation, giving a short answer and letting the other person continue is polite and appropriate. The test inverts that rule: it wants the long turn, and silence is read as inability rather than as courtesy.'},
+   cost:'Fluency and coherence is a quarter of the score and it is partly measured by sustained speech. A short answer gives the examiner nothing to score.',
+   fix:['Three part shape for every Part 3 answer: position, reason, example.',
+        'Add "for example" out loud even when it feels unnecessary.',
+        'Practise talking for forty five seconds on a boring topic on purpose.'],
+   res:['rhetoric','descriptors'], drills:['countdown']},
+
+  {id:'selfcorrect', cat:'Fluency', n:'Over correcting', meta:'Restarting sentences mid way',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'A sentence begins, an error is noticed, and the sentence restarts. Sometimes twice.',
+   why:{d:'The awareness is good and the timing is expensive. Every restart is scored as a break in fluency, and the original error was often smaller than the repair.'},
+   cost:'A repaired sentence costs more than an uncorrected small error. Two repairs cost more than the error was ever worth.',
+   fix:['One repair rule: fix it once, then continue whatever happens.',
+        'Finish the sentence you started, even badly.',
+        'Save the correction for the recording, afterwards.'],
+   res:['skehan','noticing'], drills:['onebreath']},
+
+  {id:'pausing', cat:'Fluency', n:'Silent gaps', meta:'Long silences instead of natural fillers',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'Thinking time arrives as complete silence, which sounds longer to a listener than filled time does.',
+   why:{d:'Fillers are often taught as bad habits, so they are suppressed. English speakers use them constantly and hear them as normal thinking.'},
+   cost:'Silence is scored as hesitation. The same pause with a natural phrase in it is not.',
+   fix:['Learn four thinking phrases and use them: that is a good question, I have never thought about that, let me think for a second, it depends really.',
+        'Deliberate pause drill, so that silence stops feeling dangerous.'],
+   res:['formulaic','anxiety'], drills:['pause']},
+
+  {id:'speed', cat:'Fluency', n:'Speaking too fast', meta:'Speed used to hide uncertainty',
+   tags:['cmn-tw','cmn-cn','yue-hk'],
+   heard:'The pace rises when the topic is difficult, and accuracy falls at exactly the same moment.',
+   why:{d:'Speed feels like fluency and is not. Rushing removes the planning time your grammar needs, so the harder the question the more the speed costs.'},
+   cost:'It damages fluency and grammar together, which is the worst trade available.',
+   fix:['One breath, one sentence.',
+        'Deliberate two second pauses at commas.',
+        'Slow to eighty percent on Part 3 and watch accuracy rise.'],
+   res:['skehan'], drills:['pause','onebreath']}
+];
+
+/* ---------- how the student feels about the test ---------- */
+const MOODS = {
+  nervous:{
+    t:'On feeling nervous about this',
+    lead:'You told me you feel nervous about the test. That is worth answering properly rather than brushing past, because nervousness is not a personality problem here. It is a measurable cost, and it is trainable.',
+    body:[
+      'Research across a large number of studies finds a consistent negative relationship between speaking anxiety and speaking performance. The mechanism is simple: anxiety occupies working memory, and grammar needs the same working memory. You are not less capable when you are nervous. You have less capacity free.',
+      'Four principles guide how I will approach speaking with you.',
+      'The first: speaking is not performing. It is paying attention to the person in front of you. Nervousness comes almost entirely from watching yourself. Move the attention onto the examiner, onto the actual question, onto what you are describing, and there is less of you left over to be nervous with.',
+      'The second: you do not need to win the conversation. You need to keep it alive. Every answer is a pass, not a shot. This removes the idea that any single sentence can ruin the test, which is the belief doing most of the damage.',
+      'The third: say the small true thing rather than the big impressive thing. The small true thing is always available, always accurate, and scores higher than the impressive sentence that collapses halfway.',
+      'The fourth: do not apologise before you begin. No "my English is not good", no nervous laugh before the answer. It costs you nothing to remove and it changes how the whole conversation is heard.',
+      'Practically, most of the fear is fear of the unfamiliar, and the unfamiliar is the only part I can remove directly. By the time you sit the test you will have done the format enough times that it is boring. Boring is the goal.'
+    ]},
+  confident:{
+    t:'On feeling ready',
+    lead:'You are comfortable speaking English and that is genuinely an advantage. It also changes what the work needs to be, so it is worth being direct about it.',
+    body:[
+      'Confidence gets you into the conversation. It does not get you the band. The marking does not measure how easily you speak. It measures four separate things, and comfort only guarantees one of them.',
+      'The risk for a confident speaker is a specific one: fluent, comfortable, and repetitive. The same structures, the same connectors, the same three adjectives, delivered smoothly. It feels like a good performance and it caps at a predictable band, because half the score is asking for range rather than for ease.',
+      'So the work here is not confidence. It is precision, and deliberately using structures that feel less comfortable than the ones you default to. That will feel like getting worse before it gets better, and that is the correct sequence.',
+      'The other thing worth saying plainly: I will tell you exactly what is costing you marks, without softening it. That is what you are paying for, and comfortable feedback would waste your time.'
+    ]},
+  plateau:{
+    t:'On being stuck',
+    lead:'You have taken the test before and the score has not moved. That is a specific situation and it needs a specific answer, not more of the same practice.',
+    body:[
+      'A plateau almost never means you have reached a limit. It means the thing that lifted you to your current band is not the thing that lifts you past it. More practice of the same kind produces more of the same result, which is exactly what you have already observed.',
+      'What usually changes it is not volume. It is a change in what is being practised. If the last attempt was built on vocabulary, the next one is usually built on structure and delivery. If it was built on speaking more, the next one is usually built on speaking more precisely.',
+      'The other thing a plateau needs is measurement. Practice without feedback rehearses the errors along with everything else, so the same answer comes out the same way for months. Everything in this plan asks you to record and listen back, because that is the step that was probably missing.',
+      'The findings in this report are the specific things to change. They are not general advice. They are the reason the score stopped moving.'
+    ]},
+  deadline:{
+    t:'On the time you have',
+    lead:'You are working to a date, so this plan is built around triage rather than around completeness.',
+    body:[
+      'With limited time the correct strategy is not to fix everything a little. It is to fix the two or three things that cost the most, completely, and leave the rest alone deliberately.',
+      'The items below are ordered by how much each one is costing you, not by how easy each one is. Work down the list. If time runs out, it runs out at the bottom, where it does the least damage.',
+      'One warning about short timelines: the temptation is to add hours in the final week. Research on spaced practice is consistent and unhelpful on this point. Distributed practice beats massed practice by a wide margin, so twenty minutes a day for the remaining weeks will beat two long weekend sessions, even if the total time is lower.',
+      'Familiarity with the format is also worth more per hour than anything else in the last ten days, so the final phase of the plan is deliberately full practice tests rather than skill work.'
+    ]},
+  perfectionist:{
+    t:'On wanting it to be right',
+    lead:'You care about getting it correct, and that care is why your accuracy is where it is. It is also, in a specific way, costing you marks right now.',
+    body:[
+      'In speaking, the pursuit of a perfect sentence is expensive. Attention is a fixed budget shared between complexity, accuracy and fluency, and pushing hard on accuracy takes the resource the other two need. This is a documented trade off, not a failure of effort.',
+      'The most visible version of this is repair. A sentence starts, a small error appears, and the sentence restarts. The restart is scored as a break in fluency, and it usually costs more than the error it was fixing. One repair, then continue, is the rule.',
+      'The second version is silence. Waiting for the right word produces a gap, and a gap is scored as hesitation while a slightly imperfect word is not scored at all in most cases.',
+      'So part of the work is permission. Smaller sentences, finished. Ordinary words, used exactly. The ambition goes into the second sentence of an answer, never the first.'
+    ]},
+  shy:{
+    t:'On being a quiet speaker',
+    lead:'You are not a loud talker, and there is no reason you should become one. The test does not measure volume. It does measure length, and that part is worth separating out.',
+    body:[
+      'Being quiet and giving short answers are two different things, and only one of them costs marks. A softly spoken candidate who speaks for forty five seconds scores above a loud one who stops after eight.',
+      'Speaking is not performing. It is paying attention to the person in front of you, and that framing is useful here, because it removes the requirement to be a bigger version of yourself. You only have to be interested in the question.',
+      'A practical point about the room: examiners will not ask you to repeat yourself unless they have to, and a quiet voice with clear consonants is easier to follow than a loud voice without them. Articulation matters more than volume, so the drills below are about clarity rather than about projection.',
+      'The one thing I will push on is length. Every answer gets a reason and an example, whether it feels necessary or not.'
+    ]},
+  neutral:{
+    t:'How I will work with you',
+    lead:'You are steady about the test, which makes this straightforward. The plan can go directly at the things that are costing marks.',
+    body:[
+      'Three things shape how I teach. The first: every error in this report has a cause, usually in the structure of your first language, and I will always tell you the cause rather than just the correction. A rule you understand survives pressure. A rule you memorised does not.',
+      'The second: practice is spread out, not stacked. Twenty minutes on six days does more than two hours on one, and this is one of the most reliable findings in learning research.',
+      'The third: you record yourself. Not because it is pleasant, but because you cannot hear your own speech while producing it, and change begins with noticing the gap.'
+    ]}
+};
+
+/* ---------- plans ---------- */
+const PLANS = {
+  four:{n:'Four weeks', sub:'Short runway. Two problems, fixed properly.',
+    weeks:[
+      {t:'Week one', h:'Hear it',
+       b:'The first week is about noticing, because nothing can be corrected until it can be heard. Daily recording starts now, five minutes of speaking and five of listening back.',
+       l:['Record one minute daily and count your top pattern','Voice set, five minutes, every morning','One true story out loud, sixty seconds, in the past']},
+      {t:'Week two', h:'Drill it',
+       b:'The two patterns costing the most get direct daily attention until they stop costing attention.',
+       l:['Twenty minutes on pattern one, out loud','Ten minutes on pattern two','Shadow thirty seconds of audio daily','Keep recording, keep counting']},
+      {t:'Week three', h:'Use it under pressure',
+       b:'The drilled structures move into unscripted speech, which is where they usually fall apart the first time.',
+       l:['The countdown drill on three questions daily','Full Part 2 answers, timed, recorded','Part 3 with the position, reason, example shape']},
+      {t:'Week four', h:'Make it boring',
+       b:'Full format practice so the room holds no surprises. No new material is introduced this week on purpose.',
+       l:['Two full speaking tests, timed, recorded','Review the recordings for melody only','Light drilling only, keep the voice warm']}
+    ]},
+  two:{n:'Two months', sub:'Enough time to fix the causes rather than the symptoms.',
+    weeks:[
+      {t:'Weeks one and two', h:'Diagnosis and voice',
+       b:'Recording daily and building the pitch range, which is the fastest available gain and needs no new grammar.',
+       l:['Voice set daily','Baseline recordings of all four parts','Count patterns, do not fix them yet']},
+      {t:'Weeks three and four', h:'Grammar rebuilt at the cause',
+       b:'The structural patterns are drilled with the reason attached, so the rule survives pressure.',
+       l:['Twenty minutes daily on the main pattern','Narrative tenses, one story per day','Five joiners, one per answer']},
+      {t:'Weeks five and six', h:'Range',
+       b:'Clause variety and word partners, which is where the range half of the score actually lives.',
+       l:['One long sentence per answer','Collocation notebook, partners only','Part 3 depth: position, reason, example']},
+      {t:'Weeks seven and eight', h:'Test conditions',
+       b:'Full tests, feedback, and repetition until the format is dull.',
+       l:['Two full tests weekly','Recording review, melody pass and grammar pass','No new material in the final week']}
+    ]},
+  three:{n:'Three months', sub:'Room to build the habits that hold after the test.',
+    weeks:[
+      {t:'Month one', h:'Foundations and awareness',
+       b:'Voice, recording habit, and the first pattern taken to automatic. Slow on purpose.',
+       l:['Voice set daily, five minutes','One recording daily, one listen back','Pattern one drilled to automatic']},
+      {t:'Month two', h:'Structure and range',
+       b:'Clause variety, narrative tenses, word partners, and Part 3 shape.',
+       l:['Subordination in every answer','A story a day in the past','Collocations collected from your own speech','Part 3 practice three times weekly']},
+      {t:'Month three', h:'Pressure and polish',
+       b:'Everything under time, then full tests, then rest.',
+       l:['Countdown drills weekly','Two full tests weekly in the last three weeks','Light maintenance in the final week']}
+    ]},
+  six:{n:'Six months', sub:'The version where the level actually changes, not just the score.',
+    weeks:[
+      {t:'Months one and two', h:'Rebuild the base',
+       b:'Voice, the recording habit, and the structural patterns taken one at a time to automatic rather than to understood.',
+       l:['Voice set daily','One pattern at a time, three weeks each','Daily speaking, recorded, no exceptions']},
+      {t:'Months three and four', h:'Range and depth',
+       b:'Clause variety, collocation, narrative tenses, and extended answers. This is where the band moves.',
+       l:['Long sentences by design','Collocation notebook built from your own errors','Extended Part 3 answers three times weekly','Reading aloud daily for rhythm']},
+      {t:'Month five', h:'Full test skills',
+       b:'The format, the timing, and the specific strategies for each part.',
+       l:['Weekly full tests','Part 2 with no preparation notes','Targeted work on whatever the tests expose']},
+      {t:'Month six', h:'Make it routine',
+       b:'Repetition until the test is uneventful, then taper.',
+       l:['Two full tests weekly','Recording review only','Taper in the final ten days, do not cram']}
+    ]}
+};
+
+function pickPlan(weeks){
+  if(weeks===null||weeks===undefined) return 'two';
+  if(weeks<=5) return 'four';
+  if(weeks<=10) return 'two';
+  if(weeks<=16) return 'three';
+  return 'six';
+}
+
+/* ============================================================
+   PLANNER BLOCKS
+   ============================================================ */
+const PLANNER = [
+  {id:'voice', n:'The voice set', m:5,  w:'First thing, before anything else', d:'Five minutes of the drills below. This is the highest return per minute on the whole list, and it needs no thinking.'},
+  {id:'shadow', n:'Shadowing', m:5, w:'Straight after the voice set', d:'Thirty seconds of audio, repeated. Copy the melody, not the meaning.'},
+  {id:'record', n:'Record and listen back', m:10, w:'Any fixed point in the day', d:'One minute of speaking, then one listen for content and one for melody. Non negotiable.'},
+  {id:'story', n:'One story out loud', m:5, w:'While making coffee or breakfast', d:'Something that happened yesterday, told in the past, sixty seconds, to nobody.'},
+  {id:'drill1', n:'Main pattern drill', m:15, w:'When your head is clearest', d:'The first item on your list below. Out loud, not on paper.'},
+  {id:'drill2', n:'Second pattern drill', m:10, w:'Later in the day, separately', d:'Deliberately separated from the first, because spacing beats stacking.'},
+  {id:'read', n:'Reading aloud', m:10, w:'Evening', d:'Anything. Exaggerate every ending sound. This fixes grammar you did not know was a sound problem.'},
+  {id:'commute', n:'English on the move', m:15, w:'Commute, walking, gym', d:'A podcast or a video. Repeat one sentence in three out loud if you are alone.'},
+  {id:'part1', n:'Part 1 questions', m:10, w:'Any gap', d:'Five questions, answered out loud at full length. Speed is the target here.'},
+  {id:'part2', n:'Part 2 long turn', m:10, w:'A quiet moment', d:'One card, one minute of notes, two minutes of talking, recorded.'},
+  {id:'part3', n:'Part 3 depth', m:15, w:'When you have energy to think', d:'Position, reason, example. Three questions. This is the part that moves the band.'},
+  {id:'collo', n:'Word partners notebook', m:10, w:'Evening, sitting down', d:'Not new words. The partners of the words you already used badly today.'},
+  {id:'news', n:'One story, retold', m:10, w:'Lunch or evening', d:'Read one short article, close it, retell it out loud from memory.'},
+  {id:'last', n:'One minute before bed', m:5, w:'Last thing', d:'Describe your day out loud in the past tense. Sixty seconds. Then stop.'}
+];
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const para = s => String(s||'').split(/\n{2,}|\n/).map(x=>x.trim()).filter(Boolean).map(x=>'<p>'+esc(x)+'</p>').join('');
+const slugify = s => String(s||'').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40) || 'student';
+
+function weeksTo(trial, test){
+  if(!test) return null;
+  const base = trial ? new Date(trial+'T00:00:00') : new Date();
+  const t = new Date(test+'T00:00:00');
+  if(isNaN(t)) return null;
+  const days = Math.round((t-base)/86400000);
+  const today = new Date(); today.setHours(0,0,0,0);
+  return {days:days, weeks:Math.floor(days/7), gone:(t < today)};
+}
+function prettyDate(d){
+  if(!d) return '';
+  const x = new Date(d+'T00:00:00'); if(isNaN(x)) return '';
+  return x.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+}
+function langText(field, lang){
+  if(typeof field === 'string') return field;
+  if(!field) return '';
+  return field[lang] || field.d || '';
+}
+function fillL1(txt, lang){
+  return String(txt||'').replace(/\{L1\}/g, LANGS[lang] ? LANGS[lang].l1 : 'your first language');
+}
+
+/* ============================================================
+   THE REPORT
+   ============================================================ */
+function buildReport(S){
+  const L = LANGS[S.lang] || LANGS['cmn-tw'];
+  const full = S.stage === 'enrolled';
+  const wk = weeksTo(S.trial, S.test);
+  const planKey = pickPlan(wk ? wk.weeks : null);
+  const plan = PLANS[planKey];
+  const picked = WEAK.filter(w => S.weak.indexOf(w.id) > -1);
+  const strong = STRENGTHS.filter(s => S.strong.indexOf(s.id) > -1);
+  const mood = MOODS[S.mood] || MOODS.neutral;
+
+  /* research keys used by the chosen weaknesses, in order, de-duplicated */
+  const rkeys = [];
+  picked.forEach(w => (w.res||[]).forEach(k => { if(rkeys.indexOf(k)<0) rkeys.push(k); }));
+  ['transfer','spaced','production'].forEach(k => { if(rkeys.indexOf(k)<0) rkeys.push(k); });
+  const research = (full ? rkeys : rkeys.slice(0,6)).map(k=>RESEARCH[k]).filter(Boolean);
+
+  /* drills used by the chosen weaknesses */
+  const dkeys = [];
+  picked.forEach(w => (w.drills||[]).forEach(k => { if(dkeys.indexOf(k)<0) dkeys.push(k); }));
+  const drills = dkeys.map(k=>DRILLS[k]).filter(Boolean);
+
+  const name = S.name || 'your';
+  const first = S.name ? esc(S.name) : 'there';
+
+  /* ---------- date line ---------- */
+  let dateline = '';
+  if(wk){
+    const wl = wk.weeks === 1 ? '1 week' : wk.weeks + ' weeks';
+    dateline = wk.gone
+      ? 'Your test date, ' + esc(prettyDate(S.test)) + ', has passed. Tell me how it went and I will rebuild this around the next one.'
+      : 'Your test is on ' + esc(prettyDate(S.test)) + '. From your trial lesson that is ' + wl + ', or ' + wk.days + ' days.';
+  } else {
+    dateline = 'You have not fixed a test date yet, so this plan assumes you want the level to move rather than the calendar to decide.';
+  }
+
+  /* ---------- nav ---------- */
+  const nav = [['open','Start here']];
+  if(strong.length || S.strongnote) nav.push(['working','Already working']);
+  nav.push(['findings','What is costing you']);
+  if(drills.length) nav.push(['voice','Your voice set']);
+  nav.push(['plan', plan.n]);
+  nav.push(['day','Your day']);
+  nav.push(['research','Why this works']);
+  if(full) nav.push(['homework','This week']);
+  nav.push(['next','What happens next']);
+
+  /* ---------- sections ---------- */
+  let H = '';
+
+  /* header */
+  H += '<header class="hero"><div class="wrap">'
+    + '<div class="kicker"><span class="dot"></span>GrahamIELTS</div>'
+    + '<h1>' + (S.name ? esc(S.name) + ', here is where you are' : 'Here is where you are') + '</h1>'
+    + '<p class="lede">' + (full
+        ? 'This is your working document. Everything here is built from what I heard in your lesson, and it will be updated as you move.'
+        : 'This is what I heard in your trial lesson, what it is costing you, and what I would do about it.') + '</p>'
+    + '<div class="facts">'
+    + (S.now ? '<div class="fact"><span>Where you are</span><b>' + esc(S.now) + '</b></div>' : '')
+    + (S.target ? '<div class="fact"><span>Where you need to be</span><b>' + esc(S.target) + '</b></div>' : '')
+    + (wk ? '<div class="fact"><span>Time available</span><b>' + (wk.gone ? 'Test date passed' : esc(wk.weeks + (wk.weeks===1?' week':' weeks'))) + '</b></div>' : '')
+    + '<div class="fact"><span>The plan</span><b>' + esc(plan.n) + '</b></div>'
+    + '</div></div></header>';
+
+  /* nav */
+  H += '<nav class="nav" id="nav"><div class="wrap nav-in">'
+    + nav.map(n=>'<a href="#'+n[0]+'">'+esc(n[1])+'</a>').join('')
+    + '</div></nav>';
+
+  H += '<main class="wrap">';
+
+  /* start here */
+  H += '<section id="open" class="sec"><div class="opener">'
+    + '<div class="op-k">Start here</div>'
+    + (S.personal ? '<div class="op-personal">' + para(S.personal) + '</div>' : '')
+    + '<h2>' + esc(mood.t) + '</h2>'
+    + '<p class="lead">' + esc(mood.lead) + '</p>'
+    + mood.body.map(b=>'<p>'+esc(b)+'</p>').join('')
+    + '<div class="dateline">' + dateline + '</div>'
+    + '</div></section>';
+
+  /* what is working */
+  if(strong.length || S.strongnote){
+    H += '<section id="working" class="sec"><h2 class="sh">What is already working</h2>'
+      + '<p class="sub">This is not politeness. These are the things I do not have to build, which is what makes the rest of the plan short.</p>'
+      + '<div class="cards">'
+      + strong.map(s=>'<div class="card"><h3>'+esc(s.n)+'</h3><p>'+esc(s.s)+'</p></div>').join('')
+      + (S.strongnote ? '<div class="card gold"><h3>What I noticed</h3>'+para(S.strongnote)+'</div>' : '')
+      + '</div></section>';
+  }
+
+  /* findings */
+  H += '<section id="findings" class="sec"><h2 class="sh">What is costing you marks</h2>'
+    + '<p class="sub">Every item below has a cause, and in almost every case the cause is that '
+    + esc(L.l1) + ' does something sensible that English does not allow. That matters, because a random error is a problem and a systematic one is a schedule.</p>';
+
+  picked.forEach((w,i)=>{
+    const why = fillL1(langText(w.why, S.lang), S.lang);
+    H += '<article class="find">'
+      + '<div class="find-h"><span class="num">' + (i+1) + '</span><div>'
+      + '<h3>' + esc(w.n) + '</h3><div class="find-meta">' + esc(w.cat) + ' &middot; ' + esc(w.meta) + '</div>'
+      + '</div></div>'
+      + '<div class="find-b">'
+      + '<div class="blk heard"><span class="bl">What I heard</span><p>' + esc(w.heard) + '</p></div>'
+      + '<div class="blk why"><span class="bl">Why it happens</span><p>' + esc(why) + '</p></div>'
+      + '<div class="blk cost"><span class="bl">What it costs</span><p>' + esc(w.cost) + '</p></div>'
+      + '<div class="blk fix"><span class="bl">What to do about it</span><ol>'
+      + w.fix.map(f=>'<li>'+esc(f)+'</li>').join('')
+      + '</ol></div>'
+      + '</div></article>';
+  });
+
+  if(S.weaknote){
+    H += '<article class="find"><div class="find-h"><span class="num">'+(picked.length+1)+'</span><div>'
+      + '<h3>One more thing</h3><div class="find-meta">From the lesson</div></div></div>'
+      + '<div class="find-b"><div class="blk">'+para(S.weaknote)+'</div></div></article>';
+  }
+
+  if(!full){
+    H += '<div class="tease"><h3>There is more underneath each of these</h3>'
+      + '<p>Each pattern above has a full drill sequence, a set of example sentences built from your own speech, and a worksheet unit that takes it from understood to automatic. Those are part of the programme rather than part of a trial report, and they are where the actual change happens.</p>'
+      + '<ul class="locked">'
+      + ['The full drill protocol for every pattern above','Example banks built from your own recordings','The workbook unit that matches each finding','Weekly written feedback on your recordings','Task 1 and Task 2 writing correction']
+        .map(x=>'<li>'+esc(x)+'</li>').join('')
+      + '</ul></div>';
+  }
+  H += '</section>';
+
+  /* voice set */
+  if(drills.length){
+    const shown = full ? drills : drills.slice(0,4);
+    H += '<section id="voice" class="sec"><h2 class="sh">Waking up your voice</h2>'
+      + '<p class="sub">Five minutes, every morning, before any other English. These are not warm ups for the test. They change the range your voice has available, and a wider range is scored in a quarter of the marking that costs no vocabulary and no grammar.</p>'
+      + '<div class="drills">'
+      + shown.map((d,i)=>'<div class="drill"><div class="dn"><span>'+(i+1)+'</span>'+esc(d.n)+'</div>'
+          + '<p class="dp">'+esc(d.p)+'</p>'
+          + '<p class="do"><b>Why it works.</b> '+esc(d.o)+'</p></div>').join('')
+      + '</div>'
+      + (!full && drills.length>4 ? '<p class="micro">There are more of these, and the order they are done in matters. That is a first lesson conversation.</p>' : '')
+      + '</section>';
+  }
+
+  /* plan */
+  H += '<section id="plan" class="sec"><h2 class="sh">' + esc(plan.n) + '</h2>'
+    + '<p class="sub">' + esc(plan.sub) + ' ' + (wk && !wk.gone
+        ? 'Chosen because you have ' + esc(wk.weeks + (wk.weeks===1?' week':' weeks')) + ' before the test.'
+        : 'Chosen because there is no date fixed yet, so the level is the target rather than the calendar.') + '</p>'
+    + '<div class="weeks">';
+  plan.weeks.forEach((w,i)=>{
+    const locked = !full && i > 0;
+    H += '<div class="wkc' + (locked?' lock':'') + '">'
+      + '<div class="wkh"><span class="wk-n">' + esc(w.t) + '</span><h3>' + esc(w.h) + '</h3></div>'
+      + '<p>' + esc(w.b) + '</p>'
+      + (locked ? '<div class="locknote">Unlocked when we start</div>'
+                : '<ul>' + w.l.map(x=>'<li>'+esc(x)+'</li>').join('') + '</ul>')
+      + '</div>';
+  });
+  H += '</div>'
+    + '<p class="micro">This is the shape, not your shape. In the first full lesson it gets rebuilt around your actual week, which is what the next section is for.</p>'
+    + '</section>';
+
+  /* day planner */
+  H += '<section id="day" class="sec"><h2 class="sh">Finding the time you already have</h2>'
+    + '<p class="sub">Nobody finds two spare hours. What works is attaching English to things you already do at a fixed time, because a habit with a trigger survives and a habit with good intentions does not. Tick what is realistic and set how many days a week. The numbers below are honest, so an unrealistic plan will look unrealistic.</p>'
+    + '<div class="plan-grid">';
+  PLANNER.forEach(b=>{
+    H += '<label class="pb" data-m="'+b.m+'">'
+      + '<input type="checkbox" class="pchk" data-id="'+b.id+'">'
+      + '<div class="pb-in"><div class="pb-t">'+esc(b.n)+'<span class="pmin">'+b.m+' min</span></div>'
+      + '<div class="pb-w">'+esc(b.w)+'</div>'
+      + '<div class="pb-d">'+esc(b.d)+'</div>'
+      + '<div class="pb-days">Days a week <select class="pdays" aria-label="Days a week for '+esc(b.n)+'">'
+      + [1,2,3,4,5,6,7].map(n=>'<option value="'+n+'"'+(n===5?' selected':'')+'>'+n+'</option>').join('')
+      + '</select></div></div></label>';
+  });
+  H += '</div>'
+    + '<div class="tally" id="tally">'
+    + '<div class="tnum"><b id="tmin">0</b><span>minutes a week</span></div>'
+    + '<div class="tbar"><i id="tfill"></i></div>'
+    + '<p class="tmsg" id="tmsg">Nothing selected yet. Start with the voice set and one recording.</p>'
+    + '<button type="button" class="tcopy" id="tcopy">Copy my plan</button>'
+    + '</div></section>';
+
+  /* research */
+  H += '<section id="research" class="sec"><h2 class="sh">Why this plan looks like this</h2>'
+    + '<p class="sub">Not opinion. These are the findings the plan is built on, and they are the reason it asks for twenty minutes daily rather than three hours on Sunday.</p>'
+    + '<div class="res">'
+    + research.map(r=>'<div class="rc"><h3>'+esc(r.t)+'</h3><p>'+esc(r.b)+'</p></div>').join('')
+    + '</div></section>';
+
+  /* homework, enrolled only */
+  if(full){
+    const top = picked[0], second = picked[1];
+    H += '<section id="homework" class="sec"><h2 class="sh">This week</h2>'
+      + '<div class="hw">'
+      + '<div class="hwi"><span class="hn">1</span><div><h3>Every morning</h3><p>'
+        + (drills.length ? 'The voice set. Five minutes, before any other English.' : 'Five minutes reading aloud, exaggerating every ending sound.')
+        + '</p></div></div>'
+      + '<div class="hwi"><span class="hn">2</span><div><h3>Every day</h3><p>One minute recorded, one minute listened back. Count '
+        + (top ? esc(top.n.toLowerCase()) : 'your main pattern') + '. Write the number down. That number is the homework.</p></div></div>'
+      + (top ? '<div class="hwi"><span class="hn">3</span><div><h3>Fifteen minutes daily</h3><p>'
+        + esc(top.fix[0]) + '</p></div></div>' : '')
+      + (second ? '<div class="hwi"><span class="hn">4</span><div><h3>Ten minutes, separately</h3><p>'
+        + esc(second.fix[0]) + '</p></div></div>' : '')
+      + '<div class="hwi"><span class="hn">' + (second?5:(top?4:3)) + '</span><div><h3>Before the next lesson</h3><p>Send me one recording, sixty seconds, on any question. Do not re record it to make it better. The first take is the useful one.</p></div></div>'
+      + '</div></section>';
+  }
+
+  /* next */
+  H += '<section id="next" class="sec"><div class="closing">'
+    + '<h2>' + (full ? 'How I work' : 'What happens next') + '</h2>'
+    + (full
+      ? '<ol class="six">'
+        + ['Every correction comes with its cause. A rule you understand survives pressure. A rule you memorised does not.',
+           'Practice is spread across days, never stacked into one session.',
+           'You record yourself, because you cannot hear your own speech while producing it.',
+           'Two problems at a time. Not eight. Eight is a list, not a plan.',
+           'The plan changes when the evidence changes, and the evidence is your recordings.',
+           'I will tell you what is actually costing you marks, including when it is not what you expected.']
+          .map(x=>'<li>'+esc(x)+'</li>').join('') + '</ol>'
+      : '<p>The first full lesson does three things. It rebuilds the plan above around your actual week rather than an imaginary one. It takes the first finding and turns it into a drill you can do without me. And it sets the recording routine, which is the part that makes everything else measurable.</p>'
+        + '<p>Bring one thing: a recording of yourself answering any question, sixty seconds, first take. That is where we start.</p>')
+    + '<div class="sig">Graham</div>'
+    + '</div></section>';
+
+  H += '</main><footer class="foot"><div class="wrap">GrahamIELTS'
+    + (S.name ? ' &middot; prepared for ' + esc(S.name) : '')
+    + (S.trial ? ' &middot; ' + esc(prettyDate(S.trial)) : '')
+    + '</div></footer>';
+
+  return REPORT_SHELL(S, H);
+}
+
+/* ============================================================
+   REPORT SHELL: full standalone document
+   ============================================================ */
+function REPORT_SHELL(S, inner){
+  const title = (S.name ? S.name + ' | ' : '') + 'After your trial | GrahamIELTS';
+  return '<!doctype html>\n<html lang="en">\n<head>\n'
++ '<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n'
++ '<meta name="robots" content="noindex,nofollow">\n'
++ '<title>' + esc(title) + '</title>\n'
++ '<link rel="preconnect" href="https://fonts.googleapis.com">\n'
++ '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
++ '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">\n'
++ '<style>\n' + REPORT_CSS + '</style>\n</head>\n<body>\n'
++ inner
++ '\n<script>\n' + REPORT_JS + '\n<\/script>\n</body>\n</html>\n';
+}
+
+const REPORT_CSS = [
+':root{--paper:#FBFAF7;--surface:#FFFFFF;--surface-2:#F4F2EA;--ink:#15211C;--ink-2:#3D4E46;',
+'--muted:#6E7F76;--line:#E2DED2;--line-soft:#EDEAE0;--green:#1B4D3A;--green-deep:#10352A;',
+'--green-bright:#2C7A5A;--green-wash:#EEF4F0;--gold:#C9A227;--gold-ink:#7A5A0F;--gold-soft:#FBF2D8;',
+'--shadow:0 1px 2px rgba(16,53,42,.05),0 10px 30px rgba(16,53,42,.07);--pad:clamp(18px,4.2vw,44px)}',
+'@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){',
+'--paper:#0E1A15;--surface:#152621;--surface-2:#1B322B;--ink:#EDF2EF;--ink-2:#C3D0CA;--muted:#8FA69C;',
+'--line:#2A423A;--line-soft:#223730;--green:#4FB489;--green-deep:#0A231B;--green-bright:#5FC79A;',
+'--green-wash:#163026;--gold:#E3BE4F;--gold-ink:#EACD73;--gold-soft:#2B2415;',
+'--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.3)}}',
+':root[data-theme="dark"]{--paper:#0E1A15;--surface:#152621;--surface-2:#1B322B;--ink:#EDF2EF;',
+'--ink-2:#C3D0CA;--muted:#8FA69C;--line:#2A423A;--line-soft:#223730;--green:#4FB489;',
+'--green-deep:#0A231B;--green-bright:#5FC79A;--green-wash:#163026;--gold:#E3BE4F;--gold-ink:#EACD73;',
+'--gold-soft:#2B2415;--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.3)}',
+'*{box-sizing:border-box}html{color-scheme:light dark;scroll-behavior:smooth;scroll-padding-top:70px}',
+'body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.68;-webkit-font-smoothing:antialiased;overflow-x:hidden}',
+'h1,h2,h3{font-family:Fraunces,Georgia,serif;margin:0;line-height:1.16;text-wrap:balance}',
+'p{margin:0 0 14px}p:last-child{margin-bottom:0}',
+'a{color:var(--green-bright)}',
+':focus-visible{outline:2.5px solid var(--gold);outline-offset:3px;border-radius:6px}',
+/* container */
+'.wrap{width:100%;max-width:900px;margin-inline:auto;padding-inline:var(--pad)}',
+'@media (min-width:1100px){.wrap{max-width:1060px}}',
+'@media (min-width:1500px){.wrap{max-width:1240px}}',
+/* hero */
+'.hero{background:linear-gradient(160deg,var(--green-deep),#164034 60%,var(--green-deep));color:#F2EFE4;padding:clamp(36px,7vw,74px) 0 clamp(30px,5vw,54px);border-bottom:3px solid var(--gold)}',
+'.kicker{display:inline-flex;align-items:center;gap:9px;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}',
+'.kicker .dot{width:9px;height:9px;border-radius:50%;background:var(--gold)}',
+'.hero h1{font-size:clamp(2rem,5.4vw,3.4rem);font-weight:600;color:#FFFDF6;max-width:20ch}',
+'.hero .lede{margin-top:16px;font-size:clamp(1rem,2vw,1.16rem);color:#C6D8CE;max-width:60ch}',
+'.facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}',
+'.fact{background:rgba(255,255,255,.07);border:1px solid rgba(201,162,39,.32);border-radius:10px;padding:9px 15px;min-width:150px}',
+'.fact span{display:block;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#9FB8AC}',
+'.fact b{font-size:1.02rem;color:#FFFDF6;font-weight:600}',
+/* nav that never clips */
+'.nav{position:sticky;top:0;z-index:50;background:var(--green-deep);border-bottom:1px solid rgba(201,162,39,.34)}',
+'.nav-in{display:flex;gap:3px;overflow-x:auto;overflow-y:hidden;padding-block:8px;scrollbar-width:thin;scrollbar-color:rgba(201,162,39,.5) transparent;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}',
+'.nav::after{content:"";position:absolute;top:0;right:0;bottom:0;width:52px;pointer-events:none;opacity:0;transition:opacity .2s;background:linear-gradient(to right,rgba(16,53,42,0),var(--green-deep))}',
+'.nav.more::after{opacity:1}',
+'.nav-in::-webkit-scrollbar{height:5px}',
+'.nav-in::-webkit-scrollbar-thumb{background:rgba(201,162,39,.5);border-radius:9px}',
+'.nav a{flex:0 0 auto;scroll-snap-align:start;color:#C6D8CE;text-decoration:none;font-size:.775rem;font-weight:600;padding:6px 11px;border-radius:99px;white-space:nowrap;transition:background .14s,color .14s}',
+'.nav a:hover{background:rgba(255,255,255,.11);color:#fff}',
+'.nav a.on{background:var(--gold);color:#10352A}',
+/* sections */
+'main{padding-block:clamp(30px,5vw,56px) 20px}',
+'.sec{margin-bottom:clamp(38px,6vw,72px);scroll-margin-top:66px}',
+'.sh{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:600;color:var(--green);margin-bottom:10px}',
+'.sub{color:var(--ink-2);max-width:70ch;margin-bottom:26px}',
+'.micro{font-size:.88rem;color:var(--muted);margin-top:18px;max-width:70ch}',
+/* opener */
+'.opener{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:14px;padding:clamp(22px,4vw,38px);box-shadow:var(--shadow)}',
+'.op-k{font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:12px}',
+'.op-personal{background:var(--green-wash);border-radius:10px;padding:15px 18px;margin-bottom:22px;font-size:1.02rem;color:var(--ink)}',
+'.opener h2{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:600;color:var(--green);margin-bottom:14px}',
+'.opener .lead{font-size:1.07rem;color:var(--ink);font-weight:500}',
+'.opener p{color:var(--ink-2);max-width:72ch}',
+'.dateline{margin-top:22px;padding-top:18px;border-top:1px dashed var(--line);font-weight:600;color:var(--gold-ink)}',
+/* cards */
+'.cards{display:grid;gap:14px;grid-template-columns:1fr}',
+'@media (min-width:640px){.cards{grid-template-columns:1fr 1fr}}',
+'@media (min-width:1100px){.cards{grid-template-columns:repeat(3,1fr)}}',
+'.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow)}',
+'.card h3{font-size:1.04rem;font-weight:600;color:var(--green);margin-bottom:7px}',
+'.card p{font-size:.93rem;color:var(--ink-2)}',
+'.card.gold{border-color:var(--gold);background:var(--gold-soft)}',
+'.card.gold h3{color:var(--gold-ink)}',
+/* findings */
+'.find{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:18px;overflow:hidden;box-shadow:var(--shadow)}',
+'.find-h{display:flex;gap:15px;align-items:flex-start;padding:20px 22px;background:var(--green-wash);border-bottom:1px solid var(--line)}',
+'.find-h .num{flex:none;width:34px;height:34px;border-radius:9px;background:var(--green-deep);color:var(--gold);display:grid;place-items:center;font-weight:700;font-size:.95rem;font-variant-numeric:tabular-nums}',
+'.find-h h3{font-size:1.24rem;font-weight:600;color:var(--green)}',
+'.find-meta{font-size:.76rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-top:4px}',
+'.find-b{padding:20px 22px;display:grid;gap:18px}',
+'@media (min-width:1100px){.find-b{grid-template-columns:1fr 1fr}',
+'.find-b .heard,.find-b .fix{grid-column:1/-1}}',
+'.bl{display:block;font-size:.63rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:6px}',
+'.blk p{color:var(--ink-2);font-size:.97rem}',
+'.blk.why{background:var(--surface-2);border-radius:10px;padding:15px 17px}',
+'.blk.why p{color:var(--ink)}',
+'.blk.cost{background:var(--gold-soft);border-radius:10px;padding:15px 17px}',
+'.blk.cost p{color:var(--ink)}',
+'.blk.fix{background:var(--green-wash);border-radius:10px;padding:15px 17px}',
+'.blk.fix ol{margin:0;padding-left:20px}',
+'.blk.fix li{margin-bottom:7px;color:var(--ink);font-size:.97rem}',
+'.blk.fix li:last-child{margin-bottom:0}',
+/* tease */
+'.tease{background:var(--green-deep);color:#EDE9DC;border-radius:14px;padding:clamp(22px,4vw,34px);border:1px solid rgba(201,162,39,.4)}',
+'.tease h3{color:var(--gold);font-size:1.3rem;font-weight:600;margin-bottom:12px}',
+'.tease p{color:#BCCFC5;max-width:68ch}',
+'.locked{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:9px}',
+'.locked li{padding:11px 15px 11px 42px;background:rgba(255,255,255,.06);border-radius:9px;position:relative;font-size:.94rem;color:#DCE7E1}',
+'.locked li::before{content:"";position:absolute;left:15px;top:50%;transform:translateY(-50%);width:13px;height:11px;border-radius:2px;background:var(--gold);box-shadow:0 -6px 0 -2px transparent,inset 0 0 0 99px var(--gold)}',
+'.locked li::after{content:"";position:absolute;left:18px;top:50%;transform:translateY(-92%);width:7px;height:7px;border:2px solid var(--gold);border-bottom:0;border-radius:4px 4px 0 0}',
+/* drills */
+'.drills{display:grid;gap:14px;grid-template-columns:1fr}',
+'@media (min-width:760px){.drills{grid-template-columns:1fr 1fr}}',
+'@media (min-width:1500px){.drills{grid-template-columns:repeat(3,1fr)}}',
+'.drill{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:19px 21px;box-shadow:var(--shadow)}',
+'.dn{display:flex;align-items:center;gap:11px;font-family:Fraunces,Georgia,serif;font-size:1.1rem;font-weight:600;color:var(--green);margin-bottom:10px}',
+'.dn span{flex:none;width:26px;height:26px;border-radius:7px;background:var(--gold);color:#10352A;display:grid;place-items:center;font-family:Inter,sans-serif;font-size:.78rem;font-weight:700}',
+'.dp{font-size:.95rem;color:var(--ink)}',
+'.do{font-size:.89rem;color:var(--ink-2);padding-top:11px;border-top:1px dashed var(--line);margin-bottom:0}',
+'.do b{color:var(--gold-ink)}',
+/* weeks */
+'.weeks{display:grid;gap:14px;grid-template-columns:1fr}',
+'@media (min-width:760px){.weeks{grid-template-columns:1fr 1fr}}',
+'.wkc{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:19px 21px;box-shadow:var(--shadow)}',
+'.wkh{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-bottom:10px}',
+'.wk-n{flex:none;height:26px;padding:0 11px;border-radius:7px;background:var(--green-deep);color:var(--gold);display:inline-flex;align-items:center;white-space:nowrap;font-size:.66rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;font-variant-numeric:tabular-nums}',
+'.wkc h3{font-size:1.1rem;font-weight:600;color:var(--green)}',
+'.wkc p{font-size:.94rem;color:var(--ink-2)}',
+'.wkc ul{margin:12px 0 0;padding-left:19px}',
+'.wkc li{font-size:.93rem;color:var(--ink);margin-bottom:6px}',
+'.wkc.lock{background:var(--surface-2);border-style:dashed}',
+'.locknote{margin-top:12px;display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--gold-ink);background:var(--gold-soft);padding:5px 11px;border-radius:99px}',
+/* planner */
+'.plan-grid{display:grid;gap:11px;grid-template-columns:1fr}',
+'@media (min-width:700px){.plan-grid{grid-template-columns:1fr 1fr}}',
+'@media (min-width:1500px){.plan-grid{grid-template-columns:repeat(3,1fr)}}',
+'.pb{display:flex;gap:12px;background:var(--surface);border:1.5px solid var(--line);border-radius:11px;padding:14px 16px;cursor:pointer;transition:border-color .14s,background .14s}',
+'.pb:hover{border-color:var(--green-bright)}',
+'.pb:has(input:checked){border-color:var(--gold);background:var(--gold-soft)}',
+'.pchk{appearance:none;flex:none;width:19px;height:19px;margin:3px 0 0;border:2.2px solid var(--muted);border-radius:5px;display:grid;place-items:center;cursor:pointer;background:var(--surface)}',
+'.pchk:checked{background:var(--gold);border-color:var(--gold)}',
+'.pchk:checked::after{content:"";width:5px;height:10px;border:solid #10352A;border-width:0 2.4px 2.4px 0;transform:rotate(43deg) translate(-1px,-1px)}',
+'.pb-in{min-width:0}',
+'.pb-t{font-weight:600;font-size:.99rem;color:var(--ink);display:flex;gap:9px;align-items:baseline;flex-wrap:wrap}',
+'.pmin{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-ink);background:var(--gold-soft);padding:2px 7px;border-radius:99px}',
+'.pb-w{font-size:.78rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-top:3px}',
+'.pb-d{font-size:.89rem;color:var(--ink-2);margin-top:7px}',
+'.pb-days{margin-top:9px;font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:7px}',
+'.pdays{font:inherit;font-size:.82rem;padding:3px 7px;border:1.5px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink)}',
+'.tally{margin-top:20px;background:var(--green-deep);border:1px solid rgba(201,162,39,.4);border-radius:13px;padding:22px 24px;color:#EDE9DC}',
+'.tnum{display:flex;align-items:baseline;gap:10px}',
+'.tnum b{font-family:Fraunces,Georgia,serif;font-size:2.5rem;font-weight:600;color:var(--gold);font-variant-numeric:tabular-nums;line-height:1}',
+'.tnum span{font-size:.76rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#9FB8AC}',
+'.tbar{height:9px;border-radius:99px;background:rgba(255,255,255,.13);margin:15px 0 14px;overflow:hidden}',
+'.tbar i{display:block;height:100%;width:0;border-radius:99px;background:var(--gold);transition:width .32s ease}',
+'.tmsg{color:#C6D8CE;font-size:.95rem;margin:0;max-width:66ch}',
+'.tcopy{margin-top:16px;border:1.5px solid var(--gold);background:var(--gold);color:#10352A;font:inherit;font-size:.85rem;font-weight:700;padding:9px 18px;border-radius:99px;cursor:pointer}',
+'.tcopy:hover{background:#DDB63C}',
+/* research */
+'.res{display:grid;gap:13px;grid-template-columns:1fr}',
+'@media (min-width:760px){.res{grid-template-columns:1fr 1fr}}',
+'@media (min-width:1500px){.res{grid-template-columns:repeat(3,1fr)}}',
+'.rc{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--green-bright);border-radius:11px;padding:17px 19px}',
+'.rc h3{font-size:1rem;font-weight:600;color:var(--green);margin-bottom:7px}',
+'.rc p{font-size:.91rem;color:var(--ink-2);margin:0}',
+/* homework */
+'.hw{display:grid;gap:12px}',
+'.hwi{display:flex;gap:14px;background:var(--gold-soft);border:1px solid var(--gold);border-radius:12px;padding:17px 19px}',
+'.hn{flex:none;width:31px;height:31px;border-radius:8px;background:var(--green-deep);color:var(--gold);display:grid;place-items:center;font-weight:700;font-size:.9rem}',
+'.hwi h3{font-size:1.02rem;font-weight:600;color:var(--green);margin-bottom:5px}',
+'.hwi p{font-size:.95rem;color:var(--ink);margin:0}',
+/* closing */
+'.closing{background:var(--green-deep);color:#EDE9DC;border-radius:15px;padding:clamp(26px,5vw,44px);border:1px solid rgba(201,162,39,.4)}',
+'.closing h2{color:var(--gold);font-size:clamp(1.4rem,3vw,1.95rem);font-weight:600;margin-bottom:16px}',
+'.closing p{color:#C6D8CE;max-width:68ch}',
+'.six{margin:0;padding-left:22px}',
+'.six li{color:#DCE7E1;margin-bottom:11px;font-size:.99rem}',
+'.sig{margin-top:26px;font-family:Fraunces,Georgia,serif;font-size:1.5rem;color:var(--gold)}',
+'.foot{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);font-size:.82rem}',
+/* print */
+'@media print{.nav{display:none}.tcopy{display:none}body{font-size:11.5pt;background:#fff}',
+'.hero{background:#10352A !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}',
+'.tally,.tease,.closing{-webkit-print-color-adjust:exact;print-color-adjust:exact}',
+'.sec{break-inside:avoid-page;margin-bottom:22px}.find,.drill,.wkc,.rc,.hwi{break-inside:avoid}',
+'.wrap{max-width:none}}'
+].join('\n');
+
+const REPORT_JS = [
+'(function(){',
+'var K="gi-report-"+(location.pathname.replace(/[^a-z0-9]/gi,"")||"x");',
+'var boxes=[].slice.call(document.querySelectorAll(".pchk"));',
+'var days=[].slice.call(document.querySelectorAll(".pdays"));',
+'var tmin=document.getElementById("tmin"),tfill=document.getElementById("tfill"),tmsg=document.getElementById("tmsg");',
+'var FLOOR=120,CEILING=300;',
+'function state(){var o={c:[],d:[]};boxes.forEach(function(b,i){o.c[i]=b.checked;o.d[i]=days[i]?days[i].value:5});return o}',
+'function save(){try{localStorage.setItem(K,JSON.stringify(state()))}catch(e){}}',
+'function load(){try{var o=JSON.parse(localStorage.getItem(K)||"null");if(!o)return;boxes.forEach(function(b,i){b.checked=!!(o.c&&o.c[i]);if(days[i]&&o.d&&o.d[i])days[i].value=o.d[i]})}catch(e){}}',
+'function tally(){',
+' if(!tmin)return;var total=0,n=0;',
+' boxes.forEach(function(b,i){if(!b.checked)return;n++;',
+'  var lab=b.closest(".pb");var m=parseInt(lab.getAttribute("data-m"),10)||0;',
+'  var d=parseInt(days[i]?days[i].value:5,10)||0;total+=m*d});',
+' tmin.textContent=total;',
+' tfill.style.width=Math.min(100,Math.round(total/CEILING*100))+"%";',
+' var msg;',
+' if(n===0){msg="Nothing selected yet. Start with the voice set and one recording. That is fifteen minutes and it is enough to begin."}',
+' else if(total<FLOOR){msg="That is "+total+" minutes a week. Honest answer: it is below what moves a band. Add one more block, or add days to what you have already ticked, until it passes 120."}',
+' else if(total<=CEILING){msg="That is "+total+" minutes a week across "+n+(n===1?" activity":" activities")+". This is the range that works, and it works because it is spread out rather than stacked."}',
+' else {msg="That is "+total+" minutes a week. It is more than the plan needs, and plans this size are usually abandoned in week two. Cut it back to around 300 and keep it for the whole period instead."}',
+' tmsg.textContent=msg;save()}',
+'boxes.forEach(function(b){b.addEventListener("change",tally)});',
+'days.forEach(function(d){d.addEventListener("change",tally);d.addEventListener("click",function(e){e.stopPropagation()})});',
+'load();tally();',
+'var tc=document.getElementById("tcopy");',
+'if(tc)tc.addEventListener("click",function(){',
+' var out=["My English week",""];var total=0;',
+' boxes.forEach(function(b,i){if(!b.checked)return;var lab=b.closest(".pb");',
+'  var t=lab.querySelector(".pb-t").childNodes[0].textContent.trim();',
+'  var w=lab.querySelector(".pb-w").textContent.trim();',
+'  var m=parseInt(lab.getAttribute("data-m"),10)||0;var d=parseInt(days[i]?days[i].value:5,10)||0;',
+'  total+=m*d;out.push("- "+t+", "+m+" min, "+d+(d===1?" day":" days")+" a week ("+w.toLowerCase()+")")});',
+' out.push("");out.push("Total: "+total+" minutes a week.");',
+' var txt=out.join("\\n");',
+' function done(){tc.textContent="Copied";setTimeout(function(){tc.textContent="Copy my plan"},1600)}',
+' if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,fallback)}else{fallback()}',
+' function fallback(){var ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";',
+'  document.body.appendChild(ta);ta.select();try{document.execCommand("copy");done()}catch(e){}document.body.removeChild(ta)}',
+'});',
+/* nav highlight + keep active chip in view */
+'var links=[].slice.call(document.querySelectorAll(".nav a"));',
+'var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});',
+'var navIn=document.querySelector(".nav-in");',
+'var navEl=document.querySelector(".nav");',
+'function flag(){if(navEl&&navIn)navEl.classList.toggle("more",navIn.scrollWidth-navIn.clientWidth>4)}',
+'window.addEventListener("resize",flag);flag();',
+'function onScroll(){var y=window.scrollY+96,cur=0;',
+' secs.forEach(function(s,i){if(s&&s.offsetTop<=y)cur=i});',
+' if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-6)cur=links.length-1;',
+' links.forEach(function(a,i){a.classList.toggle("on",i===cur)});',
+' var a=links[cur];if(a&&navIn){var l=a.offsetLeft,r=l+a.offsetWidth;',
+'  if(l<navIn.scrollLeft||r>navIn.scrollLeft+navIn.clientWidth){navIn.scrollTo({left:Math.max(0,l-24),behavior:"smooth"})}}}',
+'window.addEventListener("scroll",onScroll,{passive:true});onScroll();',
+'})();'
+].join('\n');
+
+/* ============================================================
+   BUILDER WIRING
+   ============================================================ */
+(function(){
+  const $ = s => document.querySelector(s);
+  const KEY = 'gi-builder-v1';
+  const prev = $('#prev');
+  const toastEl = $('#toast');
+  let lastHTML = '';
+
+  function toast(m){ toastEl.textContent = m; toastEl.classList.add('show');
+    clearTimeout(toast._t); toast._t = setTimeout(()=>toastEl.classList.remove('show'), 2200); }
+
+  /* ---------- extra controls injected into the form panel ---------- */
+  const pubHTML =
+    '<fieldset id="pubset">'
+    + '<legend>Publishing</legend>'
+    + '<div class="grid2">'
+    + '<label class="f"><span>Your site address</span><input class="inp" id="f-site" placeholder="https://yoursite.pages.dev"></label>'
+    + '<label class="f"><span>Folder name for this student</span><input class="inp" id="f-slug" placeholder="auto"></label>'
+    + '</div>'
+    + '<div class="note" id="pubsteps"></div>'
+    + '<div class="chips" style="margin-top:12px">'
+    + '<button class="chip" type="button" id="b-reset">Start a new student</button>'
+    + '<button class="chip" type="button" id="b-save">Save student file</button>'
+    + '<button class="chip" type="button" id="b-load">Open student file</button>'
+    + '<input type="file" id="f-file" accept="application/json" hidden>'
+    + '</div>'
+    + '</fieldset>';
+  $('.panel-body').insertAdjacentHTML('beforeend', pubHTML);
+
+  /* ---------- populate strengths ---------- */
+  $('#strengths').innerHTML = STRENGTHS.map(s =>
+    '<label class="chip"><input type="checkbox" data-s="' + s.id + '">' + s.n + '</label>').join('');
+
+  /* ---------- populate weaknesses, filtered by language ---------- */
+  function paintWeak(){
+    const lang = $('#f-lang').value;
+    const chosen = readWeak();
+    const list = WEAK.filter(w => w.tags.indexOf(lang) > -1);
+    const cats = [];
+    list.forEach(w => { if(cats.indexOf(w.cat) < 0) cats.push(w.cat); });
+    $('#weaknesses').innerHTML = cats.map(c =>
+      '<div class="tg" style="margin:6px 0 2px;background:transparent;color:var(--gold-ink);font-size:.63rem">' + c + '</div>'
+      + list.filter(w => w.cat === c).map(w =>
+        '<label class="wk-item"><div class="wk-top">'
+        + '<input type="checkbox" data-w="' + w.id + '"' + (chosen.indexOf(w.id) > -1 ? ' checked' : '') + '>'
+        + '<div><div class="wk-name">' + w.n + '</div><div class="wk-meta">' + w.meta + '</div></div>'
+        + '</div></label>').join('')
+    ).join('');
+    $('#weaknesses').querySelectorAll('input').forEach(i => i.addEventListener('change', queue));
+  }
+  function readWeak(){ return [].slice.call(document.querySelectorAll('[data-w]:checked')).map(i => i.dataset.w); }
+  function readStrong(){ return [].slice.call(document.querySelectorAll('[data-s]:checked')).map(i => i.dataset.s); }
+
+  /* ---------- state ---------- */
+  function collect(){
+    return {
+      name: $('#f-name').value.trim(),
+      email: $('#f-email').value.trim(),
+      trial: $('#f-trial').value,
+      test: $('#f-test').value,
+      now: $('#f-now').value.trim(),
+      target: $('#f-target').value.trim(),
+      lang: $('#f-lang').value,
+      stage: $('#f-stage').value,
+      mood: $('#f-mood').value,
+      strong: readStrong(),
+      strongnote: $('#f-strengthnote').value.trim(),
+      weak: readWeak(),
+      weaknote: $('#f-weaknote').value.trim(),
+      personal: $('#f-personal').value.trim(),
+      site: $('#f-site').value.trim(),
+      slug: $('#f-slug').value.trim()
+    };
+  }
+  function apply(S){
+    if(!S) return;
+    ['name','email','trial','test','now','target','lang','stage','mood','site','slug'].forEach(k=>{
+      const el = $('#f-' + (k==='strongnote'?'strengthnote':k)); if(el && S[k] != null) el.value = S[k];
+    });
+    $('#f-strengthnote').value = S.strongnote || '';
+    $('#f-weaknote').value = S.weaknote || '';
+    $('#f-personal').value = S.personal || '';
+    document.querySelectorAll('[data-s]').forEach(i => i.checked = (S.strong||[]).indexOf(i.dataset.s) > -1);
+    paintWeak();
+    document.querySelectorAll('[data-w]').forEach(i => i.checked = (S.weak||[]).indexOf(i.dataset.w) > -1);
+  }
+
+  /* ---------- render ---------- */
+  let timer = null;
+  function queue(){ clearTimeout(timer); timer = setTimeout(render, 160); }
+
+  function render(){
+    const S = collect();
+    if(!S.slug) $('#f-slug').placeholder = slugify(S.name);
+    const wk = weeksTo(S.trial, S.test);
+    $('#dateline').textContent = !wk
+      ? 'No test date yet. Plan chosen: ' + PLANS[pickPlan(null)].n + '. Add a date and the plan changes to match it.'
+      : wk.gone
+        ? 'That test date has already passed. Check it before you send this.'
+        : wk.days < 0
+          ? 'The test date is before the trial lesson date. One of the two is wrong.'
+          : 'That is ' + wk.days + ' days, or ' + wk.weeks + (wk.weeks===1?' week':' weeks') + '. Plan chosen: ' + PLANS[pickPlan(wk.weeks)].n + '.';
+
+    lastHTML = buildReport(S);
+    prev.srcdoc = lastHTML;
+
+    const kb = Math.round(lastHTML.length / 1024);
+    $('#meta-out').textContent = S.weak.length + (S.weak.length===1?' finding':' findings')
+      + ' · ' + (S.stage==='enrolled'?'full detail':'trial level') + ' · ' + kb + ' KB';
+
+    const n = S.weak.length;
+    $('#status').textContent = !S.name ? 'Fill in a name to begin.'
+      : n === 0 ? S.name + ': pick at least one finding.'
+      : n > 4 ? S.name + ': ' + n + ' findings is a list, not a plan. Four is the ceiling.'
+      : 'Ready for ' + S.name + '.';
+
+    const slug = S.slug || slugify(S.name);
+    const site = (S.site || 'https://yoursite.pages.dev').replace(/\/+$/,'');
+    $('#pubsteps').innerHTML = '<b>To put this online.</b> Download the file below, create a folder called <b>'
+      + esc(slug) + '</b> in your repository, drop <b>index.html</b> inside it, and commit. It appears at <b>'
+      + esc(site + '/' + slug + '/') + '</b> in about a minute.';
+
+    try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){}
+  }
+
+  /* ---------- preview width ---------- */
+  document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed','false'));
+    b.setAttribute('aria-pressed','true');
+    const w = b.dataset.pw;
+    prev.style.width = (w === '100%') ? '100%' : w + 'px';
+    prev.style.marginInline = (w === '100%') ? '0' : 'auto';
+    prev.style.border = (w === '100%') ? '0' : '1px solid var(--line)';
+  }));
+
+  /* ---------- actions ---------- */
+  function currentSlug(){ const S = collect(); return S.slug || slugify(S.name); }
+
+  $('#b-download').addEventListener('click', () => {
+    if(!lastHTML) return;
+    const blob = new Blob([lastHTML], {type:'text/html'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'index.html';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
+    toast('Downloaded. Put it in a folder called ' + currentSlug());
+  });
+
+  $('#b-print').addEventListener('click', () => {
+    if(!lastHTML) return;
+    let f = document.getElementById('printer');
+    if(f) f.remove();
+    f = document.createElement('iframe');
+    f.id = 'printer';
+    f.style.cssText = 'position:fixed;left:-9999px;top:0;width:1100px;height:1400px;border:0';
+    document.body.appendChild(f);
+    f.srcdoc = lastHTML;
+    f.onload = () => setTimeout(() => {
+      try{ f.contentWindow.focus(); f.contentWindow.print(); }
+      catch(e){ toast('Your browser blocked printing. Use the downloaded file instead.'); }
+    }, 700);
+    toast('Opening the print dialogue. Choose Save as PDF.');
+  });
+
+  $('#b-copyurl').addEventListener('click', () => {
+    const S = collect();
+    const url = (S.site || 'https://yoursite.pages.dev').replace(/\/+$/,'') + '/' + currentSlug() + '/';
+    copy(url, 'Link copied');
+  });
+
+  $('#b-mail').addEventListener('click', () => {
+    const S = collect();
+    const url = (S.site || 'https://yoursite.pages.dev').replace(/\/+$/,'') + '/' + currentSlug() + '/';
+    const first = S.name || 'there';
+    const sub = S.stage === 'enrolled'
+      ? 'Your plan and this week' + (S.name ? ', ' + S.name : '')
+      : 'After your trial lesson' + (S.name ? ', ' + S.name : '');
+    const body = [
+      'Hi ' + first + ',',
+      '',
+      S.stage === 'enrolled'
+        ? 'Here is your working document. It has what I heard, what it is costing you, the plan, and this week in full.'
+        : 'Thank you for the lesson. I have written up what I heard, what it is costing you, and what I would do about it.',
+      '',
+      url,
+      '',
+      'Two things worth doing before we speak again.',
+      '',
+      '1. Open it on a laptop if you can. The daily planner near the bottom is interactive, and what you tick is saved in your own browser.',
+      '2. Record yourself for sixty seconds answering any question, and send it to me. First take. Do not re record it to make it better.',
+      '',
+      'Graham'
+    ].join('\n');
+    const href = 'mailto:' + encodeURIComponent(S.email || '')
+      + '?subject=' + encodeURIComponent(sub) + '&body=' + encodeURIComponent(body);
+    if(href.length > 1900){ copy(body, 'Email text copied, the link was too long for the mail button'); return; }
+    window.location.href = href;
+  });
+
+  function copy(txt, msg){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(()=>toast(msg), fb);
+    } else fb();
+    function fb(){
+      const ta = document.createElement('textarea');
+      ta.value = txt; ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); toast(msg); }catch(e){ toast('Copy failed'); }
+      document.body.removeChild(ta);
+    }
+  }
+
+  $('#b-reset').addEventListener('click', () => {
+    if(!confirm('Clear the form and start a new student?')) return;
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    const site = $('#f-site').value;
+    document.querySelectorAll('.inp').forEach(el => { if(el.tagName === 'SELECT') el.selectedIndex = 0; else el.value = ''; });
+    document.querySelectorAll('input[type=checkbox]').forEach(i => i.checked = false);
+    $('#f-site').value = site;
+    $('#f-trial').value = new Date().toISOString().slice(0,10);
+    paintWeak(); render(); toast('Cleared');
+  });
+
+  $('#b-save').addEventListener('click', () => {
+    const S = collect();
+    const blob = new Blob([JSON.stringify(S, null, 2)], {type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (currentSlug() || 'student') + '.json';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
+    toast('Saved. Open it later to update this report.');
+  });
+
+  $('#b-load').addEventListener('click', () => $('#f-file').click());
+  $('#f-file').addEventListener('change', e => {
+    const file = e.target.files[0]; if(!file) return;
+    const r = new FileReader();
+    r.onload = () => { try{ apply(JSON.parse(r.result)); render(); toast('Loaded ' + file.name); }
+                       catch(err){ toast('That file could not be read'); } };
+    r.readAsText(file); e.target.value = '';
+  });
+
+  /* ---------- boot ---------- */
+  document.querySelectorAll('.inp, #strengths input').forEach(el => {
+    el.addEventListener('input', queue); el.addEventListener('change', queue);
+  });
+  $('#f-lang').addEventListener('change', () => { paintWeak(); queue(); });
+
+  paintWeak();
+  let saved = null;
+  try{ saved = JSON.parse(localStorage.getItem(KEY) || 'null'); }catch(e){}
+  if(saved) apply(saved);
+  else $('#f-trial').value = new Date().toISOString().slice(0,10);
+  render();
+})();
+
+</script>
+</body>
+</html>
