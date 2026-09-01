@@ -1422,8 +1422,8 @@ const REPORT_JS = [
     const slug = S.slug || slugify(S.name);
     const site = (S.site || 'https://yoursite.pages.dev').replace(/\/+$/,'');
     $('#pubsteps').innerHTML = '<b>To put this online.</b> Download the file below, then open '
-      + '<a href="https://github.com/GrahamIELTS/Betty/upload/main/' + esc(slug) + '" target="_blank" rel="noopener">'
-      + 'github.com/GrahamIELTS/Betty/upload/main/' + esc(slug) + '</a> and drag index.html in. '
+      + '<a href="https://github.com/GrahamIELTS/documents/upload/main/' + esc(slug) + '" target="_blank" rel="noopener">'
+      + 'github.com/GrahamIELTS/documents/upload/main/' + esc(slug) + '</a> and drag index.html in. '
       + 'That link makes the folder for you. Commit, and it is live at <b>'
       + esc(site + '/' + slug + '/') + '</b> in about a minute.';
 
@@ -1560,7 +1560,7 @@ const REPORT_JS = [
   try{ saved = JSON.parse(localStorage.getItem(KEY) || 'null'); }catch(e){}
   if(saved) apply(saved);
   else $('#f-trial').value = new Date().toISOString().slice(0,10);
-  if(!$('#f-site').value) $('#f-site').value = 'https://betty.gman292.workers.dev';
+  if(!$('#f-site').value) $('#f-site').value = 'https://documents.grahamielts.workers.dev';
   render();
 })();
 
