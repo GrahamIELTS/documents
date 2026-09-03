@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Speaking Units | GrahamIELTS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{--paper:#FBFAF7;--surface:#FFFFFF;--surface-2:#F4F2EA;--ink:#15211C;--ink-2:#3D4E46;
+--muted:#6E7F76;--line:#E2DED2;--line-soft:#EDEAE0;--green:#1B4D3A;--green-deep:#10352A;
+--green-bright:#2C7A5A;--green-wash:#EEF4F0;--gold:#C9A227;--gold-ink:#7A5A0F;--gold-soft:#FBF2D8;
+--shadow:0 1px 2px rgba(16,53,42,.05),0 10px 30px rgba(16,53,42,.07)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+--paper:#0E1A15;--surface:#152621;--surface-2:#1B322B;--ink:#EDF2EF;--ink-2:#C3D0CA;--muted:#8FA69C;
+--line:#2A423A;--line-soft:#223730;--green:#4FB489;--green-deep:#0A231B;--green-bright:#5FC79A;
+--green-wash:#163026;--gold:#E3BE4F;--gold-ink:#EACD73;--gold-soft:#2B2415;
+--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.3)}}
+:root[data-theme="dark"]{--paper:#0E1A15;--surface:#152621;--surface-2:#1B322B;--ink:#EDF2EF;
+--ink-2:#C3D0CA;--muted:#8FA69C;--line:#2A423A;--line-soft:#223730;--green:#4FB489;
+--green-deep:#0A231B;--green-bright:#5FC79A;--green-wash:#163026;--gold:#E3BE4F;--gold-ink:#EACD73;
+--gold-soft:#2B2415;--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.3)}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:74px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+font-size:17px;line-height:1.68;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:78px}
+h1,h2,h3,h4{font-family:Fraunces,Georgia,serif;margin:0;line-height:1.16;text-wrap:balance}
+p{margin:0 0 13px}p:last-child{margin-bottom:0}
+a{color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px}
+@media(min-width:1100px){.wrap{max-width:1060px}}
+@media(min-width:1500px){.wrap{max-width:1240px}}
+
+/* ---------- wordmark ---------- */
+.wm{font-family:Fraunces,Georgia,serif;font-weight:700;letter-spacing:.01em}
+.wm .g{color:#FFFFFF}.wm .i{color:var(--gold)}
+
+/* ---------- hero ---------- */
+.hero{background:linear-gradient(160deg,#10352A 0%,#173F31 55%,#1B4D3A 100%);color:#EDE9DC;
+padding:clamp(34px,6vw,64px) 0 clamp(30px,5vw,52px);border-bottom:3px solid var(--gold)}
+.kicker{display:flex;align-items:center;gap:9px;font-size:.95rem;margin-bottom:16px}
+.kicker .dot{width:9px;height:9px;border-radius:50%;background:var(--gold);flex:none}
+.hero h1{font-size:clamp(1.9rem,5.2vw,3rem);font-weight:600;color:#FBFAF7;max-width:20ch}
+.hero .lede{margin-top:15px;max-width:62ch;color:#C7D6CE;font-size:clamp(1rem,2.1vw,1.1rem)}
+.hero .stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.hero .stat{background:rgba(255,255,255,.07);border:1px solid rgba(201,162,39,.3);border-radius:10px;
+padding:9px 15px;font-size:.85rem;color:#DCE7E1}
+.hero .stat b{color:var(--gold);font-weight:700}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:40;background:var(--green-deep);border-bottom:1px solid rgba(201,162,39,.3)}
+.nav-in{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;padding:9px 22px}
+.nav-in::-webkit-scrollbar{display:none}
+.nav a{flex:none;text-decoration:none;color:#BCCFC5;font-size:.85rem;font-weight:600;
+padding:7px 14px;border-radius:20px;white-space:nowrap}
+.nav a:hover{color:#FBFAF7;background:rgba(255,255,255,.07)}
+.nav a.on{background:var(--gold);color:#10352A}
+
+/* ---------- sections ---------- */
+.sec{padding:clamp(34px,5.5vw,58px) 0 0}
+.sh{font-size:clamp(1.5rem,3.6vw,2.1rem);font-weight:600;color:var(--green)}
+.sub{color:var(--ink-2);max-width:70ch;margin-top:11px}
+.sec-k{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:7px}
+
+/* ---------- chosen ---------- */
+.chosen-box{margin-top:20px;border:2px solid var(--gold);border-radius:15px;background:var(--gold-soft);overflow:hidden}
+.chosen-head{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;
+background:transparent;border:0;width:100%;text-align:left;font:inherit;color:inherit}
+.chosen-head:hover{background:rgba(201,162,39,.09)}
+.chosen-head h3{font-size:1.15rem;font-weight:600;color:var(--green)}
+.chosen-head .cnt{margin-left:auto;flex:none;background:var(--green-deep);color:var(--gold);
+font-family:Inter,sans-serif;font-size:.75rem;font-weight:700;padding:4px 11px;border-radius:20px;white-space:nowrap}
+.chev{flex:none;width:13px;height:13px;border-right:2px solid var(--gold-ink);border-bottom:2px solid var(--gold-ink);
+transform:rotate(45deg);transition:transform .18s;margin-right:2px}
+.chosen-box.open .chev{transform:rotate(-135deg)}
+.chosen-body{display:none;padding:0 15px 15px}
+.chosen-box.open .chosen-body{display:block}
+.chosen-empty{padding:4px 20px 20px;color:var(--ink-2);font-size:.96rem;max-width:66ch}
+
+/* ---------- contents ---------- */
+.toc{margin-top:22px;display:grid;gap:14px;align-items:start}
+@media(min-width:900px){.toc{grid-template-columns:1fr 1fr}}
+.toc-grp{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:16px 18px;box-shadow:var(--shadow)}
+.toc-grp h3{font-size:1.05rem;font-weight:600;color:var(--green);margin-bottom:4px}
+.toc-grp .gs{font-size:.83rem;color:var(--muted);margin-bottom:11px;line-height:1.55}
+.toc-row{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-top:1px solid var(--line-soft)}
+.toc-row:first-of-type{border-top:0}
+.toc-row input{flex:none;width:19px;height:19px;margin-top:3px;accent-color:var(--gold);cursor:pointer}
+.toc-row a{flex:1;text-decoration:none;font-size:.94rem;line-height:1.45;color:var(--ink)}
+.toc-row a:hover{color:var(--green-bright)}
+.toc-row .exn{font-family:Inter,sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.05em;
+color:var(--gold-ink);display:block}
+.toc-row.picked a{font-weight:600}
+.toc-row.picked .exn::after{content:" · CHOSEN";color:var(--green-bright)}
+
+/* ---------- unit card ---------- */
+.grp-head{margin:34px 0 4px;padding-bottom:10px;border-bottom:2px solid var(--line)}
+.grp-head h3{font-size:1.35rem;font-weight:600;color:var(--green)}
+.grp-head p{font-size:.93rem;color:var(--muted);margin:7px 0 0;max-width:72ch}
+.unit{border:1px solid var(--line);border-radius:14px;background:var(--surface);
+box-shadow:var(--shadow);margin-top:14px;overflow:hidden}
+.unit[open]{border-color:var(--green-bright)}
+.unit>summary{list-style:none;cursor:pointer;padding:16px 19px;display:flex;gap:13px;align-items:flex-start}
+.unit>summary::-webkit-details-marker{display:none}
+.unit>summary:hover{background:var(--green-wash)}
+.unit .exn{flex:none;min-width:52px;font-family:Inter,sans-serif;font-size:.68rem;font-weight:700;
+letter-spacing:.05em;color:var(--gold-ink);padding-top:4px}
+.unit .sm{flex:1;min-width:0}
+.unit .sm h4{font-size:1.16rem;font-weight:600;color:var(--green);line-height:1.3}
+.unit .smeta{font-size:.79rem;color:var(--muted);margin-top:4px}
+.unit .flag{flex:none;font-family:Inter,sans-serif;font-size:.63rem;font-weight:700;letter-spacing:.05em;
+text-transform:uppercase;padding:3px 9px;border-radius:20px;background:var(--gold-soft);
+color:var(--gold-ink);border:1px solid var(--gold);align-self:center;display:none;white-space:nowrap}
+.unit.picked .flag{display:inline-block}
+.unit .caret{flex:none;width:11px;height:11px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);
+transform:rotate(45deg);align-self:center;transition:transform .18s}
+.unit[open] .caret{transform:rotate(-135deg)}
+
+.ubody{padding:0 19px 20px;border-top:1px solid var(--line-soft)}
+.play-h{background:var(--green-deep);color:#EDE9DC;margin:0 -19px 18px;padding:18px 19px}
+.play-k{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.play-h h5{font-family:Fraunces,Georgia,serif;font-size:1.12rem;font-weight:600;color:#FBFAF7;margin:0;line-height:1.3}
+.usrc{margin-top:9px;font-size:.87rem;color:#BCCFC5}
+.usrc .k{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8FA69C;margin-right:5px}
+.usrc b{color:#FBFAF7;font-weight:600}
+.usrc .dot{margin:0 7px;color:#6E8379}
+.usrc .cred{color:var(--gold);font-weight:600}
+.utags{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}
+.utags span{font-size:.71rem;font-weight:600;padding:4px 11px;border-radius:20px;
+background:rgba(255,255,255,.09);color:#DCE7E1;border:1px solid rgba(201,162,39,.35)}
+
+.blk{margin-top:17px}
+.blk .bl{display:block;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+color:var(--gold-ink);margin-bottom:7px}
+.blk p,.blk li{max-width:74ch}
+.blk.like{background:var(--green-wash);border-radius:11px;padding:14px 17px}
+.blk.like p{font-style:italic;color:var(--ink-2)}
+.blk ol,.blk ul{margin:0;padding-left:21px;display:grid;gap:8px}
+.blk.mat{border-left:3px solid var(--gold);padding-left:16px}
+.blk.mat ul{list-style:none;padding-left:0}
+.blk.mat li{background:var(--surface-2);border-radius:8px;padding:9px 13px;font-size:.95rem}
+.blk.speak{background:var(--green-wash);border-radius:11px;padding:14px 17px}
+.blk.bonus{border:1px dashed var(--line);border-radius:11px;padding:14px 17px}
+.blk.bonus .bl{color:var(--muted)}
+
+/* copies inside the chosen box */
+.chosen-body .unit{background:var(--surface);border-color:var(--gold)}
+.chosen-body .unit .flag{display:none}
+.rank{flex:none;width:26px;height:26px;border-radius:8px;background:var(--green-deep);color:var(--gold);
+display:grid;place-items:center;font-family:Inter,sans-serif;font-size:.76rem;font-weight:700;align-self:center}
+.drop{margin-left:auto;flex:none;background:transparent;border:1px solid var(--line);border-radius:8px;
+color:var(--muted);font:inherit;font-size:.74rem;font-weight:600;padding:4px 10px;cursor:pointer;align-self:flex-start;margin-top:2px}
+.drop:hover{border-color:var(--gold);color:var(--gold-ink)}
+
+/* ---------- teacher bar ---------- */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--green-deep);
+border-top:1px solid rgba(201,162,39,.35);color:#DCE7E1}
+.bar-in{display:flex;align-items:center;gap:11px;flex-wrap:wrap;padding:11px 22px;max-width:1240px;margin:0 auto}
+.bar .msg{font-size:.85rem;color:#BCCFC5;margin-right:auto}
+.bar .msg b{color:var(--gold)}
+.btn{font:inherit;font-size:.85rem;font-weight:600;padding:9px 16px;border-radius:9px;cursor:pointer;
+border:1px solid var(--gold);background:var(--gold);color:#10352A;white-space:nowrap}
+.btn.ghost{background:transparent;color:#EDE9DC;border-color:rgba(255,255,255,.28)}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn:disabled{opacity:.42;cursor:not-allowed}
+.mailin{font:inherit;font-size:.85rem;padding:8px 12px;border-radius:9px;border:1px solid rgba(255,255,255,.25);
+background:rgba(255,255,255,.07);color:#EDF2EF;width:210px;display:none}
+.mailin::placeholder{color:#8FA69C}
+.bar.mailing .mailin{display:inline-block}
+#toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%) translateY(12px);z-index:60;
+background:var(--green-deep);color:#FBFAF7;border:1px solid var(--gold);border-radius:10px;
+padding:10px 18px;font-size:.88rem;opacity:0;pointer-events:none;transition:.2s}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.foot{margin-top:52px;padding:26px 0 34px;border-top:1px solid var(--line);color:var(--muted);font-size:.86rem}
+
+@media(max-width:600px){
+  .unit>summary{padding:14px 15px;flex-wrap:wrap}
+  .copy>summary .sm{flex:1 1 100%;order:3;margin-top:6px}
+  .copy>summary .drop{order:2}
+  .ubody{padding:0 15px 17px}
+  .play-h{margin:0 -15px 16px;padding:16px 15px}
+  .bar .msg{width:100%;margin-bottom:4px}
+  .mailin{width:100%}
+}
+@media print{
+  .nav,.bar,#toast,.toc,.lib-units,.hero .stats{display:none!important}
+  body{padding-bottom:0}
+  .chosen-box{border-color:#999}
+  .unit{break-inside:avoid;box-shadow:none}
+  .unit .ubody{display:block!important}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker"><span class="dot"></span><span class="wm"><span class="g">Graham</span><span class="i">IELTS</span></span></div>
+    <h1>The Speaking Units</h1>
+    <p class="lede">Every skill in the programme, in one place. Each unit takes one tool from the Speaking Playbook and pairs it with the workbook exercise built to train it, so you learn why something works and then immediately put it in your mouth.</p>
+    <div class="stats">
+      <div class="stat"><b>34</b> units</div>
+      <div class="stat"><b>28</b> exercises</div>
+      <div class="stat"><b>6</b> system pages</div>
+      <div class="stat">Write first <b>&middot;</b> then speak <b>&middot;</b> no partner needed</div>
+    </div>
+  </div>
+</header>
+
+<nav class="nav" id="nav"><div class="nav-in wrap">
+  <a href="#chosen">Chosen for you</a>
+  <a href="#contents">Contents</a>
+  <a href="#g-p1">The first four minutes</a>
+  <a href="#g-p2">The long turn</a>
+  <a href="#g-p3">The discussion</a>
+  <a href="#g-voice">The voice</a>
+  <a href="#g-day">Test day</a>
+  <a href="#g-mind">The mind</a>
+  <a href="#g-engine">The engine room</a>
+</div></nav>
+
+<main>
+  <section class="sec" id="chosen"><div class="wrap">
+    <div class="sec-k">Section one</div>
+    <h2 class="sh">Chosen for you</h2>
+    <p class="sub">These are the units I have picked out as your starting point, taken from what I heard in your lesson rather than from the front of the book. Everything here is a copy: each one stays in the full library below as well, so nothing moves and nothing disappears. The newest one I add always sits at the top.</p>
+    <div class="chosen-box open" id="cbox">
+      <button class="chosen-head" id="chead" aria-expanded="true">
+        <span class="chev"></span>
+        <h3>Your starting point</h3>
+        <span class="cnt" id="ccount">0 units</span>
+      </button>
+      <div class="chosen-empty" id="cempty">Nothing chosen yet. Tick a unit in the contents below and its full copy appears here, in the order it was added.</div>
+      <div class="chosen-body" id="cbody"></div>
+    </div>
+  </div></section>
+
+  <section class="sec" id="contents"><div class="wrap">
+    <div class="sec-k">Section two</div>
+    <h2 class="sh">The complete library</h2>
+    <p class="sub">All twenty eight exercises and the six system pages that keep them running, grouped by the part of the test they train. Tick a box to copy that unit into your starting point above. Click a title to jump straight to it.</p>
+    <div class="toc" id="toc"></div>
+    <div class="lib-units" id="lib"></div>
+  </div></section>
+
+  <div class="wrap"><div class="foot">
+    <p><span class="wm" style="color:var(--green)"><span class="g" style="color:var(--green)">Graham</span><span class="i">IELTS</span></span> &middot; 九分G老師 &middot; The Speaking Playbook and Workbook, joined into units.</p>
+    <p>Every technique here traces to a named source. Nothing was included because it sounded good.</p>
+  </div></div>
+</main>
+
+<div class="bar" id="bar"><div class="bar-in">
+  <span class="msg" id="barmsg">Tick the units this student should start with.</span>
+  <input class="mailin" id="mailto" type="email" placeholder="Student email address" autocomplete="off">
+  <button class="btn ghost" id="b-clear">Clear</button>
+  <button class="btn ghost" id="b-link">Copy the link</button>
+  <button class="btn" id="b-mail">Email it</button>
+</div></div>
+<div id="toast"></div>
+
+<script>
+/* ============================================================
+   THE SPEAKING UNITS
+   One playbook tool joined to the workbook exercise that
+   trains it. Sources name the person, the source, and only a
+   credential worth stopping for.
+   ============================================================ */
+
+const GROUPS = [
+  {k:'p1',    n:'The first four minutes',  s:'Part 1 of the test. Familiar questions, and the examiner deciding what kind of speaker you are before you have said anything difficult.'},
+  {k:'p2',    n:'The long turn',           s:'Part 2. Two minutes alone with a cue card, which is where a band is most visibly won. Nine units: the spine of a story, the flesh on it, and how to land it.'},
+  {k:'p3',    n:'The discussion',          s:'Part 3. Abstract questions, and the place band seven is decided. Everything here builds two things: answers that grow, and answers that grow in more than one direction.'},
+  {k:'voice', n:'The voice',               s:'Cross-cutting. Four units on the parts of pronunciation that are actually scored: pitch movement, pace, phrasing, and where the weight of a sentence falls.'},
+  {k:'day',   n:'Test day',                s:'Rehearsed at home so they run on rails in the room. The preparation minute, the blank, and the self-talk that walks in with you.'},
+  {k:'mind',  n:'The mind',                s:'Two written drills. Everything else in this chapter is a way of thinking rather than something to practise on paper, so only these two are here.'},
+  {k:'engine',n:'The engine room',         s:'Not units. Six pages that keep the units running: the story bank, the review log, the word decks, the habit plan, the progress lines, the state card. Refill them weekly.'}
+];
+
+const UNITS = [
+
+/* ---------- PART 1 ---------- */
+{id:'01', grp:'p1', ex:'Exercise 01', pg:5, n:'Kill "I think"',
+ tool:'Tool 1', tn:'The grounded observation swap',
+ who:'Codie Sanchez', from:'her teaching on speaking well', cred:'',
+ crit:'Fluency and coherence, and lexical resource',
+ play:[`Count the openers in a nervous Part 1 and it is often the same three words every time. I think. The examiner hears one phrase launch answer after answer, which flattens the whole interview, signals a narrow vocabulary, and reads as a hedge before you have said anything at all.`,
+       `The swap is small and it does three things at once. Open on something observable instead: from what I have seen, in my experience, what I have noticed is. That varies your phrasing, which the vocabulary mark explicitly rewards. It sounds grounded rather than unsure. And it quietly forces development, because you cannot say from what I have seen without then saying what you saw, so the answer extends past one line without any effort.`],
+ like:`I think is the plastic spoon of English. It works, it is everywhere, and using it for every dish tells the examiner you own no other cutlery.`,
+ how:[`Rewrite each opener below so it starts on something observable from your own life: a place, a routine, a number, a scene.`,
+      `Let the opinion arrive one clause later, already carrying its evidence.`,
+      `One rewritten sentence per line. Write before you speak.`],
+ mat:[`I think my hometown is quite a good place.`,
+      `I think reading is very important.`,
+      `I think the weather affects my mood.`,
+      `I think public transport in my city is convenient.`,
+      `I think cooking at home is better than eating out.`,
+      `I think weekends are too short.`],
+ speak:`The five object sweep. Wherever you are, pick five things you can see. For each one, speak an opener that starts on the object rather than on you: that kettle has boiled four times today, which probably says something about my deadlines. Observation first, opinion riding behind. Five objects, five sentences, daily this week.`,
+ bonus:`Have them ask you five Part 1 questions and keep a tally of every I think you open with. Three or more and you buy the coffee. A public stake does what private intention does not.`},
+
+{id:'02', grp:'p1', ex:'Exercise 02', pg:5, n:'The doorknob 門把',
+ tool:'Tool 5', tn:'Leave a handle on every answer',
+ who:'Cai Kangyong 蔡康永', from:'說話之道', cred:'his books on conversation have sold in the millions',
+ crit:'Fluency and coherence',
+ play:[`Cai teaches that a good conversational turn ends with a 門把, a doorknob: a small handle the other person can grab so the conversation keeps moving. In ordinary life that is warmth and consideration. Here we repurpose it.`,
+       `A Part 1 answer that ends in a dead stop, yes I like it, forces the examiner to drag the interview forward question by question, and a string of those reads as minimal, undeveloped response. That is the definition of the band five to six ceiling in this part. The handle converts a one clause answer into a two or three clause answer without any padding, because what you added is concrete and new. The examiner will not grab the handle. The handle itself is what gets marked.`],
+ like:`A dead end answer is a room with no door handles. The conversation walks in, touches the wall, and has to be carried back out. Install one handle per room.`,
+ how:[`Each answer below is flat. Not too short, just closed: it ends at a wall.`,
+      `Extend each one with a doorknob. One specific detail, or one small trade off, then stop cleanly.`,
+      `Resist the corridor of doors. One handle is development. Three is rambling.`],
+ mat:[`Do you like your job? Yes, I like it. The people are friendly.`,
+      `Do you prefer mornings or evenings? Evenings. I feel more relaxed then.`,
+      `Is your hometown a good place to live? It is okay. It has everything I need.`],
+ speak:`The handle audit, out loud. Take any ten Part 1 questions and answer each into your recorder. After each answer ask one question: did I leave a handle? If the answer ended on a closed fact, redo it immediately, once. The redo is the drill. On the commute, no recorder needed. Answer under your breath, but keep the audit question running: handle, or wall?`,
+ bonus:`They ask the follow up question your doorknob invites. If they cannot find anything to ask, the handle was not really there. Their curiosity is your instrument reading.`},
+
+/* ---------- PART 2 ---------- */
+{id:'03', grp:'p2', ex:'Exercise 03', pg:8, n:'The five second moment',
+ tool:'Tool 7', tn:'A story is a moment, not a topic',
+ who:'Matthew Dicks', from:'Storyworthy', cred:'60-time Moth StorySLAM champion',
+ crit:'Fluency and coherence, and lexical resource',
+ play:[`Given describe a memorable trip, most candidates reach for the most impressive event they can find, the famous tower or the graduation, and produce a travelogue: a list of things that happened, with no meaning attached. Research on storytelling in a second language consistently finds that raters reward the part that says why the events mattered, and an impressive but empty story has none of it.`,
+       `Dicks found that every story worth telling is really about a five second moment when something inside you changed. A realisation, a shift, a small transformation. Everything else exists only to make that moment land. Building around a change moment gives you meaning automatically, keeps the story small enough to finish inside two minutes, and generates real feeling in the telling, which drives natural intonation and honest vocabulary instead of the flat recital of a borrowed event.`],
+ like:`The story is not the trip to Japan. The story is the ten seconds on the platform, holding the wrong ticket, when you realised nobody was coming to fix this for you.`,
+ how:[`For each broad topic below, do not describe the topic.`,
+      `Write one sentence naming the five second moment from your own life that the topic points to.`,
+      `Format: the moment when...`],
+ mat:[`Describe a meal you remember. Not the restaurant, the moment.`,
+      `Describe a person who influenced you. Not their biography, the moment.`,
+      `Describe a place you like to visit. Not the guidebook, the moment.`],
+ speak:`Today's smallest moment. Tonight, before sleep, speak for thirty seconds about the most story like five seconds of your day. The text that changed a plan. The stranger who held the lift. Thirty seconds, out loud, no notes. You are training the eye that finds moments, and it is the same eye the preparation minute needs.`,
+ bonus:``},
+
+{id:'04', grp:'p2', ex:'Exercise 04', pg:8, n:'Homework for Life',
+ tool:'Tool 9', tn:'The story bank',
+ who:'Matthew Dicks', from:'Storyworthy', cred:'60-time Moth StorySLAM champion',
+ crit:'Fluency and coherence, and lexical resource',
+ play:[`On test day the problem is never that your life is empty. It is that you never noticed it. Asked for a memorable something in the preparation minute, you scan a blank archive and panic. Unrecorded life is unretrievable life, and the fix sits upstream of the exam.`,
+       `Dicks fills the shelf with one line a night. Not a diary. One sentence naming the most story like moment of that day, written before sleep. Two things happen over a few weeks. You build a searchable bank of real moments, and, more importantly, you retrain your attention: once you know you owe the notebook a line tonight, you start noticing candidates during the day. Consciously processed experience is far more retrievable later, which is exactly what a sixty second window needs.`],
+ like:`You cannot withdraw from an account you never deposit into. This is a one coin deposit every night, and the preparation minute is the withdrawal window.`,
+ how:[`Seven nights, seven lines, written in the book itself.`,
+      `Write in English. A short clumsy English line beats a polished one in your first language, because the point is the retrieval, not the record.`,
+      `Thirty seconds of your day counts. Nothing has to be impressive.`,
+      `When the week is full, move the habit onto your phone and copy the two best lines into the story bank on System Page S1.`],
+ mat:[`Day 1`,`Day 2`,`Day 3`,`Day 4`,`Day 5`,`Day 6`,`Day 7`],
+ speak:`The commute retell. Each morning, pick one line from a previous day and tell its story for sixty seconds. Whispered on the platform, full voice in the kitchen, silently mouthing on the bus, all of it counts. The line is the seed and the retell is the water. By day seven you have six banked stories that have been told aloud once, which is more than most candidates walk in with.`,
+ bonus:``},
+
+{id:'05', grp:'p2', ex:'Exercise 05', pg:9, n:'Storyboard one cue card',
+ tool:'Tools 10 and 17', tn:'Hook, Struggle, Breakthrough, Application',
+ who:'Vinh Giang', from:'7 Secrets of Great Communicators', cred:'',
+ crit:'Fluency and coherence',
+ play:[`Even with a good story chosen, delivery usually collapses into chronology. First this, then this, then this, and yeah. The examiner hears events rather than a narrative: no reason to care at the start, no tension in the middle, no meaning at the end. Chronology is coherent and it is not developed, and development is what the two minutes are for.`,
+       `Four beats fix it. Hook: why should anyone care, in one line. Struggle: the complication. Breakthrough: the turning point, which is where your five second moment lives. Application: what it meant, what it changed. That arc is what raters experience as a fully developed long turn, and it is a shape rather than a script, so you can hold it from four dot points and carry no memorisation risk at all.`],
+ like:`A story is a tiny film. The trailer, the problem, the turning point, and the scene after the credits where you say what it meant.`,
+ how:[`Choose a cue card. Describe a time you learned something difficult works, or take one from your story bank.`,
+      `Fill the four boxes. Three to eight words per box: dots, not sentences.`,
+      `If a box fights you, your moment may be the wrong one. Choose again. That discovery is the exercise working.`],
+ mat:[`HOOK: the five second moment, teased`,
+      `STRUGGLE: what made it hard`,
+      `BREAKTHROUGH: what changed`,
+      `APPLICATION: what it means now`],
+ speak:`The table read, three passes. Stand up. Deliver the story from your four boxes, dots only, never sentences read aloud, at genuine exam energy, projecting to the far wall. Three full passes. If a pass runs long, tighten the Struggle, never the Breakthrough. Record pass three and keep it. Exercise 11 and System Page S2 will use it.`,
+ bonus:`Deliver pass three to them and ask one question only: where did you stop following? The answer is almost always a missing Struggle beat.`},
+
+{id:'06', grp:'p2', ex:'Exercise 06', pg:10, n:'The But and Therefore engine',
+ tool:'Tool 11', tn:'Chain causes, not events',
+ who:'Matthew Dicks', from:'Storyworthy', cred:'60-time Moth StorySLAM champion',
+ crit:'Grammar range and accuracy, and fluency and coherence',
+ play:[`Your sentences are not wrong. The joints are. And then chains events: this happened, then this, then this. But and therefore chain causes: this happened, which stopped that, so I had to do this instead. The events can be identical. The grammar is not.`,
+       `This matters because narrative in your first language runs comfortably on chained sequences, and that machinery translates straight into English as a string of ands. It is not laziness and it is not a gap in your English. It is perfectly good storytelling grammar from one language arriving in a language that scores subordination. The swap moves two criteria in one motion: but and therefore force cause and contrast subordination, which is the complex sentence range grammar marking wants above band six, and at the same time they drive the story forward, because every but creates a question and every therefore answers one.`],
+ like:`And then is a train on flat track. It moves, but nothing happens. But is a bend, therefore is the engine accelerating out of it, and passengers only look up at bends.`,
+ how:[`Rewrite the paragraph below with and then completely banned.`,
+      `Every join must come from the but and therefore family: but, so, because, which meant, therefore, even though, although.`,
+      `Keep every event. Change only the joints.`,
+      `Write it before you say it. Writing is slow enough that you can still see the choice being made.`],
+ mat:[`I wanted to cook dinner for my parents and then I found a recipe and then I went to the market and then the fish was sold out and then I bought chicken and then I changed the recipe and then my parents arrived and then they liked it.`],
+ speak:`The morning retell, joints exposed. Narrate your morning so far in eight to ten sentences with a quota: two buts, one therefore, zero and thens. The awkward pause you feel before each connector is the new wiring being laid. Do it daily for a week. On day seven the pause is gone and the quota fills itself.`,
+ bonus:``},
+
+{id:'07', grp:'p2', ex:'Exercise 07', pg:10, n:'The governing point',
+ tool:'Tool 12', tn:'Abstraction: what the story is really about',
+ who:'Vinh Giang', from:'7 Secrets of Great Communicators', cred:'',
+ crit:'Fluency and coherence',
+ play:[`Given a cue card, most people either freeze or over pack, cramming in every fact they can remember. Both wreck coherence: the answer wanders, doubles back, and never resolves. The examiner cannot find a through line, so the fluency and coherence mark suffers even when every individual sentence is fine.`,
+       `Before you speak, boil the whole answer down to one governing point. This is really a story about how I learned to trust strangers. Everything then hangs off that spine. Coherence, to a rater, is the experience of following a through line, and a single governing idea gives every sentence a job: it either serves the spine or it gets cut. Because the spine is an idea rather than a fixed sequence of words, it delivers structure with no script risk at all.`],
+ like:`Preparation notes with five disconnected nouns are a pile of bricks. The spine sentence is the architect's sketch, and suddenly every brick knows where it goes.`,
+ how:[`For the Exercise 5 story and one more from your bank, complete the line.`,
+      `Then write the one sentence you would actually say aloud to deliver that point.`,
+      `If your notes are five unconnected nouns, force them under one idea before you start.`],
+ mat:[`Story A: this is really a story about ______________.`,
+      `Story B: this is really a story about ______________.`],
+ speak:`The sandwich. Record Story A as point, then story, then the point again, worded differently. Listen once and check the middle: did every beat serve the point, or did a stray detail wander in? Cut one detail and record again. The second recording is usually your first genuinely coherent long turn. Notice how it feels.`,
+ bonus:``},
+
+{id:'08', grp:'p2', ex:'Exercise 08', pg:11, n:'Show, do not tell',
+ tool:'Tool 13', tn:'The sensory sweep',
+ who:'Matthew Dicks', from:'Storyworthy', cred:'60-time Moth StorySLAM champion',
+ crit:'Lexical resource, and fluency and coherence',
+ play:[`Adjectives claim. Senses prove. Delicious is a verdict you are asking the listener to accept. The smell of star anise still in the flat the next morning is evidence, and evidence is where the less common vocabulary lives.`,
+       `There is a translation trap underneath this one. The warm, high frequency praise words of your first language map onto very good and very beautiful, which are correct, natural, and among the lowest value words in English. The instinct is right and the dictionary match is the enemy. The mechanism is the useful part: you never have to hunt for advanced vocabulary, because you cannot describe a dry mouth or oil separating on the surface of a broth using nice. The precise word gets dragged in by the precise detail.`],
+ like:`It was delicious is a stamp on an envelope. The steam off the broth, the chilli oil separating, the first burnt tongue sip: that is the letter inside. Examiners grade letters, not stamps.`,
+ how:[`Describe one kitchen you know well in exactly four lines, one per sense: see, hear, touch, smell and taste.`,
+      `One rule: no evaluative adjectives. Nice, cosy, delicious and clean are all banned.`,
+      `If a verdict word appears, replace it with the physical sign that earned the verdict.`,
+      `Four lines only. The constraint is what forces the vocabulary.`],
+ mat:[`See`,`Hear`,`Touch`,`Smell and taste`],
+ speak:`The four sense street. On your commute, sweep the street through four senses, one sentence each, spoken or whispered. The diesel smell of the bus, the tap of the pedestrian signal. Two minutes, daily. This is the highest yield vocabulary walk available to you and it needs no materials at all.`,
+ bonus:``},
+
+{id:'09', grp:'p2', ex:'Exercise 09', pg:11, n:'Specificity, name it exactly',
+ tool:'Tool 14', tn:'Which one, exactly?',
+ who:'Vinh Giang', from:'7 Secrets of Great Communicators', cred:'',
+ crit:'Lexical resource',
+ play:[`Generic nouns keep a whole answer bland. A place, some food, a thing I did. You almost certainly own the precise words already. They are simply not what you reach for under pressure, and every generic noun is a scored opportunity quietly declined.`,
+       `Precision compounds, which is why it is the quickest single move available. The specific noun drags in its own precise verbs and modifiers: a rusty Toyota rattles, soup simmers, a night market is packed rather than very crowded. One decision upgrades the whole sentence. Specific detail also reads as true where generic detail reads as filler, so the answer sounds honest as well as wider. This is also the standing correction to the advice that you should speak simply in the test: the marking explicitly rewards precise, less common vocabulary, so simple and vague is a ceiling you build yourself.`],
+ like:`A dog is a stock photo. My neighbour's arthritic golden retriever who barks at the lift is a photograph, and only one of them was worth developing.`,
+ how:[`Two columns, eight rows.`,
+      `Left column: the vague word you actually say. Right column: the exact version, with a brand, a model, a dish, a title or a street in it.`,
+      `Take all eight from your own life, not from a list. The words have to be retrievable under pressure, which means they have to be true.`,
+      `When it is done, copy the best four into the precision deck on System Page S3.`],
+ mat:[`My phone, becoming my iPhone 12 with the cracked corner`,
+      `A snack, becoming scallion pancakes from the cart outside the station`,
+      `Six more of your own`],
+ speak:`The exact naming sweep. Two minutes, anywhere. Name what you can see at maximum precision, out loud or whispered. Not a drink but a half finished bubble tea, fifty percent sugar, from the shop that always undercooks the pearls. Your surroundings are the flashcards.`,
+ bonus:``},
+
+{id:'10', grp:'p2', ex:'Exercise 10', pg:12, n:'Dialogue inside the story',
+ tool:'Tool 15', tn:'Let a voice into the room',
+ who:'Vinh Giang', from:'7 Secrets of Great Communicators', cred:'',
+ crit:'Grammar range and accuracy, and lexical resource',
+ play:[`One line of direct speech inside a story switches tense, register and rhythm in a single move. And she just said: just start again. That sentence does three grammatical jobs while sounding like nothing more than good storytelling.`,
+       `A narrated only answer stays locked in one tense and one structure. I went, I saw, I felt. Two minutes of simple past is a grammar ceiling built by the speaker rather than by the language, and quotation breaks it open with no grammar drilling at all. Reported speech is where the marks hide: restating your own quoted line as a report forces the backshift, he said he was leaving rather than he said he is leaving, and that structure sits squarely in band seven territory. Here you produce it as a by product of telling a story, which is far more durable than producing it in an exercise.`],
+ like:`A narrated only story is a documentary with the sound off. One line of dialogue turns the sound on, and the examiner hears three grammatical structures walk in with it.`,
+ how:[`Convert each reported line below into a direct quote inside a frame sentence.`,
+      `Keep the quote short. Real spoken dialogue is three to eight words, never a paragraph.`,
+      `Then restate your own quote as reported speech and watch the tense step back one place.`,
+      `Let your voice actually change on the quoted line when you say it out loud.`],
+ mat:[`My coach told me I was giving up too early.`,
+      `My mother asked whether I had eaten.`,
+      `My friend said the tickets were sold out.`],
+ speak:`Yesterday's conversation, one quote. Retell any real conversation from yesterday in thirty to sixty seconds with exactly one line of direct speech in it, and let your voice change on the quoted line. Record it. On playback, if you cannot hear where the quote begins, the voice switch needs another pass.`,
+ bonus:``},
+
+{id:'11', grp:'p2', ex:'Exercise 11', pg:12, n:'Close the loop, land the turn',
+ tool:'Tool 16', tn:'意猶未盡: stop while they still want more',
+ who:'Cai Kangyong 蔡康永', from:'說話之道', cred:'his books on conversation have sold in the millions',
+ crit:'Fluency and coherence',
+ play:[`Part 2 answers usually just stop. You run out of things to say and trail off, or you pad desperately until the examiner cuts you off mid sentence. Either way there is no sense of an ending, and a sense of completion is an explicit expectation for a developed long turn. Worse, the final seconds are the freshest thing in the examiner's ear.`,
+       `Two part landing. Close the loop: end by echoing your opening idea, now carrying the weight of the story. And land it early: plan a closing line and use it on a strong note rather than padding to collapse. The callback signals deliberate structure, so the examiner hears an arc rather than an accident, and a clean stop at one minute fifty outscores a ramble to two minutes ten that disintegrates into filler exactly as the fluency judgement forms.`],
+ like:`Gymnasts drill the dismount as its own skill, because judges score the landing and not just the routine. A wobbled landing taxes everything that came before it.`,
+ how:[`Take the Exercise 5 story and write its spine sentence: the hook, one line.`,
+      `Then write two candidate final lines that echo it. Same image or phrase, transformed by what happened in between.`,
+      `Pre load three flexible closers that could cap any story.`],
+ mat:[`Spine sentence`,`Candidate ending A`,`Candidate ending B`],
+ speak:`Endings only. Record just the last fifteen seconds of three stories from your bank. The landing, nothing else. Each must end on its echo line with the pitch falling to the floor. Practising endings in isolation feels strange and works absurdly well, because the ending is the part the examiner hears last and remembers first.`,
+ bonus:``}
+
+];
+
+UNITS.push(
+
+/* ---------- PART 3 ---------- */
+{id:'12', grp:'p3', ex:'Exercise 12', pg:15, n:'Speak in paragraphs',
+ tool:'Tool 18', tn:'The PREP frame',
+ who:'Alexander Lyon', from:'his PREP framework', cred:'communication professor',
+ crit:'Fluency and coherence',
+ play:[`Point, Reason, Example, Point restated. It is not a script and it is not something to memorise. It is a shape your answer pours into, so that development happens by default instead of by luck. Lyon named it, and Ken Romeo, a linguist at Stanford, arrived at the same four beats separately, which is usually a sign that a thing is real rather than clever.`,
+       `The habit it replaces is a reasonable one. In many classrooms, answering a teacher briefly and precisely is respect, and talking on is presumptuous. This test inverts that etiquette completely: here the extended answer is the respectful one, because it is the only kind the marking scheme can reward. A one line reply, however correct, is an adequate response, and adequate is the ceiling of band five to six. PREP is the cleanest route out because it turns say more, which is vague and unusable, into four beats you can always find. The reason beat feeds your grammar. The example beat feeds your vocabulary and your length. The restatement gives every answer a small sense of completion.`],
+ like:`A single sentence is a brick handed to the examiner. PREP is the same brick with mortar, a second course and a lintel. Suddenly it is architecture, and architecture is what gets graded.`,
+ how:[`Fill the grid for both questions in dots and short phrases, never full sentences.`,
+      `The example row is where most candidates go generic. Make yours named, dated and placed: a real person, a real week, a real street.`,
+      `Then deliver each answer from the grid, forty five seconds, recorded.`,
+      `On playback check one thing only: did all four beats arrive? A missing example is the usual casualty, and it is the exact difference between an opinion and an answer.`],
+ mat:[`Q1: Do you think children today have too much screen time?`,
+      `Q2: Is it better to work for one company for a long time, or to change jobs often?`,
+      `For each: Point, Reason, Example (named, dated, placed), Point restated`],
+ speak:`Forty five seconds per question, recorded, delivered from the grid rather than read from it. Then a second pass on the same two questions with the grid turned face down. The second pass is the one that tells you whether the shape is yours yet.`,
+ bonus:`They ask why after your restated point. If your reason already answered it, you built the paragraph correctly. If you find yourself repeating, the reason was hollow.`},
+
+{id:'13', grp:'p3', ex:'Exercise 13', pg:15, n:'Preview, then deliver',
+ tool:'Tools 19 and 21', tn:'Flexible signposting, and the example engine',
+ who:'Alexander Lyon', from:'his work on discourse markers', cred:'communication professor',
+ crit:'Fluency and coherence',
+ play:[`Longer Part 3 answers often turn into unmapped territory. You have three ideas and deliver them as one undifferentiated stream, and the examiner, who is marking cohesive devices in real time, hears effortful speech instead of organised thought.`,
+       `Announce the map before walking it. Two things drive this, one economic and one cultural. Then deliver both. Signposts are named on the marking descriptor, and previewing reduces the load for both of you: the examiner can follow effortlessly, which is what coherence is from their side, and you have publicly committed to a structure, which stops you wandering. One caution: firstly, secondly, thirdly on every answer is a known flag for rehearsed formula. Vary the language, keep the habit.`],
+ like:`A signpost costs three seconds and saves the listener thirty. Nobody has ever got lost in a building with a floor map at the entrance, including the person giving the tour.`,
+ how:[`For each question, write a one line preview that names two reasons.`,
+      `Then write a one line version of each reason.`,
+      `The preview must label them differently. One and the other, or partly and mostly. Not firstly and secondly twice.`],
+ mat:[`Q1: Why do people enjoy watching sport?`,
+      `Q2: Why are traditional festivals becoming more commercial?`],
+ speak:`Promise and keep it. Record each answer as preview, reason one, reason two, done. About forty seconds. On playback, audit the promise: did reason two actually arrive, and did it arrive labelled? Dropping a promised second reason is one of the most common self inflicted coherence wounds in Part 3, and this drill removes it in a week.`,
+ bonus:``},
+
+{id:'14', grp:'p3', ex:'Exercise 14', pg:16, n:'The because engine',
+ tool:'Tool 22', tn:'Real reasons only',
+ who:'Tim David', from:'Magic Words', cred:'former professional magician',
+ crit:'Fluency and coherence, and grammar range and accuracy',
+ play:[`Ellen Langer, the first woman ever tenured in psychology at Harvard, had someone ask to jump a photocopier queue. With no reason, some people agreed. With a real reason, most did. With an empty reason, because I need to make copies, almost as many agreed as with the real one. The word alone satisfied a listener who was not really listening.`,
+       `Your listener is the exact opposite. Grading the reason is their job. So the trick that works in a queue fails on a mark sheet, and an empty because reads as precisely what it is: filler wearing a logic costume. This is the inversion worth carrying, because it hurts at the moment it feels most helpful. A loaded because pays twice: it is a subordinate clause, which is grammar range, and it carries development, which is fluency and coherence. Two quarters of the mark from one sentence, on the single condition that the clause contains something new.`],
+ like:`Because is a tow hitch. In small talk people glance at the hitch and wave you through. The examiner walks around the back and checks whether anything is attached.`,
+ how:[`Each claim below is followed by a hollow because. Rewrite each one with cargo.`,
+      `Use a mechanism (because it changes how...), a consequence (because without it...), or a condition (because whenever...).`,
+      `Rotate the three types. Do not use mechanism four times.`,
+      `Test each rewrite by covering the claim: does the because clause still tell you something on its own?`],
+ mat:[`Public parks matter because they are important to cities.`,
+      `Students should learn history because it is useful knowledge.`,
+      `Online shopping is popular because many people like it.`,
+      `Exercise is good for you because it is healthy.`],
+ speak:`The surroundings because drill. On your commute, make five claims about what you can see, each with a loaded because. This bus stop is badly placed, because the shelter faces the afternoon sun, so nobody uses the bench after two. Mechanism, consequence, condition, rotating. The street is an endless supply of Part 3 questions in disguise.`,
+ bonus:``},
+
+{id:'15', grp:'p3', ex:'Exercise 15', pg:17, n:'Hedge like a professor',
+ tool:'Tool 23', tn:'Qualified opinion is the Part 3 register',
+ who:'Julian Treasure', from:'his TED talk on how to speak', cred:'one of the most watched TED talks ever given',
+ crit:'Grammar range and accuracy, and lexical resource',
+ play:[`Wanting to sound certain, you deliver absolutes. Yes. It is bad. Definitely. Dogmatic certainty sounds less sophisticated rather than more, and it is structurally self defeating: once you have declared an absolute, the answer is finished. There is nowhere left to develop.`,
+       `This is the one high band behaviour that runs with your instincts rather than against them. The habit of avoiding sweeping claims, softening a position and leaving room for another view is exactly the register this section rewards. You are not learning a foreign behaviour. You are being given permission to use one you already have. And the reason it scores is that hedges are grammatical machinery in disguise. It depends on whether demands a conditional. Might, tend to and could are modal verbs. To some extent and in certain contexts are less common vocabulary in their own right. Strategically the hedge also keeps the answer alive, because it depends obliges you to say what it depends on.`],
+ like:`An absolute answer is a door slammed. Loud, final, conversation over. A hedge is the same door held open: everyone can hear there is more house behind it.`,
+ how:[`Recalibrate each absolute claim below, using a different hedge every time.`,
+      `Your bank: tends to, often, in many cases, is likely to, can, up to a point, depends partly on, with some exceptions.`,
+      `One hedge per sentence, then one clause saying what the hedge points at. A hedge with nothing after it is just vagueness.`,
+      `Copy your two favourites into the hedge deck on System Page S3.`],
+ mat:[`Social media makes people lonely.`,
+      `Everyone prefers working from home.`,
+      `Children learn languages faster than adults.`,
+      `Advertising always manipulates people.`,
+      `City life is more stressful than village life.`,
+      `Technology improves education.`],
+ speak:`Hedged forecasting. Speak five predictions about your own day, each carrying one hedge. The 8:15 will probably be full by the third stop. I am likely to regret this second coffee. Low stakes, real calibration, and by Friday the hedges start arriving in a discussion answer without being invited.`,
+ bonus:``},
+
+{id:'16', grp:'p3', ex:'Exercise 16', pg:17, n:'Hold both sides',
+ tool:'Tools 24 and 25', tn:'But becomes and, and the neutral judge',
+ who:'Julian Treasure', from:'his talk on the words that damage', cred:'one of the most watched TED talks ever given',
+ crit:'Grammar range and accuracy, and fluency and coherence',
+ play:[`When you concede a point, but quietly deletes it. Education is important, but it is expensive abandons the first idea and collapses into a one sided answer. Swap to and at the pivot and both ideas stand: education is important, and it is also expensive, which is exactly the tension. Now you are obliged to develop the relationship between them, and the trade off vocabulary that unlocks, tension, on balance, weigh against, is high value on its own.`,
+       `The second half of this unit is the judge's posture. Most people who hedge still develop only the side they happen to agree with, and gesture at the other with of course some people disagree. An empty concession reads as formula rather than reasoning. Give the strongest honest version of each side, one developed reason each, then adjudicate: on balance I lean this way, because. That doubles your material by construction, forces contrast structures, and gives you a natural landing.`],
+ like:`But is an eraser held in your speaking hand. Every time you use it at a pivot it rubs out the clause before it. And is a second hand: now you can hold both objects up and compare them.`,
+ how:[`Rewrite each either or below as one sentence that keeps both halves alive.`,
+      `Use while, although, and at the same time, or it is both and.`,
+      `The test: after your sentence, both sides should still be standing.`],
+ mat:[`Tourism brings money but destroys local culture.`,
+      `Exams are stressful but necessary.`,
+      `Cities are exciting but exhausting.`,
+      `Technology connects people but isolates them.`],
+ speak:`Thirty thirty. Pick one topic you actually have an opinion on. Record thirty seconds arguing your side, then immediately thirty seconds arguing the other side as fairly as you can. The second thirty is the drill: arguing reasons you do not hold is precisely the muscle Part 3 follow ups test.`,
+ bonus:`The neutral judge. They assign you the side you do not hold, cold, and time you for forty five seconds. Then swap. Arguing the assigned brief is the closest home rehearsal there is to a hostile follow up.`},
+
+{id:'17', grp:'p3', ex:'Exercise 17', pg:18, n:'The if pressure release',
+ tool:'Tool 26', tn:'The side gate into a question you cannot answer',
+ who:'Tim David', from:'Magic Words', cred:'former professional magician',
+ crit:'Grammar range and accuracy, and fluency and coherence',
+ play:[`Some questions produce a particular kind of freeze. Not lost words, a lost opinion. Should governments fund the arts, and the mind returns nothing at all. Recovery phrases rescue a lost thread. Nothing in the standard toolkit rescues having no thread to lose. Part of that freeze is a correctness reflex: years of examinations where answers were right or wrong make an unformed opinion feel dangerous to say out loud, and the gatekeeper checking for the correct answer is precisely what blocks the fluent one.`,
+       `If is the side gate. If I were a working artist, I would probably say, whereas if I am honest as a taxpayer, and suddenly you are speaking. Two engines in one word. Psychologically, a hypothetical requires no commitment, so the pressure that caused the freeze evaporates. Grammatically, if manufactures conditionals, and if I were, I would is second conditional machinery, among the most reliably rewarded structures there is.`],
+ like:`A direct question is a locked front door you keep pushing. If is the side gate. You end up in the same garden, nothing had to be forced, and the examiner watches you walk in like you own the place.`,
+ how:[`Extend each topic below twice.`,
+      `Once with a likely conditional: if this continues, ... will.`,
+      `Once with an unlikely one: if this were reversed, ... would.`,
+      `Feel the verb machinery change between the two. That change is the scored behaviour, so write both halves out in full.`],
+ mat:[`Fewer young people are learning traditional crafts.`,
+      `Most commuting in your city happens by scooter or car.`],
+ speak:`Five ifs about what you can see. On the commute, five spoken conditionals about your surroundings, mixing likely and unlikely. If this carriage had one more door, boarding would take half the time. If scooters were banned tomorrow, this street would be unrecognisable. Idle speculation, exam grade grammar.`,
+ bonus:``},
+
+{id:'18', grp:'p3', ex:'Exercise 18', pg:19, n:'The analogy reflex',
+ tool:'Tool 27', tn:'When abstract vocabulary runs out, relocate',
+ who:'Vinh Giang', from:'his CLEAR framework', cred:'',
+ crit:'Lexical resource, and grammar range and accuracy',
+ play:[`Abstract questions leave you groping for topic vocabulary you do not have. The band seven words for technology and society are simply not there, so you retreat into vague repetition and the answer sounds thin no matter how good the underlying idea is.`,
+       `Relocate instead. Social media is like a window: you can see everyone, but there is still glass between you. The analogy solves the vocabulary problem by moving it. You may lack the words for digital alienation, and you own plenty for windows, glass and distance, and used figuratively those everyday words count as flexible, less common usage, which is exactly what the vocabulary mark rewards. Comparative structures feed your grammar, and a sustained image is sustained development: push the image, ask who installed the glass, and the answer keeps growing. One more thing worth knowing. Reaching past your first association is the whole skill. The first word that arrives is the one every other candidate also grabbed.`],
+ like:`The first fish that bites is the one nearest the boat, and it is the same fish everyone else caught. Row out a little. Say the obvious word out loud, then cross it off.`,
+ how:[`Complete each frame below.`,
+      `Then add one sentence extending the image. Who installed the window? What happens when it breaks? The extension is where the tool pays.`,
+      `Third answer rule: say the obvious comparison, bin it, say the next one, bin it, and use the third.`],
+ mat:[`Preparing for IELTS is like ______, because ______.`,
+      `A city's public transport is like the body's ______, because ______.`,
+      `Learning from failure is like ______, because ______.`],
+ speak:`The analogy hunt. Pick one abstract staple: globalisation, tradition, competition. Look around, find its analogy in something you can physically see, and talk the image out for thirty seconds. Repeat with a new object tomorrow. The reflex you are building is abstract question, concrete image, extended answer.`,
+ bonus:``},
+
+{id:'19', grp:'p3', ex:'Exercise 19', pg:19, n:'Problem, Cause, Solution',
+ tool:'Tool 28', tn:'The frame for how should society questions',
+ who:'Alexander Lyon', from:'his answer frames', cred:'communication professor',
+ crit:'Fluency and coherence',
+ play:[`Some Part 3 questions are structural by nature. How could cities reduce traffic. Without a frame those get answered as a scattered suggestion list: idea, idea, idea, stop. Lists are coherent at sentence level and incoherent at answer level.`,
+       `Carry a skeleton for the policy shaped ones. Name the problem, explain its cause, propose the fix that targets the cause. Naming the cause before the solution makes the solution follow rather than merely appear, which is what developed reasoning sounds like. Causal language, stems from, drives, which would mean, feeds both grammar and vocabulary. Like PREP it is a shape rather than a script, so it is unmemorisable by design and reusable forever. Learn to recognise which shape a question wants: opinion shaped goes to PREP, policy shaped comes here.`],
+ like:`A list of solutions is furniture in a pile. Problem, cause, solution is the same furniture in a room that makes sense, and the examiner is grading the room.`,
+ how:[`Fill the grid for one question: how can cities encourage people to use public transport more? Or substitute any social question you care about. The transfer is the point.`,
+      `The fourth row is the one that separates a memorised frame from real reasoning.`,
+      `Use one frame per answer. Do not stack both frames into one bloated reply.`],
+ mat:[`PROBLEM: stated concretely`,
+      `CAUSE: the mechanism behind it`,
+      `SOLUTION: specific, with its own because`,
+      `LIMIT: one honest hedge on your solution`],
+ speak:`Sixty seconds, recorded, all four rows. The fourth row is what makes it real: though this depends partly on whether fares stay affordable. Finish on the hedge and let the intonation fall.`,
+ bonus:``},
+
+/* ---------- THE VOICE ---------- */
+{id:'20', grp:'voice', ex:'Exercise 20', pg:22, n:'Sprints, not streams',
+ tool:'Tool 32', tn:'Chunk and pause',
+ who:'Matt Abrahams', from:'Think Fast, Talk Smart', cred:'lecturer at Stanford Graduate School of Business',
+ crit:'Pronunciation, and fluency and coherence',
+ play:[`Fluent speech moves in short sprints with real pauses between them. It is not one long breathless stream. A pause placed at a phrase boundary is not hesitation, it is phrasing, and phrasing is scored. Three people who teach speaking for a living, working separately, all landed on this same behaviour.`,
+       `For a lot of students the racing is a reflex about being watched: silence feels like failure happening in public, so speed becomes armour. Read that carefully, because the mark sheet has it exactly backwards from the fear. The pause you are afraid of is scored positively, as pace control. The racing you are hiding behind is scored negatively. Chunked speech also has clearer sound: each group gets its own stress peak and its own falling boundary, which gives the examiner an easy rhythm to mark, and each pause buys you a planning window so the content improves too. Placement is everything. Pauses between ideas read as composure. Pauses inside a phrase read as hesitation. Same silence, opposite score.`],
+ like:`Nobody can read a paragraph written without spaces. Pauses are the spaces between written words: invisible as content, indispensable as structure. You are not going silent, you are typing a space.`,
+ how:[`Mark the paragraph below with a slash at every natural chunk boundary. Three to seven words per chunk.`,
+      `Read it aloud, pausing only at slashes, and make each pause a full beat, longer than feels polite.`,
+      `Record it. Any breath taken in the middle of a chunk means the chunk was too long. Re mark and read again.`,
+      `Copy your two favourite chunked sentences out, slashes included, as your reading score for the week.`],
+ mat:[`When I first moved to this city I thought I would hate the noise but after a few months the sound of the night market under my window became the thing that told me I was home and now when I travel somewhere quiet I actually find it difficult to sleep.`],
+ speak:`Read your marks, then freestyle. Thirty seconds on any topic, deliberately speaking in sprints. Aim the pause rather than falling into it. On playback ask one question: are my pauses at the joints, or inside the phrases? If they are inside, move them. That is the entire drill.`,
+ bonus:``},
+
+{id:'21', grp:'voice', ex:'Exercise 21', pg:22, n:'Land the plane',
+ tool:'Tool 31', tn:'Falling intonation',
+ who:'Alexander Lyon', from:'his communication teaching', cred:'communication professor',
+ crit:'Pronunciation',
+ play:[`A sentence that ends with the pitch falling to the floor sounds certain and finished. One that hangs in the air sounds like a question you are asking yourself. Lyon's image is the one to keep: land the plane. Every sentence, on the runway, wheels down.`,
+       `Two separate routes produce the rise in speakers with your first language. In Cantonese, several everyday sentence particles carry rising or high contours, and the habit of ending a turn on a soft rise travels into English intact. In Mandarin, uncertainty in the content leaks into the pitch: when you are not sure the sentence is correct, the voice hedges upward as though asking permission. Either route puts a question mark on the end of a statement you never intended to question. This is the highest leverage intonation fix available, and the reason is arithmetic: you do not have to retrain every sentence, only the landings, and there are only so many landings in a fourteen minute test.`],
+ like:`Every answer is a flight. Rising at the end is circling the airport while the listener waits, seatbelt on, for a landing that never comes.`,
+ how:[`Underline the final word of every sentence in the passage below and mark it with a downward arrow.`,
+      `That mark means the pitch drops on this word, to the bottom of your range.`,
+      `Read it aloud, exaggerating each fall. The last word should feel almost theatrically final.`,
+      `Record and listen only to the endings. Count how many of the four actually landed. Anything still airborne, read again.`],
+ mat:[`I would say my favourite place is my grandmother's balcony. It faces the harbour, so every evening the light turns orange. We used to shell peanuts out there for hours. Even now, that smell means summer to me.`],
+ speak:`Land every one. Take any thirty second answer you have already recorded and deliver it again, landing every sentence. One week of this and the fall becomes your default, which also removes the unsure impression that flat endings create in the discussion section.`,
+ bonus:``},
+
+{id:'22', grp:'voice', ex:'Exercise 22', pg:23, n:'End weight',
+ tool:'Tool 33', tn:'Put the point last',
+ who:'Tim David', from:'Magic Words', cred:'former professional magician',
+ crit:'Grammar range and accuracy, and fluency and coherence',
+ play:[`English carries its news at the end. The final position in a sentence is the stressed position, the slot the ear is waiting on. A sentence that leads with its claim and then trails off through qualifiers has spent that slot on nothing: the strong material went first and the weak material is freshest in the examiner's ear.`,
+       `The repair is pure reordering, and it happens to build exactly the structure the grammar mark rewards. Fronting the qualifiers and the context, then landing the main clause last, is subordinate material first and main clause second, which is complex sentence machinery produced without any grammar study at all. It also pairs physically with the falling ending: once the point is last, the pitch has something worth landing on, and the two together are what certainty actually sounds like in English.`],
+ like:`A firework show does not open with the finale. The sky is brightest at the end, because that is when everyone is looking up.`,
+ how:[`Rewrite each sentence below so its most important idea sits last.`,
+      `Move the qualifiers, the hedges and the context to the front. They are not the news.`,
+      `Read each pair aloud, old version then new, and punch the final word.`,
+      `Then take three sentences from your own recording and rebuild them the same way.`],
+ mat:[`The night market is the thing I miss most, to be honest, when I am abroad.`,
+      `My decision to change careers, which surprised everyone, came after one conversation.`,
+      `Learning to say no was, for me at least, the hardest part of growing up.`,
+      `The exam, although I had prepared for months, still made me nervous.`],
+ speak:`Punch the last word. Record the four rebuilt sentences, hitting the final word with both stress and a fall. Then, in your next practice answer, end three sentences on their actual point. You will feel your sentence planning change mid flight to make it happen. That feeling is the tool installing.`,
+ bonus:``},
+
+{id:'23', grp:'voice', ex:'Exercise 23', pg:23, n:'Melody at 200 percent',
+ tool:'Tool 30', tn:'De-flatten the line',
+ who:'Vinh Giang', from:'his Diary of a CEO interview', cred:'',
+ crit:'Pronunciation',
+ play:[`This is the deepest transfer effect in the whole method. In your first language, pitch is part of the word: change the tone and you change the meaning. Your speech system learned very early that pitch is not yours to play with. In English that discipline becomes a cage, because English spends pitch across the sentence to carry emphasis, attitude and structure, and holding it steady deletes an entire channel of meaning.`,
+       `So the flat delivery is not a personality trait and it is not shyness. It is a rule from another language, still running. That matters, because you cannot fix a personality and you can absolutely switch off a rule. The training principle is calibration by exaggeration: your sense of how much is too much was set by a language where pitch means something else, so what feels cartoonish from inside usually lands as ordinary expressiveness to an English ear. Practise at double, perform at plus twenty. A recording is the only honest referee here, because the gap you are closing is precisely the gap between what it feels like and what it sounds like.`],
+ like:`A tone language issued your pitch a work permit: on duty for words, forbidden elsewhere. English hands it a second job, and until you formally hire it, that job sits vacant.`,
+ how:[`Mark the dialogue below: an up arrow over words that rise, a sideways arrow over words that glide, a down arrow over words that fall.`,
+      `There is no single right answer. The marking forces the choice, and the choice is the skill.`,
+      `Perform it once at double the melody you would ever dare use. Cartoon level. Record it.`,
+      `Then perform it again at what feels like 120 percent, and record that too.`],
+ mat:[`"You are moving?" "I am. Not far, though." "When did you decide?" "Honestly? The day the lift broke. Again." "So, a fifth floor decision." "A fifth floor decision."`],
+ speak:`Play both recordings back. The 120 percent version, the one that felt embarrassing from inside, almost always sounds simply expressive from outside. That gap between felt and heard is the entire reason this exercise exists, and it shrinks every time you repeat it. Redo it weekly.`,
+ bonus:`Read the 120 percent version to them and ask them to rate the drama from one to ten. Their number is almost always lower than yours: live proof that the exaggeration is safe.`}
+
+);
+
+UNITS.push(
+
+/* ---------- TEST DAY ---------- */
+{id:'24', grp:'day', ex:'Exercise 24', pg:26, n:'Separate WHAT from HOW',
+ tool:'Tool 36', tn:'The preparation minute',
+ who:'Tim David', from:'Magic Words', cred:'former professional magician',
+ crit:'Fluency and coherence',
+ play:[`The preparation minute fails when you try to compose sentences in it. You can plan wording or plan content, never both. The minute evaporates, the notes are three half sentences, and the answer launches with neither a plan nor good grammar, which is the worst of both worlds.`,
+       `Idea generation and form monitoring compete for the same working memory. Doing both at once degrades both. So split them and give each job its natural phase: the minute is for what you will say, captured as four dots, and the how happens live, where it always had to happen anyway. This is also why dot points beat sentence notes. Sentences tempt you into reading, which sounds like reading. Dots force live generation, which is what fluency sounds like.`],
+ like:`A chef preps ingredients before service, never during. And never cooks the dish in advance and reheats it, because everyone can taste a reheat.`,
+ how:[`Two timed rounds. Pick a cue card, set a sixty second timer, and fill one preparation box with four dots, three words each. Nothing else.`,
+      `Then immediately deliver it.`,
+      `Round two, new card, same rule.`,
+      `If you wrote a sentence, cross it out. The boxes are deliberately small because the real preparation sheet is smaller.`],
+ mat:[`ROUND 1: H / S / B / A`,
+      `ROUND 2: H / S / B / A`],
+ speak:`Deliver immediately, from dots. The moment the timer sounds, stand and speak the story from your four dots, recorded, full energy, until it is told. No re reading, no editing the dots mid turn. The whole drill is the handoff: the what decided in the minute, the how trusted to training. Run this pair twice a week in exam month.`,
+ bonus:``},
+
+{id:'25', grp:'day', ex:'Exercise 25', pg:26, n:'Recovery lines',
+ tool:'Tools 37 and 38', tn:'Never announce the blank, and continue rather than repair',
+ who:'Matt Abrahams', from:'Think Fast, Talk Smart', cred:'lecturer at Stanford Graduate School of Business',
+ crit:'Fluency and coherence',
+ play:[`Everybody blanks. Everybody makes small errors. The band difference is almost never the stumble, it is the three seconds after it, and those three seconds are entirely trainable. This is the most agreed on rule in everything I have read on speaking under pressure: three separate teachers, none of them citing the others, all say the same thing.`,
+       `Two habits cost you here and both come from good instincts. The first is announcing the blank: sorry, I forgot, what was the question. That converts a one second internal stumble into a visible, extended collapse. The pause itself was nearly free. The announcement is what gets scored. The second is serial repair: he go, goes, sorry, he went. One self correction across a whole test is fine. A repaired sentence costs more than the small error ever would. The replacement is a bridge: a continuer that sounds like thinking rather than failing, deployed inside the answer, light on content and forward in direction. It occupies your mouth, signals intention, and buys the two seconds your memory needs, while the examiner hears a speaker steering rather than sinking.`],
+ like:`Television presenters lose their thread constantly and you never see it, because they bridge and the broadcast never blinks. The audience only knows about the failures that get announced.`,
+ how:[`Write your three personal recovery lines. Continuers that sound like thinking, not like failing.`,
+      `Make them genuinely yours. Lines you would actually say, in your own register, not lines from a list.`,
+      `Copy each line twice more underneath it. Writing is the cheapest memorisation there is, and these three lines are the only script this method will ever ask you to own.`,
+      `Then use them under pressure, on purpose, before you ever need them by accident.`],
+ mat:[`Recovery line 1`,`Recovery line 2`,`Recovery line 3`],
+ speak:`The deliberate blank. Midway through any recorded practice answer this week, stop yourself on purpose. Genuinely lose the thread. Then deploy a recovery line and continue. Three times this week. On playback the test is simple and slightly brutal: can you hear the join? Once you cannot, the room has lost most of its power over you.`,
+ bonus:`Random fire. While you answer, they call blank at any moment. You recover with a line and continue. Two rounds of this is worth a week of solo drills, and it is the one thing a phone genuinely cannot do.`},
+
+{id:'26', grp:'day', ex:'Exercise 26', pg:27, n:'Ask, do not declare',
+ tool:'Tool 40', tn:'Interrogative self-talk',
+ who:'Senay, Albarracin and Noguchi', from:'their 2010 experiment', cred:'peer reviewed, and it nearly doubled performance',
+ crit:'Mindset, which protects everything else',
+ play:[`Standard pep talk is declarative. I will do well. I am confident. For an anxious speaker it rings hollow: the mind hears the claim, files the counter evidence, and the pep talk quietly becomes an argument you are losing with yourself in the waiting room.`,
+       `In the 2010 experiments, people primed with the question form, will I, solved nearly twice as many puzzles as those primed with the declaration, I will. The proposed mechanism fits everything else here: a question invites the mind to generate means, strategies, tools, reasons, where a declaration invites it to debate the claim. The question format turns the minutes before you go in into a strategy review. The declarative format turns them into a courtroom. It only works because the answers exist, which is the whole argument for doing the reps first.`],
+ like:`I will succeed is a poster on the wall, and the mind walks past posters. How will I succeed is a checklist handed to a worker, and the mind cannot help but start ticking it.`,
+ how:[`Convert each declaration below into a question.`,
+      `Then answer it in writing with one piece of real evidence from your own training: name the exercise, the recording, the week.`,
+      `The evidence line is the active ingredient. Without it this is just decoration.`],
+ mat:[`I will stay calm in Part 3.`,
+      `I will speak for the full long turn.`,
+      `I will recover if I blank.`],
+ speak:`The pre practice ritual. Before every recorded session this week, say your three questions aloud and answer each in one spoken sentence of evidence. Will I recover if I blank? I did, twice, in Tuesday's recording. Thirty seconds. By exam week the evidence bank answers before the anxiety does.`,
+ bonus:``},
+
+/* ---------- THE MIND ---------- */
+{id:'27', grp:'mind', ex:'Exercise 27', pg:29, n:'The why ladder',
+ tool:'Tool 44', tn:'Know your why before your what',
+ who:'Michael Jr.', from:'his Know Your Why talk', cred:'',
+ crit:'Mindset, which protects everything else',
+ play:[`Practice without purpose decays into mechanical rep counting, and under pressure a purely mechanical skill has nothing holding it upright. Grinding for a score you resent needing leaks into motivation first and then into the voice itself.`,
+       `Michael Jr. demonstrates it with a song. A music teacher sings a hymn beautifully. Asked to sing it again knowing his why, for the uncle just out of prison, for what the song cost the people who wrote it, the second version transforms, though the notes are identical. Purpose does two mechanical things. It stabilises motivation across the weeks of practice this method demands, because the why survives the boring evenings that the what alone does not. And on the day it resizes the exam: a test taken for something is an instrument rather than a verdict on your worth, which lowers the stakes that drive the whole anxiety spiral.`],
+ like:`A ship's engine and a ship's destination are different systems, and an engine running with no port in mind is just burning fuel loudly.`,
+ how:[`Complete the ladder honestly. Keep asking so that until you reach a person, a place, or a life you can picture.`,
+      `Two rungs is fine. Four is common.`,
+      `Stop when it stops being about English.`,
+      `Write the bottom rung on the first page of your practice log and re read it before every session.`],
+ mat:[`I need band ___ so that...`,
+      `...so that...`,
+      `...so that...`,
+      `...which matters because...`],
+ speak:`First sentence of practice. Tomorrow, open your practice session by saying the bottom rung of your ladder aloud. One sentence, plain voice. It will feel ceremonial. Do it anyway: sessions that start from the why survive the weeks when discipline alone would have quit.`,
+ bonus:``},
+
+{id:'28', grp:'mind', ex:'Exercise 28', pg:29, n:'The so what staircase 那又會怎麼樣',
+ tool:'Tool 46', tn:'Walk the fear down to its floor',
+ who:'Cai Kangyong 蔡康永', from:'情商課', cred:'his books on conversation have sold in the millions',
+ crit:'Mindset, which protects everything else',
+ play:[`Anxiety inflates the exam to life size and beyond. This determines everything. Inflated stakes produce exactly the physical arousal that degrades performance, and the mind rehearses catastrophe in the waiting room so the voice walks in already defeated by a disaster that has not happened.`,
+       `Cai's deflation question, asked seriously and answered honestly: and then what would happen? Worst case, the band comes back low. Then what? You book a retake. Then what? You practise six more weeks and sit it again. Follow the chain to its actual end and you arrive at inconvenience and cost. Not exile. Not identity. Catastrophic anxiety survives on vagueness, because an unexamined disaster stays infinitely large, and walking the chain to its concrete end replaces the fog with a finite, boring, plannable outcome. This is not positive thinking. Nothing here is claimed to go well. It is accurate thinking about failure, which for exam anxiety is the stronger medicine.`],
+ like:`A shadow on the bedroom wall is a monster until you turn the lamp on, and then it is a coat on a chair. And then what is the lamp. The retake was always just a coat.`,
+ how:[`Pick two real exam fears.`,
+      `Walk each one down the staircase in writing: fear, so what, so what, the floor.`,
+      `Then write the floor sentence: worst realistic case is ___, and I would handle it by ___.`,
+      `Name the tool in that second blank. A recovery line, the preparation dots, a breath. One thing that deflates the stakes never deflates the preparation: the practice schedule is untouchable, only the catastrophe is negotiable.`],
+ mat:[`Example: I will blank in Part 2, so what, I pause, so what, I use a recovery line and continue. Floor: a two second pause an examiner has heard a thousand times.`,
+      `Fear 1`,
+      `Fear 2`],
+ speak:`Read each floor sentence aloud once, in a flat, bored voice, the tone you would use for a weather report. Boredom is the point: a fear read aloud calmly, with its handling tool named, has lost its teeth. This is the one exercise here where unimpressive delivery is the goal.`,
+ bonus:``},
+
+/* ---------- THE ENGINE ROOM ---------- */
+{id:'S1', grp:'engine', ex:'System Page S1', pg:32, n:'The story bank',
+ tool:'Tools 8 and 9', tn:'Six to eight small true memories',
+ who:'Matthew Dicks', from:'Storyworthy', cred:'60-time Moth StorySLAM champion',
+ crit:'Runs underneath Part 2',
+ play:[`Six to eight small true memories cover almost every cue card there is. You do not need an impressive story, you need your story, and an ordinary real memory beats a borrowed grand one for one blunt reason: retrieval. A real memory is stored with its sensory detail attached, so descriptions arrive without effort. A borrowed story is stored as a summary, and under adrenaline the summary is all you have, and it runs out at forty seconds.`,
+       `Bank yours here as one line seeds: a person, a place, a decision, a mistake, an object, a meal. Then keep feeding the bank from your Homework for Life lines. One rule: a story counts as banked only when it has been told aloud once. Tick the box only then, because a story written and never spoken is furniture in a locked room.`],
+ like:`A borrowed story is a rented suit. It looks fine standing still, and the moment you move everyone can see it does not fit.`,
+ how:[`Eight rows: a one line seed, and a tick box for told aloud.`,
+      `Cover the six shapes between them: a person, a place, a decision, a mistake, an object, a meal.`,
+      `Return to this page weekly and refill it.`],
+ mat:[`1 to 8: seed, then told aloud`],
+ speak:`Bank maintenance: one commute retell per day, rotating through the bank. A story told four times across a month is exam ready.`,
+ bonus:``},
+
+{id:'S2', grp:'engine', ex:'System Page S2', pg:32, n:'The three pass review log',
+ tool:'Tool 53', tn:'One recording, three listens, one job each',
+ who:'Vinh Giang', from:'his review protocol', cred:'',
+ crit:'Runs underneath everything',
+ play:[`Practice without playback is practice without feedback. You cannot hear your own volume, your pauses or your intonation from inside your head, so it is entirely possible to drill for months while reinforcing the exact habits you think you are fixing.`,
+       `Single focus listening is the whole trick. Trying to hear everything at once, you hear nothing actionable. One job per pass converts a vague cringe, I sound bad, into a specific note, pauses landing inside phrases, move them to the joints. Specific notes are the only kind that change next week's practice. The protocol also gradually desensitises the near universal hatred of your own recorded voice, which otherwise quietly ends the reviewing habit in week one.`],
+ like:`A football team does not rewatch the match hunting for badness. One viewing for shape, one for the back line, one for set pieces. Same match, three films, three fixes.`,
+ how:[`Pass 1, content: did the answer develop, and did it land?`,
+      `Pass 2, one vocal dial only. This week's: pause placement, or melody, or volume, or landings.`,
+      `Pass 3, overall: would a stranger follow this comfortably?`,
+      `Log one line per pass. Never audit everything at once. Attention is the scarce resource this page is rationing.`,
+      `Once a week, transcribe one answer and audit it on paper. The ear forgives, the page does not.`],
+ mat:[`Date, recording, pass 1 note, pass 2 note, pass 3 impression`],
+ speak:`Make recording frictionless: phone, one tap, same folder. Three passes of one answer beats one pass of ten answers.`,
+ bonus:``},
+
+{id:'S3', grp:'engine', ex:'System Page S3', pg:33, n:'The precision deck and the hedge deck',
+ tool:'Tools 14 and 23', tn:'Two living word decks',
+ who:'Vinh Giang and Julian Treasure', from:'specificity, and hedging', cred:'',
+ crit:'Runs underneath lexical resource',
+ play:[`Two decks, fed by two exercises. The precision deck upgrades your generic defaults and is fed by Exercise 09. The hedge deck holds your calibration phrases and is fed by Exercise 15.`,
+       `The final column is the only one that matters. A word is yours when it has been used aloud in a practice answer, so the tick column is filled by mouth and never by pen alone. Three ticks and it is installed. A word you have said aloud in your own sentence is stored differently from a word you have only recognised, and the exam only pays for the first kind.`],
+ like:`A word recognised thirty times is not available in the room. A word used clumsily three times is.`,
+ how:[`Precision rows: my vague default, the exact swap, then three tick boxes for used aloud.`,
+      `Hedge rows: the absolute I over use, the calibrated swap, then three tick boxes.`,
+      `Refill weekly from Exercises 09 and 15.`],
+ mat:[`PRECISION: vague default, exact swap, used aloud x3`,
+      `HEDGE: the absolute, the calibrated swap, used aloud x3`],
+ speak:`Deck walk. On any commute, run the exact naming sweep using this week's deck rows on whatever you can see. Your surroundings are the flashcards.`,
+ bonus:``},
+
+{id:'S4', grp:'engine', ex:'System Page S4', pg:33, n:'The tiny start habit plan',
+ tool:'Tools 49, 50 and 51', tn:'Act first, habit beats willpower, start smaller than your pride wants',
+ who:'Cai Kangyong 蔡康永', from:'情商課', cred:'his books on conversation have sold in the millions',
+ crit:'Runs underneath everything',
+ play:[`You wait to feel ready before practising, and the feeling rarely comes first, so practice rarely starts. Reverse the order. Open your mouth for two minutes before the mood arrives, because the mood is downstream of the motion rather than upstream of it.`,
+       `Then stop budgeting willpower and build a loop instead. Roughly forty percent of daily behaviour runs on cues rather than decisions, so anchor practice to something that already happens every day, keep the routine identical, and let a small reward mark completion. Willpower then gets reassigned to the only job it is good at: the two weeks of repetitions it takes for the loop to lock in. And shrink the first step below the point of resistance, shamelessly. A step so small that refusing it would take more effort than doing it.`],
+ like:`Willpower is carrying water by hand from the river, every evening, forever. A habit is the pipe you spend two weeks laying: tedious exactly once, and then the water simply arrives.`,
+ how:[`Fill and sign the if then plan: after I [existing daily cue], I will [tiny spoken action], in [place].`,
+      `Make the cue something that already happens without you deciding: the morning coffee, boarding the train, closing the laptop at six.`,
+      `Define your minimum unit: one cue card answer aloud, recorded. That single unit always counts as a completed session. Write that rule down.`,
+      `Protect the streak for the first fourteen days as your only goal. Not quality. Occurrence.`],
+ mat:[`After I ______, I will ______, in ______.`,
+      `Weekly tick grid: Mon to Sun`],
+ speak:`On bad days, do the minimum unit shamelessly. On good days, continue past it. Both days protect the streak, and the streak is the asset. Review monthly: your minimum unit will have quietly doubled.`,
+ bonus:``},
+
+{id:'S5', grp:'engine', ex:'System Page S5', pg:34, n:'Progress lines 程度',
+ tool:'Tool 55', tn:'Measure degree, never pass or fail',
+ who:'Cai Kangyong 蔡康永', from:'情商課', cred:'his books on conversation have sold in the millions',
+ crit:'Runs underneath everything',
+ play:[`If you grade every practice against band seven, and band seven is by definition weeks away, then every session reports failure, and a practice regime that only ever reports failure gets abandoned in self defence. The metric killed the preparation, not you.`,
+       `Track movement instead. This week's answer length against last week's. Connector variety. Pauses at joints against pauses inside phrases. Seconds survived before the first filler. The only comparison allowed is you, seven days ago. Progress metrics feed the two systems that keep the engine running: a visible tick rewards the habit loop, and logged movement is the evidence that real confidence is built from.`],
+ like:`A child's height marks on the door frame never once said fail. Just a pencil line, slightly above the last one, and somehow everyone stayed motivated for years.`,
+ how:[`Choose three countable metrics and log them weekly from your recordings.`,
+      `Use the same task each week. A Part 2 from the bank works best.`,
+      `Graph nothing against band seven. Graph everything against week one.`,
+      `Monthly, read the log aloud to yourself: in four weeks, this went from ___ to ___.`],
+ mat:[`Longest run without a filler, in seconds`,
+      `But and therefore family connectors used`,
+      `Hedges used, from deck S3`,
+      `Sentences landed with a full fall`,
+      `Recovery lines deployed invisibly`,
+      `Your own metric`],
+ speak:`That monthly sentence read aloud is manufactured confidence, and it is entirely legitimate, because it is made of things you actually did.`,
+ bonus:``},
+
+{id:'S6', grp:'engine', ex:'System Page S6', pg:34, n:'The state kit card',
+ tool:'Tools 39, 41 and 54', tn:'Protocols for the corridor, not exercises',
+ who:'Matt Abrahams', from:'Think Fast, Talk Smart', cred:'lecturer at Stanford Graduate School of Business',
+ crit:'Runs underneath test day',
+ play:[`Adrenaline produces quick, shallow, chest only breathing, and a body breathing that way produces a shaking, thinning, rushing voice. Nerves sabotage the scored features, pitch stability, pace, volume support, before you have said anything wrong at all. The voice fails first and the content was fine.`,
+       `These are protocols rather than drills. Copy the card into your phone and run it in the waiting room. The long exhale is the lever: extended exhalation slows the heart within a breath or two, which steadies exactly the systems the voice sits on. Posture matters for a smaller and honest reason: an open chest supports the voice better than a collapsed one, and sitting tall genuinely nudges how steady you feel. None of this is marked. All of it protects what is.`],
+ like:`Nerves rev the engine to the red line while you are trying to steer precisely. The long exhale is the clutch: one press, revs drop, and the wheel answers your hands again.`,
+ how:[`Copy the five items into your phone. In the corridor you will not read paragraphs, so keep each one to a single sentence.`,
+      `Run them in order in the waiting room.`,
+      `Practise the sigh daily so it fires under pressure. A technique read once does not.`],
+ mat:[`1. Physiological sigh, twice: a double inhale through the nose, then a long slow mouth exhale.`,
+      `2. Box breath, one minute: in four, hold four, out four, hold four.`,
+      `3. Embodied reset: feet flat, spine tall, shoulders down, jaw loose.`,
+      `4. The film: run your six frame exam morning once, including one handled stumble.`,
+      `5. Three questions: ask them, and answer each with one line of evidence.`],
+ speak:`Rehearse the film nightly in the week before the test, and include a deliberate malfunction with its rehearsed recovery, so the recoveries are in the film too.`,
+ bonus:``}
+
+);
+
+/* ============================================================
+   THE APP
+   Selection lives in the URL, so the link Graham sends carries
+   the choice. Ticking copies a unit into the box at the top and
+   never touches the original in the library.
+   ============================================================ */
+(function(){
+  'use strict';
+  const $  = s => document.querySelector(s);
+  const $$ = s => [].slice.call(document.querySelectorAll(s));
+  const esc = s => String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+  const BY_ID = {};
+  UNITS.forEach(u => BY_ID[u.id] = u);
+
+  /* newest first */
+  let picked = [];
+
+  /* ---------- the unit card ---------- */
+  function unitCard(u, opts){
+    opts = opts || {};
+    const src = '<p class="usrc"><span class="k">Adapted from</span> <b>' + esc(u.who) + '</b>'
+      + '<span class="dot">&middot;</span>' + esc(u.from)
+      + (u.cred ? '<span class="dot">&middot;</span><span class="cred">' + esc(u.cred) + '</span>' : '')
+      + '</p>';
+
+    const head = opts.copy
+      ? '<span class="rank">' + opts.rank + '</span>'
+      : '<span class="exn">' + esc(u.ex.replace('Exercise ','EX ').replace('System Page ','')) + '</span>';
+
+    const tail = opts.copy
+      ? '<button class="drop" data-drop="' + esc(u.id) + '" title="Remove from the starting point">Remove</button>'
+      : '<span class="flag">Chosen</span><span class="caret"></span>';
+
+    return '<details class="unit' + (opts.copy ? ' copy' : '') + '"'
+      + (opts.copy ? '' : ' id="u-' + esc(u.id) + '" data-unit="' + esc(u.id) + '"')
+      + (opts.open ? ' open' : '') + '>'
+      + '<summary>' + head
+      + '<span class="sm"><h4>' + esc(u.n) + '</h4>'
+      + '<span class="smeta">' + esc(u.ex) + ', page ' + u.pg + ' &middot; ' + esc(u.tool) + ' &middot; ' + esc(u.crit) + '</span></span>'
+      + tail + '</summary>'
+      + '<div class="ubody">'
+      + '<div class="play-h"><div class="play-k">The play</div>'
+      + '<h5>' + esc(u.tool) + '. ' + esc(u.tn) + '</h5>' + src
+      + '<div class="utags"><span>' + esc(u.ex) + ', page ' + u.pg + ' of the workbook</span>'
+      + '<span>Moves: ' + esc(u.crit) + '</span></div></div>'
+      + '<div class="blk"><span class="bl">What the play is</span>'
+      + u.play.map(t => '<p>' + esc(t) + '</p>').join('') + '</div>'
+      + '<div class="blk like"><span class="bl">Think of it like this</span><p>' + esc(u.like) + '</p></div>'
+      + '<div class="blk"><span class="bl">Write first, pen before mouth</span><ol>'
+      + u.how.map(t => '<li>' + esc(t) + '</li>').join('') + '</ol></div>'
+      + '<div class="blk mat"><span class="bl">The material</span><ul>'
+      + u.mat.map(t => '<li>' + esc(t) + '</li>').join('') + '</ul></div>'
+      + '<div class="blk speak"><span class="bl">Then speak it, no partner needed</span><p>' + esc(u.speak) + '</p></div>'
+      + (u.bonus ? '<div class="blk bonus"><span class="bl">If you have a partner</span><p>' + esc(u.bonus) + '</p></div>' : '')
+      + '</div></details>';
+  }
+
+  /* ---------- build the library and the contents ---------- */
+  function build(){
+    $('#toc').innerHTML = GROUPS.map(g => {
+      const rows = UNITS.filter(u => u.grp === g.k).map(u =>
+        '<div class="toc-row" data-row="' + esc(u.id) + '">'
+        + '<input type="checkbox" data-tick="' + esc(u.id) + '" aria-label="Choose ' + esc(u.n) + '">'
+        + '<a href="#u-' + esc(u.id) + '" data-jump="' + esc(u.id) + '">'
+        + '<span class="exn">' + esc(u.ex) + '</span>' + esc(u.n) + '</a></div>'
+      ).join('');
+      return '<div class="toc-grp"><h3>' + esc(g.n) + '</h3><p class="gs">' + esc(g.s) + '</p>' + rows + '</div>';
+    }).join('');
+
+    $('#lib').innerHTML = GROUPS.map(g =>
+      '<div class="grp-head" id="g-' + esc(g.k) + '"><h3>' + esc(g.n) + '</h3><p>' + esc(g.s) + '</p></div>'
+      + UNITS.filter(u => u.grp === g.k).map(u => unitCard(u, {})).join('')
+    ).join('');
+  }
+
+  /* ---------- the chosen box ---------- */
+  function paint(){
+    const body = $('#cbody');
+    body.innerHTML = picked.map((id, i) =>
+      BY_ID[id] ? unitCard(BY_ID[id], {copy:true, rank:i + 1, open:true}) : ''
+    ).join('');
+
+    $('#ccount').textContent = picked.length + (picked.length === 1 ? ' unit' : ' units');
+    $('#cempty').style.display = picked.length ? 'none' : 'block';
+    if(picked.length) $('#cbox').classList.add('open');
+
+    $$('[data-tick]').forEach(cb => {
+      const on = picked.indexOf(cb.dataset.tick) > -1;
+      cb.checked = on;
+      cb.closest('.toc-row').classList.toggle('picked', on);
+    });
+    $$('[data-unit]').forEach(el => el.classList.toggle('picked', picked.indexOf(el.dataset.unit) > -1));
+
+    $('#barmsg').innerHTML = picked.length
+      ? '<b>' + picked.length + '</b> chosen. Newest sits at the top.'
+      : 'Tick the units this student should start with.';
+    $('#b-link').disabled = !picked.length;
+    $('#b-mail').disabled = !picked.length;
+
+    writeHash();
+  }
+
+  function choose(id, on){
+    const i = picked.indexOf(id);
+    if(on){ if(i > -1) picked.splice(i,1); picked.unshift(id); }
+    else if(i > -1){ picked.splice(i,1); }
+    paint();
+  }
+
+  /* ---------- the link carries the choice ---------- */
+  function writeHash(){
+    const h = picked.length ? '#focus=' + picked.join(',') : '';
+    try{ history.replaceState(null, '', location.pathname + location.search + h); }catch(e){}
+    try{ localStorage.setItem('gi-focus', picked.join(',')); }catch(e){}
+  }
+  function readHash(){
+    let raw = '';
+    const m = (location.hash || '').match(/focus=([A-Za-z0-9,]+)/);
+    if(m) raw = m[1];
+    else { try{ raw = localStorage.getItem('gi-focus') || ''; }catch(e){} }
+    picked = raw.split(',').map(s => s.trim()).filter(id => BY_ID[id]);
+  }
+
+  /* ---------- helpers ---------- */
+  let tq;
+  function toast(m){
+    const t = $('#toast'); t.textContent = m; t.classList.add('show');
+    clearTimeout(tq); tq = setTimeout(() => t.classList.remove('show'), 2600);
+  }
+  function copy(txt, msg){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(() => toast(msg), fb);
+    } else fb();
+    function fb(){
+      const ta = document.createElement('textarea');
+      ta.value = txt; ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); toast(msg); }catch(e){ toast('Copy failed'); }
+      document.body.removeChild(ta);
+    }
+  }
+  function shareUrl(){
+    return location.origin + location.pathname + '#focus=' + picked.join(',');
+  }
+  function listLines(){
+    return picked.map((id, i) => {
+      const u = BY_ID[id];
+      return (i + 1) + '. ' + u.n + '  (' + u.ex + ', page ' + u.pg + ')';
+    }).join('\n');
+  }
+
+  /* ---------- wiring ---------- */
+  function wire(){
+    document.addEventListener('change', e => {
+      const cb = e.target.closest && e.target.closest('[data-tick]');
+      if(cb) choose(cb.dataset.tick, cb.checked);
+    });
+
+    document.addEventListener('click', e => {
+      const drop = e.target.closest && e.target.closest('[data-drop]');
+      if(drop){ e.preventDefault(); choose(drop.dataset.drop, false); return; }
+
+      const jump = e.target.closest && e.target.closest('[data-jump]');
+      if(jump){
+        const el = document.getElementById('u-' + jump.dataset.jump);
+        if(el) el.open = true;
+      }
+    });
+
+    $('#chead').addEventListener('click', () => {
+      const b = $('#cbox');
+      b.classList.toggle('open');
+      $('#chead').setAttribute('aria-expanded', b.classList.contains('open') ? 'true' : 'false');
+    });
+
+    $('#b-clear').addEventListener('click', () => {
+      if(!picked.length) return;
+      if(!confirm('Clear the chosen list?')) return;
+      picked = []; paint(); toast('Cleared');
+    });
+
+    $('#b-link').addEventListener('click', () => {
+      copy(shareUrl(), 'Link copied. Anyone who opens it sees these units at the top.');
+    });
+
+    /* Opens a pre-filled Gmail compose window. Nothing is sent from this page,
+       no address is stored in it, and no account details ever appear in the file. */
+    $('#b-mail').addEventListener('click', () => {
+      const bar = $('#bar'), inp = $('#mailto');
+      if(!bar.classList.contains('mailing')){
+        bar.classList.add('mailing'); inp.focus();
+        toast('Type the student email address, then press Email it again.');
+        return;
+      }
+      const to = inp.value.trim();
+      const body = [
+        'Hi,', '',
+        'Here are the speaking units to start with. They are at the top of the page, in order:', '',
+        listLines(), '',
+        'Open this link and they will already be waiting for you:',
+        shareUrl(), '',
+        'Everything else in the library stays there for later. Start at number one and stop after twenty minutes.',
+        '', 'Graham'
+      ].join('\n');
+      const url = 'https://mail.google.com/mail/?view=cm&fs=1&tf=1'
+        + '&to=' + encodeURIComponent(to)
+        + '&su=' + encodeURIComponent('Your speaking units')
+        + '&body=' + encodeURIComponent(body);
+      const w = window.open(url, '_blank', 'noopener');
+      if(!w){ copy(body, 'Popup blocked, so the message is on your clipboard'); return; }
+      toast('Gmail is opening with the message filled in. Read it, then send.');
+    });
+
+    $('#mailto').addEventListener('keydown', e => { if(e.key === 'Enter') $('#b-mail').click(); });
+
+    /* nav highlight */
+    const marks = ['chosen','contents'].concat(GROUPS.map(g => 'g-' + g.k));
+    const links = {};
+    $$('.nav a').forEach(a => links[a.getAttribute('href').slice(1)] = a);
+    function spy(){
+      let cur = marks[0];
+      marks.forEach(id => {
+        const el = document.getElementById(id);
+        if(el && el.getBoundingClientRect().top <= 120) cur = id;
+      });
+      $$('.nav a').forEach(a => a.classList.remove('on'));
+      if(links[cur]) links[cur].classList.add('on');
+    }
+    let raf;
+    window.addEventListener('scroll', () => {
+      if(raf) return;
+      raf = requestAnimationFrame(() => { raf = null; spy(); });
+    }, {passive:true});
+    spy();
+  }
+
+  build();
+  readHash();
+  paint();
+  wire();
+
+  /* open whatever the arriving link pointed at */
+  if(location.hash && location.hash.indexOf('#u-') === 0){
+    const el = document.querySelector(location.hash);
+    if(el) el.open = true;
+  }
+})();
+
+</script>
+</body>
+</html>
