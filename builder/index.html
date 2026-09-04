@@ -282,7 +282,8 @@
     <button class="btn ghost" type="button" id="b-mail">Email student</button>
     <button class="btn ghost" type="button" id="b-mailcopy">Copy email text</button>
     <button class="btn ghost" type="button" id="b-copyurl">Copy live URL</button>
-    <button class="btn" type="button" id="b-download">Download both files</button>
+    <button class="btn ghost" type="button" id="b-download">Download both files</button>
+    <button class="btn" type="button" id="b-handoff">Publish for me</button>
   </div>
 </div>
 
@@ -2542,6 +2543,20 @@ const REPORT_JS = [
     const w = window.open(url, '_blank', 'noopener');
     if(!w){ copy(m.sub + '\n\n' + m.body, 'Popup blocked, so the email text is on your clipboard'); return; }
     toast('Gmail is opening with the email filled in. Read it, then send.');
+  });
+
+  /* Publish for me. Puts one line on the clipboard that carries the whole form.
+     Paste it into the chat and both files get rebuilt byte for byte and pushed
+     to the student's folder, creating the folder if it does not exist yet. */
+  $('#b-handoff').addEventListener('click', () => {
+    const S = collect();
+    if(!S.name){ toast('Fill in a name first.'); return; }
+    let code;
+    try{
+      code = btoa(unescape(encodeURIComponent(JSON.stringify(S))));
+    }catch(err){ toast('Could not build the code'); return; }
+    const line = 'PUBLISH ' + currentSlug() + ' GIELTS1:' + code;
+    copy(line, 'Copied. Paste that one line into the chat and it goes live.');
   });
 
   $('#b-mailcopy').addEventListener('click', () => {
