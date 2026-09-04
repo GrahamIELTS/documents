@@ -1,0 +1,1503 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Winnie: Academic Writing Unit</title>
+<meta name="description" content="A seven lesson academic writing unit built from Winnie's own writing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#17392C;
+  --green-2:#235846;
+  --green-3:#2F6B55;
+  --gold:#B4891F;
+  --gold-2:#C9A227;
+  --gold-soft:#F0E3BC;
+  --paper:#FBF9F4;
+  --card:#FFFFFF;
+  --ink:#181C1A;
+  --ink-2:#3A423E;
+  --muted:#63706A;
+  --line:#DFDACD;
+  --wash:#F3F1E8;
+  --red:#9E3A28;
+  --red-wash:#FBEDE9;
+  --green-ok:#1F6B4A;
+  --green-wash:#E8F4EE;
+  --shadow:0 1px 2px rgba(23,57,44,.06),0 8px 24px rgba(23,57,44,.07);
+  --radius:14px;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --green:#0E241C;
+    --green-2:#1B4335;
+    --green-3:#3F8A6E;
+    --gold:#D9B547;
+    --gold-2:#E4C766;
+    --gold-soft:#3A3319;
+    --paper:#101512;
+    --card:#171E1A;
+    --ink:#EDEFEC;
+    --ink-2:#C6CDC8;
+    --muted:#93A099;
+    --line:#2B352F;
+    --wash:#1B2420;
+    --red:#E58B76;
+    --red-wash:#2C1A16;
+    --green-ok:#6FCFA2;
+    --green-wash:#152A21;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --green:#0E241C;
+  --green-2:#1B4335;
+  --green-3:#3F8A6E;
+  --gold:#D9B547;
+  --gold-2:#E4C766;
+  --gold-soft:#3A3319;
+  --paper:#101512;
+  --card:#171E1A;
+  --ink:#EDEFEC;
+  --ink-2:#C6CDC8;
+  --muted:#93A099;
+  --line:#2B352F;
+  --wash:#1B2420;
+  --red:#E58B76;
+  --red-wash:#2C1A16;
+  --green-ok:#6FCFA2;
+  --green-wash:#152A21;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.2;margin:0}
+p{margin:0 0 1em}
+p:last-child{margin-bottom:0}
+a{color:var(--green-3)}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px}
+.wrap-wide{max-width:1060px;margin:0 auto;padding:0 20px}
+
+/* ---------- header ---------- */
+.masthead{background:var(--green);color:#fff;padding:34px 0 30px;border-bottom:3px solid var(--gold)}
+.mark{font-family:var(--serif);font-size:1.02rem;letter-spacing:.02em;font-weight:600;color:#fff}
+.mark b{color:var(--gold-2);font-weight:600}
+.eyebrow{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-2);font-weight:600;margin-top:22px}
+.masthead h1{font-size:clamp(1.85rem,5.2vw,2.75rem);color:#fff;margin:.28em 0 .34em}
+.masthead .lede{color:#D6E2DB;max-width:56ch;font-size:1.02rem;margin:0}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.fact{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:5px 13px;font-size:.79rem;color:#E4EDE7}
+.fact b{color:var(--gold-2);font-weight:600}
+
+/* ---------- sticky bar ---------- */
+.bar{position:sticky;top:0;z-index:60;background:var(--card);border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(0,0,0,.02)}
+.bar-in{display:flex;align-items:center;gap:14px;padding:9px 20px;max-width:1060px;margin:0 auto}
+.bar-label{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap}
+.track{flex:1;height:8px;background:var(--wash);border-radius:99px;overflow:hidden;min-width:60px}
+.track i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green-3),var(--gold));border-radius:99px;transition:width .45s cubic-bezier(.4,0,.2,1)}
+.bar-count{font-size:.8rem;font-weight:600;color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+.iconbtn{background:none;border:1px solid var(--line);color:var(--ink-2);border-radius:8px;width:33px;height:31px;cursor:pointer;font-size:.95rem;line-height:1;display:grid;place-items:center;flex:none}
+.iconbtn:hover{border-color:var(--green-3);color:var(--green-3)}
+.iconbtn svg{display:block}
+
+/* ---------- sections ---------- */
+main{padding:44px 0 80px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 26px 24px;margin:0 0 26px}
+@media(max-width:520px){.card{padding:20px 17px 18px}}
+
+.diag h2{font-size:1.45rem;margin-bottom:.5em}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(126px,1fr));gap:10px;margin:20px 0 4px}
+.metric{background:var(--wash);border:1px solid var(--line);border-radius:11px;padding:13px 14px}
+.metric .n{font-family:var(--serif);font-size:1.6rem;font-weight:600;color:var(--green-3);line-height:1;display:block}
+.metric .k{font-size:.76rem;color:var(--muted);margin-top:6px;line-height:1.35;display:block}
+
+.contents{list-style:none;margin:18px 0 0;padding:0;counter-reset:c}
+.contents li{border-top:1px solid var(--line)}
+.contents li:last-child{border-bottom:1px solid var(--line)}
+.contents a{display:flex;gap:13px;align-items:baseline;padding:11px 4px;text-decoration:none;color:var(--ink)}
+.contents a:hover{background:var(--wash)}
+.contents .num{font-family:var(--serif);color:var(--gold);font-weight:600;font-size:.9rem;min-width:1.4em}
+.contents .ttl{font-weight:500;flex:1}
+.contents .st{font-size:.72rem;color:var(--muted);white-space:nowrap}
+.contents .st.done{color:var(--green-ok);font-weight:600}
+
+/* ---------- lesson ---------- */
+.lesson{margin:0 0 22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow);overflow:hidden}
+.lhead{width:100%;text-align:left;background:var(--green);color:#fff;border:0;padding:19px 22px;cursor:pointer;display:flex;gap:15px;align-items:flex-start;font:inherit}
+.lhead:hover{background:var(--green-2)}
+.lnum{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--gold-2);line-height:1;min-width:1.5em;padding-top:2px}
+.lhead h2{color:#fff;font-size:1.22rem;margin:0 0 4px}
+.lsub{font-size:.83rem;color:#BFD2C8;margin:0}
+.lchev{margin-left:auto;color:var(--gold-2);font-size:.8rem;transition:transform .25s;padding-top:6px;flex:none}
+.lesson.open .lchev{transform:rotate(180deg)}
+.lbody{padding:24px 22px 26px;display:none}
+.lesson.open .lbody{display:block}
+@media(max-width:520px){.lbody{padding:20px 16px 22px}.lhead{padding:16px 15px}}
+
+h3.h{font-size:1.06rem;margin:26px 0 9px;color:var(--green-3)}
+h3.h:first-child{margin-top:0}
+.lbody p,.lbody li{color:var(--ink-2)}
+
+.quote{border-left:3px solid var(--gold);background:var(--wash);padding:13px 16px;border-radius:0 9px 9px 0;margin:0 0 16px;font-size:.97rem}
+.quote em{font-style:normal;background:var(--gold-soft);padding:.05em .22em;border-radius:3px;color:var(--ink)}
+.quote .src{display:block;font-size:.74rem;color:var(--muted);margin-top:8px;letter-spacing:.03em}
+
+.note{background:var(--green-wash);border:1px solid var(--line);border-left:3px solid var(--green-3);border-radius:0 9px 9px 0;padding:13px 16px;margin:16px 0;font-size:.94rem}
+.note b{color:var(--green-3)}
+
+table.t{width:100%;border-collapse:collapse;margin:14px 0;font-size:.9rem}
+table.t th{background:var(--green);color:#fff;text-align:left;padding:9px 11px;font-weight:600;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase}
+table.t td{border-bottom:1px solid var(--line);padding:9px 11px;vertical-align:top;color:var(--ink-2)}
+table.t tr:last-child td{border-bottom:0}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:var(--wash);padding:.1em .34em;border-radius:4px;border:1px solid var(--line)}
+.x{color:var(--red);font-weight:600}
+.ok{color:var(--green-ok);font-weight:600}
+
+/* ---------- tasks ---------- */
+.task{border:1px solid var(--line);border-radius:12px;padding:18px;margin:20px 0;background:var(--paper)}
+.task.done{border-color:var(--green-ok);background:var(--green-wash)}
+.tasktop{display:flex;align-items:center;gap:10px;margin-bottom:13px}
+.tag{background:var(--gold);color:#231C05;font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.tasktop h4{font-size:1rem;font-family:var(--sans);font-weight:600;color:var(--ink);margin:0}
+.tick{margin-left:auto;color:var(--green-ok);font-weight:700;font-size:.8rem;opacity:0;transition:opacity .3s;white-space:nowrap}
+.task.done .tick{opacity:1}
+.q{margin:14px 0 0}
+.q p.stem{margin:0 0 8px;color:var(--ink)}
+
+.opts{display:grid;gap:7px}
+.opt{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 13px;cursor:pointer;font:inherit;font-size:.93rem;color:var(--ink-2);transition:border-color .15s,background .15s}
+.opt:hover:not(:disabled){border-color:var(--green-3)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--green-ok);background:var(--green-wash);color:var(--ink)}
+.opt.wrong{border-color:var(--red);background:var(--red-wash);color:var(--ink)}
+.opt .mk{font-weight:700;margin-right:7px;color:var(--gold)}
+
+.sortrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin-bottom:8px}
+.sortrow .txt{flex:1 1 240px;font-size:.93rem;color:var(--ink-2)}
+.sortrow .btns{display:flex;gap:6px;flex:none}
+.sbtn{background:var(--wash);border:1px solid var(--line);border-radius:7px;padding:5px 11px;font:inherit;font-size:.79rem;font-weight:600;cursor:pointer;color:var(--ink-2)}
+.sbtn:hover:not(:disabled){border-color:var(--green-3);color:var(--green-3)}
+.sbtn.sel{background:var(--green);color:#fff;border-color:var(--green)}
+.sortrow.right{border-color:var(--green-ok);background:var(--green-wash)}
+.sortrow.wrong{border-color:var(--red);background:var(--red-wash)}
+.why{flex:1 1 100%;font-size:.82rem;color:var(--muted);margin-top:2px}
+
+select.gap{font:inherit;font-size:.9rem;background:var(--card);border:1px solid var(--green-3);border-radius:6px;padding:2px 5px;color:var(--ink);margin:0 2px;max-width:11em}
+select.gap.right{border-color:var(--green-ok);background:var(--green-wash)}
+select.gap.wrong{border-color:var(--red);background:var(--red-wash)}
+.gapline{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px;margin-bottom:8px;font-size:.95rem;color:var(--ink-2);line-height:2.1}
+
+textarea{width:100%;font:inherit;font-size:.94rem;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 12px;color:var(--ink);resize:vertical;min-height:76px;line-height:1.55}
+textarea:focus{outline:2px solid var(--green-3);outline-offset:-1px;border-color:var(--green-3)}
+.mini{font-size:.79rem;color:var(--muted);margin:6px 0 0}
+
+.btn{background:var(--green);color:#fff;border:0;border-radius:9px;padding:9px 17px;font:inherit;font-size:.87rem;font-weight:600;cursor:pointer}
+.btn:hover{background:var(--green-2)}
+.btn.ghost{background:transparent;color:var(--green-3);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--green-3);background:var(--wash)}
+.btn.gold{background:var(--gold);color:#231C05}
+.btn.gold:hover{background:var(--gold-2)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+
+.model{margin-top:12px;background:var(--green);color:#E9F0EC;border-radius:10px;padding:15px 17px;font-size:.93rem}
+.model h5{margin:0 0 7px;font-family:var(--sans);font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold-2);font-weight:700}
+.model p{color:#DCE6E0}
+.model p:last-child{margin-bottom:0}
+.model .hl{color:var(--gold-2);font-weight:600}
+
+/* chip matching */
+.pool{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px;min-height:38px;padding:9px;background:var(--wash);border:1px dashed var(--line);border-radius:10px}
+.chip{background:var(--card);border:1px solid var(--green-3);color:var(--ink);border-radius:99px;padding:6px 13px;font-size:.86rem;cursor:grab;user-select:none;font-weight:500}
+.chip:active{cursor:grabbing}
+.chip.sel{background:var(--green);color:#fff;box-shadow:0 0 0 3px var(--gold-soft)}
+.slots{display:grid;gap:8px}
+.slot{display:flex;gap:11px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:9px 12px;flex-wrap:wrap}
+.slot .lab{flex:1 1 180px;font-size:.9rem;color:var(--ink-2)}
+.drop{min-width:132px;min-height:36px;border:1px dashed var(--green-3);border-radius:99px;display:flex;align-items:center;justify-content:center;padding:3px 7px;flex:none;font-size:.8rem;color:var(--muted)}
+.drop.over{background:var(--gold-soft);border-style:solid}
+.drop .chip{cursor:pointer;margin:0}
+.slot.right{border-color:var(--green-ok);background:var(--green-wash)}
+.slot.wrong{border-color:var(--red);background:var(--red-wash)}
+
+/* clickable sentence picking */
+.pick{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 15px;font-size:.95rem;line-height:1.85;color:var(--ink-2)}
+.ps{cursor:pointer;border-radius:4px;padding:.08em .16em;border-bottom:2px dotted var(--line);transition:background .15s}
+.ps:hover{background:var(--wash)}
+.ps.sel{background:var(--gold-soft);border-bottom-color:var(--gold);color:var(--ink)}
+.ps.right{background:var(--green-wash);border-bottom-color:var(--green-ok);color:var(--ink);font-weight:500}
+.ps.wrong{background:var(--red-wash);border-bottom-color:var(--red)}
+
+.fb{margin-top:11px;font-size:.88rem;padding:10px 13px;border-radius:9px;display:none}
+.fb.show{display:block}
+.fb.good{background:var(--green-wash);color:var(--green-ok);border:1px solid var(--green-ok)}
+.fb.bad{background:var(--red-wash);color:var(--red);border:1px solid var(--red)}
+.fb.info{background:var(--wash);color:var(--ink-2);border:1px solid var(--line)}
+
+/* homework */
+.hw{margin-top:26px;border:2px solid var(--gold);border-radius:13px;overflow:hidden}
+.hwhead{background:var(--gold);color:#231C05;padding:12px 18px;display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.hwhead h4{font-family:var(--serif);font-size:1.08rem;margin:0;font-weight:600}
+.hwstate{margin-left:auto;font-size:.73rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.hwbody{padding:19px 18px;background:var(--card)}
+.hwlock{padding:22px 18px;background:var(--wash);text-align:center;color:var(--muted);font-size:.9rem}
+.hwlock b{color:var(--ink-2)}
+.hwbody ol{margin:0;padding-left:1.25em}
+.hwbody li{margin-bottom:11px}
+.hwbody li:last-child{margin-bottom:0}
+.due{font-size:.82rem;color:var(--muted);margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+
+.chk{display:flex;gap:9px;align-items:flex-start;font-size:.9rem;color:var(--ink-2);cursor:pointer;margin-top:11px;line-height:1.5}
+.chk input{margin-top:.28em;accent-color:var(--green-3);width:16px;height:16px;flex:none}
+
+footer{background:var(--green);color:#B9CCC2;padding:30px 0;font-size:.85rem;border-top:3px solid var(--gold);margin-top:10px}
+footer .mark{font-size:.95rem}
+footer p{margin:9px 0 0;max-width:60ch}
+
+.srcs{font-size:.83rem;color:var(--muted)}
+.srcs li{margin-bottom:7px}
+
+@media print{
+  .bar,.lchev,.iconbtn,.btn,.hwlock{display:none!important}
+  .lbody{display:block!important}
+  .lesson,.card{break-inside:avoid;box-shadow:none;page-break-inside:avoid}
+  body{background:#fff}
+  .masthead{background:#17392C!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap-wide">
+    <div class="mark">Graham<b>IELTS</b></div>
+    <div class="eyebrow">Personal unit &middot; seven lessons</div>
+    <h1>Winnie: Academic Writing</h1>
+    <p class="lede">Built entirely from your essay on smartphones and the young generation. Every example below is a sentence you wrote. Nothing here is general advice.</p>
+    <div class="facts">
+      <span class="fact"><b>439</b> words analysed</span>
+      <span class="fact"><b>7</b> lessons</span>
+      <span class="fact">Homework after <b>every</b> lesson</span>
+      <span class="fact">Goal: <b>university writing</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="bar-in">
+    <span class="bar-label">Progress</span>
+    <div class="track"><i id="pfill"></i></div>
+    <span class="bar-count" id="pcount">0 / 21</span>
+    <button class="iconbtn" id="themebtn" title="Switch light and dark" aria-label="Switch light and dark"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.5A6.5 6.5 0 0 1 8 14.5Z" fill="currentColor"/></svg></button>
+    <button class="iconbtn" id="resetbtn" title="Clear all my answers" aria-label="Clear all my answers"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13.5 8a5.5 5.5 0 1 1-1.7-3.97"/><path d="M13.6 1.9v3.2h-3.2"/></svg></button>
+  </div>
+</div>
+
+<main>
+<div class="wrap">
+
+  <!-- ================= DIAGNOSTIC ================= -->
+  <section class="card diag">
+    <h2>What your essay showed me</h2>
+    <p>You wrote 439 words on the impact of smartphones on the young generation, and you held one position from the first paragraph to the last. That is not nothing. Plenty of students at your stage lose their argument halfway through, and you did not.</p>
+    <p>Your ideas are also genuinely yours. The point about concentration being a skill that has to be built in early childhood is a real argument, not a borrowed one. The problem is never that you have nothing to say.</p>
+    <p>What is holding the writing back is <strong>how the ideas are packaged</strong>. Your paragraphs announce topics instead of arguing points, your evidence is your own life, and a small number of grammar patterns repeat so often that they colour the whole essay. Those are all fixable, and seven lessons is enough.</p>
+
+    <div class="metrics">
+      <div class="metric"><span class="n">0</span><span class="k">of your 3 reason openings state a claim</span></div>
+      <div class="metric"><span class="n">22</span><span class="k">first person references in 439 words</span></div>
+      <div class="metric"><span class="n">10</span><span class="k">article errors, the largest single group</span></div>
+      <div class="metric"><span class="n">1</span><span class="k">checkable piece of evidence in the whole essay</span></div>
+    </div>
+
+    <h3 class="h" style="margin-top:26px">The order I have put these in</h3>
+    <p>Most needed first. If we run out of time, we lose the bottom of the list, not the top. Lessons 1 to 4 change how your reader receives the argument. Lessons 5 to 7 clean up the sentences that carry it.</p>
+    <ul class="contents" id="toc">
+      <li><a href="#l1"><span class="num">1</span><span class="ttl">A topic sentence makes a claim</span><span class="st" data-st="1">not started</span></a></li>
+      <li><a href="#l2"><span class="num">2</span><span class="ttl">Support is a chain, not a list</span><span class="st" data-st="2">not started</span></a></li>
+      <li><a href="#l3"><span class="num">3</span><span class="ttl">Getting yourself out of the argument</span><span class="st" data-st="3">not started</span></a></li>
+      <li><a href="#l4"><span class="num">4</span><span class="ttl">One paragraph, one idea</span><span class="st" data-st="4">not started</span></a></li>
+      <li><a href="#l5"><span class="num">5</span><span class="ttl">a, the, or nothing at all</span><span class="st" data-st="5">not started</span></a></li>
+      <li><a href="#l6"><span class="num">6</span><span class="ttl">The register gap</span><span class="st" data-st="6">not started</span></a></li>
+      <li><a href="#l7"><span class="num">7</span><span class="ttl">Saying "so much that"</span><span class="st" data-st="7">not started</span></a></li>
+    </ul>
+    <p class="mini" style="margin-top:14px">Your answers save in this browser. Come back to the link and they will still be here. Use the circle button above to switch to dark, and the arrow to clear everything and start again.</p>
+  </section>
+
+  <!-- ================= LESSON 1 ================= -->
+  <section class="lesson" id="l1" data-lesson="1">
+    <button class="lhead" type="button">
+      <span class="lnum">1</span>
+      <span>
+        <h2>A topic sentence makes a claim</h2>
+        <p class="lsub">Why all three of your body paragraphs start in the wrong gear</p>
+      </span>
+      <span class="lchev">&#9660;</span>
+    </button>
+    <div class="lbody">
+
+      <h3 class="h">What you did</h3>
+      <p>Here is how each of your three body paragraphs begins.</p>
+      <div class="quote"><em>Firstly, let's talk about the eyesight.</em><span class="src">Your paragraph 2, first sentence</span></div>
+      <div class="quote"><em>Secondly, in terms of awareness,</em> they often watch videos on short-video platforms such as TikTok and scroll through social media.<span class="src">Your paragraph 2, sentence 5</span></div>
+      <div class="quote"><em>Finally, as for their ability to focus,</em> it's hard for them to pay attention to one thing long time now.<span class="src">Your paragraph 3, first sentence</span></div>
+      <p>All three do the same thing. They tell your reader what the paragraph is <strong>about</strong>. None of them tells your reader what you are going to <strong>prove</strong>.</p>
+
+      <h3 class="h">The test that settles it</h3>
+      <div class="note"><b>Can a reasonable person disagree with this sentence?</b> If nobody could possibly argue with it, it is not a claim, and it is not a topic sentence. It is an announcement.</div>
+      <p>Nobody can disagree with "let's talk about the eyesight." It is an instruction, not a position. But a reader could absolutely disagree with "Early smartphone use is damaging children's eyesight before they reach secondary school." That is a claim, and now the rest of the paragraph has a job: prove it.</p>
+      <p>This matters more at university than it did at school. A university marker reads your first sentence and decides, in that moment, whether the paragraph is going to argue something. If your opening sentence is a signpost, the marker reads the rest of the paragraph looking for the argument instead of following it.</p>
+
+      <h3 class="h">Three things a topic sentence must carry</h3>
+      <div class="scroll"><table class="t">
+        <tr><th>It must</th><th>Which means</th><th>Test</th></tr>
+        <tr><td>State a position</td><td>Not the subject, your view of the subject</td><td>Could someone argue back?</td></tr>
+        <tr><td>Contain the controlling idea</td><td>The one thing the paragraph will prove, named in the sentence</td><td>Can you point at the word?</td></tr>
+        <tr><td>Be capable of being wrong</td><td>If it cannot be false, it carries no information</td><td>Could evidence disprove it?</td></tr>
+      </table></div>
+
+      <h3 class="h">You already wrote a real one</h3>
+      <div class="quote">Concentration is a skill that needs to be nurtured during early childhood.<span class="src">Your paragraph 3, sentence 2</span></div>
+      <p>That is a proper topic sentence. It takes a position, it names the controlling idea (concentration as a trained skill rather than a fixed trait), and a reader could disagree with it. It is sitting in position two, behind "Finally, as for their ability to focus." Move it to the front and the paragraph starts working immediately.</p>
+      <p>So this is not a skill you lack. It is a habit of putting the signpost first and the argument second. We are swapping the order.</p>
+
+      <!-- TASK 1.1 -->
+      <div class="task" data-task="1-1" data-need="6">
+        <div class="tasktop"><span class="tag">Task 1.1</span><h4>Announcement or claim?</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 12px">Six sentences. Decide which are announcements and which are claims. Two of these are yours.</p>
+        <div id="s11"></div>
+        <div class="fb" id="f11"></div>
+      </div>
+
+      <!-- TASK 1.2 -->
+      <div class="task" data-task="1-2" data-need="1">
+        <div class="tasktop"><span class="tag">Task 1.2</span><h4>Repair your own openings</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 10px">Rewrite each opening so it makes a claim. Keep your idea. Change only what it is doing.</p>
+        <div class="q">
+          <p class="stem"><span class="x">1.</span> Firstly, let's talk about the eyesight.</p>
+          <textarea data-k="t12a" placeholder="Your claim..."></textarea>
+        </div>
+        <div class="q">
+          <p class="stem"><span class="x">2.</span> Secondly, in terms of awareness, they often watch videos on short-video platforms.</p>
+          <textarea data-k="t12b" placeholder="Your claim..."></textarea>
+        </div>
+        <div class="q">
+          <p class="stem"><span class="x">3.</span> Finally, as for their ability to focus, it's hard for them to pay attention to one thing long time now.</p>
+          <textarea data-k="t12c" placeholder="Your claim..."></textarea>
+        </div>
+        <div class="row">
+          <button class="btn ghost" data-model="m12">Show my versions</button>
+        </div>
+        <div class="model" id="m12" hidden>
+          <h5>How I would write them</h5>
+          <p><span class="hl">1.</span> Children who are given screens before the age of three are developing short sight far earlier than the generation before them.</p>
+          <p><span class="hl">2.</span> Young children absorb what they see on social platforms without the judgement needed to question it.</p>
+          <p><span class="hl">3.</span> Concentration is a skill built in early childhood, and constant screen access prevents it from forming.</p>
+          <p style="margin-top:11px;font-size:.87rem;color:#BFD2C8">Notice that none of them contain "firstly", "secondly" or "finally". You do not need those words once the sentence carries a claim. The claim itself signals a new point.</p>
+        </div>
+        <label class="chk"><input type="checkbox" data-c="1-2"> I have written all three and compared them.</label>
+      </div>
+
+      <!-- TASK 1.3 -->
+      <div class="task" data-task="1-3" data-need="2">
+        <div class="tasktop"><span class="tag">Task 1.3</span><h4>Two quick checks</h4><span class="tick">Complete</span></div>
+        <div id="m13"></div>
+      </div>
+
+      <div class="hw" data-hw="1">
+        <div class="hwhead"><h4>Homework 1</h4><span class="hwstate"></span></div>
+        <div class="hwlock">Finish the three tasks above and this opens. <b>Nothing is hidden from you</b>, the lock is only there so you do the practice first.</div>
+        <div class="hwbody" hidden>
+          <ol>
+            <li><strong>Three ways to open one paragraph.</strong> Take your eyesight paragraph. Write three different topic sentences for it, each making a genuinely different claim. Then decide which one the evidence in that paragraph actually supports, and say in one line why the other two do not survive.</li>
+            <li><strong>Read like a marker.</strong> Open any reading set for one of your university modules. Copy out the first sentence of five paragraphs. Beside each, write claim or announcement. Bring the list.</li>
+            <li><strong>The rescue.</strong> Find one paragraph in your own past work where the real topic sentence is buried in position two or three, exactly like your concentration sentence. Move it to the front and send me both versions.</li>
+          </ol>
+          <p class="due">Bring this to lesson 2. If you write nothing else this week, write number one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LESSON 2 ================= -->
+  <section class="lesson" id="l2" data-lesson="2">
+    <button class="lhead" type="button">
+      <span class="lnum">2</span>
+      <span>
+        <h2>Support is a chain, not a list</h2>
+        <p class="lsub">The homework you did not do last time, rebuilt properly</p>
+      </span>
+      <span class="lchev">&#9660;</span>
+    </button>
+    <div class="lbody">
+
+      <p>You had homework on supporting sentences and it did not come back. I am not going to make an issue of it, but I am going to teach it again, because your essay shows exactly what happens without it.</p>
+
+      <h3 class="h">Your awareness paragraph, in full</h3>
+      <div class="quote">Secondly, in terms of awareness, they often watch videos on short-video platforms such as TikTok and scroll through social media. But they are too young that do not have an ability to recognize whether the thing is right or not. This leads them to blindly follow and imitate behaviors they see online and lose the innocence they should have at their age.<span class="src">Your paragraph 2, sentences 5 to 7</span></div>
+      <p>Three sentences. An observation, an assertion, a consequence. Now ask the hard question: <strong>what in there could a reader check?</strong> Nothing. Every sentence is something you believe. Not one is something you have shown.</p>
+
+      <h3 class="h">The five moves</h3>
+      <p>A body paragraph that works is a chain. Each link holds the next one up.</p>
+      <div class="scroll"><table class="t">
+        <tr><th>Move</th><th>Job</th><th>Sounds like</th></tr>
+        <tr><td><strong>Claim</strong></td><td>What you are proving</td><td>Early screen access weakens children's judgement.</td></tr>
+        <tr><td><strong>Reason</strong></td><td>Why it would be true</td><td>Judgement develops through slow exposure, and feeds are fast.</td></tr>
+        <tr><td><strong>Evidence</strong></td><td>Something checkable</td><td>A 2023 study of 8 to 12 year olds found ...</td></tr>
+        <tr><td><strong>Warrant</strong></td><td>Why that evidence proves that claim</td><td>Because the children who scored lowest were also the heaviest users, the link is not incidental.</td></tr>
+        <tr><td><strong>Link</strong></td><td>Back to the argument</td><td>Judgement, then, is the second casualty of early access.</td></tr>
+      </table></div>
+
+      <div class="note"><b>The move almost everyone skips is the warrant.</b> Research on university argumentative writing finds that writers at every level produce far more framing material, which sets up the topic and draws causal links, than supporting material, which is the checkable part. It also finds that essay quality depends less on how much evidence appears than on whether the evidence and the claim are doing the same job. Adding a statistic changes nothing if you never say what it proves.</div>
+
+      <h3 class="h">You have exactly one piece of evidence</h3>
+      <div class="quote">I used to work part-time in one elementary school and noticed that <em>near one-third of the children there have nearsightedness</em>.<span class="src">Your paragraph 2, sentence 4</span></div>
+      <p>This is the best sentence in your essay and you walked straight past it. One third is a number. Numbers are checkable. But you never say whether one third is high, whether it is higher than it used to be, or what it has to do with screens. The evidence is sitting there unconnected to the claim it was meant to prove.</p>
+      <p>That missing sentence is the warrant. It is one sentence. It would have done more for that paragraph than another hundred words of explanation.</p>
+
+      <!-- TASK 2.1 -->
+      <div class="task" data-task="2-1" data-need="3">
+        <div class="tasktop"><span class="tag">Task 2.1</span><h4>Label your own paragraph</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 12px">Which move is each sentence of your awareness paragraph performing?</p>
+        <div id="s21"></div>
+        <div class="fb" id="f21"></div>
+      </div>
+
+      <!-- TASK 2.2 -->
+      <div class="task" data-task="2-2" data-need="5">
+        <div class="tasktop"><span class="tag">Task 2.2</span><h4>Put the chain in order</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 12px">Five sentences from a rebuilt eyesight paragraph. Tap a sentence, then tap the slot it belongs in. Tap a placed sentence to send it back.</p>
+        <div class="pool" id="p22"></div>
+        <div class="slots" id="sl22"></div>
+        <div class="row"><button class="btn" data-check="22">Check the order</button></div>
+        <div class="fb" id="f22"></div>
+      </div>
+
+      <!-- TASK 2.3 -->
+      <div class="task" data-task="2-3" data-need="1">
+        <div class="tasktop"><span class="tag">Task 2.3</span><h4>Write the missing warrant</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 10px">Here is your evidence. Write the one sentence that tells your reader what it proves.</p>
+        <div class="quote" style="margin-bottom:12px">Nearly one third of the children at the primary school where I worked were short sighted.<span class="src">Your evidence, tidied</span></div>
+        <textarea data-k="t23" placeholder="Because that proportion..."></textarea>
+        <div class="row"><button class="btn ghost" data-model="m23">Show my version</button></div>
+        <div class="model" id="m23" hidden>
+          <h5>One possible warrant</h5>
+          <p>A rate that high in a single year group is difficult to explain by inherited short sight alone, which typically appears later and in far fewer children, so something in the environment of that generation is doing the work.</p>
+          <p style="margin-top:11px;font-size:.87rem;color:#BFD2C8"><span class="hl">Watch what the sentence does.</span> It does not add information. It tells the reader how to read the information already there. That is the whole job of a warrant, and it is why the sentence usually starts with words like <span class="hl">because</span>, <span class="hl">which suggests</span>, <span class="hl">a rate that high</span>, or <span class="hl">the significance of this is</span>.</p>
+        </div>
+        <label class="chk"><input type="checkbox" data-c="2-3"> I have written a warrant and compared it.</label>
+      </div>
+
+      <div class="hw" data-hw="2">
+        <div class="hwhead"><h4>Homework 2</h4><span class="hwstate"></span></div>
+        <div class="hwlock">Finish the three tasks above and this opens. <b>Nothing is hidden from you</b>, the lock is only there so you do the practice first.</div>
+        <div class="hwbody" hidden>
+          <ol>
+            <li><strong>Rebuild the eyesight paragraph.</strong> Write it again as a full five move chain. In the margin, label each sentence claim, reason, evidence, warrant or link. If a sentence does not have a label, it does not belong in the paragraph.</li>
+            <li><strong>Rescue your statistic.</strong> Take the one third observation and write the two sentences that turn it into evidence rather than a memory: one that presents it as data, one that says what it proves.</li>
+            <li><strong>Warrant hunt.</strong> In one page of a university reading, find three warrant sentences. Copy them out. You will start to notice they almost always sit immediately after a number or a quotation.</li>
+          </ol>
+          <p class="due">Bring this to lesson 3. Number one is the piece I will actually mark.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LESSON 3 ================= -->
+  <section class="lesson" id="l3" data-lesson="3">
+    <button class="lhead" type="button">
+      <span class="lnum">3</span>
+      <span>
+        <h2>Getting yourself out of the argument</h2>
+        <p class="lsub">Twenty two first person references, and what to put in their place</p>
+      </span>
+      <span class="lchev">&#9660;</span>
+    </button>
+    <div class="lbody">
+
+      <h3 class="h">What the count shows</h3>
+      <p>In 439 words you used <strong>I, my, me</strong> twenty two times. That is roughly once every twenty words. More importantly, every single body paragraph rests its weight on your own life.</p>
+      <div class="quote">When I was in elementary school, there were few people having nearsightedness, neither were my friends.<span class="src">Paragraph 2</span></div>
+      <div class="quote">In my childhood when I did not use my smartphone frequently, I could extremely focus on the class.<span class="src">Paragraph 3</span></div>
+      <div class="quote"><em>Due to my experience, I can make an educated guess that</em> the young generation has a hard time to focus on one thing in the long term.<span class="src">Paragraph 3, final sentence</span></div>
+
+      <h3 class="h">This is not a rule about the word "I"</h3>
+      <p>Some disciplines welcome the first person. What matters is not whether you appear in the sentence, it is <strong>what is carrying the weight of the argument</strong>.</p>
+      <div class="note"><b>Here is the problem in one line.</b> If your evidence is your childhood, then a reader with a different childhood has an argument exactly as strong as yours, and there is no way to settle it. Personal experience works as one piece of evidence among several. It fails as the only piece, because it cannot be checked and it cannot be argued with.</div>
+      <p>Look at your last sentence again. "Due to my experience, I can make an educated guess." You are hedging, and the instinct is completely right. You know a single life is thin evidence, and you are warning the reader. That instinct is the beginning of academic writing. The packaging is what lets it down.</p>
+
+      <h3 class="h">Three swaps</h3>
+      <div class="scroll"><table class="t">
+        <tr><th>You wrote</th><th>The move</th><th>Academic version</th></tr>
+        <tr><td>When I was in elementary school, there were few people having nearsightedness</td><td>Anecdote to attributed claim</td><td>Studies of school age vision report a marked rise in short sight over the past two decades</td></tr>
+        <tr><td>I used to work part-time in one elementary school and noticed that</td><td>Memory to observation with a source</td><td>Observation at a single primary school suggested a rate of nearly one third, consistent with national figures</td></tr>
+        <tr><td>Due to my experience, I can make an educated guess that</td><td>Guess to hedge</td><td>This suggests that / It is likely that / The evidence points to</td></tr>
+      </table></div>
+
+      <h3 class="h">Reporting verbs, and how much they commit you</h3>
+      <p>The verb you choose tells your reader how much you are standing behind the source. Getting this wrong is one of the most common things I see in first year work.</p>
+
+      <!-- TASK 3.1 -->
+      <div class="task" data-task="3-1" data-need="6">
+        <div class="tasktop"><span class="tag">Task 3.1</span><h4>Match the verb to its strength</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 12px">Tap a verb, then tap the strength it belongs to.</p>
+        <div class="pool" id="p31"></div>
+        <div class="slots" id="sl31"></div>
+        <div class="row"><button class="btn" data-check="31">Check</button></div>
+        <div class="fb" id="f31"></div>
+      </div>
+
+      <!-- TASK 3.2 -->
+      <div class="task" data-task="3-2" data-need="3">
+        <div class="tasktop"><span class="tag">Task 3.2</span><h4>How strong is the hedge?</h4><span class="tick">Complete</span></div>
+        <div id="m32"></div>
+      </div>
+
+      <!-- TASK 3.3 -->
+      <div class="task" data-task="3-3" data-need="1">
+        <div class="tasktop"><span class="tag">Task 3.3</span><h4>Rewrite your closing sentence</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 10px">No first person. Keep the hedge, because the hedge is correct. Change only where the authority comes from.</p>
+        <div class="quote" style="margin-bottom:12px">Due to my experience, I can make an educated guess that the young generation has a hard time to focus on one thing in the long term because of early screen time.<span class="src">Your paragraph 3, final sentence</span></div>
+        <textarea data-k="t33" placeholder="Your version..."></textarea>
+        <div class="row"><button class="btn ghost" data-model="m33">Show my version</button></div>
+        <div class="model" id="m33" hidden>
+          <h5>How I would write it</h5>
+          <p>The pattern suggests that early and unrestricted screen access makes sustained attention harder to develop, although a single cohort cannot establish the direction of the effect.</p>
+          <p style="margin-top:11px;font-size:.87rem;color:#BFD2C8">Two things changed. <span class="hl">The authority moved</span> from your life to the pattern in the evidence. And <span class="hl">the hedge got sharper</span>: instead of apologising for guessing, the sentence names the specific limitation. That reads as confidence, not weakness.</p>
+        </div>
+        <label class="chk"><input type="checkbox" data-c="3-3"> I have rewritten it and compared.</label>
+      </div>
+
+      <div class="hw" data-hw="3">
+        <div class="hwhead"><h4>Homework 3</h4><span class="hwstate"></span></div>
+        <div class="hwlock">Finish the three tasks above and this opens. <b>Nothing is hidden from you</b>, the lock is only there so you do the practice first.</div>
+        <div class="hwbody" hidden>
+          <ol>
+            <li><strong>Find two real sources</strong> on early screen exposure and children. Your university library search is fine. Write one sentence from each using a different reporting verb, and make the verbs match how strongly the source actually commits.</li>
+            <li><strong>De-personalise a paragraph.</strong> Take your concentration paragraph and rewrite it with no first person at all. Keep every idea. You will find one or two ideas cannot survive the move, and those are the ones that were never evidence.</li>
+            <li><strong>Count yourself.</strong> Take a piece of writing from one of your modules and count I, my and me. Then count how many times the authority in a sentence comes from a source. Bring both numbers.</li>
+          </ol>
+          <p class="due">Bring this to lesson 4. Number two is the one that will change your marks fastest.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LESSON 4 ================= -->
+  <section class="lesson" id="l4" data-lesson="4">
+    <button class="lhead" type="button">
+      <span class="lnum">4</span>
+      <span>
+        <h2>One paragraph, one idea</h2>
+        <p class="lsub">Your second paragraph is doing two jobs, and your conclusion is starting a new one</p>
+      </span>
+      <span class="lchev">&#9660;</span>
+    </button>
+    <div class="lbody">
+
+      <h3 class="h">You wrote the plan and then did not follow it</h3>
+      <p>At the end of your document you had the structure written out: body paragraph 1 for reason 1, body paragraph 2 for reason 2. That plan was right. The essay does not match it.</p>
+      <p>Your second paragraph opens on eyesight. Four sentences in, at "Secondly, in terms of awareness", it starts a completely different reason without a paragraph break. Two arguments, one paragraph, no wall between them.</p>
+
+      <!-- TASK 4.1 -->
+      <div class="task" data-task="4-1" data-need="1">
+        <div class="tasktop"><span class="tag">Task 4.1</span><h4>Find the break</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 12px">Tap the sentence where a new paragraph should begin.</p>
+        <div class="pick" id="pk41"></div>
+        <div class="fb" id="f41"></div>
+      </div>
+
+      <h3 class="h">The test for a paragraph break</h3>
+      <div class="note"><b>When the thing you are proving changes, the paragraph ends.</b> Not when it feels long. Not when you have written enough. A paragraph is one claim and everything that proves it. The moment you start proving something else, you are in a new paragraph, even if the old one is only three sentences long.</div>
+
+      <h3 class="h">Your paragraphs are also badly balanced</h3>
+      <p>Here is how your words were distributed.</p>
+      <div class="scroll"><table class="t">
+        <tr><th>Paragraph</th><th>Words</th><th>Doing</th></tr>
+        <tr><td>Introduction</td><td>83</td><td>Context, position, three reasons previewed</td></tr>
+        <tr><td>Body 1</td><td>123</td><td><span class="x">Two reasons: eyesight and awareness</span></td></tr>
+        <tr><td>Body 2</td><td>175</td><td>One reason: concentration</td></tr>
+        <tr><td>Conclusion</td><td>51</td><td><span class="x">Opens with material that is nowhere in the essay</span></td></tr>
+      </table></div>
+      <p>The essay gets heavier and heavier and then falls off a cliff. Your third reason gets 175 words while your first gets about sixty. That tells your reader, without you meaning to, that reasons one and two matter less. Three reasons of equal standing should get roughly equal room.</p>
+
+      <h3 class="h">The conclusion opens a new topic</h3>
+      <div class="quote"><em>With rapid technological advancements, new phone models are constantly being rolled out.</em> This thing might be positive to the adults because they can gain different information through the smartphones.<span class="src">Your paragraph 4, sentences 1 and 2</span></div>
+      <p>Nothing in your essay is about new phone models being released. It arrives in the last paragraph, does no work, and takes up space you needed for the actual conclusion. A conclusion may only contain what the body has already earned.</p>
+
+      <!-- TASK 4.2 -->
+      <div class="task" data-task="4-2" data-need="2">
+        <div class="tasktop"><span class="tag">Task 4.2</span><h4>Two questions on structure</h4><span class="tick">Complete</span></div>
+        <div id="m42"></div>
+      </div>
+
+      <!-- TASK 4.3 -->
+      <div class="task" data-task="4-3" data-need="4">
+        <div class="tasktop"><span class="tag">Task 4.3</span><h4>Does it belong in the conclusion?</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 12px">Four things a writer might put in a conclusion. Which belong?</p>
+        <div id="s43"></div>
+        <div class="fb" id="f43"></div>
+      </div>
+
+      <div class="hw" data-hw="4">
+        <div class="hwhead"><h4>Homework 4</h4><span class="hwstate"></span></div>
+        <div class="hwlock">Finish the three tasks above and this opens. <b>Nothing is hidden from you</b>, the lock is only there so you do the practice first.</div>
+        <div class="hwbody" hidden>
+          <ol>
+            <li><strong>Re-paragraph the whole essay</strong> into five paragraphs: introduction, three body paragraphs of roughly equal length, conclusion. Do not write new content yet. Just cut and move, and see what you are short of.</li>
+            <li><strong>Rewrite the conclusion</strong> so that it contains nothing that does not already appear in the body. Then count the words. If it is under sixty, ask yourself what the essay actually concluded.</li>
+            <li><strong>Word budget in advance.</strong> Before you write your next university essay, write the word budget for each paragraph first, then write to it. Bring me the budget and the finished piece so we can see where it drifted.</li>
+          </ol>
+          <p class="due">Bring this to lesson 5. Number one takes fifteen minutes and teaches the most.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LESSON 5 ================= -->
+  <section class="lesson" id="l5" data-lesson="5">
+    <button class="lhead" type="button">
+      <span class="lnum">5</span>
+      <span>
+        <h2>a, the, or nothing at all</h2>
+        <p class="lsub">Your largest single error group, and the reason it is genuinely hard</p>
+      </span>
+      <span class="lchev">&#9660;</span>
+    </button>
+    <div class="lbody">
+
+      <h3 class="h">Every one of these is yours</h3>
+      <div class="scroll"><table class="t">
+        <tr><th>You wrote</th><th>Should be</th><th>Why</th></tr>
+        <tr><td>various types of <span class="x">the</span> smartphones</td><td>various types of <span class="ok">smartphone</span></td><td>A general class, not particular ones</td></tr>
+        <tr><td>the children in <span class="x">&#8709;</span> young generation</td><td>in <span class="ok">the</span> young generation</td><td>One specific generation, already named</td></tr>
+        <tr><td>let's talk about <span class="x">the</span> eyesight</td><td><span class="ok">&#8709;</span> eyesight</td><td>Abstract and general</td></tr>
+        <tr><td>see <span class="x">the</span> children with <span class="x">the</span> glasses due to <span class="x">the</span> nearsightedness</td><td><span class="ok">&#8709;</span> children ... <span class="ok">&#8709;</span> glasses ... <span class="ok">&#8709;</span> nearsightedness</td><td>Three in one sentence, all general</td></tr>
+        <tr><td>work part-time in <span class="x">one</span> elementary school</td><td>at <span class="ok">an</span> elementary school</td><td>One of many, and the number does not matter</td></tr>
+        <tr><td>do not have <span class="x">an</span> ability to recognize</td><td>lack <span class="ok">the</span> ability to recognise</td><td>A specific, defined ability</td></tr>
+        <tr><td>when I am in <span class="x">the</span> university</td><td>at <span class="ok">&#8709;</span> university</td><td>Institution as a stage of life</td></tr>
+        <tr><td>positive to <span class="x">the</span> adults</td><td>for <span class="ok">&#8709;</span> adults</td><td>Adults in general</td></tr>
+      </table></div>
+
+      <h3 class="h">Why this is hard, and it is not carelessness</h3>
+      <div class="note"><b>Mandarin marks definiteness with word order and context, not with a word in front of the noun.</b> Whether a noun is "the dog" or "a dog" is carried by where it sits in the sentence and what the listener already knows. The information is completely there in your original thought. English just gives it a slot, and your first language does not have that slot to copy from. So there is nothing to transfer, and every article has to be built from scratch.</div>
+      <p>This also explains <strong>one</strong> for <strong>a</strong>. When you wrote "in one elementary school", you were carrying across a measure word structure that counts the thing. English uses "a" for that, and saves "one" for when the number genuinely matters. "I worked at one school" means you worked at exactly one and not two.</p>
+
+      <h3 class="h">Three questions, in order</h3>
+      <div class="scroll"><table class="t">
+        <tr><th>Ask</th><th>If yes</th><th>Example</th></tr>
+        <tr><td>1. All of them, in general?</td><td><strong>No article</strong> with plurals and uncountables</td><td>Children need sleep.</td></tr>
+        <tr><td>2. One of many, reader does not know which?</td><td><strong>a / an</strong></td><td>She bought a smartphone.</td></tr>
+        <tr><td>3. Reader knows exactly which one or ones?</td><td><strong>the</strong></td><td>The children I taught were short sighted.</td></tr>
+      </table></div>
+      <p>Run them in that order every time. Question three is the one to be strict about: "the" means the reader can identify it. If they cannot, you have not earned "the" yet.</p>
+
+      <!-- TASK 5.1 -->
+      <div class="task" data-task="5-1" data-need="10">
+        <div class="tasktop"><span class="tag">Task 5.1</span><h4>Your sentences, corrected</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 12px">Choose the article for each gap. Ten gaps, all from your essay.</p>
+        <div id="g51"></div>
+        <div class="fb" id="f51"></div>
+      </div>
+
+      <!-- TASK 5.2 -->
+      <div class="task" data-task="5-2" data-need="4">
+        <div class="tasktop"><span class="tag">Task 5.2</span><h4>Which question does it fail?</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 12px">Each sentence has one article error. Which of the three questions was answered wrongly?</p>
+        <div id="s52"></div>
+        <div class="fb" id="f52"></div>
+      </div>
+
+      <!-- TASK 5.3 -->
+      <div class="task" data-task="5-3" data-need="1">
+        <div class="tasktop"><span class="tag">Task 5.3</span><h4>The triple</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 10px">This sentence has three article errors and one misplaced phrase. Rewrite it.</p>
+        <div class="quote" style="margin-bottom:12px">However, it is common to see <em>the</em> children with <em>the</em> glasses due to <em>the</em> nearsightedness on the street now.<span class="src">Your paragraph 2, sentence 3</span></div>
+        <textarea data-k="t53" placeholder="Your version..."></textarea>
+        <div class="row"><button class="btn ghost" data-model="m53">Show my version</button></div>
+        <div class="model" id="m53" hidden>
+          <h5>How I would write it</h5>
+          <p>It is now common to see children on the street wearing glasses for short sight.</p>
+          <p style="margin-top:11px;font-size:.87rem;color:#BFD2C8">Three articles gone, and one other repair worth noticing. <span class="hl">"On the street" had drifted to the end of the sentence</span>, eleven words away from "see", which is where it belongs. English keeps a modifier close to what it modifies. In your version the phrase reads as though the nearsightedness is on the street.</p>
+        </div>
+        <label class="chk"><input type="checkbox" data-c="5-3"> I have rewritten it and compared.</label>
+      </div>
+
+      <div class="hw" data-hw="5">
+        <div class="hwhead"><h4>Homework 5</h4><span class="hwstate"></span></div>
+        <div class="hwlock">Finish the three tasks above and this opens. <b>Nothing is hidden from you</b>, the lock is only there so you do the practice first.</div>
+        <div class="hwbody" hidden>
+          <ol>
+            <li><strong>The noun audit.</strong> Take 150 words of your own writing from any module. Circle every noun. For each one, write 1, 2 or 3 beside it for which question applies, then check whether the article you used matches. Expect this to take longer than you think, and expect it to be the single most useful hour of the seven weeks.</li>
+            <li><strong>Read for articles only.</strong> Take one paragraph of a university reading and highlight every article. Then cover them and try to put them back. Compare.</li>
+            <li><strong>Your own list.</strong> Start a page in your notes for article errors I mark in your work. After three weeks you will see the same two or three patterns and can stop worrying about the rest.</li>
+          </ol>
+          <p class="due">Bring this to lesson 6. Number one is the piece I will check line by line.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LESSON 6 ================= -->
+  <section class="lesson" id="l6" data-lesson="6">
+    <button class="lhead" type="button">
+      <span class="lnum">6</span>
+      <span>
+        <h2>The register gap</h2>
+        <p class="lsub">You are writing as though you are speaking to the class</p>
+      </span>
+      <span class="lchev">&#9660;</span>
+    </button>
+    <div class="lbody">
+
+      <h3 class="h">Register is not vocabulary</h3>
+      <p>The common belief is that academic writing means harder words. It does not. It means a different relationship with your reader: more distance, more precision, fewer moves that assume the reader is in the room with you.</p>
+      <p>Your essay keeps reaching for the reader as though they are sitting in front of you. That is a warm instinct and it makes your writing readable. At university it costs you.</p>
+
+      <h3 class="h">Every spoken marker in your essay</h3>
+      <div class="scroll"><table class="t">
+        <tr><th>You wrote</th><th>What it is</th><th>Instead</th></tr>
+        <tr><td>let's talk about the eyesight</td><td>Direct address to the reader</td><td>Make the claim, cut the address</td></tr>
+        <tr><td>everyone has a smartphone in hand basically</td><td>Sentence final hedge, spoken only</td><td>Delete "basically", or use "almost universally"</td></tr>
+        <tr><td>it's hard for them</td><td>Contraction</td><td>it is</td></tr>
+        <tr><td>This thing might be positive</td><td>Vague pointing word</td><td>Name the thing</td></tr>
+        <tr><td>iPhone, Samsung, ASUS etc.</td><td>A list trailing off</td><td>Close the list, or write "among others"</td></tr>
+        <tr><td>I can make an educated guess</td><td>Idiom</td><td>This suggests</td></tr>
+        <tr><td>so did my friends</td><td>Conversational inversion, spliced on with a comma</td><td>New sentence, or "and my friends did too"</td></tr>
+        <tr><td><strong>But</strong> they are too young ... <strong>But</strong> as for the young generation</td><td>Sentence initial "but", twice</td><td>However, or restructure</td></tr>
+      </table></div>
+
+      <div class="note"><b>Be careful with this one.</b> Contractions and a sentence starting with "but" are not errors. Published academics use both. They are register choices, and in a first year university essay they read as informal because the reader expects distance. Learn the rule so that later you can break it deliberately.</div>
+
+      <!-- TASK 6.1 -->
+      <div class="task" data-task="6-1" data-need="1">
+        <div class="tasktop"><span class="tag">Task 6.1</span><h4>Spot the spoken markers</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 12px">Your introduction. Tap every phrase that would not survive in a university essay. There are four.</p>
+        <div class="pick" id="pk61"></div>
+        <div class="row"><button class="btn" data-check="61">Check my selection</button></div>
+        <div class="fb" id="f61"></div>
+      </div>
+
+      <!-- TASK 6.2 -->
+      <div class="task" data-task="6-2" data-need="6">
+        <div class="tasktop"><span class="tag">Task 6.2</span><h4>Formality swap</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 12px">Tap a formal phrase, then tap the informal one it replaces.</p>
+        <div class="pool" id="p62"></div>
+        <div class="slots" id="sl62"></div>
+        <div class="row"><button class="btn" data-check="62">Check</button></div>
+        <div class="fb" id="f62"></div>
+      </div>
+
+      <!-- TASK 6.3 -->
+      <div class="task" data-task="6-3" data-need="1">
+        <div class="tasktop"><span class="tag">Task 6.3</span><h4>Rewrite the introduction</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 10px">Every spoken marker out. Keep the length roughly the same. This is the hardest task in the unit so far.</p>
+        <div class="quote" style="margin-bottom:12px">Nowadays, we can witness various types of the smartphones such as iPhone, Samsung, ASUS etc. hitting the market. The race of using them also increase significantly, and everyone has a smartphone in hand basically. In my early teens, I had a smartphone in my junior high school, so did my friends. However, the children in young generation have their own smartphones in 2 to 3 years old. They are exposure to screens too early that have a negative impact on their eyesight, awareness and attention.<span class="src">Your introduction, exactly as written</span></div>
+        <textarea data-k="t63" style="min-height:130px" placeholder="Your version..."></textarea>
+        <div class="row"><button class="btn ghost" data-model="m63">Show my version</button></div>
+        <div class="model" id="m63" hidden>
+          <h5>How I would write it</h5>
+          <p>Smartphones from a wide range of manufacturers now reach the market continuously, and ownership has become close to universal. A decade ago, most people acquired a first handset in early adolescence. Children today are given their own devices at two or three years old, and they are exposed to screens so early that the effects reach their eyesight, their judgement and their capacity to concentrate.</p>
+          <p style="margin-top:11px;font-size:.87rem;color:#BFD2C8">Compare the two. <span class="hl">The ideas are identical.</span> "Nowadays" and "we can witness" are gone, "basically" is gone, "etc." is gone, the comma splice is gone, and your personal teenage anecdote has become a general statement about a generation. It is not longer and it is not using harder words. It has simply stepped back from the reader.</p>
+        </div>
+        <label class="chk"><input type="checkbox" data-c="6-3"> I have rewritten the introduction and compared.</label>
+      </div>
+
+      <div class="hw" data-hw="6">
+        <div class="hwhead"><h4>Homework 6</h4><span class="hwstate"></span></div>
+        <div class="hwlock">Finish the three tasks above and this opens. <b>Nothing is hidden from you</b>, the lock is only there so you do the practice first.</div>
+        <div class="hwbody" hidden>
+          <ol>
+            <li><strong>Rewrite your conclusion</strong> the way you rewrote the introduction in class. Then put the two versions side by side and mark every change with the reason for it in three words or fewer.</li>
+            <li><strong>Steal three moves.</strong> Take one paragraph from a reading in your discipline and list three things the writer does that you do not. Not vocabulary. Moves: how they introduce a source, how they signal doubt, how they close a paragraph.</li>
+            <li><strong>The forbidden list.</strong> Write your own list of ten words and phrases you now know to keep out of academic work. Keep it beside you when you draft. Mine would start with basically, a lot of, thing, and nowadays.</li>
+          </ol>
+          <p class="due">Bring this to lesson 7. Number two is where the real learning happens.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LESSON 7 ================= -->
+  <section class="lesson" id="l7" data-lesson="7">
+    <button class="lhead" type="button">
+      <span class="lnum">7</span>
+      <span>
+        <h2>Saying "so much that"</h2>
+        <p class="lsub">One structure your first language has and English splits into three</p>
+      </span>
+      <span class="lchev">&#9660;</span>
+    </button>
+    <div class="lbody">
+
+      <h3 class="h">You made the same error twice</h3>
+      <div class="quote">They are exposure to screens <em>too early that have</em> a negative impact on their eyesight, awareness and attention.<span class="src">Your paragraph 1, final sentence</span></div>
+      <div class="quote">But they are <em>too young that do not have</em> an ability to recognize whether the thing is right or not.<span class="src">Your paragraph 2</span></div>
+      <p>This is one pattern, not two mistakes. Mandarin has a single structure for "so much of something that a result follows", built around <strong>太 ... 以至於</strong>. It maps beautifully onto a sentence shape English does not allow.</p>
+      <div class="note"><b>English has no "too ... that".</b> That exact combination is the one English refuses. It splits the job across three separate structures, and which one you need depends on whether you are describing a result or an obstacle.</div>
+
+      <h3 class="h">The three structures</h3>
+      <div class="scroll"><table class="t">
+        <tr><th>Meaning</th><th>Structure</th><th>Your sentence, repaired</th></tr>
+        <tr><td>Degree causes a result</td><td><strong>so</strong> + adjective + <strong>that</strong> + clause</td><td>They are exposed to screens <span class="ok">so</span> early <span class="ok">that</span> their eyesight suffers.</td></tr>
+        <tr><td>Degree causes a result, around a noun</td><td><strong>such</strong> + a/an + adjective + noun + <strong>that</strong></td><td>It is <span class="ok">such</span> an early exposure <span class="ok">that</span> the damage is difficult to reverse.</td></tr>
+        <tr><td>Excess prevents something</td><td><strong>too</strong> + adjective + <strong>to</strong> + verb</td><td>They are <span class="ok">too</span> young <span class="ok">to</span> judge what they see.</td></tr>
+      </table></div>
+      <p>Notice the difference between row one and row three. <strong>So ... that</strong> reports a result that happened. <strong>Too ... to</strong> reports something that cannot happen. Your second sentence needed row three: the children are not able to judge. Your first needed row one: the result did happen.</p>
+
+      <!-- TASK 7.1 -->
+      <div class="task" data-task="7-1" data-need="8">
+        <div class="tasktop"><span class="tag">Task 7.1</span><h4>so, such or too</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 12px">Eight gaps. Read the whole sentence before choosing, because the ending decides the answer.</p>
+        <div id="g71"></div>
+        <div class="fb" id="f71"></div>
+      </div>
+
+      <h3 class="h">Two things that travel with it</h3>
+      <p><strong>A noun standing where an adjective belongs.</strong> "They are <span class="x">exposure</span> to screens" should be "they are <span class="ok">exposed</span> to screens". Exposure is the thing; exposed is the state. The same slip produces "the first thing I do ... is <span class="x">that scroll</span> through my phone", where the sentence needs "is <span class="ok">to scroll</span>" or "is <span class="ok">scrolling</span>".</p>
+      <p><strong>Pointing words that point at the wrong thing.</strong> Look at your final sentence.</p>
+      <div class="quote">But as for the young generation, the disadvantages of early screen time outweigh the advantages, <em>which affect their eyesight, awareness and attention</em>.<span class="src">Your paragraph 4, final sentence</span></div>
+      <p>Grammatically, "which" attaches to the nearest noun, and the nearest noun is <strong>the advantages</strong>. Your sentence currently says the advantages affect their eyesight. That is the opposite of your argument, in the last line of the essay.</p>
+
+      <!-- TASK 7.2 -->
+      <div class="task" data-task="7-2" data-need="3">
+        <div class="tasktop"><span class="tag">Task 7.2</span><h4>Three precision checks</h4><span class="tick">Complete</span></div>
+        <div id="m72"></div>
+      </div>
+
+      <!-- TASK 7.3 -->
+      <div class="task" data-task="7-3" data-need="1">
+        <div class="tasktop"><span class="tag">Task 7.3</span><h4>Rebuild both sentences three ways</h4><span class="tick">Complete</span></div>
+        <p class="mini" style="margin:0 0 10px">Take your first "too ... that" sentence and write it three times: once with so ... that, once with such ... that, once with too ... to. You will find one of the three is a slightly different argument. Say which.</p>
+        <div class="quote" style="margin-bottom:12px">They are exposure to screens too early that have a negative impact on their eyesight, awareness and attention.<span class="src">Your paragraph 1, final sentence</span></div>
+        <textarea data-k="t73" style="min-height:120px" placeholder="1. so ... that&#10;2. such ... that&#10;3. too ... to&#10;&#10;The one that changes the argument is..."></textarea>
+        <div class="row"><button class="btn ghost" data-model="m73">Show my versions</button></div>
+        <div class="model" id="m73" hidden>
+          <h5>How I would write them</h5>
+          <p><span class="hl">so ... that</span> &nbsp; Children are exposed to screens so early that their eyesight, judgement and attention are all affected.</p>
+          <p><span class="hl">such ... that</span> &nbsp; Children now meet screens at such an early age that the effects reach their eyesight, judgement and attention.</p>
+          <p><span class="hl">too ... to</span> &nbsp; Children are exposed to screens too early to develop eyesight, judgement and attention normally.</p>
+          <p style="margin-top:11px;font-size:.87rem;color:#BFD2C8">The third one is the different argument. <span class="hl">So and such report damage that has happened.</span> <span class="hl">Too ... to reports development that is prevented.</span> Those are not the same claim, and in an essay you would have to decide which one you can actually support.</p>
+        </div>
+        <label class="chk"><input type="checkbox" data-c="7-3"> I have written all three and identified the odd one.</label>
+      </div>
+
+      <div class="hw" data-hw="7">
+        <div class="hwhead"><h4>Homework 7: the capstone</h4><span class="hwstate"></span></div>
+        <div class="hwlock">Finish the three tasks above and this opens. <b>Nothing is hidden from you</b>, the lock is only there so you do the practice first.</div>
+        <div class="hwbody" hidden>
+          <p style="margin-bottom:13px"><strong>Rewrite the whole essay.</strong> Not a tidy up. A rebuild, using all seven lessons. Aim for 450 to 500 words, because you will now need room for evidence you did not have before.</p>
+          <p style="margin-bottom:13px">Work through this checklist and tick each line only when it is true of every paragraph.</p>
+          <ol>
+            <li>Every body paragraph opens with a sentence a reader could disagree with.</li>
+            <li>Every body paragraph contains a claim, a reason, evidence, a warrant and a link.</li>
+            <li>At least two pieces of evidence come from outside your own life, and each is attributed.</li>
+            <li>Each body paragraph proves exactly one thing, and the three are roughly equal in length.</li>
+            <li>The conclusion contains nothing the body has not already established.</li>
+            <li>Every noun has been through the three article questions.</li>
+            <li>No contractions, no "basically", no "thing", no sentence beginning with "but", no list ending in "etc."</li>
+            <li>No "too ... that" anywhere. Every result structure is so, such or too ... to.</li>
+            <li>Every "this", "which" and "it" points at something a reader can identify without guessing.</li>
+          </ol>
+          <p class="due">Send this to me before our final lesson so I can mark it properly rather than reading it cold in class. This is the piece that shows whether the seven weeks worked.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CLOSE ================= -->
+  <section class="card">
+    <h2 style="font-size:1.3rem;margin-bottom:.5em">One last thing</h2>
+    <p>You said your struggle is building longer and more complex sentences. Your essay says otherwise. Your average sentence runs to about seventeen words and your final body paragraph averages nearly twenty two. Length is not your problem.</p>
+    <p>What the research on academic writing development shows is that maturity is carried less by long sentences with many clauses and more by <strong>dense noun phrases</strong>: an early exposure, a rate that high, the capacity to concentrate. Those pack meaning into fewer words. Long clause chains are actually a feature of conversation, not of academic prose.</p>
+    <p style="margin-bottom:0">So if anyone tells you to write longer sentences, ignore them. Write tighter ones, and put the complexity into the nouns.</p>
+  </section>
+
+  <section class="card">
+    <h3 class="h" style="margin-top:0">What these lessons draw on</h3>
+    <ul class="srcs">
+      <li>Yang, R. (2025). Framing versus supporting evidence in L2 argumentative writing. <em>Frontiers in Psychology</em>. Used for the five move chain in lesson 2 and the finding that alignment between evidence and claim predicts quality better than the amount of evidence.</li>
+      <li>Biber, D., Gray, B. and Poonpon, K. (2011), and Lu, X. (2010), on phrasal rather than clausal complexity in academic prose. Used for the closing note on noun phrases.</li>
+      <li>Development of syntactic complexity in university students' L2 argumentative writing (2022), <em>Journal of English for Academic Purposes</em> 56. Used for the same point.</li>
+      <li>Toulmin's model of argument, by way of the claim, reason, evidence, warrant sequence in lesson 2.</li>
+      <li>Your own essay on smartphones and the young generation, 439 words, which supplied every example in this unit.</li>
+    </ul>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap-wide">
+    <div class="mark">Graham<b>IELTS</b></div>
+    <p>Personal academic writing unit prepared for Winnie. Seven lessons, seven pieces of homework, built from one essay.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------------- storage ---------------- */
+var KEY="winnie-unit-v1";
+var S={};
+function load(){try{var r=localStorage.getItem(KEY);if(r)S=JSON.parse(r)||{};}catch(e){S={};}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+load();
+
+/* ---------------- helpers ---------------- */
+function el(t,c,h){var n=document.createElement(t);if(c)n.className=c;if(h!==undefined)n.innerHTML=h;return n;}
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function shuffle(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;}return b;}
+
+/* progress registry: taskId -> {need, got} */
+var REG={};
+function reg(id,need){REG[id]={need:need,got:(S.got&&S.got[id])||0};}
+function bump(id,n){
+  if(!REG[id])return;
+  REG[id].got=Math.max(REG[id].got,n);
+  S.got=S.got||{};S.got[id]=REG[id].got;save();
+  paint();
+}
+function taskDone(id){var r=REG[id];return r&&r.got>=r.need;}
+
+function paint(){
+  var total=0,done=0;
+  Object.keys(REG).forEach(function(id){
+    total++;
+    var node=$('[data-task="'+id+'"]');
+    if(taskDone(id)){done++;if(node)node.classList.add("done");}
+    else if(node)node.classList.remove("done");
+  });
+  var f=$("#pfill"),c=$("#pcount");
+  if(f)f.style.width=(total?(done/total*100):0)+"%";
+  if(c)c.textContent=done+" / "+total;
+
+  for(var L=1;L<=7;L++){
+    var ids=Object.keys(REG).filter(function(k){return k.indexOf(L+"-")===0;});
+    var d=ids.filter(taskDone).length;
+    var st=$('[data-st="'+L+'"]');
+    if(st){
+      if(d===0){st.textContent="not started";st.classList.remove("done");}
+      else if(d<ids.length){st.textContent=d+" of "+ids.length+" tasks";st.classList.remove("done");}
+      else {st.textContent="complete";st.classList.add("done");}
+    }
+    var hw=$('[data-hw="'+L+'"]');
+    if(hw){
+      var open=ids.length>0&&d===ids.length;
+      $(".hwlock",hw).hidden=open;
+      $(".hwbody",hw).hidden=!open;
+      $(".hwstate",hw).textContent=open?"open":"locked";
+    }
+  }
+}
+
+/* ---------------- accordion ---------------- */
+$$(".lesson").forEach(function(sec){
+  var h=$(".lhead",sec);
+  h.addEventListener("click",function(){
+    sec.classList.toggle("open");
+    S.open=S.open||{};S.open[sec.dataset.lesson]=sec.classList.contains("open");save();
+  });
+  if(S.open&&S.open[sec.dataset.lesson])sec.classList.add("open");
+});
+$$('#toc a').forEach(function(a){
+  a.addEventListener("click",function(){
+    var sec=$(a.getAttribute("href"));
+    if(sec&&!sec.classList.contains("open")){sec.classList.add("open");S.open=S.open||{};S.open[sec.dataset.lesson]=true;save();}
+  });
+});
+
+/* ---------------- textareas ---------------- */
+$$("textarea[data-k]").forEach(function(t){
+  var k=t.dataset.k;
+  if(S.txt&&S.txt[k])t.value=S.txt[k];
+  t.addEventListener("input",function(){S.txt=S.txt||{};S.txt[k]=t.value;save();});
+});
+$$("[data-model]").forEach(function(b){
+  b.addEventListener("click",function(){
+    var m=$("#"+b.dataset.model);
+    m.hidden=!m.hidden;
+    b.textContent=m.hidden?b.textContent.replace("Hide","Show"):b.textContent.replace("Show","Hide");
+  });
+});
+$$('input[data-c]').forEach(function(cb){
+  var id=cb.dataset.c;
+  if(S.chk&&S.chk[id]){cb.checked=true;}
+  cb.addEventListener("change",function(){
+    S.chk=S.chk||{};S.chk[id]=cb.checked;save();
+    bump(id,cb.checked?1:0);
+    if(!cb.checked){S.got=S.got||{};S.got[id]=0;REG[id].got=0;save();paint();}
+  });
+});
+
+/* ---------------- MCQ builder ---------------- */
+function mcq(host,id,items){
+  var wrap=$("#"+host);
+  var state=(S.mcq&&S.mcq[id])||{};
+  items.forEach(function(it,qi){
+    var q=el("div","q");
+    q.appendChild(el("p","stem","<b>"+(qi+1)+".</b> "+it.q));
+    var box=el("div","opts");
+    it.o.forEach(function(txt,oi){
+      var b=el("button","opt",'<span class="mk">'+String.fromCharCode(65+oi)+'</span>'+txt);
+      b.type="button";
+      b.addEventListener("click",function(){
+        if(b.disabled)return;
+        $$(".opt",box).forEach(function(x){x.disabled=true;});
+        if(oi===it.a){b.classList.add("right");}
+        else{b.classList.add("wrong");$$(".opt",box)[it.a].classList.add("right");}
+        var fb=el("div","fb show "+(oi===it.a?"good":"info"),it.e);
+        q.appendChild(fb);
+        state[qi]=true;S.mcq=S.mcq||{};S.mcq[id]=state;save();
+        bump(id,Object.keys(state).length);
+      });
+      box.appendChild(b);
+    });
+    q.appendChild(box);
+    wrap.appendChild(q);
+    if(state[qi]){
+      $$(".opt",box).forEach(function(x,oi){x.disabled=true;if(oi===it.a)x.classList.add("right");});
+      q.appendChild(el("div","fb show info",it.e));
+    }
+  });
+}
+
+/* ---------------- sorter (2 or 3 buttons) ---------------- */
+function sorter(host,id,cats,items,fbId){
+  var wrap=$("#"+host);
+  var state=(S.sort&&S.sort[id])||{};
+  items.forEach(function(it,i){
+    var row=el("div","sortrow");
+    row.appendChild(el("div","txt",it.t));
+    var btns=el("div","btns");
+    cats.forEach(function(c,ci){
+      var b=el("button","sbtn",c);
+      b.type="button";
+      b.addEventListener("click",function(){
+        if(row.classList.contains("right")||row.classList.contains("wrong"))return;
+        $$(".sbtn",btns).forEach(function(x){x.classList.remove("sel");});
+        b.classList.add("sel");
+        row.classList.add(ci===it.a?"right":"wrong");
+        if(ci!==it.a)$$(".sbtn",btns)[it.a].classList.add("sel");
+        row.appendChild(el("div","why",it.e));
+        state[i]=true;S.sort=S.sort||{};S.sort[id]=state;save();
+        bump(id,Object.keys(state).length);
+        if(Object.keys(state).length===items.length&&fbId){
+          var f=$("#"+fbId);f.className="fb show good";f.textContent="All "+items.length+" answered. Scroll back up and read the reasons again before you move on.";
+        }
+      });
+      btns.appendChild(b);
+    });
+    row.appendChild(btns);
+    wrap.appendChild(row);
+    if(state[i]){
+      row.classList.add("right");
+      $$(".sbtn",btns)[it.a].classList.add("sel");
+      $$(".sbtn",btns).forEach(function(x){x.disabled=true;});
+      row.appendChild(el("div","why",it.e));
+    }
+  });
+}
+
+/* ---------------- gap fill with selects ---------------- */
+function gaps(host,id,opts,lines,fbId){
+  var wrap=$("#"+host);
+  var state=(S.gap&&S.gap[id])||{};
+  var n=0;
+  lines.forEach(function(ln){
+    var div=el("div","gapline");
+    var parts=ln.t.split("__");
+    var lineGaps=parts.length-1, lineDone=0, hint=null;
+    parts.forEach(function(p,i){
+      div.appendChild(document.createTextNode(p));
+      if(i<parts.length-1){
+        var gi=n++;
+        var sel=el("select","gap");
+        var ph=el("option","","");ph.value="?";sel.appendChild(ph);
+        opts.forEach(function(o){var op=el("option","",o===""?"(no article)":o);op.value=(o===""?"~":o);sel.appendChild(op);});
+        sel.dataset.gi=gi;
+        var ans=(ln.a[i]===""?"~":ln.a[i]);
+        sel.addEventListener("change",function(){
+          if(sel.value==="?")return;
+          sel.classList.remove("right","wrong");
+          sel.classList.add(sel.value===ans?"right":"wrong");
+          if(sel.value!==ans){sel.value=ans;setTimeout(function(){sel.classList.remove("wrong");sel.classList.add("right");},900);}
+          state[gi]=true;S.gap=S.gap||{};S.gap[id]=state;save();
+          lineDone++;if(hint&&lineDone>=lineGaps)hint.hidden=false;
+          bump(id,Object.keys(state).length);
+          if(Object.keys(state).length===n&&fbId){var f=$("#"+fbId);f.className="fb show good";f.textContent="Every gap filled. Any that snapped back to green were corrected for you, so read those lines again.";}
+        });
+        if(state[gi]){sel.value=ans;sel.classList.add("right");lineDone++;}
+        div.appendChild(sel);
+      }
+    });
+    if(ln.n){hint=el("div","why",ln.n);hint.hidden=(lineDone<lineGaps);div.appendChild(hint);}
+    wrap.appendChild(div);
+  });
+}
+
+/* ---------------- chip matching ---------------- */
+function matcher(poolId,slotId,id,pairs,checkId,fbId){
+  var pool=$("#"+poolId),slots=$("#"+slotId);
+  var sel=null;
+  var state=(S.match&&S.match[id])||{};
+
+  function mkChip(text,key){
+    var c=el("div","chip",text);
+    c.draggable=true;c.dataset.key=key;
+    c.addEventListener("click",function(ev){
+      ev.stopPropagation();
+      if(c.parentElement.classList.contains("drop")){pool.appendChild(c);clearMark();return;}
+      if(sel===c){c.classList.remove("sel");sel=null;return;}
+      if(sel)sel.classList.remove("sel");
+      sel=c;c.classList.add("sel");
+    });
+    c.addEventListener("dragstart",function(e){e.dataTransfer.setData("text/plain",key);sel=c;});
+    return c;
+  }
+  function clearMark(){$$(".slot",slots).forEach(function(s){s.classList.remove("right","wrong");});var f=$("#"+fbId);if(f)f.className="fb";}
+
+  shuffle(pairs).forEach(function(p){pool.appendChild(mkChip(p.chip,p.key));});
+
+  pairs.forEach(function(p){
+    var s=el("div","slot");
+    s.appendChild(el("div","lab",p.label));
+    var d=el("div","drop","drop here");
+    d.dataset.key=p.key;
+    d.addEventListener("click",function(){
+      if(!sel)return;
+      if(d.firstChild&&d.firstChild.classList&&d.firstChild.classList.contains("chip"))pool.appendChild(d.firstChild);
+      d.textContent="";d.appendChild(sel);sel.classList.remove("sel");sel=null;clearMark();
+    });
+    d.addEventListener("dragover",function(e){e.preventDefault();d.classList.add("over");});
+    d.addEventListener("dragleave",function(){d.classList.remove("over");});
+    d.addEventListener("drop",function(e){
+      e.preventDefault();d.classList.remove("over");
+      if(!sel)return;
+      if(d.firstChild&&d.firstChild.classList&&d.firstChild.classList.contains("chip"))pool.appendChild(d.firstChild);
+      d.textContent="";d.appendChild(sel);sel.classList.remove("sel");sel=null;clearMark();
+    });
+    s.appendChild(d);
+    slots.appendChild(s);
+  });
+
+  document.addEventListener("click",function(){if(sel){sel.classList.remove("sel");sel=null;}});
+
+  $('[data-check="'+checkId+'"]').addEventListener("click",function(){
+    var right=0,tot=pairs.length;
+    $$(".slot",slots).forEach(function(s){
+      var d=$(".drop",s),c=$(".chip",d);
+      s.classList.remove("right","wrong");
+      if(c&&c.dataset.key===d.dataset.key){s.classList.add("right");right++;}
+      else if(c){s.classList.add("wrong");}
+    });
+    var f=$("#"+fbId);
+    if(right===tot){
+      f.className="fb show good";f.textContent="All "+tot+" correct.";
+      state.done=tot;S.match=S.match||{};S.match[id]=state;save();bump(id,tot);
+    }else{
+      f.className="fb show bad";f.textContent=right+" of "+tot+" in the right place. The green ones are correct, so move the red ones and check again.";
+      bump(id,right);
+    }
+  });
+
+  if(state.done){
+    $$(".slot",slots).forEach(function(s){
+      var d=$(".drop",s);
+      var want=d.dataset.key;
+      var c=$$(".chip",pool).filter(function(x){return x.dataset.key===want;})[0];
+      if(c){d.textContent="";d.appendChild(c);}
+      s.classList.add("right");
+    });
+    var f0=$("#"+fbId);f0.className="fb show good";f0.textContent="Completed.";
+  }
+}
+
+/* ---------------- sentence picking ---------------- */
+function picker(host,id,sentences,correct,fbId,multi,checkId){
+  var wrap=$("#"+host);
+  var chosen={};
+  var state=(S.pick&&S.pick[id])||{};
+  sentences.forEach(function(s,i){
+    var sp=el("span","ps",s+" ");
+    sp.addEventListener("click",function(){
+      if(sp.classList.contains("right")||sp.classList.contains("wrong"))return;
+      if(!multi){
+        var ok=correct.indexOf(i)>-1;
+        sp.classList.add(ok?"right":"wrong");
+        if(!ok)$$(".ps",wrap)[correct[0]].classList.add("right");
+        $$(".ps",wrap).forEach(function(x){x.style.cursor="default";});
+        var f=$("#"+fbId);
+        f.className="fb show "+(ok?"good":"info");
+        f.innerHTML=ok?"That is the break. Everything from that sentence onward is proving a different claim, so it belongs in its own paragraph."
+          :"Not quite. The break belongs at <b>\"Secondly, in terms of awareness ...\"</b> That is where you stop proving the eyesight claim and start proving a new one about judgement.";
+        state.done=1;S.pick=S.pick||{};S.pick[id]=state;save();bump(id,1);
+      }else{
+        sp.classList.toggle("sel");
+        chosen[i]=sp.classList.contains("sel");
+      }
+    });
+    wrap.appendChild(sp);
+    if(state.done&&!multi){
+      if(correct.indexOf(i)>-1)sp.classList.add("right");
+      sp.style.cursor="default";
+    }
+  });
+  if(multi&&checkId){
+    $('[data-check="'+checkId+'"]').addEventListener("click",function(){
+      var got=0,wrong=0;
+      $$(".ps",wrap).forEach(function(sp,i){
+        var want=correct.indexOf(i)>-1;
+        var got1=sp.classList.contains("sel");
+        sp.classList.remove("sel");
+        if(want){sp.classList.add("right");if(got1)got++;}
+        else if(got1){sp.classList.add("wrong");wrong++;}
+      });
+      var f=$("#"+fbId);
+      f.className="fb show "+(got===correct.length&&wrong===0?"good":"info");
+      f.innerHTML="You found <b>"+got+" of "+correct.length+"</b>"+(wrong?", and marked "+wrong+" that are acceptable":"")+
+        ". The four in green are: <b>we can witness</b> (addressing the reader directly), <b>etc.</b> (a list trailing off), <b>basically</b> (a spoken hedge at the end of a clause), and <b>so did my friends</b> (conversational inversion, joined on with a comma).";
+      state.done=1;S.pick=S.pick||{};S.pick[id]=state;save();bump(id,1);
+    });
+    if(state.done){
+      $$(".ps",wrap).forEach(function(sp,i){if(correct.indexOf(i)>-1)sp.classList.add("right");});
+      var f2=$("#"+fbId);f2.className="fb show good";f2.textContent="Completed.";
+    }
+  }
+}
+
+/* ================= LESSON 1 ================= */
+reg("1-1",6);reg("1-2",1);reg("1-3",2);
+sorter("s11","1-1",["Announcement","Claim"],[
+ {t:"Firstly, let's talk about the eyesight.",a:0,e:"Yours. It tells the reader the subject and takes no position. Nobody could disagree with it."},
+ {t:"Concentration is a skill that needs to be nurtured during early childhood.",a:1,e:"Also yours, and a real claim. A reader could argue that concentration is largely inherited. That is what makes it worth proving."},
+ {t:"This essay will now discuss the effects on social behaviour.",a:0,e:"An announcement wearing formal clothes. Sounding academic is not the same as arguing."},
+ {t:"Unrestricted access to a phone at university removes the last structure that protected study time.",a:1,e:"A claim, and a strong one. It could be false, which is exactly why it needs a paragraph behind it."},
+ {t:"In terms of awareness, children watch a lot of short videos.",a:0,e:"An observation, not a position. It reports behaviour without saying what that behaviour proves."},
+ {t:"Children given devices before the age of three lose the slow attention that later study depends on.",a:1,e:"A claim with a controlling idea named in it: slow attention. The paragraph now knows what it has to prove."}
+],"f11");
+
+mcq("m13","1-3",[
+ {q:"Your paragraph 3 opens with \"Finally, as for their ability to focus, it's hard for them to pay attention to one thing long time now.\" Which sentence in that paragraph should have opened it?",
+  o:["In my childhood when I did not use my smartphone frequently, I could extremely focus on the class.",
+     "Due to my experience, I can make an educated guess that the young generation has a hard time to focus.",
+     "Concentration is a skill that needs to be nurtured during early childhood.",
+     "However, when I am in the university when there are no restrictions on phone usage, I am becoming addicted to it."],
+  a:2,
+  e:"It states a position, it names the controlling idea, and a reader could disagree with it. The other three are evidence or personal report, which is what a paragraph contains after the claim, not instead of it."},
+ {q:"Once your topic sentence carries a real claim, what happens to \"firstly\", \"secondly\" and \"finally\"?",
+  o:["You can usually drop them, because a new claim already signals a new point.",
+     "Keep them, because markers look for signposting words.",
+     "Replace them with \"moreover\", \"furthermore\" and \"in addition\".",
+     "Move them to the end of each paragraph instead."],
+  a:0,
+  e:"Ordinal signposts are a substitute for structure. When each paragraph opens with a distinct claim, the structure is already visible and the words are just taking up space. Keep one if a sequence genuinely matters, such as steps in a process."}
+]);
+
+/* ================= LESSON 2 ================= */
+reg("2-1",3);reg("2-2",5);reg("2-3",1);
+sorter("s21","2-1",["Claim","Evidence","Warrant","Consequence"],[
+ {t:"\"Secondly, in terms of awareness, they often watch videos on short-video platforms such as TikTok and scroll through social media.\"",a:3,e:"It is not a claim, because nobody disagrees that children watch videos. It is not evidence, because there is no source or figure. It reports behaviour, which is the weakest possible opening."},
+ {t:"\"But they are too young that do not have an ability to recognize whether the thing is right or not.\"",a:0,e:"This is your actual claim, and it arrives second, unsupported. A reader could disagree with it, which means it needed a paragraph of proof behind it, not one sentence of consequence after it."},
+ {t:"\"This leads them to blindly follow and imitate behaviors they see online and lose the innocence they should have at their age.\"",a:3,e:"A consequence of the claim, stated as though it were proof of the claim. Consequences cannot support the thing they follow from. This is the circle the paragraph never escapes."}
+],"f21");
+
+matcher("p22","sl22","2-2",[
+ {key:"claim",label:"1. Claim",chip:"Early screen exposure is bringing short sight on years sooner than it used to appear."},
+ {key:"reason",label:"2. Reason",chip:"Close focus for long periods changes the shape of the developing eye."},
+ {key:"ev",label:"3. Evidence",chip:"At the primary school where I worked, nearly one third of the children already wore glasses."},
+ {key:"warrant",label:"4. Warrant",chip:"A rate that high in one year group is hard to explain by inherited short sight alone."},
+ {key:"link",label:"5. Link",chip:"Eyesight, then, is the first cost of putting a screen in a child's hands."}
+],"22","f22");
+
+/* ================= LESSON 3 ================= */
+reg("3-1",6);reg("3-2",3);reg("3-3",1);
+matcher("p31","sl31","3-1",[
+ {key:"a",label:"You fully accept it and so does the field",chip:"demonstrates"},
+ {key:"b",label:"You accept it, neutral reporting",chip:"reports"},
+ {key:"c",label:"You accept it, but it is an interpretation",chip:"argues"},
+ {key:"d",label:"Cautious, the source itself is tentative",chip:"suggests"},
+ {key:"e",label:"You are distancing yourself from it",chip:"claims"},
+ {key:"f",label:"A finding from data, past and specific",chip:"found"}
+],"31","f31");
+
+mcq("m32","3-2",[
+ {q:"Which is the most cautious?",
+  o:["The evidence indicates that early access harms attention.",
+     "Early access may contribute to weaker attention.",
+     "Early access harms attention.",
+     "Early access clearly harms attention."],
+  a:1,
+  e:"\"May contribute to\" hedges twice: once on certainty and once on how much of the effect is being claimed. That double hedge is standard in academic writing where the causal direction is not settled, which is exactly your situation."},
+ {q:"You have one observation from one school. Which sentence is honest about that?",
+  o:["Research proves that one third of children are short sighted.",
+     "All children today suffer from poor eyesight.",
+     "It is well known that screens damage children's eyes.",
+     "Observation at a single primary school suggested a rate of nearly one third, although a single site cannot be generalised."],
+  a:3,
+  e:"It names the source, names its size, and names its limit. Notice that admitting the limit makes the sentence stronger, not weaker. A marker trusts a writer who knows what their evidence cannot do."},
+ {q:"What is actually wrong with \"Due to my experience, I can make an educated guess that\"?",
+  o:["The hedging instinct is right but the authority rests on you alone and the phrasing is spoken.",
+     "It is too formal for an essay.",
+     "You should never hedge in academic writing.",
+     "\"Educated guess\" is not a real expression."],
+  a:0,
+  e:"You were right to signal uncertainty. The problem is that the sentence asks the reader to trust your life rather than your evidence, and \"make an educated guess\" belongs in conversation. Keep the caution, move the authority."}
+]);
+
+/* ================= LESSON 4 ================= */
+reg("4-1",1);reg("4-2",2);reg("4-3",4);
+picker("pk41","4-1",[
+ "Firstly, let's talk about the eyesight.",
+ "When I was in elementary school, there were few people having nearsightedness, neither were my friends.",
+ "However, it is common to see the children with the glasses due to the nearsightedness on the street now.",
+ "I used to work part-time in one elementary school and noticed that near one-third of the children there have nearsightedness.",
+ "Secondly, in terms of awareness, they often watch videos on short-video platforms such as TikTok and scroll through social media.",
+ "But they are too young that do not have an ability to recognize whether the thing is right or not.",
+ "This leads them to blindly follow and imitate behaviors they see online and lose the innocence they should have at their age."
+],[4],"f41",false);
+
+mcq("m42","4-2",[
+ {q:"Your body paragraphs run to 123 and 175 words. What does that imbalance tell a reader, whether you meant it or not?",
+  o:["That the third reason matters more than the first two.",
+     "That you ran out of time.",
+     "Nothing, length is irrelevant.",
+     "That the essay is too long overall."],
+  a:0,
+  e:"Space signals importance. If you give one reason nearly three times the room of another, the reader concludes you rate it higher. If that is not what you think, the structure is arguing against you."},
+ {q:"\"With rapid technological advancements, new phone models are constantly being rolled out.\" Why can this not open your conclusion?",
+  o:["It is too short.",
+     "It introduces material the body never established, and a conclusion may only draw on what has been earned.",
+     "It should be in the passive voice.",
+     "\"Rapid technological advancements\" is too informal."],
+  a:1,
+  e:"A conclusion has one job: show the reader what the body has proved. New content there is unproved by definition, and it costs you the words you needed to close the argument. Your conclusion was 51 words, and roughly a third of it went on this."}
+]);
+
+sorter("s43","4-3",["Belongs","Does not belong"],[
+ {t:"A restatement of your position in different words from the introduction.",a:0,e:"Yes. Different words, not copied. The reader should feel the position has been earned rather than repeated."},
+ {t:"A new example that proves your third point particularly well.",a:1,e:"No. If it proves the point, it belonged in the body where the reader could weigh it. In the conclusion it arrives with no chance to be examined."},
+ {t:"A short statement of what follows from the argument.",a:0,e:"Yes. This is the one genuinely forward-looking move a conclusion is allowed, provided it follows from what you proved rather than adding to it."},
+ {t:"An acknowledgement that smartphones also benefit adults.",a:1,e:"This is what you did, and it is the trickiest case. A concession is legitimate, but it has to be made and answered in the body. Arriving in the last three lines, it weakens the position you spent the essay building."}
+],"f43");
+
+/* ================= LESSON 5 ================= */
+reg("5-1",10);reg("5-2",4);reg("5-3",1);
+gaps("g51","5-1",["a","an","the",""],[
+ {t:"Nowadays we can witness various types of __ smartphone hitting the market.",a:[""],n:"Smartphones as a general class."},
+ {t:"Children in __ young generation are given their own devices before the age of three.",a:["the"],n:"One specific generation, and the reader knows which."},
+ {t:"Firstly, __ eyesight is the clearest cost.",a:[""],n:"Abstract and general, so no article."},
+ {t:"It is common to see __ children wearing __ glasses for short sight.",a:["",""],n:"Both general. Neither the children nor the glasses are ones the reader can identify."},
+ {t:"I worked part-time at __ elementary school.",a:["an"],n:"One of many, and the number does not matter. Note \"an\" before the vowel sound."},
+ {t:"They lack __ ability to judge what they see.",a:["the"],n:"A specific ability, defined by the words that follow it."},
+ {t:"When I am at __ university, there are no restrictions on phone use.",a:[""],n:"University as a stage of life takes no article, like school, hospital and prison."},
+ {t:"This may be positive for __ adults, who can gather information quickly.",a:[""],n:"Adults in general."},
+ {t:"By contrast, __ children I taught were mostly short sighted.",a:["the"],n:"Now the reader can identify exactly which children, because you told them."}
+],"f51");
+
+sorter("s52","5-2",["Q1: general","Q2: one of many","Q3: identifiable"],[
+ {t:"\"various types of the smartphones\"",a:0,e:"Question 1. You are talking about smartphones as a class, so no article at all. \"The\" would mean particular smartphones the reader already has in mind."},
+ {t:"\"I used to work part-time in one elementary school\"",a:1,e:"Question 2. One of many, reader does not know which, so \"an\". \"One\" is only right if the number is the point, as in one school and not two."},
+ {t:"\"do not have an ability to recognize whether ...\"",a:2,e:"Question 3. The words after it define exactly which ability, so the reader can identify it and it takes \"the\". Better still: \"lack the ability to\"."},
+ {t:"\"might be positive to the adults\"",a:0,e:"Question 1. Adults in general, so no article. Also \"positive for\", not \"positive to\"."}
+],"f52");
+
+/* ================= LESSON 6 ================= */
+reg("6-1",1);reg("6-2",6);reg("6-3",1);
+picker("pk61","6-1",[
+ "Nowadays,","we can witness","various types of the smartphones such as iPhone, Samsung, ASUS","etc.","hitting the market.",
+ "The race of using them also increase significantly, and everyone has a smartphone in hand","basically.",
+ "In my early teens, I had a smartphone in my junior high school,","so did my friends.",
+ "However, the children in young generation have their own smartphones in 2 to 3 years old."
+],[1,3,6,8],"f61",true,"61");
+
+matcher("p62","sl62","6-2",[
+ {key:"a",label:"basically",chip:"almost universally"},
+ {key:"b",label:"let's talk about",chip:"(delete it and make the claim)"},
+ {key:"c",label:"this thing",chip:"this continuous release of new models"},
+ {key:"d",label:"I can make an educated guess that",chip:"this suggests that"},
+ {key:"e",label:"etc.",chip:"among others"},
+ {key:"f",label:"But (starting a sentence)",chip:"However,"}
+],"62","f62");
+
+/* ================= LESSON 7 ================= */
+reg("7-1",8);reg("7-2",3);reg("7-3",1);
+gaps("g71","7-1",["so","such","too"],[
+ {t:"They are exposed to screens __ early that their eyesight suffers.",a:["so"],n:"Adjective plus that clause, and the result happened."},
+ {t:"They are __ young to judge what they see online.",a:["too"],n:"Followed by \"to\" plus a verb: the judging is prevented, not reported."},
+ {t:"It is __ an early exposure that the effects are difficult to reverse.",a:["such"],n:"There is a noun in the phrase (\"exposure\"), so \"such\" rather than \"so\"."},
+ {t:"The feed moves __ quickly that a child cannot evaluate any single item.",a:["so"],n:"Adverb plus that clause."},
+ {t:"Concentration is __ fragile a skill that it has to be built early.",a:["such"],n:"A trap worth knowing: with a countable noun you can also write \"such a fragile skill that\". Both are correct, and this inverted form is the more academic of the two."},
+ {t:"The children were __ distracted to finish the task.",a:["too"],n:"The task was not finished. Excess prevents."},
+ {t:"Screens arrive __ early in childhood that attention never fully forms.",a:["so"],n:"Adverbial phrase plus that clause, reporting a result."},
+ {t:"She was __ tired that she could not concentrate in class.",a:["so"],n:"Compare: \"too tired to concentrate\" says the same thing with the other structure. Both are right, but you may never mix them into \"too tired that\"."}
+],"f71");
+
+mcq("m72","7-2",[
+ {q:"\"They are exposure to screens too early.\" What is the word-level problem, before we even reach the structure?",
+  o:["\"Exposure\" is spelled wrongly.",
+     "\"Screens\" should be singular.",
+     "\"Early\" should be \"earlier\".",
+     "\"Exposure\" is a noun sitting where the adjective \"exposed\" belongs."],
+  a:3,
+  e:"They are exposed. Exposure is the thing itself; exposed is the state of a person. The same slip produced \"the first thing I do is that scroll through my phone\", which needs \"is to scroll\" or \"is scrolling\"."},
+ {q:"\"the disadvantages of early screen time outweigh the advantages, which affect their eyesight, awareness and attention.\" What does that sentence currently say?",
+  o:["That the advantages affect their eyesight, awareness and attention.",
+     "That the disadvantages affect their eyesight, awareness and attention.",
+     "That screen time affects their eyesight, awareness and attention.",
+     "It is ambiguous but readers will understand."],
+  a:0,
+  e:"\"Which\" attaches to the nearest noun, and that is \"the advantages\". In the final line of your essay you have accidentally argued the opposite of your case. The repair is to end the sentence and start a new one: \"The disadvantages of early screen time outweigh the advantages. Eyesight, judgement and attention are all affected.\""},
+ {q:"\"But they are too young that do not have an ability to recognize whether the thing is right or not.\" Besides the structure, what else has gone missing?",
+  o:["A comma after \"young\".",
+     "The subject of the second clause: it says \"that do not have\" with nobody doing the not having.",
+     "The word \"very\".",
+     "Nothing else, the structure is the only problem."],
+  a:1,
+  e:"English requires the subject to be repeated in the new clause: \"they do not have\". Your first language allows a subject to carry over silently, which is why it feels complete when you write it. Cleanest repair: \"They are too young to judge what they see.\""}
+]);
+
+/* ---------------- theme + reset ---------------- */
+var tb=$("#themebtn");
+try{if(S.theme)document.documentElement.setAttribute("data-theme",S.theme);}catch(e){}
+tb.addEventListener("click",function(){
+  var cur=document.documentElement.getAttribute("data-theme");
+  var next;
+  if(cur==="dark")next="light";
+  else if(cur==="light")next="dark";
+  else next=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  S.theme=next;save();
+});
+$("#resetbtn").addEventListener("click",function(){
+  if(!window.confirm("Clear every answer and start the unit again?"))return;
+  var th=S.theme;
+  S={};if(th)S.theme=th;
+  try{localStorage.removeItem(KEY);}catch(e){}
+  save();
+  window.location.reload();
+});
+
+paint();
+})();
+</script>
+</body>
+</html>
