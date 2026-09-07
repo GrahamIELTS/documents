@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jamie: Your Writing Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+ --paper:#F7F8F4; --surface:#FFFFFF; --sunk:#EFF3EC; --line:#DDE4D9; --line2:#C4CFC0;
+ --ink:#171E1A; --ink2:#47524B; --ink3:#79847C;
+ --forest:#12795A; --forest-d:#0E5C45; --forest-ink:#123F31;
+ --gold:#B5851C; --gold-d:#8C6714; --gold-lite:#F6EFDC;
+ --c1:#D3E7DA; --c2:#A6CDB6; --c3:#77B292; --c4:#48976F; --c5:#2A7050; --c6:#12492F;
+ --shadow:0 1px 2px rgba(18,73,47,.05), 0 8px 24px rgba(18,73,47,.05);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --paper:#10140F; --surface:#181E19; --sunk:#141A15; --line:#28312A; --line2:#3A453B;
+ --ink:#E7ECE5; --ink2:#B0BAAF; --ink3:#828D83;
+ --forest:#45BE92; --forest-d:#69D2AB; --forest-ink:#A9E4C9;
+ --gold:#DCAE44; --gold-d:#EAC163; --gold-lite:#2B2513;
+ --c1:#1C3A2C; --c2:#27543E; --c3:#357355; --c4:#4D9A73; --c5:#79C09B; --c6:#ADE0C0;
+ --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+ --paper:#10140F; --surface:#181E19; --sunk:#141A15; --line:#28312A; --line2:#3A453B;
+ --ink:#E7ECE5; --ink2:#B0BAAF; --ink3:#828D83;
+ --forest:#45BE92; --forest-d:#69D2AB; --forest-ink:#A9E4C9;
+ --gold:#DCAE44; --gold-d:#EAC163; --gold-lite:#2B2513;
+ --c1:#1C3A2C; --c2:#27543E; --c3:#357355; --c4:#4D9A73; --c5:#79C09B; --c6:#ADE0C0;
+ --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 110px}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+header.top{padding:60px 0 30px;border-bottom:3px solid var(--forest);margin-bottom:14px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600;display:flex;gap:8px 16px;flex-wrap:wrap}
+.eyebrow i{font-style:normal;color:var(--line2)}
+h1{font-family:"Fraunces",Georgia,serif;font-weight:700;font-size:clamp(2.3rem,6vw,3.5rem);line-height:1.02;letter-spacing:-.02em;margin:.3em 0 .2em;color:var(--forest-ink);text-wrap:balance}
+.dek{font-size:1.14rem;color:var(--ink2);max-width:60ch;margin:0;line-height:1.6}
+section{margin-top:66px;scroll-margin-top:20px}
+h2{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(1.55rem,3.4vw,2.05rem);line-height:1.15;margin:0 0 10px;letter-spacing:-.014em;text-wrap:balance;color:var(--ink)}
+h2 .num{font-family:"IBM Plex Mono",monospace;font-size:.5em;color:var(--gold);font-weight:600;display:block;letter-spacing:.14em;margin-bottom:6px}
+h3{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:1.18rem;margin:34px 0 8px;color:var(--forest-ink);letter-spacing:-.008em}
+p{margin:0 0 1.05em;max-width:68ch}
+strong{font-weight:600;color:var(--ink)}
+.lead{font-size:1.04rem;color:var(--ink2)}
+.pull{border-left:3px solid var(--gold);padding:4px 0 4px 20px;margin:26px 0;font-family:"Fraunces",Georgia,serif;font-size:1.24rem;line-height:1.36;color:var(--forest-ink);max-width:56ch;font-weight:500}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:22px 24px;margin:24px 0;box-shadow:var(--shadow)}
+.card h4{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 12px;font-weight:600}
+.card p:last-child{margin-bottom:0}
+.figure{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:24px;margin:26px 0}
+.figtitle{font-weight:600;font-size:1rem;margin:0 0 3px;color:var(--ink)}
+.figsub{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);margin:0 0 20px}
+.fignote{font-size:.87rem;color:var(--ink3);margin:16px 0 0;padding-top:13px;border-top:1px solid var(--line);max-width:none}
+.pies{display:grid;gap:22px;grid-template-columns:1fr}
+@media(min-width:680px){.pies{grid-template-columns:repeat(3,1fr)}}
+.pie{text-align:center}
+.pie h5{font-size:.92rem;margin:0 0 2px;font-weight:600;color:var(--ink)}
+.pie .sub{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink3);margin:0 0 10px;text-transform:uppercase;letter-spacing:.07em}
+.pie svg{max-width:200px;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin-top:16px}
+.legend span{display:inline-flex;align-items:center;gap:6px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink2)}
+.legend i{width:11px;height:11px;border-radius:2px;display:inline-block}
+.empty-pie{display:flex;align-items:center;justify-content:center;height:200px;width:200px;border:2px dashed var(--line2);border-radius:50%;margin:0 auto;color:var(--ink3);font-size:.78rem;padding:30px;line-height:1.45;text-align:center}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:3px;background:var(--surface);margin:22px 0}
+table{border-collapse:collapse;width:100%;min-width:520px}
+th,td{padding:10px 14px;border-bottom:1px solid var(--line);text-align:left;font-size:.92rem;vertical-align:top}
+th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-weight:600;background:var(--sunk);border-bottom:1px solid var(--line2)}
+td.n,th.n{text-align:right;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap;font-size:.86rem}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--sunk)}
+.up{color:var(--forest);font-weight:600}
+.dn{color:var(--gold-d);font-weight:600}
+.swap{display:grid;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:18px 0}
+@media(min-width:700px){.swap{grid-template-columns:1fr 1fr}}
+.swap>div{padding:16px 20px;background:var(--surface)}
+.swap>div:first-child{background:var(--sunk);border-right:1px solid var(--line)}
+.swap .lab{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:600;margin-bottom:9px;display:block}
+.swap>div:first-child .lab{color:var(--gold-d)}
+.swap>div:last-child .lab{color:var(--forest)}
+.swap ul{margin:0;padding-left:18px}
+.swap li{margin-bottom:9px;font-size:.92rem;line-height:1.5}
+.swap li:last-child{margin-bottom:0}
+.swap li .src{font-family:"IBM Plex Mono",monospace;font-size:9.5px;color:var(--ink3);display:block;margin-top:2px}
+.bank{border:1px solid var(--line);border-radius:3px;background:var(--surface);margin:14px 0;overflow:hidden}
+.bank>summary{padding:14px 20px;cursor:pointer;font-weight:600;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;list-style:none;font-size:.98rem}
+.bank>summary::-webkit-details-marker{display:none}
+.bank>summary::before{content:"+";font-family:"IBM Plex Mono",monospace;color:var(--gold);font-weight:700}
+.bank[open]>summary::before{content:"\2013"}
+.bank>summary:hover{background:var(--sunk)}
+.bank .rate{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink3);font-weight:400;margin-left:auto}
+.bank .body{padding:6px 20px 18px;border-top:1px solid var(--line)}
+.forms{display:grid;gap:13px;margin-top:12px}
+.form{border-left:2px solid var(--c3);padding-left:14px}
+.form .f{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--forest);font-weight:600}
+.form .c{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink3);margin-left:8px}
+.form .eg{font-size:.89rem;color:var(--ink2);margin-top:3px;line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.chip{font-family:"IBM Plex Mono",monospace;font-size:11.5px;padding:4px 10px;border:1px solid var(--line2);border-radius:14px;color:var(--ink2);background:var(--surface)}
+.chip b{color:var(--forest);font-weight:600}
+.drill{counter-reset:d;list-style:none;padding:0;margin:22px 0}
+.drill li{counter-increment:d;position:relative;padding:0 0 0 48px;margin-bottom:24px}
+.drill li::before{content:counter(d,decimal-leading-zero);position:absolute;left:0;top:1px;font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;color:var(--gold);border:1px solid var(--line2);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center}
+.drill b{display:block;margin-bottom:3px;font-family:"Fraunces",serif;font-size:1.06rem;color:var(--forest-ink)}
+.drill p{margin:0;font-size:.94rem;color:var(--ink2)}
+.essaybox{background:var(--surface);border:1px solid var(--line);border-radius:3px;margin:20px 0}
+.essaybox .h{padding:13px 20px;background:var(--sunk);border-bottom:1px solid var(--line);font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink2);display:flex;gap:12px;flex-wrap:wrap;align-items:baseline}
+.essaybox .h b{color:var(--forest);font-weight:600}
+.essaybox .h .why{color:var(--gold-d);margin-left:auto;font-size:10.5px}
+.essaybox .q{padding:14px 20px;border-bottom:1px solid var(--line);font-size:.92rem;color:var(--ink2);font-style:italic}
+.essaybox .t{padding:16px 20px}
+.essaybox .t p{font-size:.95rem;margin-bottom:.85em}
+.essaybox .t p:last-child{margin-bottom:0}
+.essaybox .src{padding:10px 20px 13px;border-top:1px solid var(--line);font-family:"IBM Plex Mono",monospace;font-size:10px}
+.essaybox .src a{color:var(--forest);text-decoration:none;border-bottom:1px solid var(--line2);word-break:break-all}
+.statrow{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:22px 0;grid-template-columns:repeat(2,1fr)}
+@media(min-width:640px){.statrow{grid-template-columns:repeat(4,1fr)}}
+.statrow div{background:var(--surface);padding:16px 16px 14px}
+.statrow .k{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:5px;font-weight:600}
+.statrow .v{font-family:"Fraunces",serif;font-size:1.7rem;font-weight:600;color:var(--forest);line-height:1;font-variant-numeric:tabular-nums}
+.statrow .u{font-size:.77rem;color:var(--ink3);display:block;margin-top:5px;line-height:1.35}
+.bars{display:grid;gap:10px;margin-top:6px}
+.bar{display:grid;grid-template-columns:minmax(115px,1.3fr) 1fr auto;gap:12px;align-items:center;font-size:.87rem}
+.bar .lb{color:var(--ink2);line-height:1.3}
+.bar .track{height:20px;background:var(--sunk);border-radius:2px;position:relative;overflow:hidden}
+.bar .mid{position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line2)}
+.bar .fill{position:absolute;top:2px;bottom:2px;border-radius:2px}
+.bar .val{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink2);min-width:48px;text-align:right}
+.stackrow{margin-bottom:18px}
+.stackrow .lb{font-size:.87rem;color:var(--ink2);margin-bottom:6px;display:flex;justify-content:space-between;gap:10px}
+.stackrow .lb b{color:var(--ink);font-weight:600}
+.stack{display:flex;height:32px;border-radius:3px;overflow:hidden;gap:2px}
+.stack div{position:relative;min-width:2px}
+.foot{margin-top:76px;padding-top:26px;border-top:1px solid var(--line);font-size:.88rem;color:var(--ink3)}
+.foot p{max-width:70ch}
+.foot b{color:var(--ink2)}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media print{.bank{break-inside:avoid}body{font-size:11pt}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+ <div class="eyebrow"><span>GrahamIELTS</span><i>/</i><span>Personal Writing Report</span><i>/</i><span>September 2026</span></div>
+ <h1>You Write Longer Sentences Than the Band 9s</h1>
+ <p class="dek">You told me you do not write long enough sentences. I measured your two scripts against 400 pieces of writing from my other students and against 458 Band 9 scoring essays. The belief is not true, and holding it is costing you the thing that would actually raise your score.</p>
+</header>
+
+<section style="margin-top:0">
+<h2><span class="num">Part 01</span>The claim, tested</h2>
+<p class="lead">Here is every sentence in your Task 2, drawn to scale. The two lines mark the averages you are being compared with.</p>
+<div class="figure">
+ <p class="figtitle">Your Task 2 sentences, in the order you wrote them</p>
+ <p class="figsub">Each bar is one sentence. Length in words.</p>
+ <div id="sentchart2"></div>
+ <p class="fignote">Your average is 23.3 words. My other students average 19.6 and the Band 9 essays average 20.3. Your longest sentence is 45 words; the Band 9 essays average 34.6 for their longest.</p>
+</div>
+<div class="card"><h4>What this means</h4>
+<p>Among my other students your Task 2 sentence length sits at the <b>85th percentile</b>. Only fifteen students in a hundred write longer sentences than you do. Your clauses per sentence sit at the <b>86th percentile</b>, and the amount of detail you carry in clauses sits at the <b>92nd</b>.</p>
+<p>You are not a student who writes short, simple sentences. You are a student who writes long, clause-heavy ones, and you are doing it more than the Band 9 writers do.</p></div>
+<p class="pull">If you take one thing from this report, take this. Every hour you spend trying to make your sentences longer is an hour spent making the one thing you already overdo worse.</p>
+</section>
+
+<section>
+<h2><span class="num">Part 02</span>Where you actually sit</h2>
+<p class="lead">Each bar shows your position among my other students. Fifty is average. Above eighty means you do far more of it than they do; below twenty means far less.</p>
+<div class="figure">
+ <p class="figtitle">Task 2</p>
+ <p class="figsub">Your percentile against 400 pieces of my students' writing</p>
+ <div class="bars" id="pct2"></div>
+</div>
+<div class="figure">
+ <p class="figtitle">Task 1</p>
+ <p class="figsub">Same scale, same comparison group</p>
+ <div class="bars" id="pct1"></div>
+ <p class="fignote">Notice that the two tasks are almost mirror images of each other. That is the single most interesting thing in your writing.</p>
+</div>
+<p>In Task 2 you are high on everything to do with clauses and low on everything to do with noun phrases and vocabulary. In Task 1 you are the opposite: bottom five per cent for sentence length, top five per cent for vocabulary.</p>
+<p>Two different writers appear to have produced these scripts. They did not. You did, and that is good news, because it means every skill you need is already in you. It just does not travel between the two tasks yet.</p>
+</section>
+
+<section>
+<h2><span class="num">Part 03</span>What you do well</h2>
+<p class="lead">These are not encouragements. Each one is a number that beats a real comparison group.</p>
+<div id="strengths"></div>
+</section>
+
+<section>
+<h2><span class="num">Part 04</span>Your vocabulary, in both tasks</h2>
+<p class="lead">The clearest evidence that your vocabulary is not the problem is that you already have it. In the other task.</p>
+<div class="figure">
+ <p class="figtitle">Level of every content word you wrote</p>
+ <p class="figsub">Nouns, verbs, adjectives and adverbs. Grammar words excluded.</p>
+ <div class="pies" id="pies"></div>
+ <div class="legend" id="cefrlegend"></div>
+ <p class="fignote">Read the darker slices, which are B2 and above. Your Task 1 carries 31.0 per cent. Your Task 2 carries 6.6 per cent. The Band 9 essays carry 17.4 per cent, sitting between your two.</p>
+</div>
+<p>In Task 1 you wrote <em>predictions</em>, <em>significant</em>, <em>dramatically</em>, <em>inconsistent</em>, <em>steadily</em>, <em>ultimately</em>, <em>approximately</em>, <em>declined</em>. In Task 2, describing an argument you clearly care about, you wrote <em>convenient</em>, <em>useful</em>, <em>important</em>, <em>easier</em>, <em>really</em>.</p>
+<p>The words did not leave you between Monday and Tuesday. Describing a chart puts you in a careful, precise frame of mind. Arguing a case puts you in a talking frame of mind, and talking vocabulary is A1 and A2 vocabulary.</p>
+</section>
+
+<section>
+<h2><span class="num">Part 05</span>The five things to work on</h2>
+<p class="lead">In order. The first one is urgent.</p>
+<div id="focus"></div>
+</section>
+
+<section>
+<h2><span class="num">Part 06</span>Your Task 1 sentences that do not finish</h2>
+<p class="lead">Your Task 1 runs at 0.92 clauses per sentence. Of the 400 scripts I measured, that is the lowest. A number below one means some of your sentences contain no working verb at all.</p>
+<div id="frags"></div>
+<div class="card"><h4>Why this matters more than it looks</h4>
+<p>This is why your Task 1 sentence length reads as very short. It is not that you are writing simple sentences. It is that some of what you have punctuated as a sentence is a noun phrase with a full stop attached. An examiner reads that as a grammar error, not as a style choice, and it sits in the same criterion that your excellent Task 1 vocabulary is helping.</p>
+<p>Fix these three and your Task 1 becomes a genuinely strong script, because everything else in it is already at or above the Band 9 average.</p></div>
+</section>
+
+<section>
+<h2><span class="num">Part 07</span>The rewrite that changes your Task 2</h2>
+<p class="lead">One habit, four times per essay. This is Part 05, item two, made concrete.</p>
+<p>Take any sentence of yours with <em>because</em>, <em>which</em>, <em>so that</em>, <em>that is why</em>, or a comma joining two ideas. Delete the joining word and turn the second half into a noun group.</p>
+<div class="swap">
+ <div><span class="lab">What you wrote</span><ul>
+  <li>As technology continues to advance, it's convenient for people during work or learning new knowledge, which in turn leads to people relying on using computers or AI tools to acquire information.<span class="src">31 words, four clauses</span></li>
+  <li>In a traditional classroom, students could only get what was shown on books, whereas digital tools make information easier to absorb and remember.<span class="src">23 words, three clauses</span></li>
+ </ul></div>
+ <div><span class="lab">The same idea, compressed</span><ul>
+  <li>Rapid technological advance has made information gathering convenient at work and in study, and that convenience breeds dependence on computers and AI tools.<span class="src">23 words, two clauses, three noun groups doing the work</span></li>
+  <li>Traditional classrooms limited students to the contents of a textbook, whereas digital tools make information easier to absorb.<span class="src">18 words, two clauses</span></li>
+ </ul></div>
+</div>
+<p>Both rewrites are shorter, both carry the same meaning, and both are graded higher, because the detail has moved from extra clauses into the noun phrases. That is the difference the Band 9 essays show over yours, and it is the only structural difference that matters.</p>
+</section>
+
+<section>
+<h2><span class="num">Part 08</span>What to do next</h2>
+<ol class="drill">
+<li><b>Put a space after every full stop and comma</b><p>Nine of them are missing in your Task 2 and it takes your visible word count under the minimum. Do this before anything else on this page.</p></li>
+<li><b>Do the noun-phrase rewrite four times per Task 2 essay</b><p>Once per paragraph. Use Part 07 as the model. This is the largest gap between your writing and Band 9.</p></li>
+<li><b>Write your Task 2 as though you were describing a chart</b><p>Before you start arguing, remind yourself of the register you used for <em>significant</em>, <em>dramatically</em>, <em>inconsistent</em>. Same care, different task.</p></li>
+<li><b>Read each Task 1 sentence and find the main verb</b><p>If you cannot point at one, the sentence is not finished. Three of your eleven failed this test.</p></li>
+<li><b>Add about 35 words to Task 2, as detail not as sentences</b><p>You are at 256 and the target is around 290. Extend the examples you already have rather than adding new points.</p></li>
+<li><b>Stop trying to write longer sentences</b><p>You are already above the Band 9 average. Leave sentence length alone entirely and spend that effort on items two and three.</p></li>
+</ol>
+</section>
+
+<div class="foot">
+<p><b>How this was measured.</b> Your two scripts were parsed and counted in exactly the same way as 400 Task 1 and 400 Task 2 pieces of writing from my other students, and 458 Task 2 essays and 198 Task 1 reports published as Band 9 scoring answers. Vocabulary levels come from the English Vocabulary Profile. Noun-phrase and clause measures follow the standard categories used in academic writing research. Percentiles are your position within my students' writing only.</p>
+<p><b>What to hold loosely.</b> Two scripts is a small sample of you, so treat the direction of each finding as reliable and the exact figure as approximate. Where your two tasks disagree with each other, as they do sharply here, the honest reading is that both numbers are true of you on that day and in that task.</p>
+</div>
+</div>
+<script>
+const D = {
+ t2: {
+  you:{words:256, typed:246, sents:11, mls:23.27, maxs:45, cps:2.36, phr:132.8, cls:113.3, ratio:1.17, b2:6.58},
+  others:{words:333, mls:19.55, maxs:37.4, cps:1.95, phr:149.9, cls:81.6, ratio:2.03, b2:10.96},
+  band9:{words:291, mls:20.30, maxs:34.6, cps:1.80, phr:179.0, cls:60.9, ratio:3.29, b2:17.43},
+  pct:{words:15.8, mls:85.0, maxs:83.5, cps:86.0, phr:33.8, cls:92.5, ratio:17.5, b2:20.2},
+  lens:[14,16,14,31,20,35,17,45,23,24,17]
+ },
+ t1: {
+  you:{words:172, typed:194, sents:11, mls:13.23, maxs:29, cps:0.92, phr:139.5, cls:29.1, ratio:4.80, b2:31.03},
+  others:{words:213, mls:18.14, maxs:31.5, cps:1.53, phr:141.4, cls:45.2, ratio:3.94, b2:17.17},
+  band9:{words:176, mls:21.00, maxs:33.9, cps:1.60, phr:150.3, cls:46.5, ratio:4.19, b2:17.60},
+  pct:{words:47.0, mls:4.5, maxs:46.5, cps:0.2, phr:54.8, cls:20.5, ratio:76.2, b2:95.5},
+  lens:[29,15,11,6,9,13,25,12,14,7,26]
+ },
+ cefr_t2:{
+  "Your Task 2":{A1:41.4,A2:36.8,B1:15.1,B2:5.3,C1:0.0,C2:1.3},
+  "Your Task 1":{A1:20.7,A2:31.0,B1:17.2,B2:24.1,C1:0.0,C2:6.9},
+  "Band 9 essays":{A1:26.4,A2:35.6,B1:20.6,B2:11.8,C1:1.6,C2:4.0}
+ },
+ fragments:[
+  {s:"In 1970, 30% of the population in Malaysia.", why:"There is no verb. This is a noun phrase with a full stop after it."},
+  {s:"Ultimately reaching its peak of nearly 50% by 2040.", why:"“Reaching” cannot be the main verb of a sentence on its own."},
+  {s:"The predictions of population in Malaysia from 2030 to 2040, it peak of nearly 85% by 2040.", why:"“It peak” is not a verb form, and the sentence has two subjects competing."}
+ ],
+ strengths:[
+  {t:"Your Task 1 vocabulary beats the Band 9 essays", d:"31.0 per cent of your Task 1 content words are B2 or above. The Band 9 essays average 17.6 per cent. Among my other students you are in the top 5 per cent.", n:"95th percentile"},
+  {t:"Your Task 1 length is almost exactly right", d:"172 words against a Band 9 average of 176. Most of my students overwrite Task 1 by about 40 words. You do not.", n:"172 vs 176"},
+  {t:"Your Task 1 noun phrases are already dense", d:"Your ratio of noun-phrase detail to clause detail is 4.80. The Band 9 essays average 4.19. This is the measure that most separates advanced writing, and in Task 1 you are ahead of it.", n:"4.80 vs 4.19"},
+  {t:"You build appositive noun phrases without being taught to", d:"“Chat GPT, an AI chat robot” and “Youtube, an online video platform”. That comma-plus-noun-phrase structure is a Band 9 grammatical feature and you produced two of them unprompted.", n:"2 in one essay"},
+  {t:"Your Task 1 overview does both required jobs", d:"You state the highest and lowest, then the general trend across all four countries, in two sentences and with no data in them. That is exactly the shape the overview is marked on.", n:"both elements"},
+  {t:"Your Task 2 genuinely discusses both sides", d:"You give the case against computers a full paragraph with a real example, then the case for. Many candidates only pretend to.", n:"both sides"}
+ ],
+ focus:[
+  {n:"01", t:"Your Task 2 is under the word limit as you typed it",
+   d:"Counted the way a computer counts, splitting on spaces, your Task 2 comes to 246 words. The minimum is 250. The reason is nine places where a full stop or comma has no space after it, so “education.While” is read as one word. Add those nine spaces and you are at 255. On a computer-delivered test this alone could cost you a band.",
+   e:["education.While","deeply.I","instance,Chat","GPT,an","robot,can","However,from","lessons.Computer","Youtube,an","books,whereas"]},
+  {n:"02", t:"Pack your Task 2 detail into noun phrases, not extra clauses",
+   d:"Your Task 2 ratio is 1.17. My other students average 2.03 and the Band 9 essays average 3.29. You are in the bottom fifth of my students on this one measure, and it is the measure that matters most. You already do it well in Task 1, where you score 4.80.",
+   e:[]},
+  {n:"03", t:"Bring your Task 1 vocabulary into Task 2",
+   d:"Your Task 1 sits at 31 per cent B2 and above. Your Task 2 sits at 6.6 per cent, which is the bottom fifth of my students. Same writer, same week. You are not missing the words. You stop reaching for them when you switch from describing to arguing.",
+   e:[]},
+  {n:"04", t:"Finish every Task 1 sentence",
+   d:"Three of your eleven Task 1 sentences have no working main verb. That is what pulls your Task 1 clause count to 0.92 per sentence, the lowest of the 400 scripts I measured. This is not a length problem, it is a completeness problem, and it is quick to fix.",
+   e:[]},
+  {n:"05", t:"Write about 35 more words in Task 2",
+   d:"You wrote 256. The Band 9 essays average 291 and my other students average 333. You are not long-winded, you are slightly short, and the missing words are supporting detail rather than more sentences.",
+   e:[]}
+ ]
+};
+</script>
+<script>
+const E=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const LV=["A1","A2","B1","B2","C1","C2"];
+const CV=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const RAMP=["--c1","--c2","--c3","--c4","--c5","--c6"];
+const F=(x,n)=>Number(x).toFixed(n===undefined?1:n);
+
+/* sentence-length chart */
+(function(){
+ const d=D.t2, W=680,H=230,ml=30,mb=34,mt=18,mr=14;
+ const mx=Math.max.apply(null,d.lens)+6;
+ const bw=(W-ml-mr)/d.lens.length;
+ const y=v=>H-mb-(v/mx)*(H-mb-mt);
+ let g="";
+ const lo=Math.min(d.others.mls,d.band9.mls), hi=Math.max(d.others.mls,d.band9.mls);
+ g+=`<rect x="${ml}" y="${y(hi)}" width="${W-ml-mr}" height="${Math.max(2,y(lo)-y(hi))}" fill="${CV('--forest')}" opacity=".16"/>`+
+    `<line x1="${ml}" y1="${y(hi)}" x2="${W-mr}" y2="${y(hi)}" stroke="${CV('--forest')}" stroke-width="1.5" stroke-dasharray="5 4"/>`+
+    `<line x1="${ml}" y1="${y(lo)}" x2="${W-mr}" y2="${y(lo)}" stroke="${CV('--forest')}" stroke-width="1.5" stroke-dasharray="5 4"/>`+
+    ``;
+ d.lens.forEach((v,i)=>{
+   const x=ml+i*bw+3, w=bw-6, hh=(H-mb)-y(v);
+   const col = v>d.others.mls ? CV("--gold") : CV("--c3");
+   g+=`<rect x="${x}" y="${y(v)}" width="${w}" height="${hh}" rx="3" fill="${col}"><title>Sentence ${i+1}: ${v} words</title></rect>`+
+      `<text x="${x+w/2}" y="${y(v)-5}" text-anchor="middle" font-size="10" font-family="IBM Plex Mono,monospace" fill="${CV('--ink2')}">${v}</text>`+
+      `<text x="${x+w/2}" y="${H-mb+15}" text-anchor="middle" font-size="9.5" font-family="IBM Plex Mono,monospace" fill="${CV('--ink3')}">${i+1}</text>`;
+ });
+ g+=`<line x1="${ml}" y1="${H-mb}" x2="${W-mr}" y2="${H-mb}" stroke="${CV('--line2')}"/>`;
+ g+=`<text x="${ml+(W-ml-mr)/2}" y="${H-6}" text-anchor="middle" font-size="10.5" font-family="IBM Plex Mono,monospace" fill="${CV('--ink3')}">sentence number</text>`;
+ document.getElementById("sentchart2").innerHTML=
+  `<div style="overflow-x:auto"><svg viewBox="0 0 ${W} ${H}" style="width:100%;min-width:540px;height:auto" role="img" aria-label="Your Task 2 sentence lengths">${g}</svg></div>`+
+  `<div class="legend"><span><i style="background:${CV('--gold')}"></i>above the average</span>`+
+  `<span><i style="background:${CV('--c3')}"></i>at or below it</span>`+
+  `<span><i style="background:${CV('--forest')};opacity:.3"></i>the shaded band holds both averages: my other students ${F(d.others.mls)}, Band 9 ${F(d.band9.mls)}</span></div>`;
+})();
+
+/* percentile bars */
+function pctbars(el,p,order){
+ const NAME={words:"Essay length",mls:"Sentence length",maxs:"Longest sentence",cps:"Clauses per sentence",
+  cls:"Detail carried in clauses",phr:"Detail carried in noun phrases",ratio:"Noun-phrase to clause ratio",b2:"Vocabulary at B2 and above"};
+ document.getElementById(el).innerHTML=order.map(k=>{
+  const v=p[k], hi=v>=70, lo=v<=30;
+  const col = hi?CV("--gold"):(lo?CV("--forest"):CV("--ink3"));
+  return `<div class="bar"><span class="lb">${NAME[k]}</span>`+
+   `<span class="track"><span class="mid" style="left:50%"></span>`+
+   `<span class="fill" style="left:0;width:${v}%;background:${col}"></span></span>`+
+   `<span class="val">${F(v)}</span></div>`;}).join("");
+}
+pctbars("pct2",D.t2.pct,["cls","cps","mls","maxs","phr","b2","ratio","words"]);
+pctbars("pct1",D.t1.pct,["b2","ratio","phr","maxs","words","cls","mls","cps"]);
+
+/* donuts */
+function donut(p){
+  const R=88,r=54,cx=100,cy=100,gap=1.6; let a=-90,out="";
+  LV.forEach((l,i)=>{const pct=p[l]||0; if(pct<=0) return;
+    let sw=pct*3.6,a0=a+gap/2,a1=a+sw-gap/2; a+=sw; if(a1<=a0)a1=a0+.4;
+    const rad=d=>d*Math.PI/180, pt=(A,rr)=>[cx+rr*Math.cos(rad(A)),cy+rr*Math.sin(rad(A))];
+    const p0=pt(a0,R),p1=pt(a1,R),p2=pt(a1,r),p3=pt(a0,r), big=(a1-a0)>180?1:0;
+    out+=`<path d="M${p0[0]} ${p0[1]} A${R} ${R} 0 ${big} 1 ${p1[0]} ${p1[1]} L${p2[0]} ${p2[1]} A${r} ${r} 0 ${big} 0 ${p3[0]} ${p3[1]} Z" fill="${CV(RAMP[i])}"><title>${l}: ${pct}%</title></path>`;
+    if(pct>=7){const mid=(a0+a1)/2,lp=pt(mid,(R+r)/2),dk=i>=3;
+      out+=`<text x="${lp[0]}" y="${lp[1]-1}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" fill="${dk?'#fff':CV('--forest-ink')}">${l}</text>`+
+           `<text x="${lp[0]}" y="${lp[1]+11}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="${dk?'#fff':CV('--ink2')}">${pct}%</text>`;}});
+  return `<svg viewBox="0 0 200 200" role="img" aria-label="Vocabulary level">${out}</svg>`;
+}
+const SUB={"Your Task 2":"6.6% at B2 and above","Your Task 1":"31.0% at B2 and above","Band 9 essays":"17.4% at B2 and above"};
+document.getElementById("pies").innerHTML=Object.keys(D.cefr_t2).map(k=>
+ `<div class="pie"><h5>${E(k)}</h5><p class="sub">${SUB[k]}</p>${donut(D.cefr_t2[k])}</div>`).join("");
+document.getElementById("cefrlegend").innerHTML=LV.map((l,i)=>`<span><i style="background:${CV(RAMP[i])}"></i>${l}</span>`).join("");
+
+/* strengths */
+document.getElementById("strengths").innerHTML=D.strengths.map(s=>
+ `<div class="card" style="border-left:3px solid var(--forest)"><h4 style="color:var(--forest)">${E(s.n)}</h4>`+
+ `<p style="font-family:Fraunces,serif;font-size:1.08rem;color:var(--forest-ink);margin-bottom:.4em">${E(s.t)}</p>`+
+ `<p>${E(s.d)}</p></div>`).join("");
+
+/* focus */
+document.getElementById("focus").innerHTML=D.focus.map(f=>
+ `<div class="card"${f.n==="01"?' style="border-left:3px solid var(--gold);background:var(--gold-lite)"':''}>`+
+ `<h4>Priority ${E(f.n)}</h4>`+
+ `<p style="font-family:Fraunces,serif;font-size:1.08rem;color:var(--forest-ink);margin-bottom:.4em">${E(f.t)}</p>`+
+ `<p>${E(f.d)}</p>`+
+ (f.e.length?`<div class="chips">`+f.e.map(x=>`<span class="chip"><b>${E(x)}</b></span>`).join("")+`</div>`:"")+
+ `</div>`).join("");
+
+/* fragments */
+document.getElementById("frags").innerHTML=D.fragments.map(f=>
+ `<div class="form" style="margin-bottom:16px"><div class="eg" style="font-size:.98rem;color:var(--ink)">`+
+ `<b style="background:var(--gold-lite);padding:2px 5px;border-radius:2px">${E(f.s)}</b></div>`+
+ `<div class="eg" style="margin-top:5px">${E(f.why)}</div></div>`).join("");
+</script>
+
+</body>
+</html>
