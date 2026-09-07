@@ -1,0 +1,134 @@
+{
+  "student": "Wendy",
+  "updated": "2026-09-07",
+  "documents": [
+    {
+      "file": "index.html",
+      "label": "Your Trial Report",
+      "kind": "Trial report",
+      "added": "2026-09-07",
+      "is_index": true
+    },
+    {
+      "file": "homework.html",
+      "label": "Homework",
+      "kind": "Homework",
+      "added": "2026-09-07",
+      "is_index": false
+    }
+  ],
+  "summary": {
+    "name": "Wendy",
+    "email": "",
+    "slug": "wendy",
+    "trial": "2026-09-07",
+    "test": "2026-11-28",
+    "now": "",
+    "target": "7+",
+    "stage": "trial",
+    "level": "B2",
+    "levelName": "6 to 7",
+    "personal": "",
+    "strengths": [
+      {
+        "id": "range",
+        "n": "Wide vocabulary",
+        "s": "You already know far more words than you are able to use under pressure. That is a good problem, because the words do not have to be learned again. They have to be made available faster."
+      },
+      {
+        "id": "ideas",
+        "n": "Strong ideas",
+        "s": "You have opinions and you can find something to say on almost any topic. Many candidates lose marks because they have nothing to say. That is not your problem, which means the work is about delivery rather than about thinking."
+      },
+      {
+        "id": "willing",
+        "n": "Willing to keep talking",
+        "s": "You keep going rather than stopping when something is difficult. That single habit is worth more than it looks, because the marking rewards sustained speech."
+      },
+      {
+        "id": "listening",
+        "n": "Strong listening",
+        "s": "You understand questions the first time and answer what was actually asked. Examiners notice this immediately, and it makes the whole conversation easier for both people."
+      },
+      {
+        "id": "pace",
+        "n": "Comfortable pace",
+        "s": "Your speed is easy to follow, neither rushed nor slow. This is worth protecting when the other work starts."
+      },
+      {
+        "id": "humour",
+        "n": "Personality comes through",
+        "s": "You are interesting to listen to. The test is a conversation with a human being, and a human being who is enjoying the conversation is a friendlier marker."
+      },
+      {
+        "id": "selfaware",
+        "n": "You hear your own mistakes",
+        "s": "You notice when something comes out wrong. That awareness is the foundation of every correction that follows, and many students do not have it."
+      }
+    ],
+    "strongnote": "",
+    "weaknesses": [
+      {
+        "id": "vocab-overreach",
+        "n": "Reaching for advanced vocabulary",
+        "meta": "Big words slowing everything else down",
+        "cat": "Vocabulary",
+        "skill": "Lexical resource"
+      },
+      {
+        "id": "collocation",
+        "n": "Word partners",
+        "meta": "Right word, wrong partner",
+        "cat": "Vocabulary",
+        "skill": "Lexical resource"
+      },
+      {
+        "id": "copula",
+        "n": "The missing BE verb",
+        "meta": "Am, is, are dropping out",
+        "cat": "Grammar",
+        "skill": "Grammatical range and accuracy"
+      },
+      {
+        "id": "count",
+        "n": "Countable and uncountable",
+        "meta": "Many informations, an advice",
+        "cat": "Grammar",
+        "skill": "Grammatical range and accuracy"
+      }
+    ],
+    "weaknote": "",
+    "units": [
+      {
+        "unit": "ex09",
+        "ex": "Exercise 09",
+        "page": 11,
+        "name": "Specificity, name it exactly",
+        "tool": "Tool 14",
+        "from": "Reaching for advanced vocabulary",
+        "finding": "vocab-overreach",
+        "reason": "the vocabulary is genuinely there. The issue is that it is being spent on rarity when the marking pays for precision. This exercise trains the difference."
+      },
+      {
+        "unit": "ex08",
+        "ex": "Exercise 08",
+        "page": 11,
+        "name": "Show, do not tell, the sensory sweep",
+        "tool": "Tool 13",
+        "from": "Word partners",
+        "finding": "collocation",
+        "reason": "the nouns you choose are right almost every time. It is the words attached to them that are travelling in from your first language, and that is a partnering habit rather than a vocabulary gap."
+      },
+      {
+        "unit": "ex06",
+        "ex": "Exercise 06",
+        "page": 10,
+        "name": "The But and Therefore engine",
+        "tool": "Tool 11",
+        "from": "The missing BE verb",
+        "finding": "copula",
+        "reason": ""
+      }
+    ]
+  }
+}
