@@ -31,19 +31,19 @@
       "is_index": false,
       "picks": [
         {
-          "unit": "06",
-          "reason": ""
-        },
-        {
-          "unit": "07",
-          "reason": ""
-        },
-        {
-          "unit": "12",
+          "unit": "14",
           "reason": ""
         },
         {
           "unit": "15",
+          "reason": ""
+        },
+        {
+          "unit": "20",
+          "reason": ""
+        },
+        {
+          "unit": "23",
           "reason": ""
         }
       ]
