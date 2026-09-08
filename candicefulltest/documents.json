@@ -28,7 +28,21 @@
       "label": "Your Speaking Units",
       "kind": "Workbook",
       "added": "2026-09-08",
-      "is_index": false
+      "is_index": false,
+      "picks": [
+        {
+          "unit": "04",
+          "reason": ""
+        },
+        {
+          "unit": "09",
+          "reason": ""
+        },
+        {
+          "unit": "18",
+          "reason": ""
+        }
+      ]
     }
   ]
 }
