@@ -1,0 +1,134 @@
+{
+  "student": "Rohine",
+  "updated": "2026-09-09",
+  "documents": [
+    {
+      "file": "index.html",
+      "label": "Your Trial Report",
+      "kind": "Trial report",
+      "added": "2026-09-09",
+      "is_index": true
+    },
+    {
+      "file": "homework.html",
+      "label": "Homework",
+      "kind": "Homework",
+      "added": "2026-09-09",
+      "is_index": false
+    }
+  ],
+  "summary": {
+    "name": "Rohine",
+    "email": "",
+    "slug": "rohine",
+    "preferred": "",
+    "trial": "2026-09-07",
+    "test": "2026-09-25",
+    "now": "5",
+    "target": "5.5+",
+    "stage": "trial",
+    "level": "B1",
+    "levelName": "5 to 6",
+    "personal": "",
+    "strengths": [
+      {
+        "id": "willing",
+        "n": "Willing to keep talking",
+        "s": "You keep going rather than stopping when something is difficult. That single habit is worth more than it looks, because the marking rewards sustained speech."
+      },
+      {
+        "id": "grammar-base",
+        "n": "Solid grammar foundation",
+        "s": "The basic structures are there and correct. What is missing is variety, not knowledge, and variety is quicker to build than knowledge."
+      },
+      {
+        "id": "listening",
+        "n": "Strong listening",
+        "s": "You understand questions the first time and answer what was actually asked. Examiners notice this immediately, and it makes the whole conversation easier for both people."
+      },
+      {
+        "id": "reading",
+        "n": "Reading and grammar knowledge",
+        "s": "You know a great deal of English that has never been asked to come out of your mouth at speed. That is a storage problem rather than a knowledge problem, and it is a far shorter job."
+      }
+    ],
+    "strongnote": "",
+    "weaknesses": [
+      {
+        "id": "saferotation",
+        "n": "The same safe words on rotation",
+        "meta": "A small set, used often and correctly",
+        "cat": "Vocabulary",
+        "skill": "Lexical resource"
+      },
+      {
+        "id": "memorised",
+        "n": "Memorised answers",
+        "meta": "Prepared scripts that stop working",
+        "cat": "Vocabulary",
+        "skill": "Lexical resource"
+      },
+      {
+        "id": "speed",
+        "n": "Speaking too fast",
+        "meta": "Speed used to cover uncertainty",
+        "cat": "Discourse",
+        "skill": "Fluency and coherence"
+      },
+      {
+        "id": "relative",
+        "n": "Relative clauses",
+        "meta": "Which, who and that doing no work",
+        "cat": "Grammar",
+        "skill": "Grammatical range and accuracy"
+      },
+      {
+        "id": "vw",
+        "n": "V and W",
+        "meta": "Village and window swapping",
+        "cat": "Delivery",
+        "skill": "Pronunciation"
+      },
+      {
+        "id": "exposure",
+        "n": "Never taught out loud",
+        "meta": "English learned as a written subject",
+        "cat": "Delivery",
+        "skill": "Pronunciation"
+      }
+    ],
+    "weaknote": "",
+    "units": [
+      {
+        "unit": "ex04",
+        "ex": "Exercise 04",
+        "page": 8,
+        "name": "Homework for Life, the starter week",
+        "tool": "Tool 9",
+        "from": "Memorised answers",
+        "finding": "memorised",
+        "reason": "the polished answers are not the problem. The empty shelf behind them is. This builds the shelf, one line a night, so that the next time a cue card lands you are choosing between real memories instead of reaching for a script."
+      },
+      {
+        "unit": "ex09",
+        "ex": "Exercise 09",
+        "page": 11,
+        "name": "Specificity, name it exactly",
+        "tool": "Tool 14",
+        "from": "The same safe words on rotation",
+        "finding": "saferotation",
+        "reason": "the safe twenty words are doing all the work, and they are hiding everything else you know. This exercise pulls the precise words out of your own life rather than out of a list."
+      },
+      {
+        "unit": "ex20",
+        "ex": "Exercise 20",
+        "page": 22,
+        "name": "Sprints, not streams, chunk and pause",
+        "tool": "Tool 32",
+        "from": "Speaking too fast",
+        "finding": "speed",
+        "reason": "the pace rises exactly where the accuracy needs to hold. This exercise puts the pauses back in, at the joints, where they are scored as control rather than hesitation."
+      }
+    ]
+  }
+}
