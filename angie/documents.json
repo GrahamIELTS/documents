@@ -3,13 +3,6 @@
   "updated": "2026-09-09",
   "documents": [
     {
-      "file": "writing-analysis.html",
-      "label": "Your Writing Report",
-      "kind": "Writing analysis",
-      "added": "2026-09-09",
-      "is_index": false
-    },
-    {
       "file": "your-writing-report.html",
       "label": "Your Writing Report",
       "kind": "Writing analysis",
