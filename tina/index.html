@@ -1,0 +1,981 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GrahamIELTS | Touchscreen Tipping | C1 to C2</title>
+<style>
+:root{
+  --navy:#0E2A47; --navy2:#1D4470; --gold:#C4A24C; --gold2:#A8862F;
+  --goldtint:#FBF4E2; --ink:#17212C; --muted:#5C6875; --rule:#D5DBE3;
+  --tint:#F4F7FA; --green:#EAF3DA; --green2:#7FA645; --green3:#41541F;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--sans);font-size:15px;line-height:1.5;color:var(--ink);background:#E8ECF1;-webkit-text-size-adjust:100%}
+.wrap{max-width:900px;margin:0 auto;padding:0 0 60px;background:#fff;box-shadow:0 0 30px rgba(14,42,71,.13)}
+
+/* toolbar */
+.toolbar{position:sticky;top:0;z-index:50;display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--navy);color:#fff;padding:8px 14px;border-bottom:3px solid var(--gold)}
+.toolbar .grow{flex:1}
+.pill{font-size:11px;letter-spacing:.9px;text-transform:uppercase;font-weight:700;background:rgba(255,255,255,.12);padding:5px 10px;border-radius:20px;white-space:nowrap}
+.pill b{color:var(--gold)}
+.btn{font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;background:var(--gold);color:var(--navy);border:none;border-radius:4px;padding:7px 12px}
+.btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
+.btn:active{transform:translateY(1px)}
+.bar{height:4px;background:rgba(255,255,255,.18);border-radius:3px;width:110px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--gold);width:0%;transition:width .25s}
+
+/* masthead */
+.masthead{background:var(--navy);color:#fff;padding:16px 18px 18px;display:flex;gap:16px;align-items:center;border-bottom:4px solid var(--gold)}
+.masthead h1{font-family:var(--serif);font-size:25px;line-height:1.14;margin:2px 0 0}
+.kicker{font-size:10.5px;letter-spacing:1.7px;text-transform:uppercase;color:var(--gold);font-weight:700}
+.sub{font-size:13px;color:#C3D2E2;margin-top:5px}
+.meta{display:flex;flex-wrap:wrap;background:var(--tint);border-bottom:1px solid var(--rule)}
+.meta div{flex:1;min-width:120px;padding:7px 12px;border-right:1px solid var(--rule)}
+.meta div:last-child{border-right:none}
+.meta .lbl{display:block;text-transform:uppercase;letter-spacing:1px;font-size:9.5px;color:var(--muted);font-weight:700}
+.meta .val{font-weight:700;color:var(--navy);font-size:14px}
+.metafield{font-family:inherit;font-weight:700;color:var(--navy);font-size:14px;width:100%;border:none;border-bottom:1px dashed #A2AEBD;background:transparent;padding:1px 0}
+.metafield::placeholder{font-weight:400;color:#9AA6B4;font-style:italic}
+.metafield:focus{outline:none;border-color:var(--gold);background:var(--goldtint)}
+.howto{background:var(--goldtint);border-bottom:1px solid var(--gold);padding:9px 18px;font-size:13px;color:#4A3C15}
+.howto b{color:var(--navy)}
+.pad{padding:0 18px}
+
+/* structure */
+.partbar{background:var(--navy);color:#fff;padding:9px 14px;margin:26px -18px 0;display:flex;gap:12px;align-items:baseline}
+.partbar .pnum{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;color:var(--navy);background:var(--gold);padding:3px 8px;border-radius:3px}
+.partbar h2{font-family:var(--serif);font-weight:400;font-size:18px;margin:0}
+.partbar .mins{margin-left:auto;font-size:11.5px;color:#BFD0E2}
+.task{margin:22px 0 0}
+.thead{display:flex;gap:9px;align-items:baseline;border-bottom:2px solid var(--gold);padding-bottom:4px;flex-wrap:wrap}
+.thead .n{font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;font-weight:700;color:var(--gold2)}
+.thead h3{font-family:var(--serif);font-size:18px;color:var(--navy);margin:0;font-weight:700;flex-basis:100%}
+.chip{margin-left:auto;font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:700;color:var(--navy);border:1px solid var(--gold);background:var(--goldtint);padding:3px 7px;border-radius:3px}
+.instr{font-style:italic;color:var(--muted);font-size:13.5px;margin:8px 0 10px}
+.band{background:var(--green);border-left:4px solid var(--green2);border-radius:3px;padding:10px 13px;font-size:13.5px;color:var(--green3);margin:10px 0 14px}
+.card{border:1px solid var(--rule);border-radius:4px;padding:12px 14px;margin:14px 0}
+.card.gold{border-left:4px solid var(--gold);background:var(--goldtint)}
+.coltitle{font-size:10.5px;letter-spacing:1.3px;text-transform:uppercase;font-weight:700;color:var(--gold2);margin-bottom:5px}
+.tip{background:var(--goldtint);border:1px solid var(--gold);border-radius:4px;padding:11px 13px;margin:16px 0;font-size:14px}
+.tip .th{font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:1.1px;font-size:11px;margin-bottom:5px}
+ul.dots{margin:5px 0 0;padding-left:18px}
+ul.dots li{padding:2px 0}
+ol.qs{margin:0;padding-left:20px}
+ol.qs>li{padding:6px 0}
+
+/* reading */
+.reading{border:1px solid var(--rule);border-top:4px solid var(--navy);border-radius:4px;padding:16px 18px;font-size:15.5px;line-height:1.72}
+.reading h4{font-family:var(--serif);color:var(--navy);font-size:19px;margin:0 0 12px}
+.reading h5{font-family:var(--serif);color:var(--gold2);font-size:16px;margin:16px 0 8px}
+.reading p{margin:0 0 11px}
+.reading b{color:var(--navy);background:var(--goldtint);padding:0 3px;border-radius:2px}
+.reading .stat{font-weight:700;color:var(--navy)}
+.reading .lead{font-style:italic;color:var(--muted);font-size:14.5px;margin:-4px 0 14px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
+.reading .srcnote{font-size:12px;color:var(--muted);font-style:italic;margin-top:14px;padding-top:9px;border-top:1px solid var(--rule)}
+.gapmark{display:inline-block;background:var(--navy);color:#fff;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:2px 8px;border-radius:3px;white-space:nowrap;vertical-align:1px}
+.gn{color:var(--gold2);font-weight:700;font-size:11px;margin-right:2px}
+blockquote.pull{margin:6px 0 10px;padding:10px 14px;background:#fff;border-left:3px solid var(--gold);font-family:var(--serif);font-size:15.5px;font-style:italic;color:var(--navy)}
+
+/* matching */
+.matchgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.matchgrid{grid-template-columns:1fr}.matchgrid>div:last-child{order:-1}.slotlabel{flex:0 0 40%}.slotlabel.wide{flex:1 1 auto !important}.slotrow.stacked{flex-direction:column;gap:5px}.slotrow.stacked .dz{min-height:46px}}
+.slotrow{display:flex;align-items:stretch;gap:8px;margin-bottom:7px}
+.slotlabel{flex:0 0 36%;background:var(--tint);border:1px solid var(--rule);border-radius:4px;padding:7px 9px;font-size:14px;font-weight:600;color:var(--navy);display:flex;align-items:center}
+.slotlabel.block{display:block;line-height:1.4}
+.slotlabel.wide{flex:0 0 64%;display:block;font-weight:400;color:var(--ink)}
+.ipa{color:var(--gold2);font-size:12.5px;font-weight:600}
+.pos{display:inline-block;background:#fff;border:1px solid var(--rule);color:var(--muted);font-size:9.5px;text-transform:uppercase;letter-spacing:.8px;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:2px}
+.dz{flex:1;min-height:42px;border:2px dashed #B9C4D1;border-radius:4px;background:#fff;padding:4px;display:flex;flex-wrap:wrap;gap:4px;align-content:center;transition:background .12s,border-color .12s}
+.dz.over{border-color:var(--gold);background:var(--goldtint)}
+.dz.armed{border-color:var(--navy2);background:#F0F5FB}
+.dz.ok{border-style:solid;border-color:#4FA97A;background:#F1FAF4}
+.dz.no{border-style:solid;border-color:#E0A277;background:#FDF4EE}
+.dz:empty:before{content:attr(data-ph);color:#9AA6B4;font-size:12px;font-style:italic;padding:0 6px}
+.bank{border:1px dashed var(--navy2);background:var(--tint);border-radius:4px;padding:9px;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;min-height:56px}
+.bank:empty:before{content:"All cards placed";color:var(--muted);font-size:12.5px;font-style:italic}
+.tile{background:#fff;border:1px solid var(--navy2);border-left:4px solid var(--gold);border-radius:4px;padding:6px 9px;font-size:13.5px;cursor:grab;user-select:none;touch-action:none;box-shadow:0 1px 2px rgba(14,42,71,.12);max-width:100%}
+.tile.sel{border-color:var(--gold);background:var(--goldtint);box-shadow:0 0 0 3px rgba(196,162,76,.35)}
+.tile.ghost{position:fixed;z-index:999;pointer-events:none;opacity:.95;transform:rotate(-1.5deg);box-shadow:0 8px 18px rgba(14,42,71,.28)}
+.tile.stat{font-weight:700;color:var(--navy);font-size:15px}
+.dragging{opacity:.35}
+
+/* tables and inputs */
+table{width:100%;border-collapse:collapse;font-size:14px;margin:2px 0}
+th{background:var(--navy);color:#fff;text-align:left;padding:7px 9px;font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+td{border:1px solid var(--rule);padding:7px 9px;vertical-align:top}
+td.lbl{background:var(--tint);font-weight:700;color:var(--navy)}
+.tblwrap{overflow-x:auto}
+input.gap{font-family:inherit;font-size:14px;color:var(--navy);font-weight:600;border:none;border-bottom:2px solid var(--navy2);background:#FBFCFE;padding:2px 5px;width:140px;max-width:60vw}
+input.gap:focus{outline:none;border-color:var(--gold);background:var(--goldtint)}
+input.gap.ok{border-color:#4FA97A;background:#F1FAF4}
+input.gap.no{border-color:#E0A277;background:#FDF4EE}
+.write{min-height:38px;border:1px solid var(--rule);border-radius:4px;background:#FBFCFE;padding:7px 9px;font-size:14px;outline:none}
+.write:focus{border-color:var(--gold);background:#fff;box-shadow:0 0 0 3px rgba(196,162,76,.18)}
+.write:empty:before{content:attr(data-ph);color:#9AA6B4;font-style:italic}
+.lines .write{min-height:34px;margin-bottom:7px}
+.qnote{margin-top:6px}
+.audiobox{border:1px solid var(--rule);border-left:4px solid var(--gold);border-radius:4px;background:var(--goldtint);padding:12px 14px;margin:16px 0}
+.audiobox audio{width:100%;margin-top:10px;height:38px}
+.loadrow{display:flex;gap:11px;align-items:center;flex-wrap:wrap;margin-top:7px}
+.loadbtn{background:var(--navy);color:#fff;font-size:12.5px;font-weight:700;padding:7px 12px;border-radius:4px;cursor:pointer;white-space:nowrap}
+.loadbtn:hover{background:var(--navy2)}
+.loadname{font-size:12.5px;color:var(--muted);font-style:italic;word-break:break-all}
+@media(max-width:560px){
+  .po{flex-wrap:wrap;gap:4px;justify-content:flex-start}
+  .po button{padding:0 7px;height:29px;font-size:11.5px}
+  th,td{padding:6px 6px}
+  .po4 td:last-child,.po4 th:last-child{width:172px}
+}
+.chooselist{display:flex;flex-direction:column;gap:8px}
+.chooserow{border:1px solid var(--rule);border-radius:4px;background:#fff;padding:9px 12px;
+  display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.chooseq{font-size:14.5px;display:flex;gap:11px;align-items:baseline}
+.chooseq b{color:var(--navy);flex:0 0 auto}
+.chooserow .po{flex:0 0 auto}
+.nocheck{font-size:12.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--rule);padding:4px 0 4px 10px;margin-top:11px}
+ol.writelist > li{padding:7px 0;display:flex;gap:11px;align-items:baseline}
+input.gap.short{width:110px;flex:0 0 auto}
+.anote{font-size:12.5px;color:var(--muted);font-style:italic;margin-top:8px}
+.ticklist{display:flex;flex-direction:column;gap:7px}
+.tickrow{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--rule);border-radius:4px;padding:9px 12px;font-size:14.5px;cursor:pointer;background:#fff}
+.tickrow:hover{background:var(--tint)}
+.tickrow input{margin-top:3px;width:17px;height:17px;flex:0 0 auto}
+.tickrow.ok{border-color:#4FA97A;background:#F1FAF4}
+.tickrow.no{border-color:#E0A277;background:#FDF4EE}
+ol.mcq > li{padding:9px 0 4px}
+.opt{display:flex;flex-direction:column;gap:6px;margin-top:7px}
+.opt label{display:flex;gap:9px;align-items:flex-start;border:1px solid var(--rule);border-radius:4px;padding:7px 11px;font-size:14px;cursor:pointer;background:#fff}
+.opt label:hover{background:var(--tint)}
+.opt input{margin-top:3px;flex:0 0 auto}
+.opt label.ok{border-color:#4FA97A;background:#F1FAF4}
+.opt label.no{border-color:#E0A277;background:#FDF4EE}
+.panel{border:1px solid var(--rule);border-radius:5px;margin:16px 0;overflow:hidden;break-inside:avoid}
+.panelhead{background:var(--navy);color:#fff;font-family:var(--serif);font-size:16px;font-weight:700;padding:9px 15px;border-bottom:3px solid var(--gold)}
+.panelbody{padding:13px 16px;background:#FCFDFE;font-size:15px;line-height:1.68}
+.panelbody p{margin:0 0 10px}
+.panelbody p:last-child{margin-bottom:0}
+.credit{border-top:1px solid var(--rule);margin-top:8px;padding-top:10px;font-size:11.5px;color:var(--muted);line-height:1.6}
+.credit b{color:var(--navy)}
+.groups{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.wordgroup{flex:1 1 200px;text-align:center;background:var(--tint);border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:4px;padding:11px 9px;font-family:var(--serif);font-size:17px;font-weight:700;color:var(--navy)}
+.po{display:flex;gap:5px}
+.po button{font-family:inherit;font-weight:700;font-size:13px;padding:0 12px;height:30px;cursor:pointer;border:1px solid var(--rule);background:#fff;border-radius:4px;color:var(--muted)}
+.po button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.po.ok button.on{background:#1B7A45;border-color:#1B7A45}
+.po.no button.on{background:#B3541E;border-color:#B3541E}
+.chk{display:flex;gap:9px;align-items:flex-start;padding:5px 0;font-size:14px}
+.chk input{margin-top:4px;width:16px;height:16px}
+.actions{display:flex;gap:9px;align-items:center;margin-top:11px;flex-wrap:wrap}
+.btn.check{background:var(--navy);color:#fff}
+.btn.small{font-size:11.5px;padding:5px 9px;background:transparent;color:var(--navy);border:1px solid var(--rule)}
+.score{font-size:13px;font-weight:700;color:var(--muted)}
+.score.good{color:#1B7A45}
+.score.work{color:#B3541E}
+.counter{font-size:12px;color:var(--muted);margin-top:5px}
+.counter.good{color:#1B7A45;font-weight:700}
+.footer{margin-top:34px;border-top:2px solid var(--gold);padding:12px 18px;font-size:11.5px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap}
+.footer b{color:var(--navy);letter-spacing:1px}
+.footer .r{margin-left:auto}
+.hint{position:fixed;left:50%;transform:translateX(-50%);bottom:16px;z-index:900;background:var(--navy);color:#fff;padding:9px 16px;border-radius:22px;font-size:13.5px;font-weight:600;box-shadow:0 6px 20px rgba(14,42,71,.38);display:none;pointer-events:none}
+.hint.on{display:block}
+
+@media print{
+  .hint{display:none !important}
+  body{background:#fff}
+  .wrap{box-shadow:none;max-width:none}
+  .toolbar,.howto,.actions,.btn{display:none !important}
+  .partbar{margin:18px 0 0}
+  .task,.card,table,.tip,.reading{page-break-inside:avoid}
+  .tile{box-shadow:none}
+  .dz{border-style:solid;border-color:var(--rule)}
+  .write{border-color:var(--rule);background:#fff}
+  input.gap{background:#fff}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body><!--gp-chrome--><style>
+.gpnav{position:sticky;top:0;z-index:900;display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;
+ padding:9px clamp(14px,2.4vw,30px);background:var(--gpnav-bg,#12795A);
+ font-family:"IBM Plex Mono",ui-monospace,"Consolas",monospace;font-size:12.5px;line-height:1.3;
+ box-shadow:0 1px 0 rgba(0,0,0,.12)}
+.gpnav a,.gpnav span.gplock{display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+ padding:5px 11px;border-radius:2px;letter-spacing:.05em;white-space:nowrap;
+ border:1px solid rgba(255,255,255,.28);color:#fff}
+.gpnav a:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.6)}
+.gpnav a:focus-visible{outline:2px solid #DCAE44;outline-offset:2px}
+.gpnav a.gphome{font-weight:700;border-color:#DCAE44;background:rgba(220,174,68,.18)}
+.gpnav a.gphere{background:#fff;color:#12795A;border-color:#fff;font-weight:700}
+.gpnav span.gplock{opacity:.62;border-style:dashed;cursor:default}
+.gpnav .gpsep{flex:1}
+.gpnav .gpmark{color:#DCAE44;letter-spacing:.16em;font-weight:700;font-size:11px;
+ text-transform:uppercase;padding-right:4px}
+@media (max-width:620px){.gpnav{font-size:11.5px}.gpnav .gpmark{display:none}}
+@media print{.gpnav{display:none}}
+
+/* Let the builder's own pages use the width of the screen. The type scales and
+   the column is set in em, so the line length stays exactly as it was while the
+   page stops sitting in a narrow strip on a large monitor. Pages that already
+   scale themselves say so with data-fluid and are left alone. */
+html:not([data-fluid]) body{font-size:clamp(17px,0.44vw + 13.9px,22px)!important}
+html:not([data-fluid]) .wrap{max-width:min(94vw,53em)!important;width:auto!important}
+
+/* The report's own section links sat on one line and scrolled sideways, so half
+   of them were out of sight. Let them wrap and every section shows at once. */
+html:not([data-fluid]) .nav-in{flex-wrap:wrap!important;overflow-x:visible!important;
+ overflow-y:visible!important;scroll-snap-type:none!important;row-gap:4px!important;
+ max-width:min(96vw,64em)!important}
+html:not([data-fluid]) .nav a{scroll-snap-align:none!important;white-space:normal!important}
+html:not([data-fluid]) .nav::after{display:none!important}
+html:not([data-fluid]) .nav-in::-webkit-scrollbar{display:none}
+</style><nav class="gpnav" aria-label="Your documents"><span class="gpmark">GrahamIELTS</span><a class="gphome gphere" href="./">Tina</a><span class="gplock" title="I unlock this when we start">Workbook, locked</span></nav><!--/gp-chrome-->
+<div class="wrap">
+  <div class="toolbar">
+    <span class="pill">GRAHAM<b>IELTS</b></span>
+    <span class="pill" id="progtxt">0% done</span>
+    <span class="bar"><i id="progbar"></i></span>
+    <span class="grow"></span>
+    <button class="btn ghost" id="btnCheckToggle">Checking: on</button>
+    <button class="btn ghost" id="btnReset">Reset</button>
+    <button class="btn" id="btnPrint">Print or save PDF</button>
+  </div>
+
+  <div class="masthead">
+    <svg width="118" height="52" viewBox="0 0 236 104" xmlns="http://www.w3.org/2000/svg" style="flex:0 0 auto">
+      <rect x="0" y="62" width="13" height="26" rx="2" fill="#C4A24C"/>
+      <rect x="18" y="42" width="13" height="46" rx="2" fill="#C4A24C"/>
+      <rect x="36" y="20" width="13" height="68" rx="2" fill="#FFFFFF"/>
+      <text x="60" y="52" font-family="Georgia, serif" font-size="30" font-weight="bold" fill="#FFFFFF">GRAHAM</text>
+      <text x="61" y="82" font-family="Helvetica, Arial, sans-serif" font-size="25" font-weight="bold" fill="#C4A24C" letter-spacing="6.5">IELTS</text>
+      <rect x="60" y="59" width="170" height="2" fill="#C4A24C"/>
+    </svg>
+    <div>
+      <div class="kicker">Business English &nbsp;&bull;&nbsp; Business Issues</div>
+      <h1>Touchscreen Tipping</h1>
+      <div class="sub">Two recordings, the psychology of the anchor, and the argument about who should pay the waiter</div>
+    </div>
+  </div>
+
+  <div class="meta">
+    <div><span class="lbl">Student</span><input class="metafield" id="fName" placeholder="write your name" autocomplete="off"></div>
+    <div><span class="lbl">Level</span><span class="val">C1 to C2</span></div>
+    <div><span class="lbl">Date</span><input class="metafield" id="fDate" placeholder="today's date" autocomplete="off"></div>
+    <div><span class="lbl">Copy</span><span class="val">Student</span></div>
+  </div>
+
+  <div class="howto">
+    <b>How to use this page.</b> Type straight into the boxes. To match, drag a card into place, or tap a card and then tap the box you want it in. Tap a card that is already placed to send it back. Your work is <b>not saved automatically</b>, so press <b>Print or save PDF</b> before you close the page.
+  </div>
+
+  <div class="pad" id="app"></div>
+  <div class="hint" id="hint">Card picked up. Scroll if you need to, then tap its box.</div>
+
+  <div class="footer">
+    <b>GRAHAMIELTS</b><span>Touchscreen Tipping &nbsp;&bull;&nbsp; C1 to C2 &nbsp;&bull;&nbsp; Student copy</span>
+    <span class="r" id="fFoot"></span>
+  </div>
+  <div class="pad"><div class="credit">
+    &copy; Linguahouse.com. Photocopiable and licensed for use in Graham Bailey's lessons.<br>
+    Adapted into this interactive format for classroom use. Audio and source worksheet remain the property of Linguahouse.com.
+  </div></div>
+</div>
+
+<script>
+/* =========================================================
+   CONTENT. Edit here to reuse this page for another lesson.
+   ========================================================= */
+const PARTS = [
+{
+  part:"Section A", title:"Warm up", mins:"about 10 minutes",
+  blocks:[
+    {kind:"task", id:"e1", n:"Exercise 1", title:"Warm up", chip:"Speak and note",
+     band:"You are going to hear a news report and a podcast about tipping. Discuss these questions first.",
+     type:"discuss", items:[
+      "When you eat out, do you always leave a tip? Why, or why not? If you do, how much do you usually give?",
+      "In your country, is tipping unusual, or is it generally expected in restaurants?",
+      "Have you ever tipped someone outside a restaurant, such as a hotel worker or a taxi driver?",
+      "Do you normally pay by card, by phone or in cash when you eat out?",
+      "Why is it more common to tip some kinds of worker than others? Do you expect that to change?"
+     ]}
+  ]
+},
+{
+  part:"Section B", title:"The news report", mins:"about 25 minutes",
+  blocks:[
+    {kind:"audio", id:"news", title:"Recording 1: the news report",
+     note:"Click the button and pick the news report file from your device. Nothing is uploaded anywhere; the file stays on your computer."},
+
+    {kind:"task", id:"e2", n:"Exercise 2", title:"Listening for Specific Information", chip:"Write the number",
+     band:"Listen to the news report. Write the number you hear next to the thing it refers to.",
+     type:"writeitems", nocheck:true, items:[
+      "the number of Americans who took part in the survey",
+      "the extra amount respondents tipped when paying digitally rather than in cash",
+      "the option presented as the standard tip when a customer is shown the bill",
+      "the hourly rate in dollars that US restaurant workers may be paid before tips",
+      "the percentage of respondents who said they had a negative view of tipping"
+     ]},
+
+    {kind:"task", id:"e3", n:"Exercise 3", title:"Listening Comprehension", chip:"Tap T, F or NG",
+     band:"Listen again. Using only what the report itself says, mark each statement True, False or Not Given.",
+     type:"choose", nocheck:true, opts:[{v:"T",l:"T"},{v:"F",l:"F"},{v:"NG",l:"NG"}], head:"T / F / NG",
+     rows:[
+      {t:"Almost sixty-six percent of those in the Forbes Advisor study said they tipped more when paying digitally."},
+      {t:"The number of touchscreen point-of-sale systems in restaurants and other venues has fallen in recent years."},
+      {t:"The option not to tip at all is normally offered when customers pay digitally."},
+      {t:"The anchoring effect was first proposed by the psychologists Tversky and Kahneman."},
+      {t:"The anchoring effect usually leads customers to pick the last of the options they are shown."},
+      {t:"Customers may tip more than they intended because they feel guilty."},
+      {t:"Tipping is less common in the US than in the rest of the world."},
+      {t:"According to another study, people were more willing to tip in 2022 than in 2021."}
+     ]}
+  ]
+},
+{
+  part:"Section C", title:"General and business vocabulary", mins:"about 30 minutes",
+  blocks:[
+    {kind:"task", id:"e4", n:"Exercise 4", title:"Vocabulary: Group 1", chip:"Drag or tap",
+     band:"Read each sentence and drag the correct definition of the item in bold into the box beside it.",
+     type:"match", ph:"drop a definition here", full:true, wide:true, rawLabels:true, labelW:"52%",
+     bankTitle:"Definitions",
+     pairs:[
+      {p:"A committed conspiracy theorist, James soon <b>latched on to</b> the idea that the Earth is flat.", t:"became attached to somebody or something, often quickly and uncritically"},
+      {p:"I am reasonably good at painting, but far better at <b>procrastination</b>: I have not finished a canvas in two years.", t:"the act of delaying something you ought to be doing, usually because you would rather not"},
+      {p:"The advertisement was a fine idea. It generated thousands of new <b>leads</b>.", t:"a person or organisation that may be useful to you, especially a possible new customer"},
+      {p:"Humans and other animals rely on <b>heuristics</b> to judge and decide quickly.", t:"practical mental shortcuts for solving problems, learned from past experience"},
+      {p:"My son is a <b>budding</b> poet, so I bought him a notebook and a set of pens.", t:"beginning to develop, and showing early signs of success"}
+     ]},
+
+    {kind:"task", id:"e5", n:"Exercise 5", title:"Vocabulary: Group 2", chip:"Drag or tap",
+     band:"Read each sentence and drag the correct definition of the item in bold into the box beside it.",
+     type:"match", ph:"drop a definition here", full:true, wide:true, rawLabels:true, labelW:"52%",
+     bankTitle:"Definitions",
+     pairs:[
+      {p:"Plenty of people visit the site, but there have been very few <b>conversions</b>.", t:"the process of getting a visitor to a website to buy something, or a customer who does so"},
+      {p:"Danny is highly <b>susceptible</b> to misinformation, so we limit his time online.", t:"very likely to be influenced, harmed or affected by something"},
+      {p:"The illness is now beginning to affect her <b>cognitive</b> abilities.", t:"connected with the mental processes of thinking and understanding"},
+      {p:"Students are <b>gravitating towards</b> degrees tied to particular jobs at the moment.", t:"moving towards somebody or something you are drawn to"},
+      {p:"The President announced this afternoon that he is considering a <b>snap</b> election.", t:"made or done quickly, without careful thought or preparation"}
+     ]},
+
+    {kind:"task", id:"e6", n:"Exercise 6", title:"The Anchoring Effect", chip:"Type the word",
+     band:"Complete the article with items from Exercises 4 and 5. You may need to change the form.",
+     type:"cloze",
+     bank:["latch on to","procrastination","leads","heuristics","budding","conversions","susceptible","cognitive","gravitate towards","snap"],
+     title2:"The Anchoring Effect",
+     paras:[
+      "<b>A. What is it?</b> Also called anchoring bias, this is a form of {{1}} bias. The theory was first put forward by the psychologists Amos Tversky and Daniel Kahneman. It holds that when we meet new information, our minds {{2}} whichever item came first, treat it as an anchor, and measure everything afterwards against it. The result can be {{3}} decisions that do not actually serve our interests, in matters as small as buying lunch and as large as buying a house. Shortcuts of this kind, which psychologists call {{4}}, help us cope with the sheer volume of information we meet every day, and they spare us a good deal of decision anxiety and {{5}}.",
+      "<b>B. How does it work in business?</b> However rational we believe ourselves to be, all of us are {{6}} to it. Marketers exploit that by offering a limited set of options, usually three. A web design firm might price a deluxe package at $1,000 with unlimited storage. That figure sets the reference point, and everything cheaper begins to look reasonable beside it. Customers then tend to {{7}} the middle option, at $250 with 800 gigabytes, which is where the seller wanted them all along.",
+      "<b>C. Can it help me grow a company?</b> Turning {{8}} into {{9}} is what new owners find hardest, and anchoring can help. Besides structuring the options on offer, {{10}} entrepreneurs can prompt a sale with a discount, or by setting their product beside a competitor's. Either move plants a reference point in the buyer's mind. Combined with a website that works, it can make a small company look better value than its rivals."
+     ],
+     keys:[["cognitive"],["latch on to","latch onto"],["snap"],["heuristics"],["procrastination"],
+           ["susceptible"],["gravitate towards","gravitate toward"],["leads"],["conversions"],["budding"]]},
+
+    {kind:"task", id:"e7", n:"Exercise 7", title:"Talking Point", chip:"Speak and note",
+     band:"Discuss these questions in pairs. Use the item in bold in your answer.",
+     type:"discuss", rawItems:true, items:[
+      "Why do customers <b>gravitate towards</b> particular products or brands? Is marketing the whole explanation?",
+      "If you started an online business, how would you turn <b>leads</b> into <b>conversions</b>?",
+      "Do you struggle with <b>procrastination</b>? If so, how do you manage it?",
+      "Do you tend to make <b>snap</b> decisions, or do you think each one through?",
+      "What makes <b>susceptible</b> people <b>latch on to</b> conspiracy theories? Can anything be done about it?",
+      "Can you think of a decision of your own that may have been the result of a <b>cognitive</b> bias?",
+      "Should <b>budding</b> entrepreneurs worry about marketing, or concentrate on something else first?"
+     ]}
+  ]
+},
+{
+  part:"Section D", title:"The podcast", mins:"about 25 minutes",
+  blocks:[
+    {kind:"audio", id:"pod", title:"Recording 2: the podcast",
+     note:"Three people discuss tipping: Alice, Adam and Hugh. Load the podcast file the same way."},
+
+    {kind:"task", id:"e8", n:"Exercise 8", title:"Who Mentions What?", chip:"Tap the speaker",
+     band:"Listen to the podcast and match each item to the speaker who mentions it. One item is mentioned by none of them, so mark it NG.",
+     type:"choose", nocheck:true,
+     opts:[{v:"A",l:"Alice"},{v:"D",l:"Adam"},{v:"H",l:"Hugh"},{v:"NG",l:"NG"}], head:"Speaker",
+     rows:[{t:"tablets"},{t:"baristas"},{t:"a sous chef"},{t:"smartphones"},{t:"ambience"}]},
+
+    {kind:"task", id:"e9", n:"Exercise 9", title:"Listening Comprehension", chip:"Choose one",
+     band:"Listen again. For each question, choose the answer that most accurately reflects the recording.",
+     type:"mcq", nocheck:true, items:[
+      {q:"Hugh:", o:["always tips in restaurants","sometimes tips in restaurants","never tips in restaurants"]},
+      {q:"Alice:", o:["moved to Europe in the summer","is visiting Europe in the summer","visited Europe in the summer"]},
+      {q:"Hugh:", o:["has a friend whose daughter works in a restaurant","has a daughter who works in a restaurant","has a friend who owns a restaurant"]},
+      {q:"Alice thinks that touchscreen tipping:", o:["makes it easier for customers to tip","is safer than cash because of the pandemic","makes it easier for workers to be exploited"]}
+     ]}
+  ]
+},
+{
+  part:"Section E", title:"Expressions and phrases", mins:"about 30 minutes",
+  blocks:[
+    {kind:"task", id:"e10", n:"Exercise 10", title:"Business Expressions", chip:"Drag or tap",
+     band:"Six jobs in hospitality. Drag each description into the box beside the right one.",
+     type:"match", ph:"drop a description here", bankTitle:"Descriptions",
+     pairs:[
+      {p:"a sommelier", pos:"Noun", t:"looks after the wine in a restaurant and helps diners choose it"},
+      {p:"a bellboy", pos:"Noun", t:"works in a hotel, carrying guests' suitcases to their rooms"},
+      {p:"someone in hospitality", pos:"Noun", t:"works in the service industry: a restaurant, a guesthouse or a hotel"},
+      {p:"a hostess", pos:"Noun", t:"welcomes customers as they arrive at a restaurant and seats them"},
+      {p:"a sous chef", pos:"Noun", t:"is the second most senior cook in a kitchen"},
+      {p:"a barista", pos:"Noun", t:"works in a caf\u00e9, making and serving coffee and other soft drinks"}
+     ],
+     after:{instr:"Which of these jobs would you most like to do, and which would you least like to do? Say why.", lines:2}},
+
+    {kind:"task", id:"e11", n:"Exercise 11", title:"Expressions: Part A", chip:"Type the word",
+     band:"Complete each definition with one word from the box. Each word is used once.",
+     type:"gaps",
+     bank:["annoy","ask","attitude","device","fingers","gradually","topic"],
+     items:[
+      {a:"make a statement (collocation): to express an opinion or an ", b:" clearly through what you do or how you look", k:["attitude"]},
+      {a:"circle back (idiom): to return to an earlier state, place or ", b:" of conversation", k:["topic"]},
+      {a:"come knocking (phrase): to visit or approach someone in order to ", b:" for something", k:["ask"]},
+      {a:"scrabble around (phr. v): to use your ", b:" to hunt quickly for something you cannot see", k:["fingers"]},
+      {a:"wind somebody up (phr. v): to say or do something in order to ", b:" someone", k:["annoy"]},
+      {a:"phase out (phr. v): to stop using something ", b:", in stages, over a period of time", k:["gradually"]},
+      {a:"key something in (phr. v): to enter data into a computer or other electronic ", b:" using a keypad", k:["device"]}
+     ]},
+
+    {kind:"task", id:"e12", n:"Exercise 12", title:"Expressions: Part B", chip:"Type the phrase",
+     band:"Complete each sentence with a phrase from Exercise 11. You will need to change the form.",
+     type:"gaps",
+     bank:["make a statement","circle back","come knocking","scrabble around","wind somebody up","phase out","key something in"],
+     items:[
+      {a:"If Jim ", b:" asking for a raise, tell him I am not here.", k:["comes knocking","come knocking"]},
+      {a:"We are starting to ", b:" the 2022 model, because we want customers buying the latest one.", k:["phase out"]},
+      {a:"My daughter got into trouble at work for ", b:" with a political t-shirt.", k:["making a statement","make a statement"]},
+      {a:"The office computer is so old that it will not let me ", b:" my login details.", k:["key in","key in,","key them in"]},
+      {a:"Let us ", b:" to that point later in the meeting.", k:["circle back"]},
+      {a:"We all had to ", b:" in our pockets for our ID cards once the manager made them compulsory.", k:["scrabble around"]},
+      {a:"Nigel really knows how to ", b:" at work. He is forever asking me ridiculous questions.", k:["wind me up","wind people up","wind somebody up","wind you up"]}
+     ]}
+  ]
+},
+{
+  part:"Section F", title:"Discussion and roleplay", mins:"about 30 minutes",
+  blocks:[
+    {kind:"task", id:"e13", n:"Exercise 13", title:"Talking Point", chip:"Speak and note",
+     band:"Discuss these questions in pairs or small groups. Take a position and defend it.",
+     type:"discuss", items:[
+      "In your country, is the minimum wage fair, or should it be raised?",
+      "Why are restaurant workers in the US paid so little before tips? Should that change?",
+      "If we move to a cashless society, will tips rise or fall?",
+      "How can anyone be sure a tip reaches the waiter rather than the owner?",
+      "If you worked in a US restaurant and a customer spent hundreds of dollars but left nothing, how would you feel?",
+      "Is the argument between tipping and higher wages really a question of charity against welfare? Which does more good?",
+      "Does every business owner have a duty to pay a fair wage? Why, or why not?"
+     ]},
+
+    {kind:"task", id:"e14", n:"Exercise 14", title:"Roleplay", chip:"In pairs",
+     band:"Read the three scenarios. Choose TWO to act out. After each conversation, swap roles and run it again.",
+     type:"panels",
+     panels:[
+      {title:"Roleplay 1",
+       paras:["<b>Student A</b> is on a date at an expensive restaurant and wants to leave a large tip to impress the person opposite.",
+              "<b>Student B</b> is the waiter serving them, and is embarrassed by the amount being offered."]},
+      {title:"Roleplay 2",
+       paras:["<b>Student B</b> is a foreign visitor eating out in the US and has no idea how much to tip.",
+              "<b>Student A</b> is the waiter, who wants a fair tip but does not want to seem rude in saying so."]},
+      {title:"Roleplay 3",
+       paras:["<b>Student A</b> has had a poor experience in a restaurant and does not want to tip at all.",
+              "<b>Student B</b> is a waiter who is unhappy in the job and depends on tips to make a living."]}
+     ]},
+
+    {kind:"task", id:"e15", n:"Exercise 15", title:"My Word File", chip:"Keep this",
+     band:"Write any other useful item from today's lesson, with a sentence of your own that shows how it is used.",
+     type:"lines", lines:8}
+  ]
+}
+];
+
+/* =========================================================
+   RENDERING
+   ========================================================= */
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const norm = s => String(s||"").toLowerCase().replace(/[.,!?;:"'`]/g,"").replace(/\s+/g," ").trim();
+
+function writeCell(ph){ return `<div class="write" contenteditable="true" data-ph="${esc(ph||"")}"></div>`; }
+function actions(id,label){
+  const tk = taskById(id);
+  if(tk && tk.nocheck) return `<div class="nocheck">Answers to this one are in the recording, so there is no check button. Your teacher has the key.</div>`;
+  return `<div class="actions"><button class="btn check" data-check="${id}">${label||"Check my answers"}</button>
+    <button class="btn small" data-clear="${id}">Clear this task</button>
+    <span class="score" id="score-${id}"></span></div>`;
+}
+
+function wrapTask(t, inner){
+  return `<div class="task" id="task-${t.id}">
+    <div class="thead"><span class="n">${esc(t.n)}</span><span class="chip">${esc(t.chip)}</span><h3>${esc(t.title)}</h3></div>
+    ${t.band?`<div class="band">${esc(t.band)}</div>`:""}
+    ${t.instr?`<p class="instr">${esc(t.instr)}</p>`:""}
+    ${inner}</div>`;
+}
+
+function renderTask(t){
+  let inner = "";
+  const A = t.after ? `<p class="instr" style="margin-top:14px">${esc(t.after.instr)}</p>
+    <div class="lines">${Array.from({length:t.after.lines},()=>writeCell("")).join("")}</div>` : "";
+
+  if(t.type==="match"){
+    const tiles = shuffle(t.pairs.map((p,i)=>({id:t.id+"-"+i, t:p.t})));
+    const lw = t.wide ? "slotlabel wide" : (t.pairs[0].ipa ? "slotlabel block" : "slotlabel");
+    if(t.full){
+      inner = `<div class="bank" id="bank-${t.id}" data-ex="${t.id}" style="margin-bottom:12px">${tiles.map(x=>`<div class="tile ${t.tileCls||""}" data-ex="${t.id}" data-id="${x.id}">${esc(x.t)}</div>`).join("")}</div>
+        ${t.pairs.map((p,i)=>`
+          <div class="slotrow stacked">
+            <div class="${lw}"${t.labelW?` style="flex:0 0 ${t.labelW}"`:""}>${t.rawLabels?p.p:esc(p.p)}</div>
+            <div class="dz" data-ex="${t.id}" data-slot="${i}" data-cap="1" data-ph="${esc(t.ph)}"></div>
+          </div>`).join("")}
+        ${actions(t.id)}`;
+      return wrapTask(t, inner);
+    }
+    inner = `<div class="matchgrid">
+      <div>${t.pairs.map((p,i)=>`
+        <div class="slotrow">
+          <div class="${lw}">${esc(p.p)}${p.ipa?`<br><span class="ipa">${esc(p.ipa)}</span>`:""}${p.pos?`<span class="pos">${esc(p.pos)}</span>`:""}</div>
+          <div class="dz" data-ex="${t.id}" data-slot="${i}" data-cap="1" data-ph="${esc(t.ph)}"></div>
+        </div>`).join("")}</div>
+      <div><div class="coltitle">${esc(t.bankTitle)}</div><div class="bank" id="bank-${t.id}" data-ex="${t.id}">${tiles.map(x=>`<div class="tile ${t.tileCls||""}" data-ex="${t.id}" data-id="${x.id}">${esc(x.t)}</div>`).join("")}</div></div>
+    </div>${actions(t.id)}`;
+  }
+
+  if(t.type==="gaps"){
+    inner = `<div class="bank" style="margin-bottom:12px">${t.bank.map(w=>`<span class="tile" style="cursor:default;border-left-color:var(--navy2)">${esc(w)}</span>`).join("")}</div>
+      <ol class="qs">${t.items.map((it,i)=>`<li>${esc(it.a)}<input class="gap" data-ex="${t.id}" data-i="${i}" autocomplete="off" spellcheck="false">${esc(it.b)}</li>`).join("")}</ol>
+      ${actions(t.id)}`;
+  }
+
+  if(t.type==="cloze"){
+    const body = t.paras.map(p => "<p>" + p.replace(/\{\{(\d+)\}\}/g, (m,g)=>{
+      const i = parseInt(g,10)-1;
+      return `<sup class="gn">${g}</sup><input class="gap" data-ex="${t.id}" data-i="${i}" autocomplete="off" spellcheck="false" style="width:135px">`;
+    }) + "</p>").join("");
+    inner = `<div class="bank" style="margin-bottom:12px">${t.bank.map(w=>`<span class="tile" style="cursor:default;border-left-color:var(--navy2)">${esc(w)}</span>`).join("")}</div>
+      <div class="reading" style="border-top-color:var(--gold)">${t.title2?`<h4>${esc(t.title2)}</h4>`:""}${body}</div>
+      ${actions(t.id)}`;
+  }
+
+  if(t.type==="read"){
+    inner = `<div class="reading"><h4>${esc(t.title2)}</h4>
+      ${t.lead?`<p class="lead">${esc(t.lead)}</p>`:""}
+      ${t.paras.map(p=>`<p>${p}</p>`).join("")}
+      ${t.sub?`<h5>${esc(t.sub)}</h5>`:""}
+      ${(t.paras2||[]).map(p=>`<p>${p}</p>`).join("")}
+      ${t.note?`<p class="srcnote">${esc(t.note)}</p>`:""}</div>`;
+  }
+
+  if(t.type==="writeitems"){
+    inner = `<ol class="qs writelist">${t.items.map((q,i)=>`<li>
+      <input class="gap short" data-ex="${t.id}" data-i="${i}" autocomplete="off" spellcheck="false">
+      <span>${esc(q)}</span></li>`).join("")}</ol>${actions(t.id)}`;
+  }
+
+  if(t.type==="tick"){
+    inner = `<div class="ticklist" data-ex="${t.id}">
+      ${t.rows.map((r,i)=>`<label class="tickrow" data-i="${i}"><input type="checkbox"><span>${esc(r.t)}</span></label>`).join("")}
+    </div>${actions(t.id)}`;
+  }
+
+  if(t.type==="mcq"){
+    inner = `<ol class="qs mcq">${t.items.map((it,i)=>`<li>${esc(it.q)}
+      <div class="opt" data-ex="${t.id}" data-i="${i}">
+        ${it.o.map((o,j)=>`<label><input type="radio" name="${t.id}-${i}"><span><b>${"abcd"[j]}</b>&nbsp;&nbsp;${esc(o)}</span></label>`).join("")}
+      </div></li>`).join("")}</ol>${actions(t.id)}`;
+  }
+
+  if(t.type==="panels"){
+    inner = t.panels.map(p=>`<div class="panel">
+      <div class="panelhead">${esc(p.title)}</div>
+      <div class="panelbody">${p.paras.map(x=>`<p>${x}</p>`).join("")}</div>
+    </div>`).join("");
+  }
+
+  if(t.type==="choose" && (t.opts||[]).length>3){
+    inner = `<div class="chooselist">${t.rows.map((r,i)=>`
+      <div class="chooserow">
+        <div class="chooseq"><b>${i+1}</b>${esc(r.t)}</div>
+        <div class="po" data-ex="${t.id}" data-i="${i}">${t.opts.map(o=>`<button data-v="${o.v}">${esc(o.l)}</button>`).join("")}</div>
+      </div>`).join("")}</div>${actions(t.id)}`;
+  }
+
+  if(t.type==="choose" && (t.opts||[]).length<=3){
+    inner = `<div class="tblwrap"><table>
+      <tr><th style="width:34px"></th><th>Sentence</th><th style="width:110px">${esc(t.head)}</th></tr>
+      ${t.rows.map((r,i)=>`<tr>
+        <td style="text-align:center;font-weight:700;color:var(--navy)">${i+1}</td>
+        <td>${esc(r.t)}</td>
+        <td><div class="po" data-ex="${t.id}" data-i="${i}">${t.opts.map(o=>`<button data-v="${o.v}">${esc(o.l)}</button>`).join("")}</div></td>
+      </tr>`).join("")}
+    </table></div>${actions(t.id)}${A}`;
+  }
+
+  if(t.type==="activity"){
+    inner = `<div class="groups">${t.groups.map(g=>`<div class="wordgroup">${g}</div>`).join("")}</div>
+      <ol class="qs">${t.items.map(q=>`<li>${esc(q)}<div class="qnote">${writeCell("your notes")}</div></li>`).join("")}</ol>`;
+  }
+
+  if(t.type==="discuss"){
+    inner = `<ol class="qs">${t.items.map(q=>`<li>${t.rawItems?q:esc(q)}<div class="qnote">${writeCell("your notes")}</div></li>`).join("")}</ol>`;
+  }
+
+  if(t.type==="essay"){
+    inner = `${t.statements?`<div class="card" style="margin-top:0"><div class="coltitle">Choose one statement</div><ol class="qs" style="padding-left:22px">${t.statements.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>`:""}
+      <div class="write" id="essay" data-ph="Write your essay here." style="min-height:260px"></div>
+      <div class="counter" id="wc">0 words</div>
+      <div class="card" style="margin-top:14px"><div class="coltitle">Before you hand it in, check that</div>
+      ${t.checks.map(c=>`<label class="chk"><input type="checkbox"><span>${esc(c)}</span></label>`).join("")}</div>`;
+  }
+
+  if(t.type==="lines"){
+    inner = `<div class="lines">${Array.from({length:t.lines},()=>writeCell("")).join("")}</div>`;
+  }
+
+  return wrapTask(t, inner);
+}
+
+function renderBlock(b){
+  if(b.kind==="task") return renderTask(b);
+  if(b.kind==="tip") return `<div class="tip"><div class="th">${b.title}</div>${b.html}</div>`;
+  if(b.kind==="audio") return `<div class="audiobox" data-aud="${b.id}">
+      <div class="coltitle">${esc(b.title)}</div>
+      <div class="loadrow">
+        <label class="loadbtn">Choose the audio file<input type="file" accept="audio/*" hidden></label>
+        <span class="loadname">no file loaded yet</span>
+      </div>
+      <audio controls preload="metadata" style="display:none"></audio>
+      ${b.note?`<div class="anote">${esc(b.note)}</div>`:""}</div>`;
+  if(b.kind==="card"){
+    return `<div class="card ${b.cls||""}">
+      ${b.title?`<div class="coltitle">${esc(b.title)}</div>`:""}
+      ${b.quote?`<blockquote class="pull">${esc(b.quote)}</blockquote>`:""}
+      ${b.list?`<ul class="dots">${b.list.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}
+      ${b.html?`<p style="margin:8px 0 0;font-size:14px">${b.html}</p>`:""}</div>`;
+  }
+  return "";
+}
+
+function build(){
+  document.getElementById("app").innerHTML = PARTS.map(p=>`
+    <div class="partbar"><span class="pnum">${esc(p.part)}</span><h2>${esc(p.title)}</h2><span class="mins">${esc(p.mins)}</span></div>
+    ${p.blocks.map(renderBlock).join("")}`).join("");
+  applyCheckVisibility();
+  updateProgress();
+}
+
+/* =========================================================
+   DRAG AND TAP TO PLACE
+   ========================================================= */
+let drag = null, selected = null;
+function bankOf(ex){ return document.getElementById("bank-"+ex); }
+
+// a drop that lands just outside a box should still count, on touch especially
+function nearestDropZone(x, y, ex, tol){
+  let best = null, bestD = tol;
+  document.querySelectorAll('.dz[data-ex="'+ex+'"]').forEach(dz=>{
+    const r = dz.getBoundingClientRect();
+    const dx = x < r.left ? r.left - x : (x > r.right ? x - r.right : 0);
+    const dy = y < r.top ? r.top - y : (y > r.bottom ? y - r.bottom : 0);
+    const d = Math.sqrt(dx*dx + dy*dy);
+    if(d < bestD){ bestD = d; best = dz; }
+  });
+  return best;
+}
+
+function place(tile, dz){
+  if(dz.dataset.ex !== tile.dataset.ex) return;
+  const cap = parseInt(dz.dataset.cap||"1",10);
+  while(dz.children.length >= cap) bankOf(dz.dataset.ex).appendChild(dz.firstElementChild);
+  dz.appendChild(tile);
+  dz.classList.remove("ok","no");
+  clearSelection();
+  updateProgress();
+}
+function clearSelection(){
+  if(selected){ selected.classList.remove("sel"); selected = null; }
+  document.querySelectorAll(".dz.armed").forEach(d=>d.classList.remove("armed"));
+  document.getElementById("hint").classList.remove("on");
+}
+function armSlots(ex){ document.querySelectorAll('.dz[data-ex="'+ex+'"]').forEach(d=>d.classList.add("armed")); }
+
+document.addEventListener("pointerdown", e=>{
+  const tile = e.target.closest(".tile[data-id]");
+  if(!tile) return;
+  e.preventDefault();
+  const r = tile.getBoundingClientRect();
+  drag = {tile, ox:e.clientX-r.left, oy:e.clientY-r.top, sx:e.pageX, sy:e.pageY, w:r.width, moved:false, ghost:null};
+  try{ tile.setPointerCapture(e.pointerId); }catch(err){}
+}, {passive:false});
+
+document.addEventListener("pointermove", e=>{
+  if(!drag) return;
+  if(!drag.moved){
+    if(Math.abs(e.pageX-drag.sx)+Math.abs(e.pageY-drag.sy) < 10) return;
+    drag.moved = true;
+    const g = drag.tile.cloneNode(true);
+    g.classList.add("ghost"); g.classList.remove("sel");
+    g.style.width = drag.w+"px";
+    document.body.appendChild(g);
+    drag.ghost = g;
+    drag.tile.classList.add("dragging");
+  }
+  drag.ghost.style.left = (e.clientX-drag.ox)+"px";
+  drag.ghost.style.top  = (e.clientY-drag.oy)+"px";
+  const under = document.elementFromPoint(e.clientX, e.clientY);
+  const dz = under && under.closest ? under.closest(".dz, .bank") : null;
+  document.querySelectorAll(".dz.over,.bank.over").forEach(d=>d.classList.remove("over"));
+  const onTarget = dz && dz.dataset.ex === drag.tile.dataset.ex;
+  if(onTarget) dz.classList.add("over");
+  drag.cx = e.clientX; drag.cy = e.clientY; drag.lastMove = Date.now();
+  const vh = window.innerHeight;
+  drag.edge = onTarget ? 0 : (e.clientY < 90 ? -14 : (e.clientY > vh-90 ? 14 : 0));
+  if(drag.edge && !drag.scrolling){ drag.scrolling = true; autoScroll(); }
+});
+
+function autoScroll(){
+  const step = () => {
+    if(!drag || !drag.moved) return;
+    if(Date.now() - (drag.lastMove||0) > 80){ requestAnimationFrame(step); return; }
+    // re-check under the cursor each frame: scrolling moves the boxes, so the
+    // loop must stop as soon as a valid one arrives under the pointer
+    const under = document.elementFromPoint(drag.cx, drag.cy);
+    const dz = under && under.closest ? under.closest(".dz, .bank") : null;
+    const onTarget = dz && dz.dataset.ex === drag.tile.dataset.ex;
+    document.querySelectorAll(".dz.over,.bank.over").forEach(d=>d.classList.remove("over"));
+    if(onTarget) dz.classList.add("over");
+    if(!onTarget && drag.edge) window.scrollBy(0, drag.edge);
+    requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+document.addEventListener("pointerup", e=>{
+  if(!drag) return;
+  const {tile, moved, ghost} = drag;
+  if(ghost) ghost.remove();
+  tile.classList.remove("dragging");
+  document.querySelectorAll(".dz.over,.bank.over").forEach(d=>d.classList.remove("over"));
+  drag = null;
+
+  if(moved){
+    const under = document.elementFromPoint(e.clientX, e.clientY);
+    let target = under && under.closest ? under.closest(".dz, .bank") : null;
+    if(target && target.dataset.ex !== tile.dataset.ex) target = null;
+    const inView = e.clientY >= 0 && e.clientY <= window.innerHeight
+                && e.clientX >= 0 && e.clientX <= window.innerWidth;
+    if(!target && inView) target = nearestDropZone(e.clientX, e.clientY, tile.dataset.ex, 55);
+    if(target){
+      if(target.classList.contains("bank")) target.appendChild(tile);
+      else place(tile, target);
+    }
+    updateProgress();
+    return;
+  }
+  if(tile.parentElement.classList.contains("dz")){
+    bankOf(tile.dataset.ex).appendChild(tile);
+    clearSelection(); updateProgress(); return;
+  }
+  if(selected === tile){ clearSelection(); return; }
+  clearSelection();
+  selected = tile; tile.classList.add("sel"); armSlots(tile.dataset.ex);
+  document.getElementById("hint").classList.add("on");
+});
+
+document.addEventListener("click", e=>{
+  const dz = e.target.closest(".dz");
+  if(dz && selected && dz.dataset.ex === selected.dataset.ex){ place(selected, dz); return; }
+  const chk = e.target.closest("[data-check]");
+  if(chk){ check(chk.getAttribute("data-check")); return; }
+  const clr = e.target.closest("[data-clear]");
+  if(clr){ clearTask(clr.getAttribute("data-clear")); return; }
+  const po = e.target.closest(".po button");
+  if(po){
+    const box = po.parentElement;
+    box.querySelectorAll("button").forEach(b=>b.classList.remove("on"));
+    po.classList.add("on"); box.classList.remove("ok","no"); updateProgress(); return;
+  }
+});
+
+/* =========================================================
+   CHECKING
+   ========================================================= */
+function setScore(id, right, total){
+  const el = document.getElementById("score-"+id); if(!el) return;
+  el.className = "score " + (right===total ? "good":"work");
+  el.textContent = right===total ? `All ${total} correct. Well done.`
+                                 : `${right} of ${total} correct. Fix the orange ones and try again.`;
+}
+function taskById(id){
+  for(const p of PARTS) for(const b of p.blocks) if(b.kind==="task" && b.id===id) return b;
+  return null;
+}
+
+function check(id){
+  const t = taskById(id); if(!t) return;
+  let right=0, total=0;
+
+  if(t.type==="match"){
+    t.pairs.forEach((p,i)=>{
+      total++;
+      const dz = document.querySelector(`.dz[data-ex="${id}"][data-slot="${i}"]`);
+      const tile = dz.firstElementChild;
+      const ok = tile && tile.dataset.id === id+"-"+i;
+      dz.classList.toggle("ok", !!ok); dz.classList.toggle("no", !ok);
+      if(ok) right++;
+    });
+  }
+
+  if(t.type==="gaps"){
+    t.items.forEach((it,i)=>{
+      total++;
+      const inp = document.querySelector(`input.gap[data-ex="${id}"][data-i="${i}"]`);
+      const ok = it.k.some(k=>norm(k)===norm(inp.value));
+      inp.classList.toggle("ok", ok); inp.classList.toggle("no", !ok);
+      if(ok) right++;
+    });
+  }
+
+  if(t.type==="writeitems"){
+    inner = `<ol class="qs writelist">${t.items.map((q,i)=>`<li>
+      <input class="gap short" data-ex="${t.id}" data-i="${i}" autocomplete="off" spellcheck="false">
+      <span>${esc(q)}</span></li>`).join("")}</ol>${actions(t.id)}`;
+  }
+
+  if(t.type==="tick"){
+    t.rows.forEach((r,i)=>{
+      total++;
+      const row = document.querySelector(`.ticklist[data-ex="${id}"] .tickrow[data-i="${i}"]`);
+      const on = row.querySelector("input").checked;
+      const ok = on === !!r.k;
+      row.classList.toggle("ok", ok && on);
+      row.classList.toggle("no", !ok);
+      if(ok) right++;
+    });
+  }
+
+  if(t.type==="mcq"){
+    t.items.forEach((it,i)=>{
+      total++;
+      const box = document.querySelector(`.opt[data-ex="${id}"][data-i="${i}"]`);
+      const labels = [...box.querySelectorAll("label")];
+      labels.forEach(l=>l.classList.remove("ok","no"));
+      const inputs = [...box.querySelectorAll("input")];
+      const sel = inputs.findIndex(x=>x.checked);
+      if(sel === it.k){ labels[it.k].classList.add("ok"); right++; }
+      else if(sel > -1){ labels[sel].classList.add("no"); }
+    });
+  }
+
+  if(t.type==="cloze"){
+    t.keys.forEach((keys,i)=>{
+      total++;
+      const inp = document.querySelector(`input.gap[data-ex="${id}"][data-i="${i}"]`);
+      const ok = keys.some(k=>norm(k)===norm(inp.value));
+      inp.classList.toggle("ok", ok); inp.classList.toggle("no", !ok);
+      if(ok) right++;
+    });
+  }
+
+  if(t.type==="choose"){
+    t.rows.forEach((r,i)=>{
+      total++;
+      const box = document.querySelector(`.po[data-ex="${id}"][data-i="${i}"]`);
+      const on = box.querySelector("button.on");
+      const ok = on && on.dataset.v === r.k;
+      box.classList.toggle("ok", !!ok); box.classList.toggle("no", !ok);
+      if(ok) right++;
+    });
+  }
+
+  setScore(id, right, total);
+  updateProgress();
+}
+
+function clearTask(id){
+  const box = document.getElementById("task-"+id); if(!box) return;
+  box.querySelectorAll(".dz").forEach(dz=>{
+    dz.classList.remove("ok","no");
+    while(dz.firstElementChild) bankOf(id).appendChild(dz.firstElementChild);
+  });
+  box.querySelectorAll("input.gap").forEach(i=>{ i.value=""; i.classList.remove("ok","no"); });
+  box.querySelectorAll(".write").forEach(w=>{ w.textContent=""; w.classList.remove("ok","no"); });
+  box.querySelectorAll("input[type=checkbox],input[type=radio]").forEach(i=>i.checked=false);
+  box.querySelectorAll(".po button.on").forEach(b=>b.classList.remove("on"));
+  box.querySelectorAll(".po").forEach(x=>x.classList.remove("ok","no"));
+  const s = document.getElementById("score-"+id); if(s) s.textContent="";
+  updateProgress();
+}
+
+/* =========================================================
+   PROGRESS, WORD COUNT, TOOLBAR
+   ========================================================= */
+function updateProgress(){
+  let done=0, total=0;
+  document.querySelectorAll(".dz").forEach(d=>{ total += parseInt(d.dataset.cap||"1",10); done += d.children.length; });
+  document.querySelectorAll("input.gap").forEach(i=>{ total++; if(i.value.trim()) done++; });
+  document.querySelectorAll(".write").forEach(w=>{ total++; if(w.textContent.trim()) done++; });
+  document.querySelectorAll(".po").forEach(p=>{ total++; if(p.querySelector("button.on")) done++; });
+  document.querySelectorAll(".opt").forEach(o=>{ total++; if(o.querySelector("input:checked")) done++; });
+  document.querySelectorAll(".ticklist").forEach(l=>{ total++; if(l.querySelector("input:checked")) done++; });
+  const pct = total ? Math.round(done*100/total) : 0;
+  document.getElementById("progtxt").textContent = pct+"% done";
+  document.getElementById("progbar").style.width = pct+"%";
+}
+
+document.addEventListener("input", e=>{
+  if(e.target.id==="essay" || e.target.closest("#essay")){
+    const el = document.getElementById("essay");
+    const n = el.textContent.trim() ? el.textContent.trim().split(/\s+/).length : 0;
+    const wc = document.getElementById("wc");
+    const t = PARTS.flatMap(p=>p.blocks).find(b=>b.type==="essay");
+    wc.textContent = n + (n===1?" word":" words") + (n>=t.min && n<=t.max ? "  |  inside the target" : `  |  target ${t.min} to ${t.max}`);
+    wc.className = "counter" + (n>=t.min && n<=t.max ? " good":"");
+  }
+  updateProgress();
+});
+document.addEventListener("change", updateProgress);
+
+let checking = true;
+function applyCheckVisibility(){
+  document.querySelectorAll(".actions").forEach(a=>{ a.style.display = checking ? "flex" : "none"; });
+}
+document.getElementById("btnCheckToggle").addEventListener("click", e=>{
+  checking = !checking;
+  e.target.textContent = "Checking: " + (checking?"on":"off");
+  applyCheckVisibility();
+});
+
+let resetArmed = false;
+document.getElementById("btnReset").addEventListener("click", e=>{
+  if(!resetArmed){ resetArmed = true; e.target.textContent="Tap again to clear all"; setTimeout(()=>{resetArmed=false; e.target.textContent="Reset";},4000); return; }
+  resetArmed = false; e.target.textContent="Reset";
+  build(); window.scrollTo(0,0);
+});
+document.addEventListener("change", e=>{
+  const inp = e.target.closest('.audiobox input[type=file]');
+  if(!inp || !inp.files || !inp.files[0]) return;
+  const box = inp.closest(".audiobox");
+  const a = box.querySelector("audio");
+  if(a.dataset.url) URL.revokeObjectURL(a.dataset.url);
+  const url = URL.createObjectURL(inp.files[0]);
+  a.dataset.url = url; a.src = url; a.style.display = "block";
+  box.querySelector(".loadname").textContent = inp.files[0].name;
+  box.querySelector(".loadbtn").textContent = "Choose a different file";
+  box.querySelector(".loadbtn").appendChild(inp);
+});
+
+document.getElementById("btnPrint").addEventListener("click", ()=>window.print());
+
+["fName","fDate"].forEach(id=>document.getElementById(id).addEventListener("input", ()=>{
+  const n = document.getElementById("fName").value.trim();
+  const d = document.getElementById("fDate").value.trim();
+  document.getElementById("fFoot").textContent = [n,d].filter(Boolean).join("  |  ");
+}));
+
+build();
+</script>
+</body>
+</html>
