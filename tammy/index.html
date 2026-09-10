@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>That's the Spirit! | GrahamIELTS B2-C1 Worksheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14161A;
+  --gold:#C9A227;
+  --gold-dk:#A6841C;
+  --forest:#14472F;
+  --forest-mid:#1E6A46;
+  --forest-lt:#E9F1EC;
+  --forest-lt2:#F4F8F5;
+  --paper:#FBFAF7;
+  --card:#FFFFFF;
+  --line:#D9E2DC;
+  --muted:#5B6660;
+  --ok:#1E6A46;
+  --no:#B3261E;
+  --shadow:0 1px 2px rgba(20,71,47,.06),0 8px 24px rgba(20,71,47,.07);
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,.display{font-family:Fraunces,Georgia,"Times New Roman",serif;line-height:1.2;margin:0}
+.wrap{max-width:1020px;margin:0 auto;padding:0 20px}
+
+/* ---------- brand bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;background:rgba(251,250,247,.94);
+  backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--line);
+}
+.topbar-in{display:flex;align-items:center;gap:16px;padding:10px 20px;max-width:1020px;margin:0 auto;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none;flex:0 0 auto}
+.logo-mark{width:30px;height:30px;flex:0 0 auto}
+.logo-txt{font-family:Fraunces,Georgia,serif;font-weight:900;font-size:21px;letter-spacing:-.02em;line-height:1}
+.logo-txt .g{color:var(--ink)}
+.logo-txt .i{color:var(--gold)}
+.topbar .spacer{flex:1 1 auto}
+.scorepill{
+  display:inline-flex;align-items:center;gap:8px;background:var(--forest);color:#fff;
+  border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;letter-spacing:.01em;
+}
+.scorepill b{font-variant-numeric:tabular-nums}
+.btn{
+  font:inherit;font-size:13px;font-weight:600;cursor:pointer;border-radius:9px;
+  padding:7px 13px;border:1px solid var(--line);background:#fff;color:var(--ink);
+  transition:.15s ease;white-space:nowrap;
+}
+.btn:hover{border-color:var(--forest-mid);color:var(--forest)}
+.btn.primary{background:var(--forest);border-color:var(--forest);color:#fff}
+.btn.primary:hover{background:var(--forest-mid);color:#fff}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#2A2205}
+.btn.gold:hover{background:var(--gold-dk);color:#fff}
+.btn.ghost{background:transparent}
+
+/* ---------- hero ---------- */
+.hero{padding:44px 0 30px;border-bottom:3px solid var(--gold)}
+.eyebrow{
+  display:inline-flex;gap:10px;align-items:center;flex-wrap:wrap;
+  font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--forest-mid);
+}
+.eyebrow span{background:var(--forest-lt);border-radius:999px;padding:4px 11px}
+h1.title{font-size:clamp(38px,7vw,68px);font-weight:900;letter-spacing:-.025em;margin:14px 0 8px;color:var(--forest)}
+h1.title em{font-style:normal;color:var(--gold)}
+.sub{color:var(--muted);font-size:17px;max-width:62ch}
+.metarow{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.chipmeta{font-size:12.5px;font-weight:600;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 13px;color:var(--forest)}
+
+/* ---------- sections ---------- */
+section.stage{margin:30px 0}
+.stage-head{display:flex;align-items:flex-start;gap:14px;margin:0 0 4px}
+.num{
+  flex:0 0 auto;width:40px;height:40px;border-radius:11px;background:var(--forest);color:#fff;
+  display:grid;place-items:center;font-family:Fraunces,serif;font-weight:900;font-size:19px;
+}
+.num.gold{background:var(--gold);color:#2A2205}
+.stage-head h2{font-size:26px;font-weight:700;letter-spacing:-.015em;padding-top:5px}
+.stage-head .kicker{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dk);display:block;margin-bottom:2px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 24px;margin:14px 0;box-shadow:var(--shadow);
+}
+.card h3{font-size:18px;font-weight:700;margin-bottom:10px}
+.card h3 .tag{
+  font-family:Inter,sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--forest-lt);color:var(--forest);border-radius:5px;padding:3px 7px;margin-right:9px;vertical-align:3px;
+}
+.card h3 .tag.c1{background:#FBF2D8;color:var(--gold-dk)}
+.instr{color:var(--muted);font-size:14.5px;margin:0 0 14px}
+
+/* info / exam boxes */
+.info{border-left:4px solid var(--gold);background:#FDFAF0;border-radius:0 10px 10px 0;padding:16px 18px;margin:16px 0}
+.info h4{font-size:15px;margin-bottom:6px;color:var(--gold-dk)}
+.info p{margin:6px 0;font-size:14.5px}
+.exambox{border-left:4px solid var(--forest);background:var(--forest-lt2);border-radius:0 10px 10px 0;padding:16px 18px;margin:16px 0}
+.exambox h4{font-size:15px;margin-bottom:6px;color:var(--forest)}
+.exambox p{margin:6px 0;font-size:14.5px}
+.quote{
+  font-family:Fraunces,Georgia,serif;font-size:19px;font-style:italic;color:var(--forest);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin:16px 0;text-align:center;
+}
+
+/* ---------- exercise items ---------- */
+ol.ex{margin:0;padding-left:0;list-style:none;counter-reset:exn}
+ol.ex>li{
+  counter-increment:exn;position:relative;padding:9px 0 9px 38px;border-bottom:1px dashed #E7EDE8;
+  font-size:15.5px;
+}
+ol.ex>li:last-child{border-bottom:0}
+ol.ex>li::before{
+  content:counter(exn);position:absolute;left:0;top:10px;width:24px;height:24px;border-radius:7px;
+  background:var(--forest-lt);color:var(--forest);font-size:12px;font-weight:700;display:grid;place-items:center;
+  font-family:Inter,sans-serif;
+}
+ol.ex.alpha{counter-reset:exa}
+ol.ex.alpha>li{counter-increment:exa}
+ol.ex.alpha>li::before{content:counter(exa,lower-alpha)}
+ol.ex.manual>li::before{content:attr(data-n);width:auto;min-width:24px;padding:0 5px;font-size:11px}
+ol.ex.manual>li{padding-left:52px}
+
+select.q,input.q{
+  font:inherit;font-size:15px;font-weight:600;color:var(--forest);
+  border:1.5px solid var(--line);border-radius:8px;padding:4px 8px;background:#fff;
+  min-width:74px;transition:.15s;vertical-align:baseline;
+}
+input.q{min-width:120px;max-width:100%}
+input.q.wide{min-width:210px}
+select.q:focus,input.q:focus{outline:none;border-color:var(--forest-mid);box-shadow:0 0 0 3px rgba(30,106,70,.13)}
+.q.right{border-color:var(--ok);background:#EDF7F1;color:var(--ok)}
+.q.wrong{border-color:var(--no);background:#FDF0EF;color:var(--no)}
+.sol{display:none;margin-left:8px;font-size:13.5px;font-weight:700;color:var(--ok)}
+.sol.show{display:inline}
+.sol::before{content:"= "}
+
+/* word bank */
+.bank{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px;padding:14px;background:var(--forest-lt2);border:1px dashed var(--line);border-radius:11px}
+.bank .w{background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:14px;font-weight:600;color:var(--forest)}
+.bank-label{width:100%;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+
+/* chip matcher */
+.chiprow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;min-height:38px}
+.chip{
+  background:#fff;border:1.5px solid var(--forest-mid);color:var(--forest);border-radius:999px;
+  padding:6px 15px;font-size:14.5px;font-weight:600;cursor:pointer;transition:.15s;user-select:none;
+}
+.chip:hover{background:var(--forest-lt)}
+.chip.sel{background:var(--forest);color:#fff;border-color:var(--forest);transform:translateY(-1px)}
+.chip.used{opacity:.28;pointer-events:none}
+.slot{
+  display:inline-block;min-width:190px;border-bottom:2px solid var(--line);padding:2px 8px;
+  font-weight:600;color:var(--forest);cursor:pointer;transition:.15s;border-radius:5px 5px 0 0;min-height:26px;
+}
+.slot:hover{background:var(--forest-lt)}
+.slot.filled{background:var(--forest-lt)}
+.slot.right{background:#EDF7F1;border-color:var(--ok);color:var(--ok)}
+.slot.wrong{background:#FDF0EF;border-color:var(--no);color:var(--no)}
+.slot.armed{background:#FBF2D8;border-color:var(--gold)}
+
+/* actions */
+.actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.result{font-size:13.5px;font-weight:700;color:var(--forest);margin-left:auto}
+
+/* reading texts */
+.texts{display:grid;gap:14px}
+.text{background:#fff;border:1px solid var(--line);border-left:4px solid var(--forest-mid);border-radius:0 11px 11px 0;padding:16px 20px}
+.text .letter{
+  font-family:Fraunces,serif;font-weight:900;font-size:15px;color:#fff;background:var(--forest-mid);
+  width:26px;height:26px;border-radius:7px;display:inline-grid;place-items:center;margin-right:10px;vertical-align:2px;
+}
+.text .ttl{font-family:Fraunces,serif;font-weight:700;font-size:17px;color:var(--forest)}
+.text p{margin:10px 0 0;font-size:15.5px;line-height:1.65}
+.text .cite{display:block;margin-top:10px;font-size:13px;color:var(--muted);font-style:italic}
+.twocol{column-count:2;column-gap:28px}
+@media(max-width:760px){.twocol{column-count:1}}
+
+/* discussion / model answers */
+details.model{margin:10px 0 0;border:1px solid var(--line);border-radius:10px;background:var(--forest-lt2);padding:0}
+details.model>summary{
+  cursor:pointer;list-style:none;padding:10px 15px;font-size:13.5px;font-weight:700;color:var(--forest);
+}
+details.model>summary::-webkit-details-marker{display:none}
+details.model>summary::before{content:"▸ ";color:var(--gold-dk)}
+details.model[open]>summary::before{content:"▾ "}
+details.model .body{padding:0 15px 14px;font-size:14.5px;color:#333}
+details.model .body p{margin:6px 0}
+.talk{background:var(--forest-lt2);border-radius:11px;padding:14px 18px;margin-top:14px}
+.talk .lbl{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:6px}
+.talk ol{margin:0;padding-left:20px;font-size:15px}
+.talk ol li{margin:4px 0}
+
+/* homework */
+.hw-gate{
+  border:2px dashed var(--gold);border-radius:var(--radius);background:#FDFAF0;
+  padding:30px;text-align:center;margin:14px 0;
+}
+.hw-gate h3{font-size:22px;color:var(--forest);margin-bottom:8px}
+.hw-gate p{color:var(--muted);font-size:15px;max-width:56ch;margin:0 auto 18px}
+#homework-body{display:none}
+#homework-body.open{display:block}
+.hw-banner{background:var(--forest);color:#fff;border-radius:var(--radius);padding:24px 26px;margin:14px 0}
+.hw-banner h2{font-size:27px;font-weight:700;color:#fff}
+.hw-banner .k{font-size:11.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:5px}
+.hw-banner p{margin:9px 0 0;font-size:15px;color:#D8E5DD;max-width:64ch}
+
+table.wf{width:100%;border-collapse:collapse;font-size:15px}
+table.wf th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1.5px solid var(--line);padding:7px 8px}
+table.wf td{border-bottom:1px solid #EEF2EF;padding:8px}
+table.wf td:first-child{font-weight:600}
+
+@media(max-width:520px){
+  .topbar-in{gap:8px;padding:8px 14px}
+  .logo-txt{font-size:18px}
+  .logo-mark{width:26px;height:26px}
+  .scorepill{padding:5px 11px;font-size:12px}
+  .btn{padding:6px 10px;font-size:12px}
+  .btn.hide-sm{display:none}
+  .wrap{padding:0 14px}
+  .card{padding:18px 16px}
+  ol.ex>li{padding-left:32px;font-size:15px}
+  ol.ex.manual>li{padding-left:46px}
+  .text{padding:14px 15px}
+  .slot{min-width:130px}
+  input.q{min-width:84px}
+  input.q.wide{min-width:130px}
+  select.q{min-width:64px}
+}
+footer.foot{margin:48px 0 0;border-top:3px solid var(--gold);background:#fff}
+.foot-in{max-width:1020px;margin:0 auto;padding:26px 20px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.foot .small{font-size:13px;color:var(--muted)}
+.skip{font-size:13px;color:var(--muted)}
+
+@media print{
+  .topbar,.actions,.hw-gate,.btn,.skip{display:none!important}
+  #homework-body{display:block!important}
+  body{background:#fff;font-size:11.5pt}
+  .card{box-shadow:none;break-inside:avoid;page-break-inside:avoid}
+  section.stage{break-inside:avoid}
+  .sol.show{display:inline!important}
+}
+</style>
+</head>
+<body><!--gp-chrome--><style>
+.gpnav{position:sticky;top:0;z-index:900;display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;
+ padding:9px clamp(14px,2.4vw,30px);background:var(--gpnav-bg,#12795A);
+ font-family:"IBM Plex Mono",ui-monospace,"Consolas",monospace;font-size:12.5px;line-height:1.3;
+ box-shadow:0 1px 0 rgba(0,0,0,.12)}
+.gpnav a,.gpnav span.gplock{display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+ padding:5px 11px;border-radius:2px;letter-spacing:.05em;white-space:nowrap;
+ border:1px solid rgba(255,255,255,.28);color:#fff}
+.gpnav a:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.6)}
+.gpnav a:focus-visible{outline:2px solid #DCAE44;outline-offset:2px}
+.gpnav a.gphome{font-weight:700;border-color:#DCAE44;background:rgba(220,174,68,.18)}
+.gpnav a.gphere{background:#fff;color:#12795A;border-color:#fff;font-weight:700}
+.gpnav span.gplock{opacity:.62;border-style:dashed;cursor:default}
+.gpnav .gpsep{flex:1}
+.gpnav .gpmark{color:#DCAE44;letter-spacing:.16em;font-weight:700;font-size:11px;
+ text-transform:uppercase;padding-right:4px}
+@media (max-width:620px){.gpnav{font-size:11.5px}.gpnav .gpmark{display:none}}
+@media print{.gpnav{display:none}}
+
+/* Let the builder's own pages use the width of the screen. The type scales and
+   the column is set in em, so the line length stays exactly as it was while the
+   page stops sitting in a narrow strip on a large monitor. Pages that already
+   scale themselves say so with data-fluid and are left alone. */
+html:not([data-fluid]) body{font-size:clamp(17px,0.44vw + 13.9px,22px)!important}
+html:not([data-fluid]) .wrap{max-width:min(94vw,53em)!important;width:auto!important}
+
+/* The report's own section links sat on one line and scrolled sideways, so half
+   of them were out of sight. Let them wrap and every section shows at once. */
+html:not([data-fluid]) .nav-in{flex-wrap:wrap!important;overflow-x:visible!important;
+ overflow-y:visible!important;scroll-snap-type:none!important;row-gap:4px!important;
+ max-width:min(96vw,64em)!important}
+html:not([data-fluid]) .nav a{scroll-snap-align:none!important;white-space:normal!important}
+html:not([data-fluid]) .nav::after{display:none!important}
+html:not([data-fluid]) .nav-in::-webkit-scrollbar{display:none}
+</style><nav class="gpnav" aria-label="Your documents"><span class="gpmark">GrahamIELTS</span><a class="gphome gphere" href="./">Tammy</a><span class="gplock" title="I unlock this when we start">Workbook, locked</span></nav><!--/gp-chrome-->
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="logo" href="#top">
+      <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="37" height="37" rx="10" fill="#14472F"/>
+        <path d="M20 9.5c-4.9 0-8.6 3.6-8.6 8.4 0 4.4 3 7.6 7.2 8.2v4.4c0 .8.6 1.4 1.4 1.4s1.4-.6 1.4-1.4v-4.4c4.2-.6 7.2-3.8 7.2-8.2 0-4.8-3.7-8.4-8.6-8.4Z" fill="#C9A227"/>
+        <circle cx="16.8" cy="17.4" r="1.7" fill="#14472F"/>
+        <circle cx="23.2" cy="17.4" r="1.7" fill="#14472F"/>
+      </svg>
+      <span class="logo-txt"><span class="g">Graham</span><span class="i">IELTS</span></span>
+    </a>
+    <span class="spacer"></span>
+    <span class="scorepill">Score <b id="globalScore">0</b> / <b id="globalTotal">0</b></span>
+    <button class="btn" onclick="checkAll()">Check all</button>
+    <button class="btn ghost" onclick="resetAll()">Reset</button>
+    <button class="btn ghost hide-sm" onclick="window.print()">Print</button>
+  </div>
+</div>
+
+<div class="wrap" id="top">
+
+  <div class="hero">
+    <div class="eyebrow"><span>General English</span><span>B2 First</span><span>Upper-Intermediate B2-C1</span></div>
+    <h1 class="title">That's the <em>Spirit!</em></h1>
+    <p class="sub">Ghost stories, graded readers and the language of reviews. This worksheet trains the exam skill that decides Reading Part 7: spotting <strong>parallel expressions</strong>, where the question and the text say the same thing in completely different words.</p>
+    <div class="metarow">
+      <span class="chipmeta">Reading &amp; Use of English Part 7</span>
+      <span class="chipmeta">B2 + C1 vocabulary</span>
+      <span class="chipmeta">Idioms &amp; extreme adjectives</span>
+      <span class="chipmeta">Homework included</span>
+    </div>
+  </div>
+
+  <!-- ================= 1 WARM UP ================= -->
+  <section class="stage" id="s1">
+    <div class="stage-head">
+      <div class="num">1</div>
+      <div><span class="kicker">Stage one</span><h2>Warm up</h2></div>
+    </div>
+
+    <div class="card" data-ex="1a">
+      <h3><span class="tag">B2</span>Part A &middot; Match the titles with the genres</h3>
+      <p class="instr">Tap a title, then tap the gap it belongs in. Tap a filled gap to empty it.</p>
+      <div class="chiprow" data-pool="pool1a">
+        <span class="chip" data-v="Blood Garden">Blood Garden</span>
+        <span class="chip" data-v="Queen Victoria's Secret">Queen Victoria's Secret</span>
+        <span class="chip" data-v="Soulmates">Soulmates</span>
+        <span class="chip" data-v="The Moons of Charon">The Moons of Charon</span>
+        <span class="chip" data-v="The Necklace of Power">The Necklace of Power</span>
+        <span class="chip" data-v="The Shadow under the Stairs">The Shadow under the Stairs</span>
+      </div>
+      <ol class="ex">
+        <li><span class="slot q" data-pool="pool1a" data-a="The Necklace of Power"></span> : fantasy <span class="sol" data-sol="The Necklace of Power"></span></li>
+        <li><span class="slot q" data-pool="pool1a" data-a="The Shadow under the Stairs"></span> : ghost story <span class="sol" data-sol="The Shadow under the Stairs"></span></li>
+        <li><span class="slot q" data-pool="pool1a" data-a="Queen Victoria's Secret"></span> : historical fiction <span class="sol" data-sol="Queen Victoria's Secret"></span></li>
+        <li><span class="slot q" data-pool="pool1a" data-a="Blood Garden"></span> : horror <span class="sol" data-sol="Blood Garden"></span></li>
+        <li><span class="slot q" data-pool="pool1a" data-a="Soulmates"></span> : romance <span class="sol" data-sol="Soulmates"></span></li>
+        <li><span class="slot q" data-pool="pool1a" data-a="The Moons of Charon"></span> : science fiction (sci-fi) <span class="sol" data-sol="The Moons of Charon"></span></li>
+      </ol>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+
+    <div class="card" data-ex="1b">
+      <h3><span class="tag">B2</span>Part B &middot; Book formats</h3>
+      <p class="instr">Use one word from the box to complete each phrase. You will need one of them twice.</p>
+      <div class="bank"><span class="bank-label">Word bank</span>
+        <span class="w">book</span><span class="w">book</span><span class="w">novel</span><span class="w">reader</span>
+      </div>
+      <ol class="ex alpha">
+        <li>a classic <input class="q" data-a="novel" size="10"> : a famous work of literature, often written a long time ago <span class="sol" data-sol="novel"></span></li>
+        <li>an e-<input class="q" data-a="book" size="10"> : an electronic version of a book to read on a device <span class="sol" data-sol="book"></span></li>
+        <li>a graded <input class="q" data-a="reader" size="10"> : a book for language learners adapted to their level <span class="sol" data-sol="reader"></span></li>
+        <li>an audio<input class="q" data-a="book" size="10"> : a reading of a book to listen to on headphones <span class="sol" data-sol="book"></span></li>
+      </ol>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+
+    <div class="talk">
+      <div class="lbl">Talk about it</div>
+      <ol>
+        <li>What type of fiction do you most enjoy reading?</li>
+        <li>How often do you read non-fiction?</li>
+        <li>Where and when is your favourite place and time to read?</li>
+        <li>What sort of things do you read in English? Have you ever read a graded reader?</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= 2 LANGUAGE POINT ================= -->
+  <section class="stage" id="s2">
+    <div class="stage-head">
+      <div class="num">2</div>
+      <div><span class="kicker">Stage two</span><h2>Language point: parallel expressions</h2></div>
+    </div>
+
+    <div class="exambox">
+      <h4>Why this decides your Reading score</h4>
+      <p>Strong candidates recognise and use <strong>parallel expressions</strong>: two ways of saying the same thing using completely different words. They include synonyms, idioms and negative structures.</p>
+      <p>In B2 First, the Reading and Listening papers almost never repeat the words of the text in the question. Part 4 of Use of English (key word transformations) tests the same skill directly.</p>
+    </div>
+
+    <div class="card" data-ex="2a">
+      <h3><span class="tag">B2</span>Match each answer with the question it answers</h3>
+      <p class="instr">These are real student responses to the four questions above. Which question is each one answering?</p>
+      <ol class="ex">
+        <li>"I'm afraid I hardly ever read it, especially for fun. It's just not my cup of tea, although of course I have to read stuff like that for school or work."
+          &rarr; Question
+          <select class="q" data-a="2"><option value=""></option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+          <span class="sol" data-sol="2"></span></li>
+        <li>"That's a hard question! I'm not saying I've never read one, but I don't remember the title."
+          &rarr; Question
+          <select class="q" data-a="4"><option value=""></option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+          <span class="sol" data-sol="4"></span></li>
+        <li>"My favourite genre is sci-fi because I love imagining different worlds. It really makes you see how things could be different on this planet."
+          &rarr; Question
+          <select class="q" data-a="1"><option value=""></option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+          <span class="sol" data-sol="1"></span></li>
+        <li>"In my opinion, you can't beat a long, hot, candle-lit bath on a Sunday afternoon."
+          &rarr; Question
+          <select class="q" data-a="3"><option value=""></option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+          <span class="sol" data-sol="3"></span></li>
+      </ol>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+
+    <div class="card" data-ex="2b">
+      <h3><span class="tag">B2</span><span class="tag c1">C1</span>Find the parallel expression</h3>
+      <p class="instr">Match the words from the responses above with the plain meaning. Notice how much work the <em>negatives</em> are doing.</p>
+      <ol class="ex">
+        <li>hardly ever &rarr;
+          <select class="q" data-a="almost never"><option value=""></option><option>almost never</option><option>the best thing is</option><option>I don't enjoy it</option><option>information, facts</option><option>perhaps I have</option><option>type of book or film</option></select>
+          <span class="sol" data-sol="almost never"></span></li>
+        <li>not my cup of tea &rarr;
+          <select class="q" data-a="I don't enjoy it"><option value=""></option><option>almost never</option><option>the best thing is</option><option>I don't enjoy it</option><option>information, facts</option><option>perhaps I have</option><option>type of book or film</option></select>
+          <span class="sol" data-sol="I don't enjoy it"></span></li>
+        <li>you can't beat &rarr;
+          <select class="q" data-a="the best thing is"><option value=""></option><option>almost never</option><option>the best thing is</option><option>I don't enjoy it</option><option>information, facts</option><option>perhaps I have</option><option>type of book or film</option></select>
+          <span class="sol" data-sol="the best thing is"></span></li>
+        <li>I'm not saying I've never read one &rarr;
+          <select class="q" data-a="perhaps I have"><option value=""></option><option>almost never</option><option>the best thing is</option><option>I don't enjoy it</option><option>information, facts</option><option>perhaps I have</option><option>type of book or film</option></select>
+          <span class="sol" data-sol="perhaps I have"></span></li>
+        <li>stuff like that (= non-fiction) &rarr;
+          <select class="q" data-a="information, facts"><option value=""></option><option>almost never</option><option>the best thing is</option><option>I don't enjoy it</option><option>information, facts</option><option>perhaps I have</option><option>type of book or film</option></select>
+          <span class="sol" data-sol="information, facts"></span></li>
+        <li>genre &rarr;
+          <select class="q" data-a="type of book or film"><option value=""></option><option>almost never</option><option>the best thing is</option><option>I don't enjoy it</option><option>information, facts</option><option>perhaps I have</option><option>type of book or film</option></select>
+          <span class="sol" data-sol="type of book or film"></span></li>
+      </ol>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+
+    <div class="card" data-ex="2c">
+      <h3><span class="tag">B2</span>Book idioms &middot; Match the sentence halves</h3>
+      <p class="instr">Tap an ending, then tap the gap at the end of the sentence it completes.</p>
+      <div class="chiprow" data-pool="pool2c">
+        <span class="chip" data-v="a">a. put it down, so it's perfect for a long flight.</span>
+        <span class="chip" data-v="b">b. to cover, but I don't think that can be true.</span>
+        <span class="chip" data-v="c">c. -turner and I read it in one sitting.</span>
+        <span class="chip" data-v="d">d. judge a book by its cover.</span>
+        <span class="chip" data-v="e">e. bookworm, because I spent all my pocket money on books and comics.</span>
+      </div>
+      <ol class="ex">
+        <li>This book is a real page <span class="slot q" data-pool="pool2c" data-a="c"></span> <span class="sol" data-sol="c"></span></li>
+        <li>Once you start reading you won't be able to <span class="slot q" data-pool="pool2c" data-a="a"></span> <span class="sol" data-sol="a"></span></li>
+        <li>I know it looks boring, but everyone knows not to <span class="slot q" data-pool="pool2c" data-a="d"></span> <span class="sol" data-sol="d"></span></li>
+        <li>When I was a kid, I guess you could say I was a complete <span class="slot q" data-pool="pool2c" data-a="e"></span> <span class="sol" data-sol="e"></span></li>
+        <li>Someone told me that to learn English really well you have to read the dictionary from cover <span class="slot q" data-pool="pool2c" data-a="b"></span> <span class="sol" data-sol="b"></span></li>
+      </ol>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+      <details class="model"><summary>What do the idioms mean?</summary><div class="body">
+        <p><strong>a page-turner</strong> — a book so exciting that you keep turning the pages.</p>
+        <p><strong>you can't put it down</strong> — it is so gripping that you cannot stop reading.</p>
+        <p><strong>in one sitting</strong> — from start to finish without a break.</p>
+        <p><strong>don't judge a book by its cover</strong> — don't decide what something (or someone) is like from its appearance.</p>
+        <p><strong>a bookworm</strong> — a person who reads a very great deal.</p>
+        <p><strong>from cover to cover</strong> — from the first page to the last, all of it.</p>
+        <p><strong>not my cup of tea</strong> — not the sort of thing I like. Notice it is always negative.</p>
+      </div></details>
+    </div>
+
+    <div class="card" data-ex="2d">
+      <h3><span class="tag c1">C1</span>Negative structures and attitude</h3>
+      <p class="instr">Negative structures are used to express an attitude as well as to avoid repetition. They let a speaker criticise, hedge or concede without ever saying anything directly.</p>
+      <div class="quote">"I'm not saying I've never read one, but I don't remember the title."</div>
+      <details class="model" open><summary>What attitude is this, and how would you say it simply?</summary><div class="body">
+        <p><strong>Attitude:</strong> cautious and self-protective. The speaker does not want to claim they have read a graded reader, and does not want to admit they have not.</p>
+        <p><strong>Simply:</strong> "I may have read one, but I can't remember which."</p>
+        <p><strong>How the clauses connect:</strong> the two halves are joined by contrast linkers — <em>but, however, although, even though</em>. The first clause concedes, the second takes something back.</p>
+      </div></details>
+      <p class="instr" style="margin-top:16px">Now explain the attitude in these two sentences and rewrite the information simply.</p>
+      <ol class="ex">
+        <li>"I don't doubt that it's an unsuitable story for kids, even though I enjoyed it when I was younger."
+          <details class="model"><summary>Model answer</summary><div class="body">
+            <p><strong>Attitude:</strong> conceding a point they would rather not concede. The speaker accepts the criticism but defends their own experience.</p>
+            <p><strong>Simply:</strong> "It probably isn't suitable for children, but I liked it when I was young."</p>
+          </div></details></li>
+        <li>"He's not actually refusing to take part in the activity. However, I wouldn't describe him as excited to do the activity."
+          <details class="model"><summary>Model answer</summary><div class="body">
+            <p><strong>Attitude:</strong> polite, diplomatic criticism. Understatement is used so that the speaker never says anything openly negative.</p>
+            <p><strong>Simply:</strong> "He'll take part, but he isn't keen."</p>
+          </div></details></li>
+      </ol>
+      <div class="info">
+        <h4>Use it yourself</h4>
+        <p>Build the pattern: <strong>I'm not saying ... , but ...</strong> &nbsp;|&nbsp; <strong>I wouldn't describe it as ... </strong> &nbsp;|&nbsp; <strong>I don't doubt that ... , even though ...</strong> &nbsp;|&nbsp; <strong>It's not that I ... , it's just that ...</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3 VOCABULARY B2 ================= -->
+  <section class="stage" id="s3">
+    <div class="stage-head">
+      <div class="num gold">3</div>
+      <div><span class="kicker">Stage three</span><h2>Vocabulary builder &middot; B2</h2></div>
+    </div>
+
+    <div class="card" data-ex="3a">
+      <h3><span class="tag">B2</span>Types of publication</h3>
+      <p class="instr">Put each publication into the right category. <strong>Reference</strong> = you look things up in it. <strong>Fiction</strong> = it tells an invented story. <strong>Publicity</strong> = it exists to sell you something.</p>
+      <ol class="ex">
+        <li>atlas <select class="q" data-a="Reference"><option value=""></option><option>Reference</option><option>Fiction</option><option>Publicity</option></select> <span class="sol" data-sol="Reference"></span></li>
+        <li>thriller <select class="q" data-a="Fiction"><option value=""></option><option>Reference</option><option>Fiction</option><option>Publicity</option></select> <span class="sol" data-sol="Fiction"></span></li>
+        <li>brochure <select class="q" data-a="Publicity"><option value=""></option><option>Reference</option><option>Fiction</option><option>Publicity</option></select> <span class="sol" data-sol="Publicity"></span></li>
+        <li>ghost story <select class="q" data-a="Fiction"><option value=""></option><option>Reference</option><option>Fiction</option><option>Publicity</option></select> <span class="sol" data-sol="Fiction"></span></li>
+        <li>guidebook <select class="q" data-a="Reference"><option value=""></option><option>Reference</option><option>Fiction</option><option>Publicity</option></select> <span class="sol" data-sol="Reference"></span></li>
+        <li>catalogue <select class="q" data-a="Publicity"><option value=""></option><option>Reference</option><option>Fiction</option><option>Publicity</option></select> <span class="sol" data-sol="Publicity"></span></li>
+        <li>biography <select class="q" data-a="Reference"><option value=""></option><option>Reference</option><option>Fiction</option><option>Publicity</option></select> <span class="sol" data-sol="Reference"></span></li>
+        <li>detective story <select class="q" data-a="Fiction"><option value=""></option><option>Reference</option><option>Fiction</option><option>Publicity</option></select> <span class="sol" data-sol="Fiction"></span></li>
+        <li>cookery book <select class="q" data-a="Reference"><option value=""></option><option>Reference</option><option>Fiction</option><option>Publicity</option></select> <span class="sol" data-sol="Reference"></span></li>
+        <li>science fiction novel <select class="q" data-a="Fiction"><option value=""></option><option>Reference</option><option>Fiction</option><option>Publicity</option></select> <span class="sol" data-sol="Fiction"></span></li>
+        <li>textbook <select class="q" data-a="Reference"><option value=""></option><option>Reference</option><option>Fiction</option><option>Publicity</option></select> <span class="sol" data-sol="Reference"></span></li>
+        <li>romance <select class="q" data-a="Fiction"><option value=""></option><option>Reference</option><option>Fiction</option><option>Publicity</option></select> <span class="sol" data-sol="Fiction"></span></li>
+      </ol>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+
+    <div class="card" data-ex="3b">
+      <h3><span class="tag">B2</span>The verbs that make a ghost story work</h3>
+      <p class="instr">Complete the extract. Every gap is a verb of <strong>sound</strong> or a verb of <strong>movement</strong>. Change the form where you need to.</p>
+      <div class="bank"><span class="bank-label">Verbs of sound and movement</span>
+        <span class="w">creep</span><span class="w">crouch</span><span class="w">dart</span><span class="w">dash</span><span class="w">groan</span>
+        <span class="w">shriek</span><span class="w">stumble</span><span class="w">whimper</span><span class="w">yell</span>
+      </div>
+      <p style="font-size:15.5px;line-height:2.3;background:var(--forest-lt2);padding:16px 18px;border-radius:11px;margin:0">
+        The floorboards <input class="q" data-a="groaned" size="10"><span class="sol" data-sol="groaned"></span> under my weight. Someone was
+        <input class="q" data-a="crouching|crouched" size="11"><span class="sol" data-sol="crouching"></span> behind the door, and when I
+        <input class="q" data-a="crept" size="9"><span class="sol" data-sol="crept"></span> closer she let out a
+        <input class="q" data-a="shriek" size="9"><span class="sol" data-sol="shriek"></span> that stopped my heart. A shape
+        <input class="q" data-a="darted" size="9"><span class="sol" data-sol="darted"></span> past the window. I
+        <input class="q" data-a="dashed" size="9"><span class="sol" data-sol="dashed"></span> for the stairs,
+        <input class="q" data-a="yelling" size="9"><span class="sol" data-sol="yelling"></span> for my brother,
+        <input class="q" data-a="stumbled" size="10"><span class="sol" data-sol="stumbled"></span> on the loose step, and lay in the dark,
+        <input class="q" data-a="whimpering" size="11"><span class="sol" data-sol="whimpering"></span>, while something upstairs began to laugh.
+      </p>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+
+    <div class="card" data-ex="3c">
+      <h3><span class="tag">B2</span>Ways of seeing &middot; odd one out</h3>
+      <p class="instr">Four of these five groups are about seeing. In each group, one verb does not belong. Which one?</p>
+      <ol class="ex">
+        <li>notice / glimpse / breathe &rarr; <select class="q" data-a="breathe"><option value=""></option><option>notice</option><option>glimpse</option><option>breathe</option></select> <span class="sol" data-sol="breathe"></span></li>
+        <li>nod / gaze / peer &rarr; <select class="q" data-a="nod"><option value=""></option><option>nod</option><option>gaze</option><option>peer</option></select> <span class="sol" data-sol="nod"></span></li>
+        <li>spot / blink / view &rarr; <select class="q" data-a="blink"><option value=""></option><option>spot</option><option>blink</option><option>view</option></select> <span class="sol" data-sol="blink"></span></li>
+        <li>tremble / witness / stare &rarr; <select class="q" data-a="tremble"><option value=""></option><option>tremble</option><option>witness</option><option>stare</option></select> <span class="sol" data-sol="tremble"></span></li>
+        <li>observe / sigh / glance &rarr; <select class="q" data-a="sigh"><option value=""></option><option>observe</option><option>sigh</option><option>glance</option></select> <span class="sol" data-sol="sigh"></span></li>
+      </ol>
+      <details class="model"><summary>The difference in one line each</summary><div class="body">
+        <p><strong>glimpse</strong> = see for a very short moment. <strong>peer</strong> = look with difficulty. <strong>gaze / stare</strong> = look for a long time (stare is ruder). <strong>glance</strong> = look very quickly. <strong>spot</strong> = see something you were looking for. <strong>witness</strong> = see something important happen. <strong>observe</strong> = watch carefully.</p>
+        <p>We <strong>see</strong> without trying, but we <strong>look at</strong>, <strong>watch</strong> and <strong>read about</strong> on purpose. In the same way we <strong>hear</strong> without trying but we <strong>listen to</strong> on purpose. Examiners test this pair constantly.</p>
+      </div></details>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+
+    <div class="card" data-ex="3d">
+      <h3><span class="tag">B2</span>Writing a review &middot; choose the right word</h3>
+      <p class="instr">Choose the correct option in this short review, then underline any phrase you could reuse in your own.</p>
+      <p style="font-size:15.5px;line-height:2.4;background:var(--forest-lt2);padding:16px 18px;border-radius:11px;margin:0">
+        My <select class="q" data-a="favourite"><option value=""></option><option>favourite</option><option>best</option></select><span class="sol" data-sol="favourite"></span>
+        ghost story is by the <select class="q" data-a="novelist"><option value=""></option><option>journalist</option><option>novelist</option></select><span class="sol" data-sol="novelist"></span>
+        Shirley Jackson and it is <select class="q" data-a="called"><option value=""></option><option>called</option><option>named</option></select><span class="sol" data-sol="called"></span>
+        <em>The Haunting of Hill House</em>. It was the first ghost story that genuinely frightened me and I will always
+        <select class="q" data-a="remember"><option value=""></option><option>remind</option><option>remember</option></select><span class="sol" data-sol="remember"></span> it for that reason.
+        It is a great example of totally believable <select class="q" data-a="fiction"><option value=""></option><option>fiction</option><option>non-fiction</option></select><span class="sol" data-sol="fiction"></span>,
+        and it has a slow, unpredictable <select class="q" data-a="plot"><option value=""></option><option>plot</option><option>scheme</option></select><span class="sol" data-sol="plot"></span>.
+        The writing is so good that you feel you are in the room with the
+        <select class="q" data-a="characters"><option value=""></option><option>personalities</option><option>characters</option></select><span class="sol" data-sol="characters"></span>, and the
+        <select class="q" data-a="relationships"><option value=""></option><option>relatives</option><option>relationships</option></select><span class="sol" data-sol="relationships"></span> between them are brilliantly developed.
+        If you don't want to buy it, you may be able to <select class="q" data-a="borrow"><option value=""></option><option>lend</option><option>borrow</option></select><span class="sol" data-sol="borrow"></span>
+        it from a library. It is a thoroughly <select class="q" data-a="entertaining"><option value=""></option><option>entertained</option><option>entertaining</option></select><span class="sol" data-sol="entertaining"></span> read,
+        and a book you won't be able to put down until you have finished the last
+        <select class="q" data-a="chapter"><option value=""></option><option>verse</option><option>chapter</option></select><span class="sol" data-sol="chapter"></span>.
+      </p>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4 VOCABULARY C1 ================= -->
+  <section class="stage" id="s4">
+    <div class="stage-head">
+      <div class="num gold">4</div>
+      <div><span class="kicker">Stage four</span><h2>Vocabulary builder &middot; C1</h2></div>
+    </div>
+
+    <div class="card" data-ex="4a">
+      <h3><span class="tag c1">C1</span>Extreme adjectives</h3>
+      <p class="instr">An extreme adjective already contains the idea "very". Match each ordinary adjective with its extreme partner.</p>
+      <div class="chiprow" data-pool="pool4a">
+        <span class="chip" data-v="astonishing">astonishing</span>
+        <span class="chip" data-v="devastating">devastating</span>
+        <span class="chip" data-v="excruciating">excruciating</span>
+        <span class="chip" data-v="hideous">hideous</span>
+        <span class="chip" data-v="ludicrous">ludicrous</span>
+        <span class="chip" data-v="petrifying">petrifying</span>
+        <span class="chip" data-v="ravenous">ravenous</span>
+        <span class="chip" data-v="superb">superb</span>
+      </div>
+      <ol class="ex">
+        <li>good &rarr; <span class="slot q" data-pool="pool4a" data-a="superb" style="min-width:140px"></span> <span class="sol" data-sol="superb"></span></li>
+        <li>hungry &rarr; <span class="slot q" data-pool="pool4a" data-a="ravenous" style="min-width:140px"></span> <span class="sol" data-sol="ravenous"></span></li>
+        <li>painful &rarr; <span class="slot q" data-pool="pool4a" data-a="excruciating" style="min-width:140px"></span> <span class="sol" data-sol="excruciating"></span></li>
+        <li>sad &rarr; <span class="slot q" data-pool="pool4a" data-a="devastating" style="min-width:140px"></span> <span class="sol" data-sol="devastating"></span></li>
+        <li>scary &rarr; <span class="slot q" data-pool="pool4a" data-a="petrifying" style="min-width:140px"></span> <span class="sol" data-sol="petrifying"></span></li>
+        <li>silly &rarr; <span class="slot q" data-pool="pool4a" data-a="ludicrous" style="min-width:140px"></span> <span class="sol" data-sol="ludicrous"></span></li>
+        <li>surprising &rarr; <span class="slot q" data-pool="pool4a" data-a="astonishing" style="min-width:140px"></span> <span class="sol" data-sol="astonishing"></span></li>
+        <li>ugly &rarr; <span class="slot q" data-pool="pool4a" data-a="hideous" style="min-width:140px"></span> <span class="sol" data-sol="hideous"></span></li>
+      </ol>
+      <div class="info">
+        <h4>The rule that catches candidates out</h4>
+        <p>Gradable adjectives take <em>very, quite, a bit, rather, mildly</em>. Extreme adjectives take adverbs meaning 100%: <em>absolutely, completely, thoroughly, utterly, totally</em>. So <strong>very frightened</strong> is fine, but <strong>very petrified</strong> is not. <em>Really</em> works with both.</p>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+
+    <div class="card" data-ex="4b">
+      <h3><span class="tag c1">C1</span>Adverb + adjective collocations</h3>
+      <p class="instr">These pairs are fixed. Use each adverb from the box once. This is exactly what Use of English Part 1 tests.</p>
+      <div class="bank"><span class="bank-label">Adverbs</span>
+        <span class="w">absolutely</span><span class="w">bitterly</span><span class="w">endlessly</span><span class="w">faintly</span><span class="w">mildly</span><span class="w">thoroughly</span>
+      </div>
+      <ol class="ex">
+        <li>The guide's explanation of the curse was <input class="q" data-a="faintly" size="11"> ludicrous, but we listened anyway. <span class="sol" data-sol="faintly"></span></li>
+        <li>Three days of rain in a tent left us <input class="q" data-a="thoroughly" size="12"> miserable. <span class="sol" data-sol="thoroughly"></span></li>
+        <li>The ending was <input class="q" data-a="bitterly" size="11"> disappointing after such a strong opening. <span class="sol" data-sol="bitterly"></span></li>
+        <li>The history of the building is <input class="q" data-a="endlessly" size="11"> fascinating. <span class="sol" data-sol="endlessly"></span></li>
+        <li>She was <input class="q" data-a="absolutely" size="12"> furious when she found the door unlocked. <span class="sol" data-sol="absolutely"></span></li>
+        <li>The injection was <input class="q" data-a="mildly" size="11"> painful at worst. Stop exaggerating. <span class="sol" data-sol="mildly"></span></li>
+      </ol>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+
+    <div class="card" data-ex="4c">
+      <h3><span class="tag c1">C1</span>The language of memory</h3>
+      <p class="instr">Ghost stories are really stories about memory. Complete each sentence with one word from the box.</p>
+      <div class="bank"><span class="bank-label">Word bank</span>
+        <span class="w">bitter</span><span class="w">brings</span><span class="w">jog</span><span class="w">repressed</span><span class="w">treasured</span><span class="w">triggered</span><span class="w">vague</span>
+      </div>
+      <ol class="ex">
+        <li>The smell of candle wax always <input class="q" data-a="brings" size="9"> back memories of my grandmother's house. <span class="sol" data-sol="brings"></span></li>
+        <li>Show me a photograph. It might <input class="q" data-a="jog" size="7"> my memory. <span class="sol" data-sol="jog"></span></li>
+        <li>Standing on the empty platform <input class="q" data-a="triggered" size="11"> a memory I thought I had lost. <span class="sol" data-sol="triggered"></span></li>
+        <li>My memory of that night is <input class="q" data-a="vague" size="9">. I only remember the cold. <span class="sol" data-sol="vague"></span></li>
+        <li>She refuses to talk about it and seems to have <input class="q" data-a="repressed" size="11"> the whole experience. <span class="sol" data-sol="repressed"></span></li>
+        <li>He will not move on, and keeps reliving the <input class="q" data-a="bitter" size="9"> memories of the trial. <span class="sol" data-sol="bitter"></span></li>
+        <li>Those are <input class="q" data-a="treasured" size="11"> memories, and she guards them carefully. <span class="sol" data-sol="treasured"></span></li>
+      </ol>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+
+    <div class="card" data-ex="4d">
+      <h3><span class="tag c1">C1</span>Adaptations &middot; verb and noun collocations</h3>
+      <p class="instr">Great ghost stories get adapted. Match each list of verbs with the noun it goes with.</p>
+      <ol class="ex">
+        <li>play, hear, write, read &rarr;
+          <select class="q" data-a="music"><option value=""></option><option>art</option><option>a venue</option><option>a film</option><option>music</option><option>an orchestra</option><option>the stage</option></select> <span class="sol" data-sol="music"></span></li>
+        <li>shoot, watch, produce, show &rarr;
+          <select class="q" data-a="a film"><option value=""></option><option>art</option><option>a venue</option><option>a film</option><option>music</option><option>an orchestra</option><option>the stage</option></select> <span class="sol" data-sol="a film"></span></li>
+        <li>appreciate, buy, create, view &rarr;
+          <select class="q" data-a="art"><option value=""></option><option>art</option><option>a venue</option><option>a film</option><option>music</option><option>an orchestra</option><option>the stage</option></select> <span class="sol" data-sol="art"></span></li>
+        <li>lead, conduct, join, hear &rarr;
+          <select class="q" data-a="an orchestra"><option value=""></option><option>art</option><option>a venue</option><option>a film</option><option>music</option><option>an orchestra</option><option>the stage</option></select> <span class="sol" data-sol="an orchestra"></span></li>
+        <li>go on, take to, leave, appear on &rarr;
+          <select class="q" data-a="the stage"><option value=""></option><option>art</option><option>a venue</option><option>a film</option><option>music</option><option>an orchestra</option><option>the stage</option></select> <span class="sol" data-sol="the stage"></span></li>
+        <li>book, fill, headline, choose &rarr;
+          <select class="q" data-a="a venue"><option value=""></option><option>art</option><option>a venue</option><option>a film</option><option>music</option><option>an orchestra</option><option>the stage</option></select> <span class="sol" data-sol="a venue"></span></li>
+      </ol>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+
+    <div class="card" data-ex="4e">
+      <h3><span class="tag c1">C1</span>Word building</h3>
+      <p class="instr">Use the word in capitals to form a word that fits the gap. This is Use of English Part 3.</p>
+      <ol class="ex">
+        <li>The house has an <input class="q wide" data-a="unsettling" size="14"> atmosphere that visitors notice at once. <strong>(SETTLE)</strong> <span class="sol" data-sol="unsettling"></span></li>
+        <li>Nobody has ever found an <input class="q wide" data-a="explanation" size="14"> for the noises. <strong>(EXPLAIN)</strong> <span class="sol" data-sol="explanation"></span></li>
+        <li>Her performance as the ghost was completely <input class="q wide" data-a="convincing" size="14">. <strong>(CONVINCE)</strong> <span class="sol" data-sol="convincing"></span></li>
+        <li>The story is far too <input class="q wide" data-a="unbelievable" size="14"> to take seriously. <strong>(BELIEVE)</strong> <span class="sol" data-sol="unbelievable"></span></li>
+        <li>Radio drama demands more <input class="q wide" data-a="imagination" size="14"> from an audience than television does. <strong>(IMAGINE)</strong> <span class="sol" data-sol="imagination"></span></li>
+        <li>The final chapter is the most <input class="q wide" data-a="terrifying" size="14"> thing I have ever read. <strong>(TERROR)</strong> <span class="sol" data-sol="terrifying"></span></li>
+        <li>He spoke about the accident with obvious <input class="q wide" data-a="reluctance" size="14">. <strong>(RELUCTANT)</strong> <span class="sol" data-sol="reluctance"></span></li>
+        <li>The building's <input class="q wide" data-a="disappearance" size="14"> from the records has never been explained. <strong>(DISAPPEAR)</strong> <span class="sol" data-sol="disappearance"></span></li>
+      </ol>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 5 EXAM FOCUS ================= -->
+  <section class="stage" id="s5">
+    <div class="stage-head">
+      <div class="num">5</div>
+      <div><span class="kicker">Stage five</span><h2>Exam focus: Reading Part 7</h2></div>
+    </div>
+    <div class="exambox">
+      <h4>What Part 7 actually asks you to do</h4>
+      <p>Paper 1 contains both Use of English and Reading parts. The final reading task is <strong>Part 7</strong>: one long text or up to six shorter texts, with ten questions. You match each question with the section of text that contains the answer. Each correct answer is worth <strong>1 point</strong>.</p>
+      <p><strong>The trap:</strong> the question never uses the words of the text. "A work that is still fresh" will appear in the text as "just as entertaining now as it was in 1887". You are matching <em>meaning</em>, not words.</p>
+      <p><strong>Method:</strong> read the questions first. Skim all sections. Then, for each question, find the exact phrase in the text that proves it, and underline it. If you cannot underline it, you have not found the answer yet.</p>
+    </div>
+  </section>
+
+  <!-- ================= 6 MINI TASK ================= -->
+  <section class="stage" id="s6">
+    <div class="stage-head">
+      <div class="num">6</div>
+      <div><span class="kicker">Stage six</span><h2>Mini task</h2></div>
+    </div>
+
+    <div class="card" data-ex="6a">
+      <h3>Three short reviews</h3>
+      <p class="instr">Skim the reviews of three graded readers. First: <strong>what is the same about A, B and C?</strong> Then answer questions 1&ndash;5. Options may be chosen more than once.</p>
+      <div class="texts">
+        <div class="text"><span class="letter">A</span><span class="ttl">Ghost Stories</span>
+          <p>A game of hide-and-seek in the dark takes a terrifying turn when one of the players finds they are holding hands with a ghost. In this collection of classic tales, the editor makes the work of six different writers, including the author of <em>Dracula</em>, accessible to B2 students of English. An audio version is also available &mdash; listen late at night, if you dare.</p>
+        </div>
+        <div class="text"><span class="letter">B</span><span class="ttl">Ghost Stories</span>
+          <p>The nineteenth-century master of fear, M. R. James, keeps the power to scare audiences more than a century later. In all four of these stories, now retold for A2 readers, travellers and explorers find themselves faced with the unexplainable, the unthinkable and the unforgettable. The 2021 edition can also be bought as an e-book.</p>
+        </div>
+        <div class="text"><span class="letter">C</span><span class="ttl">Ghost Stories</span>
+          <p>What would you do if you met a strangely silent railway worker on a lonely line late at night? Intermediate readers will enjoy this collection of stories by a household name of Victorian fiction. This value-for-money edition offers readers the chance to download a fifth story free of charge, and audio versions are also available to buy.</p>
+        </div>
+      </div>
+      <p class="instr" style="margin-top:18px">For questions 1&ndash;5, choose A, B or C.</p>
+      <ol class="ex">
+        <li>Which edition is available to <em>read</em> in more than one format?
+          <select class="q" data-a="B"><option value=""></option><option>A</option><option>B</option><option>C</option></select> <span class="sol" data-sol="B"></span></li>
+        <li>Which features the work of a variety of authors?
+          <select class="q" data-a="A"><option value=""></option><option>A</option><option>B</option><option>C</option></select> <span class="sol" data-sol="A"></span></li>
+        <li>Which offers a bonus feature at no extra cost?
+          <select class="q" data-a="C"><option value=""></option><option>A</option><option>B</option><option>C</option></select> <span class="sol" data-sol="C"></span></li>
+        <li>Which stories promise to frighten readers even though they were written a long time ago?
+          <select class="q" data-a="B"><option value=""></option><option>A</option><option>B</option><option>C</option></select> <span class="sol" data-sol="B"></span></li>
+        <li>Which would be most appropriate for a student preparing for the B2 First exam?
+          <select class="q" data-a="A"><option value=""></option><option>A</option><option>B</option><option>C</option></select> <span class="sol" data-sol="A"></span></li>
+      </ol>
+      <details class="model"><summary>Why, exactly</summary><div class="body">
+        <p><strong>All three</strong> are reviews of graded readers of ghost stories, and all three collections have the same title.</p>
+        <p><strong>1 = B.</strong> "Read" is doing the work. A and C offer <em>audio</em>, which you listen to. Only B offers a book <em>and</em> an e-book, both of which you read.</p>
+        <p><strong>2 = A.</strong> "a variety of authors" = "the work of six different writers".</p>
+        <p><strong>3 = C.</strong> "at no extra cost" = "free of charge".</p>
+        <p><strong>4 = B.</strong> "even though they were written a long time ago" = "keeps the power to scare audiences more than a century later".</p>
+        <p><strong>5 = A.</strong> B2 First means level B2. A says "B2 students"; B says A2 and C says intermediate.</p>
+      </div></details>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 7 PRACTICE TASK ================= -->
+  <section class="stage" id="s7">
+    <div class="stage-head">
+      <div class="num">7</div>
+      <div><span class="kicker">Stage seven</span><h2>Practice task &middot; Reading Part 7</h2></div>
+    </div>
+
+    <div class="card" data-ex="7a">
+      <h3>Classic Ghost Stories</h3>
+      <p class="instr">A bookseller reviews five of the best, and scariest, graded readers for B1/B2 students. For questions 43&ndash;52, choose from sections <strong>A&ndash;E</strong>. The sections may be chosen more than once.</p>
+      <div class="texts">
+        <div class="text"><span class="letter">A</span>
+          <p>Set around and after the famous seventeenth-century witch trials in Salem, Massachusetts, this classic nineteenth-century novel is possibly more a tale of horror than a ghost story. After a land dispute with a neighbour, Matthew Maule is sentenced to death for witchcraft, but before he dies he curses the Pyncheon family who accused him. Unexplained deaths and financial losses follow, and several generations of the family suffer. The real star of the story is undoubtedly the house itself. It is still standing in Salem, and tourists and residents alike have reported ghostly visions there. If you are planning a visit to the area, you should definitely arrange to see it. Why not buy the audio version as well, and listen to it while you are travelling?</p>
+          <span class="cite">The House of the Seven Gables by Nathaniel Hawthorne, adapted for intermediate readers.</span>
+        </div>
+        <div class="text"><span class="letter">B</span>
+          <p>When an American family moves into an English country house, they refuse to be put off by the increasingly terrifying appearances of the resident ghost, Sir Simon. This is much more than a classic ghost story, with themes of romance and love, but most of all it is very funny, especially the descriptions of how the children get the better of Sir Simon through a series of practical jokes. Eventually the teenage daughter of the family befriends the ghost and finds a way to bring him peace. Students of intermediate level and all ages will enjoy this &mdash; just as entertaining now as it was in 1887, when it was first published. Buy the book, buy the e-book or listen to the audio version, and look out for the many television, film and theatre adaptations of this wonderful story.</p>
+          <span class="cite">The Canterville Ghost by Oscar Wilde, retold for intermediate readers.</span>
+        </div>
+        <div class="text"><span class="letter">C</span>
+          <p>This is a dark story which has been re-interpreted in many ways since its publication in 1898. Young Flora takes on a job looking after two orphan children at their uncle's remote country house. Over the summer, Flora begins to see two figures around the house and garden, but she realises that they are not visible to any of the other servants, although the children seem to be aware of them. Her concerns that the man and woman she sees pose a danger to the children prove correct, with tragic results. Intermediate students will find this short work to be a real page-turner, and may find themselves staying up late to finish the story once they have started. It is available as an e-book as well but, be warned, reading the words on a screen is just as spooky as reading them on paper.</p>
+          <span class="cite">The Turn of the Screw by Henry James, retold for intermediate readers.</span>
+        </div>
+        <div class="text"><span class="letter">D</span>
+          <p>Before it was a massively successful musical, this classic tale of a haunted theatre in Paris was a book published in 1910. At the heart of the story is a mysterious masked phantom, obsessed with the beautiful singer Christine. However, she falls for someone else, who struggles to save her from the phantom when he imprisons her. Most readers will be unaware that this is not a work of pure fiction. The events were inspired by a terrible historical accident, when a fire caused a chandelier to fall from the ceiling, killing one person and injuring several others. What is more, the underground lake that features in the story actually exists beneath the Paris Opera House, although it is really a water storage tank. B2 students will have their pick of options with this title, as it is available as a book, an e-book and in an audio version, not to mention the acclaimed musical, still going strong after nearly forty years.</p>
+          <span class="cite">The Phantom of the Opera by Gaston Leroux, retold for upper-intermediate readers.</span>
+        </div>
+        <div class="text"><span class="letter">E</span>
+          <p>Upper-intermediate readers who are looking for something a little different will enjoy this collection of six ghost stories from Japan, available only as a paper copy. Some are traditional folk tales: a musician loses his ears to a ghostly samurai, and a spirit who eats the dead is defeated by a clever monk. Modern stories offer a fascinating counterpoint; in fact, the spirits seem even more terrifying in a familiar setting as they encounter children, priests and even gangsters. The author is both an English language teacher and an acclaimed fiction writer. If this book is your cup of tea, you won't want to miss <em>The Lake Beneath the Station</em> by the same author, a collection of chilling love stories.</p>
+          <span class="cite">Japanese Ghost Stories, retold for upper-intermediate readers.</span>
+        </div>
+      </div>
+
+      <p class="instr" style="margin-top:20px">Which section or sections describe &hellip;</p>
+      <ol class="ex manual">
+        <li data-n="43">&hellip; a work that is still fresh
+          <select class="q" data-a="B"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span class="sol" data-sol="B"></span></li>
+        <li data-n="44 / 45">&hellip; two works set in real locations
+          <select class="q" data-a="A|D" data-pair="p1"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select>
+          <select class="q" data-a="A|D" data-pair="p1"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select>
+          <span class="sol" data-sol="A and D (either order)"></span></li>
+        <li data-n="46">&hellip; a work that is difficult to put down
+          <select class="q" data-a="C"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span class="sol" data-sol="C"></span></li>
+        <li data-n="47">&hellip; a similar work that is recommended to readers
+          <select class="q" data-a="E"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span class="sol" data-sol="E"></span></li>
+        <li data-n="48">&hellip; a complicated work that we can understand in more than one way
+          <select class="q" data-a="C"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span class="sol" data-sol="C"></span></li>
+        <li data-n="49 / 50">&hellip; two works that have been successful as live performances
+          <select class="q" data-a="B|D" data-pair="p2"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select>
+          <select class="q" data-a="B|D" data-pair="p2"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select>
+          <span class="sol" data-sol="B and D (either order)"></span></li>
+        <li data-n="51">&hellip; a work which contrasts the past and the present
+          <select class="q" data-a="E"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span class="sol" data-sol="E"></span></li>
+        <li data-n="52">&hellip; information that some people may find surprising
+          <select class="q" data-a="D"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span class="sol" data-sol="D"></span></li>
+      </ol>
+      <p class="skip" style="margin-top:10px">Questions 44&ndash;45 and 49&ndash;50 each need two letters. Either order is correct.</p>
+      <details class="model"><summary>Proof: the exact words that give each answer</summary><div class="body">
+        <p><strong>43 B</strong> &mdash; "just as entertaining now as it was in 1887".</p>
+        <p><strong>44/45 A and D</strong> &mdash; A: the house "is still standing in Salem". D: "the underground lake &hellip; actually exists beneath the Paris Opera House".</p>
+        <p><strong>46 C</strong> &mdash; "a real page-turner &hellip; staying up late to finish the story".</p>
+        <p><strong>47 E</strong> &mdash; "you won't want to miss <em>The Lake Beneath the Station</em> by the same author".</p>
+        <p><strong>48 C</strong> &mdash; "has been re-interpreted in many ways".</p>
+        <p><strong>49/50 B and D</strong> &mdash; B: "the many television, film and theatre adaptations". D: "a massively successful musical &hellip; still going strong".</p>
+        <p><strong>51 E</strong> &mdash; "Some are traditional folk tales &hellip; Modern stories offer a fascinating counterpoint".</p>
+        <p><strong>52 D</strong> &mdash; "Most readers will be unaware that this is not a work of pure fiction".</p>
+      </div></details>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 8 LANGUAGE IN CONTEXT ================= -->
+  <section class="stage" id="s8">
+    <div class="stage-head">
+      <div class="num">8</div>
+      <div><span class="kicker">Stage eight</span><h2>Language in context</h2></div>
+    </div>
+
+    <div class="card" data-ex="8a">
+      <h3><span class="tag">B2</span><span class="tag c1">C1</span>Phrasal verbs from the texts</h3>
+      <p class="instr">Three phrasal verbs did a lot of work in the reviews. Match each with its meaning here.</p>
+      <ol class="ex">
+        <li>"they refuse to be <strong>put off</strong> by the terrifying appearances of the ghost" &rarr;
+          <select class="q" data-a="discouraged from doing something"><option value=""></option><option>discouraged from doing something</option><option>accept a job or responsibility</option><option>start to love someone</option></select> <span class="sol" data-sol="discouraged from doing something"></span></li>
+        <li>"Flora <strong>takes on</strong> a job looking after two orphan children" &rarr;
+          <select class="q" data-a="accept a job or responsibility"><option value=""></option><option>discouraged from doing something</option><option>accept a job or responsibility</option><option>start to love someone</option></select> <span class="sol" data-sol="accept a job or responsibility"></span></li>
+        <li>"she <strong>falls for</strong> someone else" &rarr;
+          <select class="q" data-a="start to love someone"><option value=""></option><option>discouraged from doing something</option><option>accept a job or responsibility</option><option>start to love someone</option></select> <span class="sol" data-sol="start to love someone"></span></li>
+      </ol>
+      <div class="info">
+        <h4>Second meanings the exam likes</h4>
+        <p><strong>put off</strong> can also mean <em>postpone</em>: "They put the trip off until October." &nbsp; <strong>fall for</strong> can also mean <em>be tricked by</em>: "I can't believe you fell for that story."</p>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+
+    <div class="card" data-ex="8b">
+      <h3><span class="tag c1">C1</span>Use them yourself</h3>
+      <p class="instr">Complete each sentence with the correct form of <em>put off</em>, <em>take on</em> or <em>fall for</em>.</p>
+      <ol class="ex">
+        <li>The smell in the corridor <input class="q" data-a="put" size="7"> us <input class="q" data-a="off" size="6"> the flat completely. <span class="sol" data-sol="put ... off"></span></li>
+        <li>She has <input class="q" data-a="taken" size="8"> on far too much work this term. <span class="sol" data-sol="taken"></span></li>
+        <li>He <input class="q" data-a="fell" size="7"> for her the moment she walked into the room. <span class="sol" data-sol="fell"></span></li>
+        <li>They keep <input class="q" data-a="putting" size="9"> off the decision, which is helping nobody. <span class="sol" data-sol="putting"></span></li>
+      </ol>
+      <div class="talk">
+        <div class="lbl">Talk about it</div>
+        <ol>
+          <li>Things that might put you off renting a particular flat.</li>
+          <li>Jobs that people won't take on unless the pay is good.</li>
+          <li>Famous stories in which one person falls for another.</li>
+        </ol>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 9 EXTENSION ================= -->
+  <section class="stage" id="s9">
+    <div class="stage-head">
+      <div class="num">9</div>
+      <div><span class="kicker">Stage nine</span><h2>Extension: the storyteller's toolkit</h2></div>
+    </div>
+
+    <div class="card" data-ex="9a">
+      <h3>How to tell a ghost story properly</h3>
+      <p class="instr">Storytelling is an ancient art, and every culture has its own version of a ghost story. Before you read: what are five important things to do to make a story really frightening?</p>
+      <p class="instr">Now complete each gap with one word. The first letter is given.</p>
+      <div class="bank"><span class="bank-label">Word bank</span>
+        <span class="w">air</span><span class="w">contact</span><span class="w">dark</span><span class="w">factual</span><span class="w">hand</span><span class="w">interrupted</span>
+        <span class="w">introduce</span><span class="w">listeners</span><span class="w">out</span><span class="w">physical</span><span class="w">speed</span><span class="w">there</span><span class="w">torch</span><span class="w">volume</span>
+      </div>
+      <div style="font-size:15.5px;line-height:2.3;background:var(--forest-lt2);padding:18px 20px;border-radius:11px">
+        <p style="margin:0 0 12px">First, consider when and where you tell the story. The best places are, of course, <strong>d</strong><input class="q" data-a="dark" size="9"><span class="sol" data-sol="dark"></span>, quiet and secluded, and it is essential to make sure you won't be <strong>i</strong><input class="q" data-a="interrupted" size="12"><span class="sol" data-sol="interrupted"></span>.</p>
+        <p style="margin:0 0 12px">Second, stick to this simple structure: <strong>i</strong><input class="q" data-a="introduce" size="11"><span class="sol" data-sol="introduce"></span> the hero, who will have a problem. While the hero tries to find a solution, they meet someone frightening, the bogeyman, who gets upset &hellip; very upset. As the bogeyman takes revenge, leave the end of the story open, so that your audience believes the bogeyman is still <strong>o</strong><input class="q" data-a="out" size="7"><span class="sol" data-sol="out"></span> <strong>t</strong><input class="q" data-a="there" size="8"><span class="sol" data-sol="there"></span>.</p>
+        <p style="margin:0 0 12px">Next, relate the story directly to yourself or to your audience. Say it really happened to your friend or your neighbour, and that it took place in your local area. Make the characters like some of your <strong>l</strong><input class="q" data-a="listeners" size="11"><span class="sol" data-sol="listeners"></span>. If you include lots of <strong>f</strong><input class="q" data-a="factual" size="9"><span class="sol" data-sol="factual"></span> and believable details, they will imagine that the story is really happening to them.</p>
+        <p style="margin:0 0 12px">Another tip is to change the way you speak as you tell the story. Start with a quiet, casual <strong>a</strong><input class="q" data-a="air" size="6"><span class="sol" data-sol="air"></span>. As the story continues, change your <strong>s</strong><input class="q" data-a="speed" size="8"><span class="sol" data-sol="speed"></span> and <strong>v</strong><input class="q" data-a="volume" size="9"><span class="sol" data-sol="volume"></span>.</p>
+        <p style="margin:0 0 12px">You should also use your voice and body to express individual characters. Plan to bring out some props as well, for example a <strong>t</strong><input class="q" data-a="torch" size="8"><span class="sol" data-sol="torch"></span> or a hook <strong>h</strong><input class="q" data-a="hand" size="7"><span class="sol" data-sol="hand"></span>.</p>
+        <p style="margin:0">Finally, look for someone in your audience who already seems a little jittery. If they are feeling scared, it will be easy to make them jump, so choose the scariest moment and make <strong>p</strong><input class="q" data-a="physical" size="10"><span class="sol" data-sol="physical"></span> <strong>c</strong><input class="q" data-a="contact" size="9"><span class="sol" data-sol="contact"></span> with them.</p>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="checkBox(this)">Check</button>
+        <button class="btn" onclick="showBox(this)">Show answers</button>
+        <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+        <span class="result"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 10 HOMEWORK ================= -->
+  <section class="stage" id="s10">
+    <div class="stage-head">
+      <div class="num gold">10</div>
+      <div><span class="kicker">Set after class</span><h2>Homework</h2></div>
+    </div>
+
+    <div class="hw-gate" id="hwGate">
+      <h3>Homework: Where South Africa keeps its ghosts</h3>
+      <p>A second Reading Part 7, a new set of texts, and every piece of vocabulary from today recycled. Open it when your teacher tells you to.</p>
+      <button class="btn gold" onclick="openHomework()">Open homework</button>
+    </div>
+
+    <div id="homework-body">
+      <div class="hw-banner">
+        <span class="k">Homework &middot; Reading Part 7 + Vocabulary</span>
+        <h2>Where South Africa keeps its ghosts</h2>
+        <p>Same exam task, same skill, different country. Every question below is answered by a phrase in the text that means the same thing in different words. Find that phrase and underline it before you choose.</p>
+      </div>
+
+      <div class="card" data-ex="hw1">
+        <h3>Part 1 &middot; Reading Part 7</h3>
+        <p class="instr">You are going to read a travel writer's guide to five haunted places in South Africa. For questions 43&ndash;52, choose from sections <strong>A&ndash;E</strong>. The sections may be chosen more than once.</p>
+        <div class="texts">
+          <div class="text"><span class="letter">A</span><span class="ttl">The road to Uniondale</span>
+            <p>On the Easter weekend of 1968, a young woman called Maria Charlotte Roux was travelling with her fianc&eacute; on the road between Willowmore and Uniondale when their car left the tarmac. She died at the scene; he survived. Ever since, drivers crossing that lonely stretch of the Karoo have reported picking up a silent young hitchhiker in dark clothing who is simply not there when they turn round. Motorcyclists describe a sudden weight behind them, and then nothing at all. What makes the accounts hard to dismiss is that the police station in Uniondale has taken statements from soldiers, farmers and lorry drivers who had never heard the story before it happened to them. Sceptics point out that the road is straight, empty and hypnotic after dark, and that tired eyes invent company. Fill up before you leave. There is nowhere to stop for a hundred kilometres, and nobody to help you if you misjudge it.</p>
+          </div>
+          <div class="text"><span class="letter">B</span><span class="ttl">The ship that never lands</span>
+            <p>The Flying Dutchman is the best known ghost story on this coast. A captain &mdash; Hendrick van der Decken, in the version most often retold &mdash; swore that he would round the Cape even if it took him until Judgement Day, and the sea took him at his word. The first printed mention of the legend appears in a traveller's memoir of 1790. What lifts it above harbour gossip is a naval log from 1881: thirteen men aboard a British warship, among them a teenage prince who would later be crowned King George V, recorded a glowing ship crossing their bows before it vanished. Scientists now explain such sightings as a superior mirage, in which layers of cold and warm air bend light and lift a distant vessel into the sky. Stand at Cape Point on a bad afternoon, with the horizon shaking in the heat, and you may decide that the explanation is the less believable of the two.</p>
+          </div>
+          <div class="text"><span class="letter">C</span><span class="ttl">The fortress on the parade</span>
+            <p>Completed in 1679 after thirteen years of building, the Castle of Good Hope in Cape Town is the oldest colonial building still standing anywhere in the country, and its ghosts are as mixed as its history. Governor Pieter van Noodt condemned seven soldiers to hang; one of them cursed him from the gallows, and the governor was found dead in his chair before the day was out. A tall figure in grey has been reported walking the walls. A black dog approaches visitors on the parade ground and disappears before it reaches them. The bell in the tower is said to ring by itself, which is a curious thing for it to do, since it was walled up long ago. You can walk the dungeons on a guided evening tour, and nobody will charge you a cent extra for the footsteps you hear behind you.</p>
+          </div>
+          <div class="text"><span class="letter">D</span><span class="ttl">Room 10, Nottingham Road</span>
+            <p>The hotel in the KwaZulu-Natal Midlands opened in 1891 as the Railway Hotel, built to serve a station in a settlement that was then almost nothing at all. Its ghost is called Charlotte, and the accounts of who she was do not agree: a chambermaid in some versions, a rather less respectable woman in others, abandoned by a man either way, and dead after a fall from the balcony outside room 10. Whether she fell or was pushed is the part that nobody in the bar will say out loud. What is unusual is how little anyone fears her. Charlotte tidies. Guests come down to breakfast and report that their clothes have been folded, the flowers moved and the bedding straightened while they slept. Room 10 is booked out months in advance, and not by people hoping to be frightened.</p>
+          </div>
+          <div class="text"><span class="letter">E</span><span class="ttl">The village that stopped</span>
+            <p>Gold was found in Pilgrim's Creek in Mpumalanga in 1873, and within a year some 1,500 diggers were working four thousand claims in a valley that had held nobody at all. When the gold thinned out, the village did not disappear. It was frozen. The whole of Pilgrim's Rest was declared a national monument in 1986, and its corrugated-iron shopfronts and single dusty street are now a museum you can walk through. Guides run ghost tours after dark, past the cemetery on the hill where one grave lies north to south while every other grave around it lies east to west. It is known as the Robber's Grave, and the man in it is said to have been caught stealing from another digger's tent and hanged for it. The contrast is the point. This is a place where the past has been kept deliberately alive, and where the difference between a museum and a haunting starts to feel very thin indeed.</p>
+          </div>
+        </div>
+
+        <p class="instr" style="margin-top:20px">Which section &hellip;</p>
+        <ol class="ex manual">
+          <li data-n="43">&hellip; warns readers about the danger of being unprepared?
+            <select class="q" data-a="A"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span class="sol" data-sol="A"></span></li>
+          <li data-n="44">&hellip; refers to witnesses who knew nothing about the story beforehand?
+            <select class="q" data-a="A"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span class="sol" data-sol="A"></span></li>
+          <li data-n="45">&hellip; offers a scientific explanation for what people report seeing?
+            <select class="q" data-a="B"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span class="sol" data-sol="B"></span></li>
+          <li data-n="46">&hellip; mentions a witness who went on to hold an important position?
+            <select class="q" data-a="B"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span class="sol" data-sol="B"></span></li>
+          <li data-n="47">&hellip; describes a building that has outlasted all others of its kind?
+            <select class="q" data-a="C"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span class="sol" data-sol="C"></span></li>
+          <li data-n="48">&hellip; mentions a place that is busier than you might expect?
+            <select class="q" data-a="D"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span class="sol" data-sol="D"></span></li>
+          <li data-n="49">&hellip; points out that versions of the same story do not agree?
+            <select class="q" data-a="D"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span class="sol" data-sol="D"></span></li>
+          <li data-n="50">&hellip; describes a spirit that people are not afraid of?
+            <select class="q" data-a="D"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span class="sol" data-sol="D"></span></li>
+          <li data-n="51">&hellip; refers to a place that was preserved rather than allowed to disappear?
+            <select class="q" data-a="E"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span class="sol" data-sol="E"></span></li>
+          <li data-n="52">&hellip; mentions an object that lies differently from those around it?
+            <select class="q" data-a="E"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span class="sol" data-sol="E"></span></li>
+        </ol>
+        <details class="model"><summary>Proof: the exact words that give each answer</summary><div class="body">
+          <p><strong>43 A</strong> &mdash; "Fill up before you leave. There is nowhere to stop for a hundred kilometres."</p>
+          <p><strong>44 A</strong> &mdash; "statements from soldiers, farmers and lorry drivers who had never heard the story before it happened to them".</p>
+          <p><strong>45 B</strong> &mdash; "Scientists now explain such sightings as a superior mirage".</p>
+          <p><strong>46 B</strong> &mdash; "a teenage prince who would later be crowned King George V".</p>
+          <p><strong>47 C</strong> &mdash; "the oldest colonial building still standing anywhere in the country".</p>
+          <p><strong>48 D</strong> &mdash; "Room 10 is booked out months in advance".</p>
+          <p><strong>49 D</strong> &mdash; "the accounts of who she was do not agree".</p>
+          <p><strong>50 D</strong> &mdash; "how little anyone fears her &hellip; not by people hoping to be frightened".</p>
+          <p><strong>51 E</strong> &mdash; "the village did not disappear. It was frozen &hellip; declared a national monument".</p>
+          <p><strong>52 E</strong> &mdash; "one grave lies north to south while every other grave around it lies east to west".</p>
+          <p style="margin-top:10px;color:#5B6660"><em>Careful with 47.</em> Section E also describes old buildings, but E says the village was <em>preserved</em>, not that it has outlasted every other building of its kind. Only C makes that claim.</p>
+        </div></details>
+        <div class="actions">
+          <button class="btn primary" onclick="checkBox(this)">Check</button>
+          <button class="btn" onclick="showBox(this)">Show answers</button>
+          <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+          <span class="result"></span>
+        </div>
+      </div>
+
+      <div class="card" data-ex="hw2">
+        <h3><span class="tag">B2</span>Part 2 &middot; Idioms from class</h3>
+        <p class="instr">Complete each sentence with an idiom from the lesson. Use the correct form.</p>
+        <div class="bank"><span class="bank-label">Idioms</span>
+          <span class="w">a bookworm</span><span class="w">a page-turner</span><span class="w">cover to cover</span>
+          <span class="w">in one sitting</span><span class="w">judge a book by its cover</span><span class="w">my cup of tea</span><span class="w">put it down</span>
+        </div>
+        <ol class="ex">
+          <li>The guidebook to the Karoo is a real <input class="q wide" data-a="page-turner|pageturner" size="14">. I started it on the bus and read it all the way to Uniondale. <span class="sol" data-sol="page-turner"></span></li>
+          <li>The hotel looks shabby from the road, but don't <input class="q wide" data-a="judge a book by its cover|judge it by its cover" size="22">. <span class="sol" data-sol="judge a book by its cover"></span></li>
+          <li>Ghost tours are not really <input class="q wide" data-a="my cup of tea" size="14">. I would rather visit the museum. <span class="sol" data-sol="my cup of tea"></span></li>
+          <li>She read the whole history of the Castle from <input class="q wide" data-a="cover to cover" size="14"> in a weekend. <span class="sol" data-sol="cover to cover"></span></li>
+          <li>As a child he was <input class="q wide" data-a="a bookworm|bookworm" size="12"> and spent every school holiday in the library. <span class="sol" data-sol="a bookworm"></span></li>
+          <li>It was so gripping that I could not <input class="q wide" data-a="put it down" size="12"> until three in the morning. <span class="sol" data-sol="put it down"></span></li>
+          <li>The collection is short enough to finish <input class="q wide" data-a="in one sitting" size="14">. <span class="sol" data-sol="in one sitting"></span></li>
+        </ol>
+        <div class="actions">
+          <button class="btn primary" onclick="checkBox(this)">Check</button>
+          <button class="btn" onclick="showBox(this)">Show answers</button>
+          <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+          <span class="result"></span>
+        </div>
+      </div>
+
+      <div class="card" data-ex="hw3">
+        <h3><span class="tag c1">C1</span>Part 3 &middot; Extreme adjectives and collocation</h3>
+        <p class="instr">Choose the option that works. Remember: extreme adjectives take <em>absolutely, utterly, completely, thoroughly</em>, never <em>very</em>.</p>
+        <ol class="ex">
+          <li>The drive across the Karoo at night was
+            <select class="q" data-a="absolutely petrifying"><option value=""></option><option>very petrifying</option><option>absolutely petrifying</option><option>quite petrifying</option></select>. <span class="sol" data-sol="absolutely petrifying"></span></li>
+          <li>The guide's theory about the curse was
+            <select class="q" data-a="faintly ludicrous"><option value=""></option><option>faintly ludicrous</option><option>bitterly ludicrous</option><option>ravenously ludicrous</option></select>, but nobody argued. <span class="sol" data-sol="faintly ludicrous"></span></li>
+          <li>We were
+            <select class="q" data-a="bitterly disappointed"><option value=""></option><option>mildly devastated</option><option>bitterly disappointed</option><option>absolutely disappointing</option></select> when the evening tour was cancelled. <span class="sol" data-sol="bitterly disappointed"></span></li>
+          <li>By the time we reached the hotel we were
+            <select class="q" data-a="absolutely ravenous"><option value=""></option><option>very ravenous</option><option>absolutely ravenous</option><option>slightly ravenous</option></select>. <span class="sol" data-sol="absolutely ravenous"></span></li>
+          <li>The history of the building is
+            <select class="q" data-a="endlessly fascinating"><option value=""></option><option>endlessly fascinating</option><option>utterly interesting</option><option>faintly astonishing</option></select>. <span class="sol" data-sol="endlessly fascinating"></span></li>
+          <li>Three days of rain left the whole group
+            <select class="q" data-a="thoroughly miserable"><option value=""></option><option>absolutely sad</option><option>thoroughly miserable</option><option>mildly devastating</option></select>. <span class="sol" data-sol="thoroughly miserable"></span></li>
+        </ol>
+        <div class="actions">
+          <button class="btn primary" onclick="checkBox(this)">Check</button>
+          <button class="btn" onclick="showBox(this)">Show answers</button>
+          <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+          <span class="result"></span>
+        </div>
+      </div>
+
+      <div class="card" data-ex="hw4">
+        <h3><span class="tag">B2</span><span class="tag c1">C1</span>Part 4 &middot; Word building</h3>
+        <p class="instr">Use the word in capitals to form a word that fits the gap.</p>
+        <ol class="ex">
+          <li>The sighting has never been given a satisfactory <input class="q wide" data-a="explanation" size="14">. <strong>(EXPLAIN)</strong> <span class="sol" data-sol="explanation"></span></li>
+          <li>Guests describe the hotel's atmosphere as warm rather than <input class="q wide" data-a="threatening" size="14">. <strong>(THREAT)</strong> <span class="sol" data-sol="threatening"></span></li>
+          <li>Most of the accounts come from perfectly <input class="q wide" data-a="reliable" size="14"> witnesses. <strong>(RELY)</strong> <span class="sol" data-sol="reliable"></span></li>
+          <li>The village's <input class="q wide" data-a="preservation" size="14"> has made it a national monument. <strong>(PRESERVE)</strong> <span class="sol" data-sol="preservation"></span></li>
+          <li>Her <input class="q wide" data-a="disappearance" size="14"> from the balcony has never been fully explained. <strong>(DISAPPEAR)</strong> <span class="sol" data-sol="disappearance"></span></li>
+          <li>The mirage explanation is far more <input class="q wide" data-a="believable" size="14"> than the legend. <strong>(BELIEVE)</strong> <span class="sol" data-sol="believable"></span></li>
+          <li>Visitors are struck by the <input class="q wide" data-a="stillness" size="14"> of the empty street after dark. <strong>(STILL)</strong> <span class="sol" data-sol="stillness"></span></li>
+          <li>The tour guide told the story with real <input class="q wide" data-a="conviction" size="14">. <strong>(CONVINCE)</strong> <span class="sol" data-sol="conviction"></span></li>
+        </ol>
+        <div class="actions">
+          <button class="btn primary" onclick="checkBox(this)">Check</button>
+          <button class="btn" onclick="showBox(this)">Show answers</button>
+          <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+          <span class="result"></span>
+        </div>
+      </div>
+
+      <div class="card" data-ex="hw5">
+        <h3><span class="tag c1">C1</span>Part 5 &middot; Key word transformations</h3>
+        <p class="instr">Complete the second sentence so that it means the same as the first, using the word given. <strong>Do not change the word given.</strong> Use between three and six words, including that word.</p>
+        <ol class="ex">
+          <li>I really didn't enjoy that ghost tour. &nbsp;<strong>CUP</strong><br>
+            That ghost tour really <input class="q wide" data-a="was not my cup of|wasn't my cup of|was not really my cup of" size="26"> tea. <span class="sol" data-sol="was not / wasn't my cup of"></span></li>
+          <li>It was impossible for me to stop reading the book. &nbsp;<strong>PUT</strong><br>
+            I simply <input class="q wide" data-a="could not put down|couldn't put down|was not able to put down|wasn't able to put down" size="26"> the book. <span class="sol" data-sol="could not / couldn't put down"></span></li>
+          <li>Almost nobody knows that the story is based on real events. &nbsp;<strong>UNAWARE</strong><br>
+            Most people <input class="q wide" data-a="are unaware that|are unaware of the fact that" size="26"> the story is based on real events. <span class="sol" data-sol="are unaware that"></span></li>
+          <li>Don't decide what a book is like from its appearance. &nbsp;<strong>JUDGE</strong><br>
+            You shouldn't <input class="q wide" data-a="judge a book by|judge a book from" size="26"> its cover. <span class="sol" data-sol="judge a book by"></span></li>
+          <li>He read the whole report from the first page to the last. &nbsp;<strong>COVER</strong><br>
+            He read the whole report <input class="q wide" data-a="from cover to cover" size="26">. <span class="sol" data-sol="from cover to cover"></span></li>
+          <li>The weather nearly stopped us going on the tour. &nbsp;<strong>OFF</strong><br>
+            The weather nearly <input class="q wide" data-a="put us off going|put us off the tour" size="26"> on the tour. <span class="sol" data-sol="put us off going"></span></li>
+        </ol>
+        <div class="actions">
+          <button class="btn primary" onclick="checkBox(this)">Check</button>
+          <button class="btn" onclick="showBox(this)">Show answers</button>
+          <button class="btn ghost" onclick="clearBox(this)">Clear</button>
+          <span class="result"></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Part 6 &middot; Writing: a review (140&ndash;190 words)</h3>
+        <div class="exambox" style="margin-top:0">
+          <h4>Reviews wanted: places with a story</h4>
+          <p>Is there a place near you that people say is haunted, or that has a strong story attached to it? Write us a review describing the place. Explain what the story is, whether the place is worth visiting, and whether visitors from other countries would find it interesting too.</p>
+          <p style="color:#5B6660"><em>The best reviews will be published on the website next month.</em></p>
+        </div>
+        <details class="model"><summary>Checklist before you hand it in</summary><div class="body">
+          <p>Have you answered <strong>all three</strong> parts of the task? Examiners mark content first.</p>
+          <p>Have you used at least three items from this lesson? Try: <em>a page-turner, from cover to cover, not my cup of tea, put off, take on, absolutely petrifying, endlessly fascinating, brings back memories.</em></p>
+          <p>Have you used one negative structure to give an opinion politely? <em>"I'm not saying it's frightening, but you won't want to walk back alone."</em></p>
+          <p>Have you recommended the place, or advised against it, in your last sentence? A review must end with a verdict.</p>
+        </div></details>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="foot">
+  <div class="foot-in">
+    <a class="logo" href="#top">
+      <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="37" height="37" rx="10" fill="#14472F"/>
+        <path d="M20 9.5c-4.9 0-8.6 3.6-8.6 8.4 0 4.4 3 7.6 7.2 8.2v4.4c0 .8.6 1.4 1.4 1.4s1.4-.6 1.4-1.4v-4.4c4.2-.6 7.2-3.8 7.2-8.2 0-4.8-3.7-8.4-8.6-8.4Z" fill="#C9A227"/>
+        <circle cx="16.8" cy="17.4" r="1.7" fill="#14472F"/>
+        <circle cx="23.2" cy="17.4" r="1.7" fill="#14472F"/>
+      </svg>
+      <span class="logo-txt"><span class="g">Graham</span><span class="i">IELTS</span></span>
+    </a>
+    <span class="spacer" style="flex:1"></span>
+    <span class="small">That's the Spirit! &middot; B2&ndash;C1 &middot; Reading Part 7</span>
+    <button class="btn ghost" onclick="revealEverything()">Reveal all answers</button>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- helpers ---------- */
+  function norm(s){
+    return String(s||"")
+      .replace(/[‘’ʼ]/g,"'")
+      .replace(/[–—]/g,"-")
+      .trim().toLowerCase()
+      .replace(/\s+/g," ")
+      .replace(/[.,!?;:]+$/,"");
+  }
+  function alts(el){ return String(el.dataset.a||"").split("|").map(norm).filter(Boolean); }
+  function valOf(el){ return el.classList.contains("slot") ? (el.dataset.v||"") : (el.value||""); }
+  function box(node){ return node.closest("[data-ex]"); }
+  function qsIn(root){ return Array.prototype.slice.call(root.querySelectorAll(".q")); }
+
+  /* ---------- chip matcher ---------- */
+  var armed = null;
+
+  function chipsOf(pool){ return document.querySelectorAll('.chiprow[data-pool="'+pool+'"] .chip'); }
+
+  function refreshPool(pool){
+    var taken = {};
+    document.querySelectorAll('.slot[data-pool="'+pool+'"]').forEach(function(s){
+      if(s.dataset.v) taken[s.dataset.v] = true;
+    });
+    chipsOf(pool).forEach(function(c){
+      c.classList.toggle("used", !!taken[c.dataset.v]);
+    });
+  }
+
+  function disarm(){
+    if(armed){ armed.classList.remove("sel"); armed = null; }
+    document.querySelectorAll(".slot.armed").forEach(function(s){ s.classList.remove("armed"); });
+  }
+
+  document.addEventListener("click", function(e){
+    var chip = e.target.closest(".chip");
+    if(chip && !chip.classList.contains("used")){
+      if(armed === chip){ disarm(); return; }
+      disarm();
+      armed = chip; chip.classList.add("sel");
+      document.querySelectorAll('.slot[data-pool="'+chip.closest(".chiprow").dataset.pool+'"]')
+        .forEach(function(s){ if(!s.dataset.v) s.classList.add("armed"); });
+      return;
+    }
+    var slot = e.target.closest(".slot");
+    if(slot){
+      var pool = slot.dataset.pool;
+      if(slot.dataset.v){                       // empty it
+        var back = slot.dataset.v;
+        slot.dataset.v = ""; slot.textContent = "";
+        slot.classList.remove("filled","right","wrong");
+        refreshPool(pool);
+        updateScore();
+        if(armed && armed.dataset.v === back) disarm();
+        return;
+      }
+      if(armed && armed.closest(".chiprow").dataset.pool === pool){
+        slot.dataset.v = armed.dataset.v;
+        slot.textContent = armed.textContent;
+        slot.classList.add("filled");
+        slot.classList.remove("right","wrong");
+        disarm();
+        refreshPool(pool);
+        updateScore();
+      }
+      return;
+    }
+    if(!e.target.closest(".chip")) disarm();
+  });
+
+  /* ---------- marking ---------- */
+  function pairGroups(root){
+    var groups = {};
+    root.querySelectorAll(".q[data-pair]").forEach(function(el){
+      (groups[el.dataset.pair] = groups[el.dataset.pair] || []).push(el);
+    });
+    return groups;
+  }
+
+  function isCorrect(el, root){
+    var v = norm(valOf(el));
+    if(!v) return false;
+    var ok = alts(el).indexOf(v) > -1;
+    if(!ok) return false;
+    if(el.dataset.pair){
+      var mates = root.querySelectorAll('.q[data-pair="'+el.dataset.pair+'"]');
+      var seen = {};
+      for(var i=0;i<mates.length;i++){
+        var mv = norm(valOf(mates[i]));
+        if(mv && seen[mv]) return false;    // duplicate letters in a pair
+        if(mv) seen[mv] = true;
+      }
+    }
+    return true;
+  }
+
+  function mark(el, ok){
+    el.classList.remove("right","wrong");
+    el.classList.add(ok ? "right" : "wrong");
+  }
+
+  window.checkBox = function(btn){
+    var root = box(btn), items = qsIn(root), score = 0;
+    items.forEach(function(el){
+      var ok = isCorrect(el, root);
+      if(ok) score++;
+      mark(el, ok);
+    });
+    var out = root.querySelector(".result");
+    if(out){
+      out.textContent = score + " / " + items.length + (score === items.length ? "  ✓ all correct" : "");
+      out.style.color = (score === items.length) ? "#1E6A46" : "#5B6660";
+    }
+    updateScore();
+  };
+
+  window.showBox = function(btn){
+    var root = box(btn);
+    var pairSeen = {};
+    qsIn(root).forEach(function(el){
+      var list = String(el.dataset.a||"").split("|");
+      var a;
+      if(el.dataset.pair){
+        var i = pairSeen[el.dataset.pair] || 0;
+        a = list[Math.min(i, list.length - 1)];
+        pairSeen[el.dataset.pair] = i + 1;
+      } else {
+        a = list[0];
+      }
+      if(el.classList.contains("slot")){
+        var pool = el.dataset.pool;
+        var chip = document.querySelector('.chiprow[data-pool="'+pool+'"] .chip[data-v="'+CSS.escape(a)+'"]');
+        el.dataset.v = a;
+        el.textContent = chip ? chip.textContent : a;
+        el.classList.add("filled");
+        refreshPool(pool);
+      } else if(el.tagName === "SELECT"){
+        var hit = Array.prototype.slice.call(el.options).filter(function(o){ return norm(o.value||o.text) === norm(a); })[0];
+        if(hit) el.value = hit.value || hit.text;
+      } else {
+        el.value = a;
+      }
+      el.classList.remove("wrong"); el.classList.add("right");
+    });
+    root.querySelectorAll(".sol").forEach(function(s){
+      if(!s.textContent) s.textContent = s.dataset.sol || "";
+      s.classList.add("show");
+    });
+    var out = root.querySelector(".result");
+    if(out){ out.textContent = "answers shown"; out.style.color = "#5B6660"; }
+    updateScore();
+  };
+
+  window.clearBox = function(btn){
+    var root = box(btn);
+    qsIn(root).forEach(function(el){
+      if(el.classList.contains("slot")){
+        var pool = el.dataset.pool;
+        el.dataset.v = ""; el.textContent = "";
+        el.classList.remove("filled");
+        refreshPool(pool);
+      } else { el.value = ""; }
+      el.classList.remove("right","wrong");
+    });
+    root.querySelectorAll(".sol").forEach(function(s){ s.classList.remove("show"); });
+    var out = root.querySelector(".result");
+    if(out) out.textContent = "";
+    updateScore();
+  };
+
+  window.checkAll = function(){
+    document.querySelectorAll("[data-ex] .actions .btn.primary").forEach(function(b){ window.checkBox(b); });
+    document.getElementById("top").scrollIntoView({behavior:"smooth"});
+  };
+
+  window.resetAll = function(){
+    document.querySelectorAll("[data-ex] .actions .btn.ghost").forEach(function(b){ window.clearBox(b); });
+  };
+
+  window.revealEverything = function(){
+    if(!window.confirm("Show every answer on the page, including the homework?")) return;
+    openHomework();
+    document.querySelectorAll("[data-ex] .actions .btn:nth-child(2)").forEach(function(b){ window.showBox(b); });
+  };
+
+  window.openHomework = function(){
+    var body = document.getElementById("homework-body");
+    var gate = document.getElementById("hwGate");
+    if(body) body.classList.add("open");
+    if(gate) gate.style.display = "none";
+    updateScore();
+  };
+
+  /* ---------- score ---------- */
+  function updateScore(){
+    var all = document.querySelectorAll("[data-ex] .q");
+    var right = document.querySelectorAll("[data-ex] .q.right");
+    var gs = document.getElementById("globalScore");
+    var gt = document.getElementById("globalTotal");
+    if(gs) gs.textContent = right.length;
+    if(gt) gt.textContent = all.length;
+  }
+
+  /* live re-mark: clear the colour as soon as the student edits */
+  document.addEventListener("input", function(e){
+    if(e.target.classList && e.target.classList.contains("q")){
+      e.target.classList.remove("right","wrong");
+      updateScore();
+    }
+  });
+  document.addEventListener("change", function(e){
+    if(e.target.classList && e.target.classList.contains("q")){
+      e.target.classList.remove("right","wrong");
+      updateScore();
+    }
+  });
+
+  /* enter key checks the current exercise */
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Enter" && e.target.classList && e.target.classList.contains("q")){
+      e.preventDefault();
+      var root = box(e.target);
+      if(root) window.checkBox(root.querySelector(".actions .btn.primary"));
+    }
+  });
+
+  updateScore();
+})();
+</script>
+</body>
+</html>
