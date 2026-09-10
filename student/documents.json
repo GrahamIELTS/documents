@@ -1,0 +1,124 @@
+{
+  "student": "李易修",
+  "updated": "2026-09-10",
+  "documents": [
+    {
+      "file": "trial-report.html",
+      "label": "After your trial | GrahamIELTS",
+      "kind": "Trial report",
+      "added": "2026-09-10",
+      "is_index": false
+    },
+    {
+      "file": "homework.html",
+      "label": "Homework | GrahamIELTS",
+      "kind": "Homework",
+      "added": "2026-09-10",
+      "is_index": false
+    },
+    {
+      "file": "your-trial-report.html",
+      "label": "Your Trial Report",
+      "kind": "Trial report",
+      "added": "2026-09-10",
+      "is_index": false
+    },
+    {
+      "file": "homework-2.html",
+      "label": "Homework",
+      "kind": "Homework",
+      "added": "2026-09-10",
+      "is_index": false
+    }
+  ],
+  "summary": {
+    "name": "李易修",
+    "email": "",
+    "slug": "student",
+    "preferred": "Apple",
+    "trial": "2026-09-10",
+    "test": "2026-09-24",
+    "now": "5.5-6",
+    "target": "7",
+    "stage": "trial",
+    "level": "B1",
+    "levelName": "5 to 6",
+    "personal": "",
+    "strengths": [
+      {
+        "id": "willing",
+        "n": "Willing to keep talking",
+        "s": "You keep going rather than stopping when something is difficult. That single habit is worth more than it looks, because the marking rewards sustained speech."
+      },
+      {
+        "id": "reading",
+        "n": "Reading and grammar knowledge",
+        "s": "You know a great deal of English that has never been asked to come out of your mouth at speed. That is a storage problem rather than a knowledge problem, and it is a far shorter job."
+      }
+    ],
+    "strongnote": "",
+    "weaknesses": [
+      {
+        "id": "collocation",
+        "n": "Word partners",
+        "meta": "Right word, wrong partner",
+        "cat": "Vocabulary",
+        "skill": "Lexical resource"
+      },
+      {
+        "id": "articles",
+        "n": "A, an and the",
+        "meta": "Missing, added, or swapped",
+        "cat": "Grammar",
+        "skill": "Grammatical range and accuracy"
+      },
+      {
+        "id": "intonation",
+        "n": "Flat intonation",
+        "meta": "A narrow pitch range in English",
+        "cat": "Delivery",
+        "skill": "Pronunciation"
+      },
+      {
+        "id": "exposure",
+        "n": "Never taught out loud",
+        "meta": "English learned as a written subject",
+        "cat": "Delivery",
+        "skill": "Pronunciation"
+      }
+    ],
+    "weaknote": "",
+    "units": [
+      {
+        "unit": "ex08",
+        "ex": "Exercise 08",
+        "page": 11,
+        "name": "Show, do not tell, the sensory sweep",
+        "tool": "Tool 13",
+        "from": "Word partners",
+        "finding": "collocation",
+        "reason": "the nouns you choose are right almost every time. It is the words attached to them that are travelling in from your first language, and that is a partnering habit rather than a vocabulary gap."
+      },
+      {
+        "unit": "ex23",
+        "ex": "Exercise 23",
+        "page": 23,
+        "name": "Melody at 200 percent",
+        "tool": "Tool 30",
+        "from": "Flat intonation",
+        "finding": "intonation",
+        "reason": "flat delivery is the single most fixable thing on your list, and it is worth a quarter of the mark. This exercise closes the gap between how expressive you feel and how expressive you sound."
+      },
+      {
+        "unit": "ex09",
+        "ex": "Exercise 09",
+        "page": 11,
+        "name": "Specificity, name it exactly",
+        "tool": "Tool 14",
+        "from": "A, an and the",
+        "finding": "articles",
+        "reason": ""
+      }
+    ]
+  }
+}
