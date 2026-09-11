@@ -1,0 +1,132 @@
+{
+  "student": "Lucia",
+  "updated": "2026-09-11",
+  "documents": [
+    {
+      "file": "index.html",
+      "label": "Your Trial Report",
+      "kind": "Trial report",
+      "added": "2026-09-11",
+      "is_index": true
+    },
+    {
+      "file": "homework.html",
+      "label": "Homework",
+      "kind": "Homework",
+      "added": "2026-09-11",
+      "is_index": false
+    }
+  ],
+  "summary": {
+    "name": "Lucia",
+    "email": "",
+    "slug": "lucia",
+    "preferred": "Lucia",
+    "trial": "2026-09-11",
+    "test": "",
+    "now": "6-7",
+    "target": "7+",
+    "stage": "trial",
+    "level": "B2",
+    "levelName": "6 to 7",
+    "personal": "",
+    "strengths": [
+      {
+        "id": "range",
+        "n": "Wide vocabulary",
+        "s": "You already know far more words than you are able to use under pressure. That is a good problem, because the words do not have to be learned again. They have to be made available faster."
+      },
+      {
+        "id": "clarity",
+        "n": "Clear pronunciation",
+        "s": "Individual sounds are clear and easy to follow. A listener never has to ask you to repeat a word. That is a real advantage and it protects a quarter of your score."
+      },
+      {
+        "id": "ideas",
+        "n": "Strong ideas",
+        "s": "You have opinions and you can find something to say on almost any topic. Many candidates lose marks because they have nothing to say. That is not your problem, which means the work is about delivery rather than about thinking."
+      },
+      {
+        "id": "willing",
+        "n": "Willing to keep talking",
+        "s": "You keep going rather than stopping when something is difficult. That single habit is worth more than it looks, because the marking rewards sustained speech."
+      },
+      {
+        "id": "grammar-base",
+        "n": "Solid grammar foundation",
+        "s": "The basic structures are there and correct. What is missing is variety, not knowledge, and variety is quicker to build than knowledge."
+      }
+    ],
+    "strongnote": "",
+    "weaknesses": [
+      {
+        "id": "vocab-overreach",
+        "n": "Reaching for advanced vocabulary",
+        "meta": "Big words slowing everything else down",
+        "cat": "Vocabulary",
+        "skill": "Lexical resource"
+      },
+      {
+        "id": "explicitlink",
+        "n": "Making the connection visible",
+        "meta": "Good details, with the link left for the listener",
+        "cat": "Discourse",
+        "skill": "Fluency and coherence"
+      },
+      {
+        "id": "hedging",
+        "n": "Everything stated as absolute",
+        "meta": "No room left to move",
+        "cat": "Discourse",
+        "skill": "Lexical resource"
+      },
+      {
+        "id": "tenses",
+        "n": "Narrative tenses",
+        "meta": "Everything told in one tense",
+        "cat": "Grammar",
+        "skill": "Grammatical range and accuracy"
+      },
+      {
+        "id": "sva",
+        "n": "Third person s",
+        "meta": "He go, she like",
+        "cat": "Grammar",
+        "skill": "Grammatical range and accuracy"
+      }
+    ],
+    "weaknote": "",
+    "units": [
+      {
+        "unit": "ex14",
+        "ex": "Exercise 14",
+        "page": 16,
+        "name": "The because engine, real reasons only",
+        "tool": "Tool 22",
+        "from": "Making the connection visible",
+        "finding": "explicitlink",
+        "reason": "you are already doing the hard half. The claim is there and the evidence is real, and the only thing missing is the sentence that says what the evidence proves. This exercise is that sentence, drilled on its own, four times."
+      },
+      {
+        "unit": "ex15",
+        "ex": "Exercise 15",
+        "page": 17,
+        "name": "Hedge like a professor",
+        "tool": "Tool 23",
+        "from": "Everything stated as absolute",
+        "finding": "hedging",
+        "reason": "the instinct you need is already yours. This exercise takes the habit of not overclaiming and turns it into conditionals and modal verbs, which is grammar the examiner can actually mark."
+      },
+      {
+        "unit": "ex06",
+        "ex": "Exercise 06",
+        "page": 10,
+        "name": "The But and Therefore engine",
+        "tool": "Tool 11",
+        "from": "Narrative tenses",
+        "finding": "tenses",
+        "reason": "the story is there and the second layer underneath it is not. This exercise builds the causal joints that turn a list of events into something with momentum."
+      }
+    ]
+  }
+}
