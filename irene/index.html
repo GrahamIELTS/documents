@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Graham IELTS | Flexitarian | Interactive Speaking Lesson</title>
+<style>
+:root{
+  --navy:#0B2545; --blue:#1F4D78; --accent:#2E74B5; --green:#23643B;
+  --red:#9B1C1C; --gold:#7A5A00; --ink:#111111; --muted:#5F6B76;
+  --paper:#FFFFFF; --soft:#F4F6F9; --line:#E8EEF5; --pale-blue:#EEF6FF;
+  --pale-gold:#FFF8E8; --radius:18px; --shadow:0 12px 35px rgba(11,37,69,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;background:linear-gradient(180deg,#f7f9fc 0,#fff 22rem);color:var(--ink);line-height:1.5}
+a{color:inherit}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1180px;margin:auto;padding:10px 22px;display:flex;gap:16px;align-items:center}
+.brand{display:flex;align-items:center;gap:10px;min-width:max-content}
+.brand-mark{width:34px;height:34px;border-radius:9px;background:var(--navy);display:grid;place-items:center;color:#fff;font-weight:800;letter-spacing:.5px}
+.brand-text{font-weight:800;color:var(--navy);letter-spacing:.6px}.brand-text small{display:block;color:var(--muted);font-size:.68rem;font-weight:700;letter-spacing:1.2px}
+.progress-wrap{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}.progress{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--navy));transition:width .25s}
+.controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+button,.button{font:inherit;border:0;border-radius:10px;padding:9px 13px;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:7px}
+button:hover,.button:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--navy);color:#fff}.btn-secondary{background:var(--pale-blue);color:var(--navy);border:1px solid #cbdcf0}.btn-ghost{background:#fff;color:var(--muted);border:1px solid var(--line)}.btn-green{background:var(--green);color:#fff}.btn-gold{background:var(--gold);color:#fff}
+.hero{max-width:1180px;margin:0 auto;padding:58px 22px 28px;display:grid;grid-template-columns:1.35fr .65fr;gap:28px;align-items:end}
+.kicker{font-size:.8rem;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--blue)}
+h1{font-size:clamp(2.5rem,6vw,5.7rem);line-height:.92;margin:.16em 0 .18em;color:var(--navy);letter-spacing:-2px}.subtitle{font-size:1.17rem;max-width:720px;color:var(--muted)}
+.hero-card{background:var(--navy);color:#fff;border-radius:24px;padding:24px;box-shadow:var(--shadow)}.hero-card .band{font-size:2.6rem;font-weight:800;line-height:1}.hero-card small{opacity:.8}.hero-card hr{border:0;border-top:1px solid rgba(255,255,255,.2);margin:18px 0}
+.navchips{max-width:1180px;margin:0 auto;padding:0 22px 28px;display:flex;gap:8px;flex-wrap:wrap}.navchips a{text-decoration:none;padding:8px 12px;border-radius:99px;background:#fff;border:1px solid var(--line);color:var(--navy);font-weight:700;font-size:.92rem}.navchips a:hover{background:var(--pale-blue)}
+main{max-width:1180px;margin:auto;padding:0 22px 80px}
+.section{scroll-margin-top:90px;background:#fff;border:1px solid var(--line);border-radius:24px;margin:18px 0 26px;box-shadow:0 8px 28px rgba(11,37,69,.06);overflow:hidden}.section-head{padding:24px 26px;background:linear-gradient(90deg,var(--navy),#173f6a);color:#fff;display:flex;align-items:center;gap:16px}.section-no{width:44px;height:44px;border-radius:12px;background:#fff;color:var(--navy);display:grid;place-items:center;font-weight:900;font-size:1.25rem}.section-head h2{margin:0;font-size:1.65rem}.section-head p{margin:2px 0 0;opacity:.82}.section-body{padding:26px}
+.grid{display:grid;gap:18px}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{border:1px solid var(--line);background:#fff;border-radius:16px;padding:18px}.soft{background:var(--soft)}.bluebox{background:var(--pale-blue);border-color:#cbdcf0}.goldbox{background:var(--pale-gold);border-color:#eadcaa}.greenbox{background:#f1f8f3;border-color:#c8dfcf}
+.card h3,.card h4{color:var(--navy);margin-top:0}.label{font-size:.76rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);font-weight:800}.prompt{font-weight:700;color:var(--navy)}
+table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:14px;overflow:hidden}th,td{padding:12px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--soft);color:var(--navy)}tr:last-child td{border-bottom:0}
+input[type=text],textarea,select{width:100%;font:inherit;color:var(--ink);background:#fff;border:1px solid #cdd6e0;border-radius:10px;padding:10px 12px;outline:none}textarea{min-height:92px;resize:vertical}input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(46,116,181,.12)}
+.inline-answer{display:grid;grid-template-columns:minmax(150px,240px) 1fr;gap:12px;align-items:center;margin:10px 0}.correct{border-color:#56a06b!important;background:#f2fbf4!important}.wrong{border-color:#c15b5b!important;background:#fff3f3!important}
+.feedback{margin-top:12px;font-weight:700;min-height:24px}.ok{color:var(--green)}.bad{color:var(--red)}
+.teacher-answer{display:none;margin-top:8px;color:var(--green);font-weight:700;font-size:.92rem}body.teacher .teacher-answer{display:block}.added{font-size:.78rem;color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:.7px}
+.menu-card{position:relative;padding-top:48px}.menu-num{position:absolute;left:18px;top:16px;background:var(--navy);color:#fff;padding:4px 10px;border-radius:99px;font-weight:800}.dish{padding:8px 0;border-bottom:1px dashed #dce3ea}.dish:last-of-type{border-bottom:0}.dish b{display:inline-block;width:92px;color:var(--muted)}
+.topic{border-top:6px solid var(--blue)}.topic:nth-child(2){border-top-color:var(--green)}.topic:nth-child(3){border-top-color:var(--red)}.topic label{display:block;cursor:pointer}.topic input{margin-right:8px}
+.wordbank{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.word{padding:6px 9px;border-radius:8px;background:var(--soft);border:1px solid var(--line);font-weight:700;color:var(--navy)}
+.planmap{display:grid;grid-template-columns:1fr 1fr;border:2px solid #bcc8d4;border-radius:22px;overflow:hidden;position:relative}.quadrant{min-height:230px;padding:24px}.quadrant:nth-child(odd){border-right:1px solid #bcc8d4}.quadrant:nth-child(-n+2){border-bottom:1px solid #bcc8d4}.plan-centre{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--navy);color:#fff;border-radius:14px;padding:13px 20px;font-weight:800;box-shadow:0 5px 18px rgba(0,0,0,.18)}
+.timer{display:flex;align-items:center;gap:16px;flex-wrap:wrap}.clock{font-variant-numeric:tabular-nums;font-size:3rem;font-weight:900;color:var(--navy);letter-spacing:1px}.timer small{color:var(--muted)}
+.choice-row{display:flex;gap:10px;flex-wrap:wrap}.pill-choice input{position:absolute;opacity:0}.pill-choice span{display:inline-block;padding:9px 12px;border-radius:99px;border:1px solid #cfd7df;cursor:pointer;font-weight:700}.pill-choice input:checked+span{background:var(--navy);color:#fff;border-color:var(--navy)}
+.scoreboard{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}.score{padding:10px 14px;border-radius:12px;background:var(--soft);font-weight:800}.score strong{font-size:1.25rem;color:var(--navy)}
+.tiplist{margin:0;padding-left:20px}.tiplist li{margin:8px 0}
+details{border:1px solid var(--line);border-radius:14px;padding:12px 15px;background:#fff}details+details{margin-top:10px}summary{cursor:pointer;font-weight:800;color:var(--navy)}
+.link-text{font-size:1.05rem;line-height:1.9}.linktarget{border-radius:4px;padding:1px 2px}.showlinks .linktarget{background:#fff2bf;text-decoration:underline 3px var(--gold);text-underline-offset:3px}
+.footer{max-width:1180px;margin:0 auto 50px;padding:0 22px;color:var(--muted);font-size:.88rem}.footer strong{color:var(--navy)}
+.notice{border-left:4px solid var(--gold);padding:12px 14px;background:var(--pale-gold);border-radius:0 10px 10px 0;color:#604d00}
+.hidden{display:none!important}
+@media (max-width:820px){.hero{grid-template-columns:1fr}.g2,.g3,.g4{grid-template-columns:1fr}.planmap{grid-template-columns:1fr}.quadrant{border:0!important;border-bottom:1px solid #bcc8d4!important;min-height:190px}.quadrant:last-child{border-bottom:0!important}.plan-centre{position:static;transform:none;text-align:center;border-radius:0;grid-column:1}.topbar-inner{align-items:flex-start;flex-wrap:wrap}.progress-wrap{order:3;flex-basis:100%}.inline-answer{grid-template-columns:1fr}}
+@media print{.topbar,.navchips,.controls,button,.teacher-toggle,.feedback{display:none!important}body{background:#fff}.hero{padding-top:18px}.section{box-shadow:none;break-inside:avoid}.section-head{print-color-adjust:exact;-webkit-print-color-adjust:exact}.section-body{padding:18px}.teacher-answer{display:block!important}.footer{margin-bottom:0}}
+</style>
+</head>
+<body><!--gp-chrome--><style>
+.gpnav{position:sticky;top:0;z-index:900;display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;
+ padding:9px clamp(14px,2.4vw,30px);background:var(--gpnav-bg,#12795A);
+ font-family:"IBM Plex Mono",ui-monospace,"Consolas",monospace;font-size:12.5px;line-height:1.3;
+ box-shadow:0 1px 0 rgba(0,0,0,.12)}
+.gpnav a,.gpnav span.gplock{display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+ padding:5px 11px;border-radius:2px;letter-spacing:.05em;white-space:nowrap;
+ border:1px solid rgba(255,255,255,.28);color:#fff}
+.gpnav a:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.6)}
+.gpnav a:focus-visible{outline:2px solid #DCAE44;outline-offset:2px}
+.gpnav a.gphome{font-weight:700;border-color:#DCAE44;background:rgba(220,174,68,.18)}
+.gpnav a.gphere{background:#fff;color:#12795A;border-color:#fff;font-weight:700}
+.gpnav span.gplock{opacity:.62;border-style:dashed;cursor:default}
+.gpnav .gpsep{flex:1}
+.gpnav .gpmark{color:#DCAE44;letter-spacing:.16em;font-weight:700;font-size:11px;
+ text-transform:uppercase;padding-right:4px}
+@media (max-width:620px){.gpnav{font-size:11.5px}.gpnav .gpmark{display:none}}
+@media print{.gpnav{display:none}}
+
+/* Let the builder's own pages use the width of the screen. The type scales and
+   the column is set in em, so the line length stays exactly as it was while the
+   page stops sitting in a narrow strip on a large monitor. Pages that already
+   scale themselves say so with data-fluid and are left alone. */
+html:not([data-fluid]) body{font-size:clamp(17px,0.44vw + 13.9px,22px)!important}
+html:not([data-fluid]) .wrap{max-width:min(94vw,53em)!important;width:auto!important}
+
+/* The report's own section links sat on one line and scrolled sideways, so half
+   of them were out of sight. Let them wrap and every section shows at once. */
+html:not([data-fluid]) .nav-in{flex-wrap:wrap!important;overflow-x:visible!important;
+ overflow-y:visible!important;scroll-snap-type:none!important;row-gap:4px!important;
+ max-width:min(96vw,64em)!important}
+html:not([data-fluid]) .nav a{scroll-snap-align:none!important;white-space:normal!important}
+html:not([data-fluid]) .nav::after{display:none!important}
+html:not([data-fluid]) .nav-in::-webkit-scrollbar{display:none}
+</style><nav class="gpnav" aria-label="Your documents"><span class="gpmark">GrahamIELTS</span><a class="gphome gphere" href="./">Irene</a><span class="gplock" title="I unlock this when we start">Workbook, locked</span></nav><!--/gp-chrome-->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><div class="brand-mark">GI</div><div class="brand-text">GRAHAM IELTS<small>INTERACTIVE LESSON</small></div></div>
+    <div class="progress-wrap" aria-label="Lesson completion"><div class="progress" id="progress"></div></div>
+    <div class="controls">
+      <button class="btn-secondary teacher-toggle" id="teacherBtn" onclick="toggleTeacher()">Teacher answers: OFF</button>
+      <button class="btn-ghost" onclick="window.print()">Print</button>
+      <button class="btn-ghost" onclick="resetLesson()">Reset</button>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div>
+    <div class="kicker">IELTS Speaking • Intermediate B1–B2</div>
+    <h1>FLEXITARIAN</h1>
+    <p class="subtitle">Food vocabulary, IELTS Speaking Part 2 planning, a two-minute speaking task, self-assessment and connected-speech practice — rebuilt as a standalone interactive lesson.</p>
+  </div>
+  <aside class="hero-card">
+    <div class="label" style="color:#cfe0f3">Graham IELTS lesson path</div>
+    <div class="band">7 steps</div>
+    <small>Warm-up → Vocabulary → Model → Language → Your turn → Review → Pronunciation</small>
+    <hr>
+    <small>Student work saves automatically in this browser.</small>
+  </aside>
+</header>
+
+<nav class="navchips" aria-label="Lesson navigation">
+  <a href="#warmup">1 Warm-up</a><a href="#vocab">2 Vocabulary</a><a href="#model">3 Model</a><a href="#context">4 Language</a><a href="#yourturn">5 Your turn</a><a href="#review">6 Review</a><a href="#extension">7 Extension</a>
+</nav>
+
+<main>
+<section class="section" id="warmup">
+  <div class="section-head"><div class="section-no">1</div><div><h2>Warm up</h2><p>Identify three styles of eating and get the topic moving.</p></div></div>
+  <div class="section-body">
+    <p class="prompt">Label each menu <b>flexitarian</b>, <b>vegan</b> or <b>vegetarian</b>.</p>
+    <div class="grid g3">
+      <div class="card menu-card"><div class="menu-num">Menu 1</div><div class="dish"><b>Starter</b> cream of vegetable soup</div><div class="dish"><b>Main</b> egg salad sandwich</div><div class="dish"><b>Dessert</b> yogurt, honey and fruit</div><select class="track" data-answer="vegetarian" aria-label="Menu 1 type"><option value="">Choose…</option><option>flexitarian</option><option>vegan</option><option>vegetarian</option></select><div class="teacher-answer">Answer: vegetarian</div></div>
+      <div class="card menu-card"><div class="menu-num">Menu 2</div><div class="dish"><b>Starter</b> seafood salad</div><div class="dish"><b>Main</b> chicken casserole</div><div class="dish"><b>Dessert</b> egg custard tart with fruit</div><select class="track" data-answer="flexitarian" aria-label="Menu 2 type"><option value="">Choose…</option><option>flexitarian</option><option>vegan</option><option>vegetarian</option></select><div class="teacher-answer">Answer: flexitarian</div></div>
+      <div class="card menu-card"><div class="menu-num">Menu 3</div><div class="dish"><b>Starter</b> bean soup</div><div class="dish"><b>Main</b> mushroom pie and baked potato</div><div class="dish"><b>Dessert</b> fruit</div><select class="track" data-answer="vegan" aria-label="Menu 3 type"><option value="">Choose…</option><option>flexitarian</option><option>vegan</option><option>vegetarian</option></select><div class="teacher-answer">Answer: vegan</div></div>
+    </div>
+    <div style="margin-top:14px"><button class="btn-primary" onclick="checkSelects('#warmup select','warmFeedback')">Check menus</button><div id="warmFeedback" class="feedback"></div></div>
+
+    <div class="grid g2" style="margin-top:22px">
+      <div class="card soft"><div class="label">Create</div><h3>Different main courses</h3><p>Suggest one different main course for each eating style.</p><label>Flexitarian<input class="track" type="text" placeholder="Your idea…"></label><br><label>Vegetarian<input class="track" type="text" placeholder="Your idea…"></label><br><label>Vegan<input class="track" type="text" placeholder="Your idea…"></label></div>
+      <div class="card bluebox"><div class="label">Discuss</div><h3>Quick speaking</h3><label>1. Which meal would you choose? Why?<textarea class="track"></textarea></label><label>2. Do you usually eat this way? Why / why not?<textarea class="track"></textarea></label><label>3. Why do some people reduce animal products in their diet?<textarea class="track"></textarea></label><label>4. Is this common in your country? Is it easy to find suitable food when eating out?<textarea class="track"></textarea></label></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="vocab">
+  <div class="section-head"><div class="section-no">2</div><div><h2>Vocabulary</h2><p>Build precise food collocations you can reuse in IELTS answers.</p></div></div>
+  <div class="section-body">
+    <div class="grid g2">
+      <div class="card"><div class="label">Group A</div><div class="wordbank"><span class="word">cooking</span><span class="word">eater</span><span class="word">feast</span><span class="word">food</span><span class="word">pulses</span><span class="word">sourced</span></div>
+        <div id="vocabA">
+          <div class="inline-answer"><b>a fussy ___</b><input class="track" data-answer="eater" type="text"></div>
+          <div class="inline-answer"><b>a real ___</b><input class="track" data-answer="feast" type="text"></div>
+          <div class="inline-answer"><b>beans and ___</b><input class="track" data-answer="pulses" type="text"></div>
+          <div class="inline-answer"><b>comfort ___</b><input class="track" data-answer="food" type="text"></div>
+          <div class="inline-answer"><b>home ___</b><input class="track" data-answer="cooking" type="text"></div>
+          <div class="inline-answer"><b>locally ___</b><input class="track" data-answer="sourced" type="text"></div>
+        </div><button class="btn-primary" onclick="checkInputs('#vocabA input','vocabAFeedback')">Check Group A</button><div id="vocabAFeedback" class="feedback"></div>
+        <div class="teacher-answer">Key: fussy eater • real feast • beans and pulses • comfort food • home cooking • locally sourced</div>
+      </div>
+      <div class="card"><div class="label">Group B</div><div class="wordbank"><span class="word">cuisine</span><span class="word">dairy</span><span class="word">diet</span><span class="word">food</span><span class="word">produce</span><span class="word">tooth</span></div>
+        <div id="vocabB">
+          <div class="inline-answer"><b>a balanced ___</b><input class="track" data-answer="diet" type="text"></div>
+          <div class="inline-answer"><b>a sweet ___</b><input class="track" data-answer="tooth" type="text"></div>
+          <div class="inline-answer"><b>authentic ___</b><input class="track" data-answer="cuisine" type="text"></div>
+          <div class="inline-answer"><b>eggs and ___</b><input class="track" data-answer="dairy" type="text"></div>
+          <div class="inline-answer"><b>junk ___</b><input class="track" data-answer="food" type="text"></div>
+          <div class="inline-answer"><b>organic ___</b><input class="track" data-answer="produce" type="text"></div>
+        </div><button class="btn-primary" onclick="checkInputs('#vocabB input','vocabBFeedback')">Check Group B</button><div id="vocabBFeedback" class="feedback"></div>
+        <div class="teacher-answer">Key: balanced diet • sweet tooth • authentic cuisine • eggs and dairy • junk food • organic produce</div>
+      </div>
+    </div>
+
+    <div class="card soft" style="margin-top:18px">
+      <div class="label">Compare & contrast</div><h3>How are these pairs the same — and different?</h3>
+      <div class="grid g2">
+        <label>Locally sourced ↔ organic produce<textarea class="track"></textarea></label>
+        <label>Beans and pulses ↔ eggs and dairy<textarea class="track"></textarea></label>
+        <label>Comfort food ↔ junk food<textarea class="track"></textarea></label>
+        <label>Home cooking ↔ authentic cuisine<textarea class="track"></textarea></label>
+        <label>Fussy eater ↔ sweet tooth<textarea class="track"></textarea></label>
+        <label>Real feast ↔ balanced diet<textarea class="track"></textarea></label>
+      </div>
+      <details style="margin-top:14px"><summary>Graham IELTS discussion scaffold</summary><p class="added">Added support for the interactive version</p><ul class="tiplist"><li><b>Locally sourced</b> is about where food comes from; <b>organic</b> is about how it is produced.</li><li><b>Beans and pulses</b> and <b>eggs and dairy</b> can both provide protein, but one group is plant-based and the other is animal-derived.</li><li><b>Comfort food</b> is defined by emotional connection; <b>junk food</b> is defined more by convenience/quality and they can sometimes overlap.</li><li><b>Home cooking</b> describes food prepared at home; <b>authentic cuisine</b> refers to food genuinely associated with a place or tradition.</li><li>Both describe food preferences, but a <b>fussy eater</b> rejects many foods while a person with a <b>sweet tooth</b> particularly likes sweet foods.</li><li>A <b>real feast</b> describes a special large meal; a <b>balanced diet</b> describes healthy variety across what someone eats.</li></ul></details>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="model">
+  <div class="section-head"><div class="section-no">3</div><div><h2>Speaking Part 2: model answer</h2><p>Identify the cue card, then reconstruct the speaker’s one-minute plan.</p></div></div>
+  <div class="section-body">
+    <div class="notice"><b>Audio adaptation:</b> the supplied PDF refers to a recording, but the audio track is not embedded in the PDF. This interactive version uses the model-answer text supplied later in the lesson instead.</div>
+    <div class="grid g3" style="margin-top:18px">
+      <div class="card topic"><label><input class="track" type="radio" name="modelTopic" value="1"> <b>Topic 1</b></label><p>Describe a place where you like to eat out.</p><ul><li>kind of food</li><li>atmosphere</li><li>when you go</li><li>why you like it</li></ul></div>
+      <div class="card topic"><label><input class="track" type="radio" name="modelTopic" value="2"> <b>Topic 2</b></label><p>Describe a time you tried a new food.</p><ul><li>what it was</li><li>why you tried it</li><li>what it tasted like</li><li>would you eat it again?</li></ul></div>
+      <div class="card topic"><label><input class="track" type="radio" name="modelTopic" value="3"> <b>Topic 3</b></label><p>Describe someone you know who is a good cook.</p><ul><li>who they are</li><li>what they cook</li><li>why they’re a good cook</li><li>how their food makes you feel</li></ul></div>
+    </div>
+    <details style="margin-top:16px"><summary>Read the model answer</summary><p>My grandmother is the best cook I know. She lives quite near us and about once a month we have a meal at her house, on a Sunday – it’s always a real feast! She’s interested in food and takes a lot of time shopping for the best ingredients – she tries to choose locally sourced, organic produce – no junk food for her! She even gets her eggs and dairy delivered from a nearby farm.</p><p>The meals she makes aren’t anything fancy, just home-cooking, but what I especially like is that she always offers a range of dishes so that there’s something for everyone. For example, she understands my flexitarian diet and she knows that I’m not just a fussy eater. She gets that I’ve really thought about what I eat and it’s a balanced diet.</p><p>Although she always includes one dish with beans and pulses for me, I actually nearly always end up having a bit of fish at her house because it’s so delicious the way she prepares it. She also remembers that I have a sweet tooth and she always makes sure to have at least two types of dessert on the table at the end of the meal. I always leave her house feeling really full up, and like someone loves me and is taking care of me. She makes real comfort food.</p></details>
+    <div style="margin-top:12px"><button class="btn-primary" onclick="checkRadio('modelTopic','3','modelFeedback')">Which topic is it?</button><div id="modelFeedback" class="feedback"></div><div class="teacher-answer">Answer: Topic 3</div></div>
+
+    <div class="card bluebox" style="margin-top:20px"><div class="label">One-minute plan</div><h3>Add vocabulary from Section 2 to the eight numbered notes.</h3>
+      <div class="wordbank"><span class="word">real feast</span><span class="word">locally sourced / organic produce</span><span class="word">eggs and dairy</span><span class="word">home cooking</span><span class="word">fussy eater</span><span class="word">beans and pulses</span><span class="word">sweet tooth</span><span class="word">comfort food</span></div>
+      <div class="planmap" id="modelPlan">
+        <div class="quadrant"><h4>Who?</h4><p>my grandmother</p></div>
+        <div class="quadrant"><h4>What she makes</h4><label>1. once a month<select class="track" data-answer="real feast"><option value="">Choose…</option><option>real feast</option><option>fussy eater</option><option>comfort food</option><option>home cooking</option></select></label><label>2. best ingredients<select class="track" data-answer="locally sourced / organic produce"><option value="">Choose…</option><option>eggs and dairy</option><option>locally sourced / organic produce</option><option>sweet tooth</option><option>beans and pulses</option></select></label><label>3. from a nearby farm<select class="track" data-answer="eggs and dairy"><option value="">Choose…</option><option>eggs and dairy</option><option>real feast</option><option>comfort food</option><option>home cooking</option></select></label><label>4. not fancy<select class="track" data-answer="home cooking"><option value="">Choose…</option><option>sweet tooth</option><option>home cooking</option><option>fussy eater</option><option>beans and pulses</option></select></label></div>
+        <div class="quadrant"><h4>How her food makes me feel</h4><label>8. she loves me<select class="track" data-answer="comfort food"><option value="">Choose…</option><option>real feast</option><option>comfort food</option><option>fussy eater</option><option>eggs and dairy</option></select></label></div>
+        <div class="quadrant"><h4>Why she’s a good cook</h4><label>5. understands my flexitarian diet<select class="track" data-answer="fussy eater"><option value="">Choose…</option><option>fussy eater</option><option>real feast</option><option>sweet tooth</option><option>home cooking</option></select></label><label>6. makes one special dish for me<select class="track" data-answer="beans and pulses"><option value="">Choose…</option><option>locally sourced / organic produce</option><option>beans and pulses</option><option>comfort food</option><option>eggs and dairy</option></select></label><label>7. two desserts<select class="track" data-answer="sweet tooth"><option value="">Choose…</option><option>home cooking</option><option>real feast</option><option>sweet tooth</option><option>fussy eater</option></select></label></div>
+        <div class="plan-centre">a good cook</div>
+      </div>
+      <div style="margin-top:14px"><button class="btn-primary" onclick="checkSelects('#modelPlan select','planFeedback')">Check plan</button><div id="planFeedback" class="feedback"></div><div class="teacher-answer">1 real feast • 2 locally sourced / organic produce • 3 eggs and dairy • 4 home cooking • 5 fussy eater • 6 beans and pulses • 7 sweet tooth • 8 comfort food</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="context">
+  <div class="section-head"><div class="section-no">4</div><div><h2>Language in context</h2><p>Notice natural spoken phrases, then make them your own.</p></div></div>
+  <div class="section-body">
+    <div class="grid g3" id="contextMatch">
+      <div class="card"><p>“She <b>gets</b> that I’ve really thought about what I eat…”</p><select class="track" data-answer="understands"><option value="">Meaning…</option><option>understands</option><option>forgets</option><option>buys</option></select><div class="teacher-answer">gets = understands</div></div>
+      <div class="card"><p>“…I nearly always <b>end up</b> having a bit of fish…”</p><select class="track" data-answer="eventually do something, often not as originally planned"><option value="">Meaning…</option><option>stop doing something</option><option>eventually do something, often not as originally planned</option><option>cook something completely</option></select><div class="teacher-answer">end up = eventually do something, often not as originally planned</div></div>
+      <div class="card"><p>“I always leave her house feeling really <b>full up</b>…”</p><select class="track" data-answer="completely full after eating"><option value="">Meaning…</option><option>completely full after eating</option><option>energetic</option><option>angry</option></select><div class="teacher-answer">full up = completely full after eating</div></div>
+    </div>
+    <button class="btn-primary" style="margin-top:14px" onclick="checkSelects('#contextMatch select','contextFeedback')">Check meanings</button><div id="contextFeedback" class="feedback"></div>
+    <div class="card soft" style="margin-top:20px"><h3>Finish logically</h3><label>I really don’t get why junk food …<input class="track" type="text"></label><br><label>Every time I go to the supermarket, I always end up …<input class="track" type="text"></label><br><label>I always feel really full up after …<input class="track" type="text"></label></div>
+  </div>
+</section>
+
+<section class="section" id="yourturn">
+  <div class="section-head"><div class="section-no">5</div><div><h2>Speaking: your turn</h2><p>Prepare for one minute, then speak for up to two minutes.</p></div></div>
+  <div class="section-body">
+    <div class="card bluebox"><h3>IELTS Speaking Part 2</h3><ul class="tiplist"><li>Prepare and deliver a short talk about an everyday topic.</li><li>The cue card gives four points: three information points and one opinion point.</li><li>After you finish, the examiner asks a question about what you said.</li></ul></div>
+    <div class="grid g2" style="margin-top:18px">
+      <div class="card"><div class="label">Choose</div><h3>Your cue card</h3><div class="choice-row"><label class="pill-choice"><input class="track" type="radio" name="studentTopic" value="1"><span>Topic 1: place to eat out</span></label><label class="pill-choice"><input class="track" type="radio" name="studentTopic" value="2"><span>Topic 2: new food</span></label></div><p class="teacher-answer">The original lesson asks students to choose Topic 1 or Topic 2 here.</p></div>
+      <div class="card goldbox"><div class="label">Prepare</div><h3>1-minute timer</h3><div class="timer"><div class="clock" id="prepClock">01:00</div><div><button class="btn-gold" onclick="timerStart('prep',60)">Start / Pause</button> <button class="btn-ghost" onclick="timerReset('prep',60)">Reset</button><br><small>Use keywords, not full sentences.</small></div></div></div>
+    </div>
+
+    <div class="planmap" style="margin-top:18px">
+      <div class="quadrant"><h4>Point 1</h4><textarea class="track" placeholder="Key words only…"></textarea></div>
+      <div class="quadrant"><h4>Point 2</h4><textarea class="track" placeholder="Key words only…"></textarea></div>
+      <div class="quadrant"><h4>Point 3</h4><textarea class="track" placeholder="Key words only…"></textarea></div>
+      <div class="quadrant"><h4>Opinion / why</h4><textarea class="track" placeholder="Key words only…"></textarea></div>
+      <div class="plan-centre">YOUR TOPIC</div>
+    </div>
+
+    <div class="card greenbox" style="margin-top:18px"><div class="label">Speak</div><h3>2-minute timer</h3><div class="timer"><div class="clock" id="speakClock">02:00</div><div><button class="btn-green" onclick="timerStart('speak',120)">Start / Pause</button> <button class="btn-ghost" onclick="timerReset('speak',120)">Reset</button><br><small>If you are still speaking at 2:00, your partner can say, “Thank you very much.”</small></div></div></div>
+    <div class="card soft" style="margin-top:18px"><div class="added">Graham IELTS extension</div><h3>Examiner follow-up</h3><p id="followupText">Choose a topic above, then generate a follow-up question.</p><button class="btn-secondary" onclick="followup()">Generate follow-up</button></div>
+  </div>
+</section>
+
+<section class="section" id="review">
+  <div class="section-head"><div class="section-no">6</div><div><h2>How did you do?</h2><p>Self-assess the features that matter most in your Part 2 response.</p></div></div>
+  <div class="section-body">
+    <table id="selfTable">
+      <thead><tr><th>Area</th><th>Can I do this?</th><th>Yes</th><th>Sometimes</th><th>No</th></tr></thead>
+      <tbody>
+        <tr><td><b>Content</b></td><td>I can give a long enough answer: speaking for 1.5–2 minutes.</td><td><input class="track" type="radio" name="sa1" value="yes"></td><td><input class="track" type="radio" name="sa1" value="sometimes"></td><td><input class="track" type="radio" name="sa1" value="no"></td></tr>
+        <tr><td><b>Vocabulary & grammar</b></td><td>I can use a good range of language accurately, including phrases from today’s lesson.</td><td><input class="track" type="radio" name="sa2" value="yes"></td><td><input class="track" type="radio" name="sa2" value="sometimes"></td><td><input class="track" type="radio" name="sa2" value="no"></td></tr>
+        <tr><td><b>Fluency</b></td><td>I can speak without too much hesitation.</td><td><input class="track" type="radio" name="sa3" value="yes"></td><td><input class="track" type="radio" name="sa3" value="sometimes"></td><td><input class="track" type="radio" name="sa3" value="no"></td></tr>
+        <tr><td><b>Pronunciation</b></td><td>I can speak clearly enough to be understood.</td><td><input class="track" type="radio" name="sa4" value="yes"></td><td><input class="track" type="radio" name="sa4" value="sometimes"></td><td><input class="track" type="radio" name="sa4" value="no"></td></tr>
+        <tr><td><b>Self-presentation</b></td><td>I can present myself in a friendly and positive way.</td><td><input class="track" type="radio" name="sa5" value="yes"></td><td><input class="track" type="radio" name="sa5" value="sometimes"></td><td><input class="track" type="radio" name="sa5" value="no"></td></tr>
+      </tbody>
+    </table>
+    <div class="scoreboard"><div class="score">Yes <strong id="yesCount">0</strong></div><div class="score">Sometimes <strong id="someCount">0</strong></div><div class="score">No <strong id="noCount">0</strong></div></div>
+    <div class="card soft" style="margin-top:18px"><label><b>What is the most important thing you need to improve before the exam? How can you do this?</b><textarea class="track"></textarea></label></div>
+    <div class="card bluebox" style="margin-top:18px"><h3>Tips</h3><ul class="tiplist"><li>Think about the best order for the points and connect ideas with linking words or other devices.</li><li>If you cannot remember details or have little experience with the topic, it is fine to invent believable information.</li><li>You do not have to speak for the full two minutes. It is better to stop a few seconds early than repeat the same information just to fill time.</li></ul></div>
+  </div>
+</section>
+
+<section class="section" id="extension">
+  <div class="section-head"><div class="section-no">7</div><div><h2>Optional extension: connected speech</h2><p>Practise consonant → vowel linking so natural speech is easier to hear and produce.</p></div></div>
+  <div class="section-body">
+    <p>In fast natural speech, words are not always pronounced separately. A final consonant sound can link smoothly to a vowel sound at the start of the next word.</p>
+    <div class="card greenbox"><div class="label">Notice</div><h3>Reveal common links</h3><p class="link-text" id="linkText">My <span class="linktarget">grandmother is</span> the best cook I know. She lives quite <span class="linktarget">near us</span> <span class="linktarget">and about</span> once a month we have a <span class="linktarget">meal at</span> her <span class="linktarget">house, on</span> a Sunday – <span class="linktarget">it’s always</span> a real feast! She’s <span class="linktarget">interested in</span> <span class="linktarget">food and</span> <span class="linktarget">takes a</span> <span class="linktarget">lot of</span> time shopping for the <span class="linktarget">best ingredients</span>. She tries to choose locally sourced, organic produce – no junk food for her! She even gets her <span class="linktarget">eggs and</span> dairy delivered from a nearby farm.</p><button class="btn-green" onclick="document.getElementById('linkText').classList.toggle('showlinks')">Reveal / hide links</button></div>
+    <div class="grid g2" style="margin-top:18px"><div class="card"><h3>Your linking marks</h3><p>Read the remaining model answer aloud. Type the word pairs where you notice a final consonant linking into the next vowel.</p><textarea class="track" placeholder="e.g. grandmother‿is, meal‿at …"></textarea></div><div class="card soft"><h3>Practice ladder</h3><ol><li>Read slowly and clearly.</li><li>Underline consonant → vowel links.</li><li>Read again without pausing between linked words.</li><li>Repeat the whole paragraph at natural speed.</li></ol></div></div>
+  </div>
+</section>
+</main>
+
+<footer class="footer"><strong>Graham IELTS</strong> interactive classroom adaptation. Based on the user-supplied “Flexitarian” B1–B2 worksheet. Original worksheet © Linguahouse.com; licensed worksheet wording and lesson sequence are retained for the user’s classroom use.</footer>
+
+<script>
+const STORE='grahamIELTS_flexitarian_v1';
+const timers={prep:{left:60,id:null,running:false},speak:{left:120,id:null,running:false}};
+function norm(s){return (s||'').trim().toLowerCase().replace(/\s+/g,' ')}
+function setFeedback(id,good,total){const el=document.getElementById(id);el.className='feedback '+(good===total?'ok':'bad');el.textContent=good===total?`✓ ${good}/${total} correct`:`${good}/${total} correct — check the highlighted answers.`}
+function checkSelects(selector,feedbackId){const els=[...document.querySelectorAll(selector)];let good=0;els.forEach(el=>{el.classList.remove('correct','wrong');if(norm(el.value)===norm(el.dataset.answer)){el.classList.add('correct');good++}else el.classList.add('wrong')});setFeedback(feedbackId,good,els.length)}
+function checkInputs(selector,feedbackId){const els=[...document.querySelectorAll(selector)];let good=0;els.forEach(el=>{el.classList.remove('correct','wrong');if(norm(el.value)===norm(el.dataset.answer)){el.classList.add('correct');good++}else el.classList.add('wrong')});setFeedback(feedbackId,good,els.length)}
+function checkRadio(name,answer,feedbackId){const chosen=document.querySelector(`input[name="${name}"]:checked`);const el=document.getElementById(feedbackId);if(chosen&&chosen.value===answer){el.className='feedback ok';el.textContent='✓ Correct'}else{el.className='feedback bad';el.textContent=chosen?'Not this one yet — compare the cue-card points with the model.':'Choose a topic first.'}}
+function toggleTeacher(){document.body.classList.toggle('teacher');const on=document.body.classList.contains('teacher');document.getElementById('teacherBtn').textContent=`Teacher answers: ${on?'ON':'OFF'}`}
+function timerRender(key){document.getElementById(key+'Clock').textContent=String(Math.floor(timers[key].left/60)).padStart(2,'0')+':'+String(timers[key].left%60).padStart(2,'0')}
+function timerStart(key,initial){const t=timers[key];if(t.left<=0)t.left=initial;if(t.running){clearInterval(t.id);t.running=false;return}t.running=true;t.id=setInterval(()=>{t.left--;timerRender(key);if(t.left<=0){clearInterval(t.id);t.running=false;document.getElementById(key+'Clock').textContent='00:00';try{navigator.vibrate&&navigator.vibrate([120,60,120])}catch(e){}}},1000)}
+function timerReset(key,initial){const t=timers[key];clearInterval(t.id);t.running=false;t.left=initial;timerRender(key)}
+function followup(){const topic=document.querySelector('input[name="studentTopic"]:checked')?.value;const qs={1:['Why do some restaurants become more popular than others?','Do you think people eat out more often now than in the past?','What makes the atmosphere of a restaurant enjoyable?'],2:['Why can people be reluctant to try unfamiliar food?','Do you think food habits change when people travel?','Is trying new food an important part of learning about another culture?']};const el=document.getElementById('followupText');if(!topic){el.textContent='Choose Topic 1 or Topic 2 first.';return}const arr=qs[topic];el.textContent=arr[Math.floor(Math.random()*arr.length)]}
+function updateSelf(){let y=0,s=0,n=0;for(let i=1;i<=5;i++){const v=document.querySelector(`input[name="sa${i}"]:checked`)?.value;if(v==='yes')y++;if(v==='sometimes')s++;if(v==='no')n++}document.getElementById('yesCount').textContent=y;document.getElementById('someCount').textContent=s;document.getElementById('noCount').textContent=n}
+function save(){const data={};document.querySelectorAll('.track').forEach((el,i)=>{if(el.type==='radio'||el.type==='checkbox')data[i]={c:el.checked,v:el.value};else data[i]={v:el.value}});localStorage.setItem(STORE,JSON.stringify(data));updateProgress();updateSelf()}
+function restore(){let data={};try{data=JSON.parse(localStorage.getItem(STORE)||'{}')}catch(e){}document.querySelectorAll('.track').forEach((el,i)=>{const d=data[i];if(!d)return;if(el.type==='radio'||el.type==='checkbox')el.checked=!!d.c;else el.value=d.v||''});updateProgress();updateSelf()}
+function updateProgress(){const els=[...document.querySelectorAll('.track')];let filled=0;els.forEach(el=>{if(el.type==='radio'||el.type==='checkbox'){if(el.checked)filled++}else if(String(el.value||'').trim())filled++});const pct=Math.min(100,Math.round((filled/Math.max(1,els.length))*100));document.getElementById('progress').style.width=pct+'%'}
+function resetLesson(){if(!confirm('Reset all answers and saved progress for this lesson?'))return;localStorage.removeItem(STORE);document.querySelectorAll('.track').forEach(el=>{if(el.type==='radio'||el.type==='checkbox')el.checked=false;else el.value='';el.classList.remove('correct','wrong')});document.querySelectorAll('.feedback').forEach(el=>el.textContent='');timerReset('prep',60);timerReset('speak',120);updateSelf();updateProgress()}
+document.addEventListener('input',save);document.addEventListener('change',save);document.addEventListener('DOMContentLoaded',restore);
+</script>
+</body>
+</html>
