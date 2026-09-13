@@ -1,0 +1,1133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17493c">
+  <meta name="description" content="An interactive GrahamIELTS Test–Teach–Test lesson on welcoming cities, Taiwan, and modal verbs for speculation, with a polite-tourists homework module.">
+  <title>GrahamIELTS · How welcoming is Taiwan? · Modal speculation</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --jade: #17493c;
+      --jade-dark: #0f342c;
+      --jade-mid: #286455;
+      --jade-soft: #e7f0ec;
+      --mint: #bfe3d2;
+      --gold: #c9a227;
+      --gold-dark: #816714;
+      --gold-soft: #f4ecd0;
+      --paper: #f4f1e8;
+      --paper-2: #ece8dc;
+      --white: #fffef9;
+      --ink: #17211f;
+      --muted: #64716d;
+      --line: #d7ddd8;
+      --red: #a34b43;
+      --red-soft: #f8e5e1;
+      --blue: #2d6175;
+      --blue-soft: #e3eff3;
+      --shadow: 0 16px 42px rgba(8, 31, 26, .11);
+      --radius: 18px;
+      --header-h: 76px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--paper);
+      color: var(--ink);
+      font: 15px/1.58 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    button, input, select, textarea { font: inherit; }
+    button, select, input[type="range"], input[type="checkbox"] { cursor: pointer; }
+    button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 3px;
+    }
+    a { color: var(--jade-mid); text-underline-offset: 3px; }
+    h1, h2, h3, h4 { font-family: Georgia, "Times New Roman", serif; line-height: 1.12; }
+    .skip-link {
+      position: fixed; z-index: 1000; top: -70px; left: 12px;
+      padding: 10px 14px; border-radius: 7px; background: var(--white); color: var(--jade-dark); box-shadow: var(--shadow);
+    }
+    .skip-link:focus { top: 10px; }
+    .site-header {
+      position: sticky; z-index: 60; top: 0; min-height: var(--header-h);
+      display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 22px;
+      padding: 0 clamp(16px, 3vw, 34px); color: white; background: var(--jade);
+      border-bottom: 3px solid var(--gold); box-shadow: 0 4px 18px rgba(8,31,26,.22);
+    }
+    .brand { min-width: 0; display: flex; align-items: center; gap: 14px; }
+    .seal {
+      flex: 0 0 auto; width: 42px; height: 42px; display: grid; place-items: center;
+      border: 2px solid var(--gold); border-radius: 8px; color: var(--gold);
+      font: 700 13px/1.05 Georgia, serif; letter-spacing: .04em;
+    }
+    .brand-name { display: flex; align-items: baseline; gap: 10px; white-space: nowrap; }
+    .graham { color: white; font: 42px/.9 Georgia, serif; letter-spacing: -.025em; }
+    .ielts { color: var(--gold); font-size: 22px; font-weight: 850; letter-spacing: .15em; }
+    .brand-sub { margin-left: 3px; color: rgba(255,255,255,.72); font-size: 10px; letter-spacing: .15em; text-transform: uppercase; }
+    .header-progress { min-width: 245px; display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
+    .header-progress-copy { display: grid; gap: 2px; text-align: right; }
+    .header-progress-copy strong { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+    .header-progress-copy span { color: rgba(255,255,255,.72); font-size: 11px; }
+    progress { width: 108px; height: 8px; border: 0; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.18); }
+    progress::-webkit-progress-bar { background: rgba(255,255,255,.18); border-radius: 999px; }
+    progress::-webkit-progress-value { background: var(--gold); border-radius: 999px; }
+    progress::-moz-progress-bar { background: var(--gold); border-radius: 999px; }
+    .shell { display: grid; grid-template-columns: 286px minmax(0, 1fr); align-items: start; }
+    .sidebar {
+      position: sticky; top: var(--header-h); height: calc(100vh - var(--header-h)); overflow-y: auto;
+      padding: 24px 19px 26px; background: var(--white); border-right: 1px solid var(--line); box-shadow: 5px 0 24px rgba(15,52,44,.045);
+    }
+    .lesson-id { padding: 0 7px 18px; border-bottom: 1px solid var(--line); }
+    .eyebrow { margin: 0; color: var(--jade-mid); font-size: 10px; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
+    .lesson-id h2 { margin: 5px 0 4px; font-size: 23px; }
+    .lesson-id p:last-child { margin: 0; color: var(--muted); font-size: 12px; }
+    .timer-card { margin-top: 17px; padding: 15px; border: 1px solid var(--line); border-radius: 13px; background: #fbfcf9; }
+    .timer { margin: 5px 0 11px; color: var(--jade-dark); font-size: 32px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -.04em; line-height: 1; }
+    .button-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .btn {
+      min-height: 41px; border: 1px solid var(--jade); border-radius: 8px; padding: 9px 14px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+      background: var(--jade); color: white; font-weight: 780; font-size: 13px; text-decoration: none;
+      transition: transform .16s ease, background .16s ease, box-shadow .16s ease;
+    }
+    .btn:hover { transform: translateY(-1px); background: var(--jade-dark); box-shadow: 0 7px 18px rgba(15,52,44,.16); }
+    .btn.secondary { border-color: #aebdb7; background: white; color: var(--jade-dark); }
+    .btn.secondary:hover { background: var(--jade-soft); }
+    .btn.gold { border-color: var(--gold); background: var(--gold); color: var(--jade-dark); }
+    .btn.gold:hover { background: #d6b33d; }
+    .btn.small { min-height: 35px; padding: 7px 10px; font-size: 11.5px; }
+    .btn.wide { width: 100%; }
+    .agenda { margin-top: 20px; }
+    .agenda ol { list-style: none; margin: 9px 0 0; padding: 0; display: grid; gap: 3px; }
+    .agenda a {
+      display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 8px; align-items: center;
+      padding: 8px 9px; border-radius: 8px; color: var(--ink); text-decoration: none; font-size: 11.5px;
+    }
+    .agenda a:hover, .agenda a.active { background: var(--jade-soft); box-shadow: inset 3px 0 0 var(--gold); }
+    .agenda .minutes { color: var(--jade-mid); font-size: 9.5px; font-weight: 850; }
+    .side-progress { margin-top: 18px; padding: 0 7px; }
+    .progress-meta { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 10.5px; font-weight: 750; }
+    .progress-track { height: 7px; margin-top: 7px; overflow: hidden; border-radius: 999px; background: #dce4df; }
+    .progress-fill { width: 0; height: 100%; border-radius: inherit; background: var(--jade); transition: width .3s ease; }
+    .teacher-switch { margin-top: 19px; padding: 17px 7px 0; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 11.5px; }
+    .teacher-switch small { color: var(--muted); }
+    .switch { position: relative; width: 44px; height: 25px; flex: 0 0 auto; border: 0; border-radius: 999px; padding: 0; background: #c5cfca; }
+    .switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 19px; height: 19px; border-radius: 50%; background: white; box-shadow: 0 2px 6px rgba(0,0,0,.18); transition: transform .18s ease; }
+    .switch[aria-pressed="true"] { background: var(--jade); }
+    .switch[aria-pressed="true"]::after { transform: translateX(19px); }
+    .sidebar-actions { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+    .main { width: 100%; max-width: 1180px; margin: 0 auto; padding: 30px clamp(18px, 4vw, 58px) 88px; }
+    .topline { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .route-label { color: var(--muted); font-size: 11.5px; font-weight: 760; letter-spacing: .04em; }
+    .pill { display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 999px; background: var(--jade-soft); color: var(--jade); font-size: 10.5px; font-weight: 850; }
+    .pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--jade-mid); }
+    .hero {
+      position: relative; overflow: hidden; margin-top: 25px; padding: clamp(28px, 5vw, 54px);
+      display: grid; grid-template-columns: 1.22fr .78fr; gap: clamp(25px, 5vw, 58px); align-items: center;
+      border-radius: 24px; background: var(--jade-dark); color: white; box-shadow: var(--shadow);
+    }
+    .hero::after { content: ""; position: absolute; right: -95px; bottom: -120px; width: 310px; height: 310px; border: 1px solid rgba(201,162,39,.42); border-radius: 50%; box-shadow: 0 0 0 34px rgba(201,162,39,.055), 0 0 0 68px rgba(201,162,39,.04); pointer-events: none; }
+    .hero .eyebrow { color: #e2c96e; }
+    .hero h1 { position: relative; z-index: 1; max-width: 720px; margin: 9px 0 14px; font-size: clamp(40px, 6vw, 70px); letter-spacing: -.05em; }
+    .hero .lead { position: relative; z-index: 1; max-width: 690px; margin: 0; color: #d5e4de; font-size: 16.5px; line-height: 1.7; }
+    .hero-facts { position: relative; z-index: 1; display: grid; gap: 10px; }
+    .hero-fact { padding: 16px; border: 1px solid rgba(255,255,255,.16); border-radius: 13px; background: rgba(255,255,255,.065); }
+    .hero-fact strong { display: block; color: #f2d979; font: 600 26px/1 Georgia, serif; }
+    .hero-fact span { display: block; margin-top: 6px; color: #d6e3de; font-size: 11.5px; }
+    .outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; margin-top: 16px; }
+    .outcome { min-height: 86px; padding: 15px; border: 1px solid var(--line); border-radius: 12px; background: var(--white); font-size: 12.5px; }
+    .outcome b { display: block; margin-bottom: 4px; color: var(--jade); }
+    .lesson-section, .homework {
+      scroll-margin-top: calc(var(--header-h) + 18px); margin-top: 28px; padding: clamp(22px, 4vw, 34px);
+      border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); box-shadow: var(--shadow);
+    }
+    .section-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
+    .section-head h2 { margin: 5px 0 0; font-size: clamp(27px, 4vw, 40px); letter-spacing: -.035em; }
+    .time-chip { flex: 0 0 auto; padding: 7px 10px; border-radius: 999px; background: var(--gold-soft); color: #6e5816; font-size: 10.5px; font-weight: 850; }
+    .instruction { max-width: 850px; margin: 14px 0 20px; color: var(--muted); }
+    .teacher-note { display: none; margin-top: 18px; padding: 14px 16px; border-left: 4px solid var(--gold); border-radius: 0 9px 9px 0; background: var(--gold-soft); color: #5d4b18; font-size: 12.5px; }
+    body.teacher-on .teacher-note { display: block; }
+    .question-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .prompt-card { min-height: 118px; padding: 17px; border: 1px solid var(--line); border-radius: 13px; background: #fbfcf9; }
+    .prompt-card .num { display: grid; place-items: center; width: 27px; height: 27px; margin-bottom: 10px; border-radius: 50%; background: var(--jade); color: white; font-size: 11px; font-weight: 850; }
+    .prompt-card p { margin: 0; font-family: Georgia, serif; font-size: 16px; }
+    .subhead { margin: 27px 0 5px; font-size: 23px; }
+    .sub-instruction { margin: 5px 0 15px; color: var(--muted); font-size: 13px; }
+    .sequence-builder { padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: #f8faf7; }
+    .sequence-bank { display: flex; flex-wrap: wrap; gap: 8px; }
+    .sequence-chip { border: 1px solid #a9bbb4; border-radius: 999px; padding: 8px 11px; background: white; color: var(--jade-dark); font-size: 12px; font-weight: 780; }
+    .sequence-chip:hover:not(:disabled) { border-color: var(--jade); background: var(--jade-soft); }
+    .sequence-chip:disabled { opacity: .42; cursor: default; }
+    .sequence-output { min-height: 55px; margin: 14px 0; padding: 11px; display: flex; flex-wrap: wrap; align-items: center; gap: 7px; border: 1px dashed #aab8b2; border-radius: 10px; background: white; }
+    .sequence-output .placeholder { color: var(--muted); font-size: 12px; }
+    .placed-chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 10px; border-radius: 8px; background: var(--jade); color: white; font-size: 11px; font-weight: 760; }
+    .placed-chip b { color: #f1d66d; }
+    .score-lab { margin-top: 16px; display: grid; grid-template-columns: 1fr .68fr; gap: 14px; align-items: stretch; }
+    .range-list { display: grid; gap: 10px; }
+    .range-row { display: grid; grid-template-columns: minmax(115px, .8fr) minmax(130px, 1.2fr) 31px; gap: 10px; align-items: center; }
+    .range-row label { font-size: 12px; font-weight: 750; }
+    .range-row input { width: 100%; accent-color: var(--jade); }
+    .range-value { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 7px; background: var(--jade-soft); color: var(--jade-dark); font-size: 11px; font-weight: 850; }
+    .score-result { padding: 20px; display: flex; flex-direction: column; justify-content: center; border-radius: 13px; background: var(--jade-dark); color: white; text-align: center; }
+    .score-result strong { color: var(--gold); font: 700 46px/1 Georgia, serif; }
+    .score-result span { display: block; margin-top: 7px; color: #d6e4df; font-size: 12px; }
+    .score-result p { margin: 13px 0 0; font-size: 12.5px; }
+    .data-note { margin-top: 10px; color: var(--muted); font-size: 11px; }
+    .clue-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 11px; margin-bottom: 17px; }
+    .clue { padding: 15px; border-radius: 12px; border: 1px solid var(--line); background: #fafbf8; }
+    .clue b { display: block; color: var(--jade); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    .clue p { margin: 6px 0 0; font-family: Georgia, serif; font-size: 15.5px; }
+    .quiz-grid { display: grid; gap: 10px; }
+    .quiz-item { display: grid; grid-template-columns: 35px minmax(0, 1fr) minmax(142px, .42fr); gap: 11px; align-items: center; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: #fbfcf9; }
+    .quiz-item .qnum { display: grid; place-items: center; width: 29px; height: 29px; border-radius: 8px; background: var(--gold); color: var(--jade-dark); font-size: 11px; font-weight: 900; }
+    .quiz-item p { margin: 0; }
+    .quiz-item small { display: block; margin-bottom: 4px; color: var(--muted); }
+    select, textarea, input[type="text"] { width: 100%; border: 1px solid #b9c8c2; border-radius: 8px; background: white; color: var(--ink); }
+    select { min-height: 41px; padding: 8px 32px 8px 10px; }
+    textarea { min-height: 105px; resize: vertical; padding: 12px 13px; line-height: 1.58; }
+    input[type="text"] { min-height: 41px; padding: 9px 11px; }
+    select.correct { border-color: #3e8a70; background: #e4f3ec; }
+    select.wrong { border-color: #bd665e; background: var(--red-soft); }
+    .actions { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 9px; align-items: center; }
+    .feedback { display: none; margin-top: 13px; padding: 12px 14px; border-radius: 9px; font-size: 12.5px; font-weight: 680; }
+    .feedback.show { display: block; }
+    .feedback.good { background: #e2f2ea; color: #185943; }
+    .feedback.try { background: var(--red-soft); color: #78372f; }
+    .write-box { margin-top: 17px; }
+    .write-box label { display: block; margin-bottom: 7px; font-size: 12px; font-weight: 800; }
+    .save-status { margin-left: auto; color: var(--muted); font-size: 10.5px; }
+    .vocab-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .vocab-card { min-height: 164px; padding: 16px; border: 1px solid var(--line); border-radius: 13px; background: #fbfcf9; }
+    .vocab-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 9px; }
+    .vocab-card h3 { margin: 0; color: var(--jade); font-size: 23px; }
+    .pos { padding: 4px 7px; border-radius: 5px; background: var(--gold-soft); color: #6c5717; font-size: 9px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+    .phonetic { margin: 5px 0 8px; color: var(--red); font-size: 11px; }
+    .definition { margin: 0; font-size: 12px; }
+    .example { margin: 11px 0 0; padding-top: 9px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; font-style: italic; }
+    .article-shell { overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: #fffdf7; }
+    .article-header { padding: 20px 22px; background: var(--jade-dark); color: white; }
+    .article-header .eyebrow { color: #e4ca6c; }
+    .article-header h3 { margin: 6px 0 4px; font-size: 28px; }
+    .article-header p { margin: 0; color: #ccddd7; font-size: 11px; }
+    .article-body { padding: clamp(20px, 3vw, 30px); font-family: Georgia, serif; font-size: 16px; line-height: 1.78; }
+    .article-body p { margin: 0 0 16px; }
+    .article-body p:last-child { margin-bottom: 0; }
+    mark { padding: 1px 4px; border-radius: 4px; background: #f0dfa0; color: var(--ink); }
+    .reading-tools { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 11px 16px; border-top: 1px solid var(--line); background: #f7f5ed; color: var(--muted); font-size: 10.5px; }
+    .rank-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; margin-top: 16px; }
+    .rank-card { overflow: hidden; border: 1px solid var(--line); border-radius: 13px; background: white; }
+    .rank-card h3 { margin: 0; padding: 15px 16px 12px; font-size: 19px; }
+    .rank-list { list-style: none; margin: 0; padding: 0 11px 13px; counter-reset: rank; }
+    .rank-list li { counter-increment: rank; min-height: 32px; display: grid; grid-template-columns: 25px 1fr; align-items: center; padding: 5px 8px; font-size: 11px; }
+    .rank-list li::before { content: counter(rank); color: var(--muted); font-size: 9.5px; font-weight: 800; }
+    .rank-list li:nth-child(odd) { background: #f3f5f1; }
+    .rank-list li.taiwan { background: var(--gold-soft); color: var(--jade-dark); font-weight: 850; box-shadow: inset 3px 0 0 var(--gold); }
+    .answer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .answer-card { padding: 15px; border: 1px solid var(--line); border-radius: 12px; background: #fbfcf9; }
+    .answer-card label { min-height: 50px; display: block; margin-bottom: 9px; font-size: 12px; font-weight: 760; }
+    .method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+    .method-card { position: relative; padding: 18px; border-radius: 13px; border: 1px solid var(--line); background: #fafbf8; }
+    .method-card.primary { border-top: 5px solid var(--jade); }
+    .method-card.secondary-method { border-top: 5px solid var(--gold); }
+    .method-card h3 { margin: 0 0 7px; font-size: 21px; }
+    .method-card p { margin: 5px 0; font-size: 12px; }
+    .method-result { display: none; margin-top: 13px; padding: 12px; border-radius: 9px; background: var(--gold-soft); }
+    .method-result.show { display: block; }
+    .method-result strong { color: var(--jade); font: 700 26px/1 Georgia, serif; }
+    .accuracy-note { margin-top: 15px; padding: 14px 16px; border-left: 4px solid var(--blue); border-radius: 0 10px 10px 0; background: var(--blue-soft); color: #254d5e; font-size: 12px; }
+    .certainty-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; }
+    .certainty-card { padding: 18px; border: 1px solid var(--line); border-radius: 13px; background: #fafbf8; }
+    .certainty-card.must { border-top: 5px solid var(--jade); }
+    .certainty-card.might { border-top: 5px solid var(--gold); }
+    .certainty-card.could { border-top: 5px solid var(--blue); }
+    .certainty-card h3 { margin: 0; font-size: 24px; }
+    .certainty-card .meaning { min-height: 42px; margin: 7px 0 11px; color: var(--muted); font-size: 12px; }
+    .certainty-card .model { margin: 0; font-family: Georgia, serif; font-size: 14px; }
+    .certainty-line { position: relative; height: 8px; margin: 24px 10px 32px; border-radius: 999px; background: linear-gradient(90deg, var(--blue), var(--gold), var(--jade)); }
+    .certainty-line span { position: absolute; top: 14px; color: var(--muted); font-size: 10px; }
+    .certainty-line span:first-child { left: 0; }
+    .certainty-line span:nth-child(2) { left: 50%; transform: translateX(-50%); }
+    .certainty-line span:last-child { right: 0; }
+    .formula { margin: 18px 0; padding: 18px; border-radius: 13px; background: var(--jade-dark); color: white; text-align: center; }
+    .formula strong { color: var(--gold); font: 700 clamp(18px,3vw,28px)/1.3 Georgia, serif; }
+    .formula p { margin: 7px 0 0; color: #cfddd8; font-size: 11.5px; }
+    .micro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .micro-card { padding: 14px; border: 1px solid var(--line); border-radius: 11px; background: #fbfcf9; }
+    .micro-card strong { color: var(--jade); }
+    .micro-card p { margin: 6px 0 0; font-size: 12px; }
+    .test-scoreboard { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; margin: 18px 0; padding: 16px; border: 1px solid var(--line); border-radius: 13px; background: #f7faf7; text-align: center; }
+    .score-box strong { display: block; color: var(--jade); font: 700 34px/1 Georgia, serif; }
+    .score-box span { color: var(--muted); font-size: 10.5px; text-transform: uppercase; letter-spacing: .1em; }
+    .score-arrow { color: var(--gold-dark); font-size: 25px; }
+    .evidence-strip { margin-bottom: 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+    .evidence-mini { padding: 13px; border-radius: 10px; background: var(--jade-soft); font-size: 11.5px; }
+    .evidence-mini b { color: var(--jade); }
+    .country-board { margin-top: 20px; padding: 19px; border: 1px solid var(--line); border-radius: 14px; background: #fafbf8; }
+    .rank-sentence { display: none; margin-top: 13px; padding: 12px; border-radius: 9px; background: var(--gold-soft); font-family: Georgia, serif; }
+    .rank-sentence.show { display: block; }
+    .discussion-stage { display: grid; grid-template-columns: .82fr 1.18fr; gap: 13px; }
+    .question-draw { min-height: 250px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; border-radius: 15px; background: var(--jade-dark); color: white; }
+    .question-draw .eyebrow { color: #e5cc72; }
+    .drawn-question { margin: 18px 0; font: 600 clamp(22px, 3vw, 32px)/1.25 Georgia, serif; }
+    .token-list { display: grid; gap: 9px; }
+    .token { display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: #fafbf8; font-size: 12.5px; font-weight: 730; }
+    .token input { width: 18px; height: 18px; accent-color: var(--jade); }
+    .discussion-notes { margin-top: 12px; }
+    .exit-grid { margin-top: 18px; display: grid; grid-template-columns: .8fr 1.2fr; gap: 13px; }
+    .checklist { display: grid; gap: 8px; }
+    .check-row { display: flex; align-items: flex-start; gap: 9px; padding: 11px; border: 1px solid var(--line); border-radius: 9px; background: #fbfcf9; font-size: 11.5px; }
+    .check-row input { width: 17px; height: 17px; margin-top: 1px; accent-color: var(--jade); }
+    .homework { border: 2px solid var(--gold); background: #fffdf6; }
+    .homework-banner { margin: calc(clamp(22px, 4vw, 34px) * -1); margin-bottom: 26px; padding: 26px clamp(22px, 4vw, 34px); display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; background: var(--jade-dark); color: white; border-radius: 16px 16px 0 0; }
+    .homework-banner .eyebrow { color: #e6cc6e; }
+    .homework-banner h2 { margin: 6px 0 5px; font-size: clamp(28px,4vw,42px); }
+    .homework-banner p { margin: 0; color: #d0dfda; }
+    .homework-step { margin-top: 24px; padding-top: 23px; border-top: 1px solid var(--line); }
+    .homework-step:first-of-type { margin-top: 0; padding-top: 0; border-top: 0; }
+    .step-title { display: flex; align-items: center; gap: 10px; margin-bottom: 13px; }
+    .step-number { display: grid; place-items: center; flex: 0 0 auto; width: 31px; height: 31px; border-radius: 9px; background: var(--gold); color: var(--jade-dark); font-weight: 900; }
+    .step-title h3 { margin: 0; font-size: 23px; }
+    .homework-vocab .vocab-card { background: white; }
+    .source-card { padding: 18px; display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: center; border: 1px solid var(--line); border-radius: 13px; background: white; }
+    .source-card h4 { margin: 0 0 5px; font-size: 19px; }
+    .source-card p { margin: 0; color: var(--muted); font-size: 11.5px; }
+    .homework-data { display: none; margin-top: 13px; }
+    .homework-data.show { display: block; }
+    .data-table { width: 100%; border-collapse: collapse; background: white; font-size: 11.5px; }
+    .data-table th, .data-table td { padding: 9px 10px; border: 1px solid var(--line); text-align: left; }
+    .data-table th { background: var(--jade-soft); color: var(--jade-dark); }
+    .word-meta { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 7px; }
+    .word-badge { padding: 6px 9px; border-radius: 999px; background: #e9eeeb; color: var(--muted); font-size: 10px; font-weight: 780; }
+    .word-badge.on { background: var(--jade-soft); color: var(--jade); }
+    .complete-bar { margin-top: 24px; padding: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 9px; border-radius: 13px; background: var(--jade-soft); }
+    .complete-message { display: none; color: var(--jade); font-size: 11.5px; font-weight: 850; }
+    .complete-message.show { display: inline; }
+    .sources { margin-top: 28px; padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: #e9ece7; }
+    .sources h2 { margin: 0 0 10px; font-size: 22px; }
+    .sources ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 11px; }
+    .sources li + li { margin-top: 6px; }
+    .footer { margin-top: 22px; color: var(--muted); font-size: 10.5px; text-align: center; }
+    .mobile-tools { display: none; }
+    .toast { position: fixed; z-index: 200; left: 50%; bottom: 24px; transform: translate(-50%, 22px); opacity: 0; pointer-events: none; padding: 11px 16px; border-radius: 8px; background: var(--jade-dark); color: white; box-shadow: var(--shadow); font-size: 12px; transition: .2s ease; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    @media (max-width: 980px) {
+      .shell { grid-template-columns: 246px minmax(0,1fr); }
+      .sidebar { padding-inline: 14px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-facts { grid-template-columns: repeat(3,1fr); }
+      .score-lab, .discussion-stage { grid-template-columns: 1fr; }
+      .vocab-grid { grid-template-columns: repeat(2,1fr); }
+      .rank-grid { grid-template-columns: 1fr; }
+      .rank-list { columns: 2; column-gap: 15px; }
+      .rank-list li { break-inside: avoid; }
+      .quiz-item { grid-template-columns: 34px minmax(0,1fr); }
+      .quiz-item select { grid-column: 2; }
+    }
+    @media (max-width: 760px) {
+      :root { --header-h: 65px; }
+      .site-header { padding-inline: 12px; }
+      .seal, .brand-sub, .header-progress-copy { display: none; }
+      .graham { font-size: 31px; }
+      .ielts { font-size: 16px; }
+      .header-progress { min-width: 66px; }
+      .header-progress progress { width: 66px; }
+      .shell { display: block; }
+      .sidebar { display: none; }
+      .main { padding: 20px 15px 105px; }
+      .topline { align-items: flex-start; }
+      .hero { padding: 29px 23px; }
+      .hero h1 { font-size: clamp(39px,12vw,57px); }
+      .hero-facts, .outcomes, .question-grid, .clue-grid, .vocab-grid, .answer-grid, .method-grid, .certainty-grid, .micro-grid, .evidence-strip, .exit-grid { grid-template-columns: 1fr; }
+      .rank-list { columns: 1; }
+      .homework-banner { grid-template-columns: 1fr; }
+      .source-card { grid-template-columns: 1fr; }
+      .score-lab { display: block; }
+      .score-result { margin-top: 13px; }
+      .range-row { grid-template-columns: 112px minmax(90px,1fr) 31px; }
+      .section-head { display: block; }
+      .time-chip { display: inline-flex; margin-top: 10px; }
+      .test-scoreboard { grid-template-columns: 1fr; }
+      .score-arrow { transform: rotate(90deg); }
+      .mobile-tools { position: fixed; z-index: 80; left: 10px; right: 10px; bottom: 10px; display: grid; grid-template-columns: 1fr auto auto; gap: 7px; align-items: center; padding: 8px 9px; border: 1px solid var(--line); border-radius: 13px; background: rgba(255,254,249,.96); box-shadow: var(--shadow); }
+      .mobile-tools .timer { margin: 2px 0 0; font-size: 21px; }
+    }
+    @media (max-width: 470px) {
+      .quiz-item { grid-template-columns: 30px minmax(0,1fr); padding: 10px; }
+      .range-row { grid-template-columns: 1fr 34px; }
+      .range-row input { grid-column: 1/-1; grid-row: 2; }
+      .homework, .lesson-section { padding: 20px 16px; }
+      .homework-banner { margin: -20px -16px 22px; padding: 22px 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+    @media print {
+      body { background: white; }
+      .site-header, .sidebar, .mobile-tools, .timer-card, .actions, .teacher-switch, .toast, .topline { display: none !important; }
+      .shell { display: block; }
+      .main { max-width: none; padding: 0; }
+      .hero { color: black; background: white; border: 2px solid var(--jade); box-shadow: none; }
+      .hero .lead, .hero-fact span { color: #333; }
+      .hero-fact { border-color: var(--line); }
+      .lesson-section, .homework { box-shadow: none; break-inside: avoid; }
+      .teacher-note { display: none !important; }
+      .article-shell { break-inside: auto; }
+    }
+  </style>
+</head>
+<body><!--gp-chrome--><style>
+.gpnav{position:sticky;top:0;z-index:900;display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;
+ padding:9px clamp(14px,2.4vw,30px);background:var(--gpnav-bg,#12795A);
+ font-family:"IBM Plex Mono",ui-monospace,"Consolas",monospace;font-size:12.5px;line-height:1.3;
+ box-shadow:0 1px 0 rgba(0,0,0,.12)}
+.gpnav a,.gpnav span.gplock{display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+ padding:5px 11px;border-radius:2px;letter-spacing:.05em;white-space:nowrap;
+ border:1px solid rgba(255,255,255,.28);color:#fff}
+.gpnav a:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.6)}
+.gpnav a:focus-visible{outline:2px solid #DCAE44;outline-offset:2px}
+.gpnav a.gphome{font-weight:700;border-color:#DCAE44;background:rgba(220,174,68,.18)}
+.gpnav a.gphere{background:#fff;color:#12795A;border-color:#fff;font-weight:700}
+.gpnav span.gplock{opacity:.62;border-style:dashed;cursor:default}
+.gpnav .gpsep{flex:1}
+.gpnav .gpmark{color:#DCAE44;letter-spacing:.16em;font-weight:700;font-size:11px;
+ text-transform:uppercase;padding-right:4px}
+@media (max-width:620px){.gpnav{font-size:11.5px}.gpnav .gpmark{display:none}}
+@media print{.gpnav{display:none}}
+
+/* Let the builder's own pages use the width of the screen. The type scales and
+   the column is set in em, so the line length stays exactly as it was while the
+   page stops sitting in a narrow strip on a large monitor. Pages that already
+   scale themselves say so with data-fluid and are left alone. */
+html:not([data-fluid]) body{font-size:clamp(17px,0.44vw + 13.9px,22px)!important}
+html:not([data-fluid]) .wrap{max-width:min(94vw,53em)!important;width:auto!important}
+
+/* The report's own section links sat on one line and scrolled sideways, so half
+   of them were out of sight. Let them wrap and every section shows at once. */
+html:not([data-fluid]) .nav-in{flex-wrap:wrap!important;overflow-x:visible!important;
+ overflow-y:visible!important;scroll-snap-type:none!important;row-gap:4px!important;
+ max-width:min(96vw,64em)!important}
+html:not([data-fluid]) .nav a{scroll-snap-align:none!important;white-space:normal!important}
+html:not([data-fluid]) .nav::after{display:none!important}
+html:not([data-fluid]) .nav-in::-webkit-scrollbar{display:none}
+</style><nav class="gpnav" aria-label="Your documents"><span class="gpmark">GrahamIELTS</span><a class="gphome" href="../candicefulltest/">Candicefulltest</a><a href="trial-report.html">Trial report</a><a href="homework.html">Homework</a><a href="workbook.html">Your Speaking Workbook</a><a href="workbook-2.html">Your Speaking Units</a><a href="grahamielts-how-welcoming-is-taiwan-modal-speculation.html" class="gphere">Other</a></nav><!--/gp-chrome-->
+  <a class="skip-link" href="#mainContent">Skip to lesson</a>
+  <header class="site-header">
+    <div class="brand" aria-label="Graham IELTS">
+      <div class="seal" aria-hidden="true">九<br>分</div>
+      <div>
+        <div class="brand-name"><span class="graham">Graham</span><span class="ielts">IELTS</span></div>
+        <div class="brand-sub">Speaking lab · travel & culture</div>
+      </div>
+    </div>
+    <div class="header-progress" aria-label="Lesson completion">
+      <div class="header-progress-copy"><strong>Lesson progress</strong><span id="headerProgressText">0% complete</span></div>
+      <progress id="headerProgress" max="100" value="0">0%</progress>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="lesson-id">
+        <p class="eyebrow">Test → Teach → Test</p>
+        <h2>Welcoming cities</h2>
+        <p>Modal verbs for speculation</p>
+      </div>
+      <section class="timer-card" aria-label="80-minute class timer">
+        <p class="eyebrow">80-minute lesson</p>
+        <div class="timer" id="timerDesktop" aria-live="polite">80:00</div>
+        <div class="button-row">
+          <button class="btn small" id="timerToggle" type="button">Start</button>
+          <button class="btn secondary small" id="timerReset" type="button">Reset</button>
+        </div>
+      </section>
+      <nav class="agenda" aria-label="Lesson stages">
+        <p class="eyebrow">Today’s route</p>
+        <ol>
+          <li><a href="#pre-read"><span class="minutes">0–8</span><span>Pre-reading: define welcome</span></a></li>
+          <li><a href="#test-one"><span class="minutes">8–18</span><span>Test 1: first deductions</span></a></li>
+          <li><a href="#vocabulary"><span class="minutes">18–28</span><span>Vocabulary passport</span></a></li>
+          <li><a href="#read"><span class="minutes">28–42</span><span>Read + decode rankings</span></a></li>
+          <li><a href="#teach"><span class="minutes">42–54</span><span>Teach: certainty clinic</span></a></li>
+          <li><a href="#test-two"><span class="minutes">54–68</span><span>Test 2: Taiwan evidence lab</span></a></li>
+          <li><a href="#discussion"><span class="minutes">68–80</span><span>Extended discussion</span></a></li>
+          <li><a href="#homework"><span class="minutes">HOME</span><span>Polite tourists</span></a></li>
+        </ol>
+      </nav>
+      <div class="side-progress">
+        <div class="progress-meta"><span>Saved on this device</span><span id="sideProgressText">0%</span></div>
+        <div class="progress-track"><div class="progress-fill" id="sideProgressFill"></div></div>
+      </div>
+      <div class="teacher-switch">
+        <span><strong>Teacher notes</strong><br><small>keys, prompts + timing</small></span>
+        <button class="switch" id="teacherToggle" type="button" role="switch" aria-checked="false" aria-pressed="false" aria-label="Show teacher notes"></button>
+      </div>
+      <div class="sidebar-actions">
+        <button class="btn secondary small" id="printLesson" type="button">Print</button>
+        <button class="btn secondary small" id="resetWork" type="button">Reset work</button>
+      </div>
+    </aside>
+
+    <main class="main" id="mainContent">
+      <div class="topline">
+        <span class="route-label">Travel & culture · Intermediate · Evidence before certainty</span>
+        <span class="pill">Self-contained lesson</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Modal verbs of speculation</p>
+          <h1>How welcoming<br>is Taiwan?</h1>
+          <p class="lead">Use evidence—not stereotypes—to decide what <strong>could be</strong>, what <strong>might be</strong>, and what <strong>must be</strong> true about the world’s friendliest destinations.</p>
+        </div>
+        <div class="hero-facts" aria-label="Taiwan ranking clues">
+          <div class="hero-fact"><strong>#7</strong><span>Taipei in Holafly’s separate safety list</span></div>
+          <div class="hero-fact"><strong>#2</strong><span>Magong in a different 2026 welcoming-destination list</span></div>
+          <div class="hero-fact"><strong>?</strong><span>Where might Taiwan rank as a country? Build a hypothesis.</span></div>
+        </div>
+      </section>
+      <div class="outcomes" aria-label="Lesson outcomes">
+        <div class="outcome"><b>Test</b>Choose a modal before seeing the rule and record your first score.</div>
+        <div class="outcome"><b>Teach</b>Match certainty to evidence and keep the verb form accurate.</div>
+        <div class="outcome"><b>Test again</b>Make careful Taiwan deductions and avoid national stereotypes.</div>
+      </div>
+
+      <section class="lesson-section" id="pre-read" data-stage="1">
+        <div class="section-head">
+          <div><p class="eyebrow">Stage 1 · Pre-reading discussion</p><h2>What makes a place feel welcoming?</h2></div>
+          <span class="time-chip">0–8 minutes</span>
+        </div>
+        <p class="instruction">Discuss before opening the article. Give a real example for each answer; then turn your ideas into a prediction about Taiwan.</p>
+        <div class="question-grid">
+          <article class="prompt-card"><span class="num">1</span><p>In the first 30 minutes after arriving, what makes a visitor feel welcome—or unwelcome?</p></article>
+          <article class="prompt-card"><span class="num">2</span><p>Is a place still welcoming if it is friendly but difficult to navigate?</p></article>
+          <article class="prompt-card"><span class="num">3</span><p>Which Taiwanese city would you recommend to a first-time visitor, and why?</p></article>
+          <article class="prompt-card"><span class="num">4</span><p>Should online comments be used to measure friendliness? What might go wrong?</p></article>
+        </div>
+
+        <h3 class="subhead">Rank the six factors</h3>
+        <p class="sub-instruction">Click from most important to least important. This is your ranking; the article has not been opened yet.</p>
+        <div class="sequence-builder" data-sequence-name="criteria">
+          <div class="sequence-bank">
+            <button class="sequence-chip" type="button" data-item="safety">Safety</button>
+            <button class="sequence-chip" type="button" data-item="english">English ability</button>
+            <button class="sequence-chip" type="button" data-item="services">Tourist services</button>
+            <button class="sequence-chip" type="button" data-item="visa">Visa ease</button>
+            <button class="sequence-chip" type="button" data-item="help">Help in trouble</button>
+            <button class="sequence-chip" type="button" data-item="mentions">Friendly mentions online</button>
+          </div>
+          <div class="sequence-output" id="criteriaOutput" aria-live="polite"><span class="placeholder">Your ordered factors will appear here.</span></div>
+          <button class="btn secondary small" type="button" data-reset-sequence="criteria">Clear ranking</button>
+        </div>
+
+        <h3 class="subhead">Your Taiwan welcome score</h3>
+        <p class="sub-instruction">Rate Taiwan from 1 (low) to 5 (high) on each factor. This creates a class hypothesis—not a published result.</p>
+        <div class="score-lab">
+          <div class="range-list">
+            <div class="range-row"><label for="factorSafety">Safety</label><input id="factorSafety" type="range" min="1" max="5" value="3" data-factor-score="safety" data-save="factorSafety"><output class="range-value" id="score-safety">3</output></div>
+            <div class="range-row"><label for="factorEnglish">English ability</label><input id="factorEnglish" type="range" min="1" max="5" value="3" data-factor-score="english" data-save="factorEnglish"><output class="range-value" id="score-english">3</output></div>
+            <div class="range-row"><label for="factorServices">Tourist services</label><input id="factorServices" type="range" min="1" max="5" value="3" data-factor-score="services" data-save="factorServices"><output class="range-value" id="score-services">3</output></div>
+            <div class="range-row"><label for="factorVisa">Visa ease</label><input id="factorVisa" type="range" min="1" max="5" value="3" data-factor-score="visa" data-save="factorVisa"><output class="range-value" id="score-visa">3</output></div>
+            <div class="range-row"><label for="factorHelp">Help in trouble</label><input id="factorHelp" type="range" min="1" max="5" value="3" data-factor-score="help" data-save="factorHelp"><output class="range-value" id="score-help">3</output></div>
+            <div class="range-row"><label for="factorMentions">Friendly mentions</label><input id="factorMentions" type="range" min="1" max="5" value="3" data-factor-score="mentions" data-save="factorMentions"><output class="range-value" id="score-mentions">3</output></div>
+          </div>
+          <div class="score-result" aria-live="polite"><strong id="taiwanScore">18/30</strong><span>Your hypothetical score</span><p id="taiwanScoreSentence">In your model, Taiwan might be a strong contender.</p></div>
+        </div>
+        <p class="data-note">Language warning: a score you created can support a conclusion inside your model, but it cannot prove Taiwan’s position in a real global ranking.</p>
+        <div class="teacher-note"><strong>Open, then narrow:</strong> Take one minute per prompt. During the factor ranking, ask “Why is that first?” Do not teach the target forms yet. If the student naturally uses <em>maybe</em>, <em>I think</em>, or a bare present, note it for the first test.</div>
+      </section>
+
+      <section class="lesson-section" id="test-one" data-stage="2">
+        <div class="section-head">
+          <div><p class="eyebrow">Stage 2 · Test 1</p><h2>Make the first deductions</h2></div>
+          <span class="time-chip">8–18 minutes</span>
+        </div>
+        <p class="instruction">Do this before the language explanation. Read each clue and choose the phrase that matches the evidence. <strong>Could be</strong> and <strong>might be</strong> can both express a real possibility.</p>
+        <div class="clue-grid">
+          <article class="clue"><b>Clue A</b><p>Singapore scored highly for safety, English ability and visa access.</p></article>
+          <article class="clue"><b>Clue B</b><p>Taipei appears at #7 in a safety list, but its other scores are not shown.</p></article>
+          <article class="clue"><b>Clue C</b><p>London scored highly for English, visitor services and friendly online mentions.</p></article>
+          <article class="clue"><b>Clue D</b><p>A second source reportedly puts Magong near the top, but you have not seen its method yet.</p></article>
+        </div>
+        <div class="quiz-grid" id="test1Quiz" data-check-group="test1">
+          <div class="quiz-item"><span class="qnum">1</span><p><small>Strong evidence across three factors</small>Singapore ___ near the top of the ranking.</p><select aria-label="Test 1 question 1" data-answer="must be" data-save="test1q1"><option value="">Choose…</option><option>could be</option><option>might be</option><option>must be</option></select></div>
+          <div class="quiz-item"><span class="qnum">2</span><p><small>Only one factor is known</small>One or more of Taipei’s other scores ___ lower.</p><select aria-label="Test 1 question 2" data-answer="could be|might be" data-save="test1q2"><option value="">Choose…</option><option>could be</option><option>might be</option><option>must be</option></select></div>
+          <div class="quiz-item"><span class="qnum">3</span><p><small>Several strong London results</small>London ___ one of the leading cities.</p><select aria-label="Test 1 question 3" data-answer="must be" data-save="test1q3"><option value="">Choose…</option><option>could be</option><option>might be</option><option>must be</option></select></div>
+          <div class="quiz-item"><span class="qnum">4</span><p><small>An unverified report</small>The claim about Magong ___ true, but we need the method.</p><select aria-label="Test 1 question 4" data-answer="could be|might be" data-save="test1q4"><option value="">Choose…</option><option>could be</option><option>might be</option><option>must be</option></select></div>
+        </div>
+        <div class="actions"><button class="btn" type="button" data-check-button="test1">Check Test 1</button><span class="save-status">Your score will be compared with Test 2.</span></div>
+        <div class="feedback good" id="test1Good"></div>
+        <div class="feedback try" id="test1Try"></div>
+        <div class="write-box">
+          <label for="firstPrediction">Before reading, make one prediction about Taiwan or Taipei. Give evidence with <em>because</em>.</label>
+          <textarea id="firstPrediction" data-save="firstPrediction" placeholder="Taipei might be … because …"></textarea>
+        </div>
+        <div class="teacher-note"><strong>Do not repair immediately.</strong> Record the student’s choices and spoken sentence. Test 1 key: 1 <em>must be</em>; 2 <em>could be / might be</em>; 3 <em>must be</em>; 4 <em>could be / might be</em>. Accept either possibility modal and listen for the base form after the modal.</div>
+      </section>
+
+      <section class="lesson-section" id="vocabulary" data-stage="3">
+        <div class="section-head">
+          <div><p class="eyebrow">Stage 3 · Vocabulary</p><h2>Pack the vocabulary passport</h2></div>
+          <span class="time-chip">18–28 minutes</span>
+        </div>
+        <p class="instruction">Say each word, read its definition and create a Taiwan example aloud. Then complete the context check.</p>
+        <div class="vocab-grid">
+          <article class="vocab-card"><div class="vocab-top"><h3>ability</h3><span class="pos">noun</span></div><p class="phonetic">/əˈbɪləti/</p><p class="definition">Talent or skill in an area; the power or skill to do something.</p><p class="example">His musical ability was obvious at a young age.</p></article>
+          <article class="vocab-card"><div class="vocab-top"><h3>safety</h3><span class="pos">noun</span></div><p class="phonetic">/ˈseɪfti/</p><p class="definition">The state of being protected from, or unlikely to cause, danger or harm.</p><p class="example">When biking, you should wear a helmet for your own safety.</p></article>
+          <article class="vocab-card"><div class="vocab-top"><h3>population</h3><span class="pos">noun</span></div><p class="phonetic">/ˌpɒpjəˈleɪʃən/</p><p class="definition">All the people or animals living in a particular place.</p><p class="example">California has a population of over 39 million.</p></article>
+          <article class="vocab-card"><div class="vocab-top"><h3>trouble</h3><span class="pos">noun</span></div><p class="phonetic">/ˈtrʌbəl/</p><p class="definition">Problems or difficulty.</p><p class="example">I’m having trouble logging in to my account.</p></article>
+          <article class="vocab-card"><div class="vocab-top"><h3>mention</h3><span class="pos">noun</span></div><p class="phonetic">/ˈmenʃən/</p><p class="definition">An act of referring to someone or something.</p><p class="example">There was no mention of the budget during the meeting.</p></article>
+          <article class="vocab-card"><div class="vocab-top"><h3>separate</h3><span class="pos">adjective</span></div><p class="phonetic">/ˈseprət/</p><p class="definition">Distinct; not shared, connected or joined.</p><p class="example">My little sister and I have separate rooms.</p></article>
+        </div>
+        <h3 class="subhead">Context check</h3>
+        <div class="quiz-grid" id="vocabQuiz" data-check-group="vocab">
+          <div class="quiz-item"><span class="qnum">1</span><p>Taiwan’s ___ includes residents of many cities and islands.</p><select aria-label="Vocabulary question 1" data-answer="population" data-save="vocabq1"><option value="">Choose…</option><option>ability</option><option>safety</option><option>population</option><option>trouble</option><option>mention</option><option>separate</option></select></div>
+          <div class="quiz-item"><span class="qnum">2</span><p>A visitor who is in ___ may need clear information and local help.</p><select aria-label="Vocabulary question 2" data-answer="trouble" data-save="vocabq2"><option value="">Choose…</option><option>ability</option><option>safety</option><option>population</option><option>trouble</option><option>mention</option><option>separate</option></select></div>
+          <div class="quiz-item"><span class="qnum">3</span><p>English language ___ was one of Holafly’s six measures.</p><select aria-label="Vocabulary question 3" data-answer="ability" data-save="vocabq3"><option value="">Choose…</option><option>ability</option><option>safety</option><option>population</option><option>trouble</option><option>mention</option><option>separate</option></select></div>
+          <div class="quiz-item"><span class="qnum">4</span><p>Taipei appeared in a ___ list for the safest cities.</p><select aria-label="Vocabulary question 4" data-answer="separate" data-save="vocabq4"><option value="">Choose…</option><option>ability</option><option>safety</option><option>population</option><option>trouble</option><option>mention</option><option>separate</option></select></div>
+          <div class="quiz-item"><span class="qnum">5</span><p>A high number of positive online ___ can improve a city’s image.</p><select aria-label="Vocabulary question 5" data-answer="mentions" data-save="vocabq5"><option value="">Choose…</option><option>abilities</option><option>safety</option><option>populations</option><option>trouble</option><option>mentions</option><option>separate</option></select></div>
+          <div class="quiz-item"><span class="qnum">6</span><p>Good lighting and reliable transport may increase visitors’ sense of ___.</p><select aria-label="Vocabulary question 6" data-answer="safety" data-save="vocabq6"><option value="">Choose…</option><option>ability</option><option>safety</option><option>population</option><option>trouble</option><option>mention</option><option>separate</option></select></div>
+        </div>
+        <div class="actions"><button class="btn" type="button" data-check-button="vocab">Check vocabulary</button></div>
+        <div class="feedback good" id="vocabGood"></div><div class="feedback try" id="vocabTry"></div>
+        <div class="teacher-note"><strong>Personalise quickly:</strong> Ask for one Taiwan sentence per word, but cap this at six minutes. Answers: population, trouble, ability, separate, mentions, safety. Point out the plural <em>mentions</em> in item 5 and the adjective pronunciation of <em>separate</em>.</div>
+      </section>
+
+      <section class="lesson-section" id="read" data-stage="4">
+        <div class="section-head">
+          <div><p class="eyebrow">Stage 4 · Reading</p><h2>Read the evidence, then inspect the lists</h2></div>
+          <span class="time-chip">28–42 minutes</span>
+        </div>
+        <p class="instruction">First skim for the six measures. Then read closely and highlight the evidence that justifies each top-three position.</p>
+        <article class="article-shell">
+          <header class="article-header"><p class="eyebrow">Engoo Daily News · 11 August 2026</p><h3>These Are the World’s Most “Welcoming” Cities</h3><p>Level 6 · Intermediate · supplied lesson text</p></header>
+          <div class="article-body">
+            <p>Singapore is the world’s most “welcoming” city according to a new ranking that gives cities scores on things like English language <mark>ability</mark> and <mark>safety</mark> — as well as friendliness.</p>
+            <p>To find out where the world’s most welcoming cities are, an eSIM company called Holafly looked at 200 cities around the world that included 100 of the world’s most-visited cities and 100 cities with the biggest <mark>populations</mark>.</p>
+            <p>Researchers at Holafly collected data on six different ways in which cities can be welcoming to tourists, giving scores for each. These included scores based on safety, English language ability, the number of tourism and information services, how easy it is to visit without a visa, how easy it is to get help if you’re in <mark>trouble</mark>, and how often people say the city is “friendly” or “welcoming” online.</p>
+            <p>Taking first place in the ranking, Singapore scored very well for safety, for English language ability, and for how easy it is to visit without a visa. The city also has a good number of tourism and information services to make life easier for first-time visitors.</p>
+            <p>London in the UK took second place, and not surprisingly scored very well for English language ability! London also got a good score for its tourism and information services, and a high number of <mark>mentions</mark> online as a “friendly” or “welcoming” city!</p>
+            <p>In third place was Sydney in Australia, which also scored well for English language ability, tourism and information services, and had a fairly high score for safety.</p>
+            <p>Holafly also made <mark>separate</mark> rankings for the world’s most helpful cities and safest cities.</p>
+            <p>It said the world’s most helpful city is Tokyo in Japan, followed by Hamburg in Germany and Birmingham in the UK. And the world’s safest city is Sapporo in Japan, followed by Abu Dhabi in the UAE, and Yokohama in Japan.</p>
+          </div>
+          <div class="reading-tools"><span>Vocabulary from the source is highlighted.</span><a href="https://engoo.com/app/daily-news/article/these-are-the-worlds-most-welcoming-cities/8QJZ1I9qEfGBns-w-6VeTw" target="_blank" rel="noopener">Open the original Engoo lesson ↗</a></div>
+        </article>
+
+        <h3 class="subhead">Comprehension check</h3>
+        <div class="answer-grid" id="readingQuiz" data-check-group="reading">
+          <div class="answer-card"><label for="reading1">1. How many cities did Holafly examine?</label><select id="reading1" data-answer="200" data-save="reading1"><option value="">Choose…</option><option>100</option><option>200</option><option>300</option></select></div>
+          <div class="answer-card"><label for="reading2">2. What did London score well on?</label><select id="reading2" data-answer="english, services and mentions" data-save="reading2"><option value="">Choose…</option><option>Safety and visa access only</option><option value="english, services and mentions">English, services and online mentions</option><option>Population and food</option></select></div>
+          <div class="answer-card"><label for="reading3">3. What was the safest city?</label><select id="reading3" data-answer="sapporo" data-save="reading3"><option value="">Choose…</option><option>Tokyo</option><option>Sydney</option><option value="sapporo">Sapporo</option></select></div>
+        </div>
+        <div class="actions"><button class="btn" type="button" data-check-button="reading">Check reading</button></div>
+        <div class="feedback good" id="readingGood"></div><div class="feedback try" id="readingTry"></div>
+
+        <h3 class="subhead">Three rankings, three questions</h3>
+        <p class="sub-instruction">Taipei is not in the overall top ten. It appears at #7 only in the separate safety list.</p>
+        <div class="rank-grid">
+          <article class="rank-card"><h3>Most welcoming</h3><ol class="rank-list"><li>Singapore</li><li>London</li><li>Sydney</li><li>New York</li><li>Boston</li><li>Penang Island</li><li>The Hague</li><li>Hong Kong</li><li>Copenhagen</li><li>Aarhus</li></ol></article>
+          <article class="rank-card"><h3>Most helpful</h3><ol class="rank-list"><li>Tokyo</li><li>Hamburg</li><li>Birmingham</li><li>Ottawa</li><li>Brisbane</li><li>Montreal</li><li>Berlin</li><li>Sydney</li><li>Paris</li><li>Beijing</li></ol></article>
+          <article class="rank-card"><h3>Safest</h3><ol class="rank-list"><li>Sapporo</li><li>Abu Dhabi</li><li>Yokohama</li><li>Sharjah</li><li>Dubai</li><li>Kobe</li><li class="taiwan">Taipei · Taiwan</li><li>The Hague</li><li>Salzburg</li><li>Utrecht</li></ol></article>
+        </div>
+
+        <h3 class="subhead">Taiwan reveal: same label, different method</h3>
+        <div class="method-grid">
+          <article class="method-card primary"><p class="eyebrow">Data set A · Holafly / Engoo</p><h3>Composite city index</h3><p><strong>Coverage:</strong> 200 large or highly visited cities.</p><p><strong>Measures:</strong> safety, English, services, visa ease, help and online mentions.</p><p><strong>Taiwan result shown:</strong> Taipei is #7 for safety, not top ten overall.</p></article>
+          <article class="method-card secondary-method"><p class="eyebrow">Data set B · Booking.com 2026</p><h3>Accommodation awards</h3><p><strong>Evidence base:</strong> more than 370 million verified reviews.</p><p><strong>Measure:</strong> the share of eligible local accommodation partners receiving a Traveller Review Award.</p><button class="btn gold small" type="button" data-reveal="magongResult">Reveal Taiwan’s position</button><div class="method-result" id="magongResult"><strong>#2 · Magong, Taiwan</strong><p>Second in the published global order, after Montepulciano, Italy.</p></div></article>
+        </div>
+        <div class="accuracy-note"><strong>Critical-reading rule:</strong> these lists do not contradict each other; they measure different things. Neither source provides a directly comparable current ranking of whole countries. We can speculate about Taiwan as a country, but we must label that as a hypothesis.</div>
+        <div class="teacher-note"><strong>Reading key:</strong> 200; English ability + visitor services + friendly/welcoming online mentions; Sapporo. Before revealing Magong, ask the student to predict with <em>might</em> or <em>could</em>. After the reveal, elicit: “Magong must be doing very well under Booking.com’s accommodation-award method.”</div>
+      </section>
+
+      <section class="lesson-section" id="teach" data-stage="5">
+        <div class="section-head">
+          <div><p class="eyebrow">Stage 5 · Teach</p><h2>Match the modal to the evidence</h2></div>
+          <span class="time-chip">42–54 minutes</span>
+        </div>
+        <p class="instruction">Now compare your Test 1 choices with the system below. The key decision is not “Which phrase sounds advanced?” It is “How strongly does my evidence support this conclusion?”</p>
+        <div class="certainty-grid">
+          <article class="certainty-card could"><h3>could be</h3><p class="meaning">A possible explanation or result. The evidence leaves several options open.</p><p class="model">Different methods <strong>could be</strong> producing different winners.</p></article>
+          <article class="certainty-card might"><h3>might be</h3><p class="meaning">A real but uncertain possibility. Often interchangeable with <em>could be</em> here.</p><p class="model">Taiwan <strong>might be</strong> high in a country ranking.</p></article>
+          <article class="certainty-card must"><h3>must be</h3><p class="meaning">A strong logical conclusion from evidence—not an obligation and not absolute proof.</p><p class="model">Taipei <strong>must be</strong> strong on safety in this data set.</p></article>
+        </div>
+        <div class="certainty-line" aria-hidden="true"><span>open possibility</span><span>uncertain</span><span>strong deduction</span></div>
+        <div class="formula"><strong>evidence + subject + modal + base verb + reason</strong><p>Taipei is #7 for safety, so it <u>must be</u> performing strongly on that measure.</p></div>
+        <div class="micro-grid">
+          <article class="micro-card"><strong>Form</strong><p>Use the base form: <em>must be</em>, not <s>must to be</s> or <s>must is</s>. No third-person <em>-s</em> follows a modal.</p></article>
+          <article class="micro-card"><strong>Meaning</strong><p><em>Must be</em> means “the evidence strongly points to this.” Do not use it to generalise from a city to every person or place.</p></article>
+          <article class="micro-card"><strong>Could vs might</strong><p>Both are acceptable for an uncertain possibility in today’s tasks. Do not force a fixed percentage difference.</p></article>
+          <article class="micro-card"><strong>Pronunciation</strong><p>Link the phrase smoothly: /kʊd biː/, /maɪt biː/, /mʌs(t) biː/. The /t/ in <em>must</em> may be light in connected speech.</p></article>
+        </div>
+
+        <h3 class="subhead">Form surgery</h3>
+        <div class="quiz-grid" id="formQuiz" data-check-group="form">
+          <div class="quiz-item"><span class="qnum">1</span><p>Which form is accurate?</p><select aria-label="Form question 1" data-answer="taipei must be safe" data-save="formq1"><option value="">Choose…</option><option value="taipei must to be safe">Taipei must to be safe.</option><option value="taipei must be safe">Taipei must be safe.</option><option value="taipei must is safe">Taipei must is safe.</option></select></div>
+          <div class="quiz-item"><span class="qnum">2</span><p>Which form expresses a possibility?</p><select aria-label="Form question 2" data-answer="magong might be welcoming" data-save="formq2"><option value="">Choose…</option><option value="magong might is welcoming">Magong might is welcoming.</option><option value="magong might to be welcoming">Magong might to be welcoming.</option><option value="magong might be welcoming">Magong might be welcoming.</option></select></div>
+          <div class="quiz-item"><span class="qnum">3</span><p>Which form keeps the main verb in the base form?</p><select aria-label="Form question 3" data-answer="the method could produce a different result" data-save="formq3"><option value="">Choose…</option><option value="the method could produces a different result">The method could produces a different result.</option><option value="the method could produce a different result">The method could produce a different result.</option><option value="the method could to produce a different result">The method could to produce a different result.</option></select></div>
+        </div>
+        <div class="actions"><button class="btn" type="button" data-check-button="form">Check the forms</button></div>
+        <div class="feedback good" id="formGood"></div><div class="feedback try" id="formTry"></div>
+        <div class="teacher-note"><strong>Board this contrast:</strong> “The ranking says Taipei is #7 for safety → it <em>must be</em> strong on safety.” / “It gives no English score → English <em>might be / could be</em> a weaker factor.” Ask the student to explain why <em>must</em> is not suitable in the second sentence.</div>
+      </section>
+
+      <section class="lesson-section" id="test-two" data-stage="6">
+        <div class="section-head">
+          <div><p class="eyebrow">Stage 6 · Test 2</p><h2>Run the Taiwan evidence lab</h2></div>
+          <span class="time-chip">54–68 minutes</span>
+        </div>
+        <p class="instruction">No rule prompts this time. Use only the evidence available, keep the city and country claims separate, and choose the most defensible phrase.</p>
+        <div class="evidence-strip">
+          <div class="evidence-mini"><b>Known:</b> Taipei is #7 in Holafly’s separate safety list.</div>
+          <div class="evidence-mini"><b>Known:</b> Magong is #2 in Booking.com’s different 2026 list.</div>
+          <div class="evidence-mini"><b>Unknown:</b> no comparable current whole-country position is supplied.</div>
+        </div>
+        <div class="quiz-grid" id="test2Quiz" data-check-group="test2">
+          <div class="quiz-item"><span class="qnum">1</span><p><small>Direct ranking evidence</small>Taipei ___ strong on safety in Holafly’s data set.</p><select aria-label="Test 2 question 1" data-answer="must be" data-save="test2q1"><option value="">Choose…</option><option>could be</option><option>might be</option><option>must be</option></select></div>
+          <div class="quiz-item"><span class="qnum">2</span><p><small>Missing factor scores</small>One or more of Taipei’s other factors ___ weaker.</p><select aria-label="Test 2 question 2" data-answer="could be|might be" data-save="test2q2"><option value="">Choose…</option><option>could be</option><option>might be</option><option>must be</option></select></div>
+          <div class="quiz-item"><span class="qnum">3</span><p><small>#2 under the accommodation-award method</small>Magong’s accommodation hospitality ___ excellent under that measure.</p><select aria-label="Test 2 question 3" data-answer="must be" data-save="test2q3"><option value="">Choose…</option><option>could be</option><option>might be</option><option>must be</option></select></div>
+          <div class="quiz-item"><span class="qnum">4</span><p><small>Different methods</small>The winners ___ different because each list measures something different.</p><select aria-label="Test 2 question 4" data-answer="could be|might be" data-save="test2q4"><option value="">Choose…</option><option>could be</option><option>might be</option><option>must be</option></select></div>
+          <div class="quiz-item"><span class="qnum">5</span><p><small>No current country table</small>Taiwan ___ high in a welcoming-country ranking, but more data is needed.</p><select aria-label="Test 2 question 5" data-answer="could be|might be" data-save="test2q5"><option value="">Choose…</option><option>could be</option><option>might be</option><option>must be</option></select></div>
+        </div>
+        <div class="actions"><button class="btn" type="button" data-check-button="test2">Check Test 2</button><span class="save-status">Both possibility forms are accepted where the evidence is incomplete.</span></div>
+        <div class="feedback good" id="test2Good"></div><div class="feedback try" id="test2Try"></div>
+        <div class="test-scoreboard" aria-live="polite">
+          <div class="score-box"><strong id="test1Score">—</strong><span>Test 1 · out of 4</span></div>
+          <div class="score-arrow">→</div>
+          <div class="score-box"><strong id="test2Score">—</strong><span>Test 2 · out of 5</span></div>
+        </div>
+
+        <div class="country-board">
+          <p class="eyebrow">Class hypothesis · not published data</p>
+          <h3 class="subhead" style="margin-top:7px">Build your predicted country ranking</h3>
+          <p class="sub-instruction">Click the five countries from most to least welcoming. The goal is to justify Taiwan’s position—not to claim that the list is factual.</p>
+          <div class="sequence-builder" data-sequence-name="countries">
+            <div class="sequence-bank"><button class="sequence-chip" type="button" data-item="Taiwan">Taiwan</button><button class="sequence-chip" type="button" data-item="Japan">Japan</button><button class="sequence-chip" type="button" data-item="Singapore">Singapore</button><button class="sequence-chip" type="button" data-item="Canada">Canada</button><button class="sequence-chip" type="button" data-item="New Zealand">New Zealand</button></div>
+            <div class="sequence-output" id="countriesOutput" aria-live="polite"><span class="placeholder">Your predicted countries will appear here.</span></div>
+            <button class="btn secondary small" type="button" data-reset-sequence="countries">Clear ranking</button>
+          </div>
+          <div class="rank-sentence" id="countrySentence">Taiwan is <strong id="taiwanRankPosition">—</strong> in your prediction. Explain it with an uncertainty modal.</div>
+          <div class="write-box"><label for="countryReason">Justification: use <em>could be</em> or <em>might be</em>, one reason, and one limitation.</label><textarea id="countryReason" data-save="countryReason" placeholder="Taiwan might be near the top because … However, this prediction could be affected by …"></textarea></div>
+        </div>
+        <div class="accuracy-note"><strong>Stereotype check:</strong> “Magong is #2, so every Taiwanese city must be welcoming” is not a logical deduction. A result for one city, one measure or one sample cannot describe every place or person.</div>
+        <div class="teacher-note"><strong>Test 2 key:</strong> 1 must be; 2 could/might be; 3 must be <em>under that measure</em>; 4 could/might be; 5 could/might be. Compare accuracy and ask the student to self-correct one sentence from Test 1. Country order is intentionally open; evaluate only the quality of the justification.</div>
+      </section>
+
+      <section class="lesson-section" id="discussion" data-stage="7">
+        <div class="section-head">
+          <div><p class="eyebrow">Stage 7 · Extended discussion + exit</p><h2>Defend a view without overclaiming</h2></div>
+          <span class="time-chip">68–80 minutes</span>
+        </div>
+        <p class="instruction">Draw a question, speak for 60–90 seconds, and support each speculative claim with a reason or example. Draw at least three questions.</p>
+        <div class="discussion-stage">
+          <div class="question-draw">
+            <div><p class="eyebrow">Discussion card</p><p class="drawn-question" id="drawnQuestion">Why might Taipei rank highly for safety but not appear in the overall welcoming top ten?</p></div>
+            <button class="btn gold" id="drawQuestion" type="button">Draw another question</button>
+          </div>
+          <div>
+            <h3 style="margin-top:0">Spend all three language tokens</h3>
+            <div class="token-list">
+              <label class="token"><input type="checkbox" data-check="usedCould"><span>I used <strong>could be</strong> for an open possibility.</span></label>
+              <label class="token"><input type="checkbox" data-check="usedMight"><span>I used <strong>might be</strong> for an uncertain possibility.</span></label>
+              <label class="token"><input type="checkbox" data-check="usedMust"><span>I used <strong>must be</strong> for a strong evidence-based deduction.</span></label>
+            </div>
+            <div class="discussion-notes"><label class="sr-only" for="discussionNotes">Discussion evidence notes</label><textarea id="discussionNotes" data-save="discussionNotes" placeholder="Note the strongest evidence or phrase you heard …"></textarea></div>
+          </div>
+        </div>
+        <div class="exit-grid">
+          <div class="checklist">
+            <label class="check-row"><input type="checkbox" data-check="exitMeaning"><span>I match certainty to evidence.</span></label>
+            <label class="check-row"><input type="checkbox" data-check="exitForm"><span>I use the base verb after a modal.</span></label>
+            <label class="check-row"><input type="checkbox" data-check="exitLimit"><span>I separate data from stereotypes.</span></label>
+          </div>
+          <div class="write-box" style="margin-top:0"><label for="exitSentence">Exit ticket: write one three-sentence conclusion using <em>could be</em>, <em>might be</em> and <em>must be</em> once each.</label><textarea id="exitSentence" data-save="exitSentence" placeholder="Taipei must be … Another factor might be … A different method could be …"></textarea><div class="word-meta"><span class="word-badge" id="exitCould">could be</span><span class="word-badge" id="exitMight">might be</span><span class="word-badge" id="exitMust">must be</span></div></div>
+        </div>
+        <div class="actions"><button class="btn gold" id="completeLesson" type="button">Mark class lesson complete</button><span class="complete-message" id="lessonCompleteMessage">✓ Class lesson saved as complete.</span></div>
+        <div class="teacher-note"><strong>Question bank:</strong> The draw includes the ten Engoo discussion/further-discussion themes plus Taiwan-specific critical questions. For the exit ticket, do not supply the endings. A successful answer contains all three forms, an evidence-based <em>must</em>, and uncertainty where the data is incomplete.</div>
+      </section>
+
+      <section class="homework" id="homework">
+        <div class="homework-banner">
+          <div><p class="eyebrow">Homework · 25–35 minutes</p><h2>Japanese Tourists Are the Most Polite — Survey</h2><p>Read, check the data and use modal deductions without turning survey results into stereotypes.</p></div>
+          <a class="btn gold" href="https://engoo.com/app/daily-news/article/japanese-tourists-are-the-most-polite-survey/JUAvkqYwEfG8gxdxdmaZkQ" target="_blank" rel="noopener">Open homework article ↗</a>
+        </div>
+
+        <div class="homework-step">
+          <div class="step-title"><span class="step-number">1</span><h3>Preview the vocabulary</h3></div>
+          <div class="vocab-grid homework-vocab">
+            <article class="vocab-card"><div class="vocab-top"><h3>polite</h3><span class="pos">adjective</span></div><p class="phonetic">/pəˈlaɪt/</p><p class="definition">Showing respect and consideration for other people.</p><p class="example">The guide was polite even when the group was late.</p></article>
+            <article class="vocab-card"><div class="vocab-top"><h3>tour</h3><span class="pos">noun</span></div><p class="phonetic">/tʊr/</p><p class="definition">A visit around a place, usually to see or learn about it.</p><p class="example">We joined a walking tour of the old district.</p></article>
+            <article class="vocab-card"><div class="vocab-top"><h3>operator</h3><span class="pos">noun</span></div><p class="phonetic">/ˈɒpəreɪtər/</p><p class="definition">A person or organisation that runs a business or service.</p><p class="example">The ferry operator changed the departure time.</p></article>
+            <article class="vocab-card"><div class="vocab-top"><h3>tipper</h3><span class="pos">noun</span></div><p class="phonetic">/ˈtɪpər/</p><p class="definition">A person described by the amount they leave as a tip.</p><p class="example">Local customs can influence whether visitors are big tippers.</p></article>
+            <article class="vocab-card"><div class="vocab-top"><h3>spender</h3><span class="pos">noun</span></div><p class="phonetic">/ˈspendər/</p><p class="definition">Someone described by how they spend money.</p><p class="example">A careful spender may set a daily travel budget.</p></article>
+            <article class="vocab-card"><div class="vocab-top"><h3>adventurous</h3><span class="pos">adjective</span></div><p class="phonetic">/ədˈventʃərəs/</p><p class="definition">Willing to take risks or try unfamiliar experiences.</p><p class="example">An adventurous visitor might taste every night-market dish.</p></article>
+          </div>
+          <div class="quiz-grid" id="homeVocabQuiz" data-check-group="homeVocab" style="margin-top:14px">
+            <div class="quiz-item"><span class="qnum">1</span><p>Do you want to do a guided ___ of the castle?</p><select aria-label="Homework vocabulary 1" data-answer="tour" data-save="homeVocab1"><option value="">Choose…</option><option>operator</option><option>adventurous</option><option>tippers</option><option>spender</option><option>polite</option><option>tour</option></select></div>
+            <div class="quiz-item"><span class="qnum">2</span><p>American tourists are often big ___.</p><select aria-label="Homework vocabulary 2" data-answer="tippers" data-save="homeVocab2"><option value="">Choose…</option><option>operator</option><option>adventurous</option><option>tippers</option><option>spender</option><option>polite</option><option>tour</option></select></div>
+            <div class="quiz-item"><span class="qnum">3</span><p>I’m not very ___, but I would like to try skydiving.</p><select aria-label="Homework vocabulary 3" data-answer="adventurous" data-save="homeVocab3"><option value="">Choose…</option><option>operator</option><option>adventurous</option><option>tippers</option><option>spender</option><option>polite</option><option>tour</option></select></div>
+            <div class="quiz-item"><span class="qnum">4</span><p>The hotel staff were helpful and ___.</p><select aria-label="Homework vocabulary 4" data-answer="polite" data-save="homeVocab4"><option value="">Choose…</option><option>operator</option><option>adventurous</option><option>tippers</option><option>spender</option><option>polite</option><option>tour</option></select></div>
+            <div class="quiz-item"><span class="qnum">5</span><p>The cruise ___ cancelled the trip because of the weather.</p><select aria-label="Homework vocabulary 5" data-answer="operator" data-save="homeVocab5"><option value="">Choose…</option><option>operator</option><option>adventurous</option><option>tippers</option><option>spender</option><option>polite</option><option>tour</option></select></div>
+            <div class="quiz-item"><span class="qnum">6</span><p>My brother is a big ___, especially when it comes to watches.</p><select aria-label="Homework vocabulary 6" data-answer="spender" data-save="homeVocab6"><option value="">Choose…</option><option>operator</option><option>adventurous</option><option>tippers</option><option>spender</option><option>polite</option><option>tour</option></select></div>
+          </div>
+          <div class="actions"><button class="btn" type="button" data-check-button="homeVocab">Check homework vocabulary</button></div>
+          <div class="feedback good" id="homeVocabGood"></div><div class="feedback try" id="homeVocabTry"></div>
+        </div>
+
+        <div class="homework-step">
+          <div class="step-title"><span class="step-number">2</span><h3>Read the article and check the facts</h3></div>
+          <div class="source-card"><div><h4>Read on Engoo before answering</h4><p>The survey asked 192 Africa-focused safari tour operators. Its result describes this sample—not every tourist in the world.</p></div><a class="btn secondary" href="https://engoo.com/app/daily-news/article/japanese-tourists-are-the-most-polite-survey/JUAvkqYwEfG8gxdxdmaZkQ" target="_blank" rel="noopener">Read article ↗</a></div>
+          <div class="quiz-grid" id="homeReadingQuiz" data-check-group="homeReading" style="margin-top:14px">
+            <div class="quiz-item"><span class="qnum">1</span><p>Norwegians were the second-most polite tourists in the survey.</p><select aria-label="Homework reading 1" data-answer="true" data-save="homeRead1"><option value="">Choose…</option><option value="true">True</option><option value="false">False</option></select></div>
+            <div class="quiz-item"><span class="qnum">2</span><p>About 30% of operators named Americans as the best tippers.</p><select aria-label="Homework reading 2" data-answer="true" data-save="homeRead2"><option value="">Choose…</option><option value="true">True</option><option value="false">False</option></select></div>
+            <div class="quiz-item"><span class="qnum">3</span><p>Americans, Germans and Canadians were named the biggest spenders.</p><select aria-label="Homework reading 3" data-answer="true" data-save="homeRead3"><option value="">Choose…</option><option value="true">True</option><option value="false">False</option></select></div>
+          </div>
+          <div class="actions"><button class="btn" type="button" data-check-button="homeReading">Check article facts</button><button class="btn secondary" type="button" data-reveal="homeData">Show the evidence table</button></div>
+          <div class="feedback good" id="homeReadingGood"></div><div class="feedback try" id="homeReadingTry"></div>
+          <div class="homework-data" id="homeData">
+            <table class="data-table"><thead><tr><th>Survey category</th><th>Leading group(s)</th><th>Reported share</th></tr></thead><tbody><tr><td>Most polite</td><td>Japan; Norway second</td><td>21.1%; 10.6%</td></tr><tr><td>Best tippers</td><td>USA; Germany second; Canada third</td><td>29.5%; 13.1%; 10%</td></tr><tr><td>Biggest spenders</td><td>USA; Germany and Canada tied next</td><td>24%; 12.8%; 12.8%</td></tr><tr><td>Most adventurous</td><td>Germany; France second</td><td>21.1%; 17.8%</td></tr></tbody></table>
+          </div>
+        </div>
+
+        <div class="homework-step">
+          <div class="step-title"><span class="step-number">3</span><h3>Turn data into careful deductions</h3></div>
+          <div class="quiz-grid" id="homeModalQuiz" data-check-group="homeModal">
+            <div class="quiz-item"><span class="qnum">1</span><p><small>Japan has the highest share</small>Within this survey, Japan ___ the leading group for politeness.</p><select aria-label="Homework modal 1" data-answer="must be" data-save="homeModal1"><option value="">Choose…</option><option>could be</option><option>might be</option><option>must be</option></select></div>
+            <div class="quiz-item"><span class="qnum">2</span><p><small>One limited sample</small>The result ___ different if operators in another region were asked.</p><select aria-label="Homework modal 2" data-answer="could be|might be" data-save="homeModal2"><option value="">Choose…</option><option>could be</option><option>might be</option><option>must be</option></select></div>
+            <div class="quiz-item"><span class="qnum">3</span><p><small>29.5% chose the USA</small>American safari guests ___ generous tippers, but this does not describe everyone.</p><select aria-label="Homework modal 3" data-answer="could be|might be" data-save="homeModal3"><option value="">Choose…</option><option>could be</option><option>might be</option><option>must be</option></select></div>
+            <div class="quiz-item"><span class="qnum">4</span><p><small>Germany leads this category</small>In the adventurous ranking, Germany ___ at the top.</p><select aria-label="Homework modal 4" data-answer="must be" data-save="homeModal4"><option value="">Choose…</option><option>could be</option><option>might be</option><option>must be</option></select></div>
+            <div class="quiz-item"><span class="qnum">5</span><p><small>Survey limitation</small>The operators’ experiences ___ influenced by the types of trips they run.</p><select aria-label="Homework modal 5" data-answer="could be|might be" data-save="homeModal5"><option value="">Choose…</option><option>could be</option><option>might be</option><option>must be</option></select></div>
+          </div>
+          <div class="actions"><button class="btn" type="button" data-check-button="homeModal">Check modal deductions</button></div>
+          <div class="feedback good" id="homeModalGood"></div><div class="feedback try" id="homeModalTry"></div>
+          <div class="accuracy-note"><strong>Best correction:</strong> Avoid “Japanese tourists must always be polite.” Say: “Japan must be the leading group <em>in this survey</em>, but an individual tourist could be different.”</div>
+        </div>
+
+        <div class="homework-step">
+          <div class="step-title"><span class="step-number">4</span><h3>Write the evidence paragraph</h3></div>
+          <p class="sub-instruction">Write 100–130 words answering: <strong>What can this survey reasonably suggest about tourist behaviour?</strong> Include one number, one limitation, and all three target phrases.</p>
+          <div class="write-box"><label for="homeWriting">Your paragraph</label><textarea id="homeWriting" data-save="homeWriting" data-word-counter="homeWordCount" placeholder="The results suggest that … Within this survey, Japan must be … However, the result might be … Another sample could be …"></textarea><div class="word-meta"><span class="word-badge" id="homeWordCount">0 words</span><span class="word-badge" id="homeCould">could be</span><span class="word-badge" id="homeMight">might be</span><span class="word-badge" id="homeMust">must be</span></div></div>
+          <div class="write-box"><label for="homeReflection">One final response: Which finding surprised you most, and why?</label><textarea id="homeReflection" data-save="homeReflection" placeholder="I was surprised that … because …"></textarea></div>
+        </div>
+
+        <div class="complete-bar">
+          <button class="btn secondary" id="copyHomework" type="button">Copy homework brief</button>
+          <button class="btn gold" id="completeHomework" type="button">Mark homework complete</button>
+          <span class="complete-message" id="homeworkCompleteMessage">✓ Homework saved as complete.</span>
+        </div>
+        <div class="teacher-note"><strong>Homework key:</strong> Vocabulary: tour, tippers, adventurous, polite, operator, spender. All three article statements are true. Modal key: must be; could/might be; could/might be; must be; could/might be. In the paragraph, assess calibration and the stated sample limitation, not agreement with the survey.</div>
+      </section>
+
+      <section class="sources" aria-labelledby="sourcesHeading">
+        <h2 id="sourcesHeading">Source & method notes</h2>
+        <ul>
+          <li><a href="https://engoo.com/app/daily-news/article/these-are-the-worlds-most-welcoming-cities/8QJZ1I9qEfGBns-w-6VeTw" target="_blank" rel="noopener">Engoo: These Are the World’s Most “Welcoming” Cities</a> — lesson text, vocabulary, questions and Holafly ranking graphic.</li>
+          <li><a href="https://news.booking.com/bookingcom-announces-the-worlds-most-welcoming-cities-for-2026/" target="_blank" rel="noopener">Booking.com: World’s Most Welcoming Cities for 2026</a> — Magong result and accommodation-award methodology.</li>
+          <li><a href="https://engoo.com/app/daily-news/article/japanese-tourists-are-the-most-polite-survey/JUAvkqYwEfG8gxdxdmaZkQ" target="_blank" rel="noopener">Engoo: Japanese Tourists Are the Most Polite — Survey</a> — homework article and vocabulary.</li>
+          <li><a href="https://www.safaribookings.com/blog/survey-reveals-the-worlds-politest-tourists" target="_blank" rel="noopener">SafariBookings: full survey</a> — underlying percentages and scope (192 Africa-focused safari operators).</li>
+        </ul>
+      </section>
+      <p class="footer">GrahamIELTS · Interactive lesson · Responses stay in this browser on this device.</p>
+    </main>
+  </div>
+
+  <div class="mobile-tools" aria-label="Mobile lesson tools">
+    <div><span class="eyebrow">Class timer</span><div class="timer" id="timerMobile">80:00</div></div>
+    <button class="btn small" id="timerToggleMobile" type="button">Start</button>
+    <button class="btn secondary small" id="teacherToggleMobile" type="button">Notes</button>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      'use strict';
+      const STORAGE_KEY = 'grahamielts-welcoming-cities-ttt-v1';
+      const defaultState = { fields: {}, checks: {}, scores: {}, sequences: { criteria: [], countries: [] }, lessonComplete: false, homeworkComplete: false };
+      let state = JSON.parse(JSON.stringify(defaultState));
+      try {
+        const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        state = Object.assign(state, stored);
+        state.fields = Object.assign({}, defaultState.fields, stored.fields || {});
+        state.checks = Object.assign({}, defaultState.checks, stored.checks || {});
+        state.scores = Object.assign({}, defaultState.scores, stored.scores || {});
+        state.sequences = Object.assign({}, defaultState.sequences, stored.sequences || {});
+      } catch (error) {}
+
+      function persist() {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (error) {}
+        updateProgress();
+      }
+      function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(showToast.timer);
+        showToast.timer = setTimeout(function () { toast.classList.remove('show'); }, 2300);
+      }
+      function normalise(value) { return String(value || '').trim().toLowerCase(); }
+      function wordCount(value) { return String(value || '').trim().split(/\s+/).filter(Boolean).length; }
+
+      document.querySelectorAll('[data-save]').forEach(function (field) {
+        const key = field.dataset.save;
+        if (Object.prototype.hasOwnProperty.call(state.fields, key)) field.value = state.fields[key];
+        const eventName = field.matches('select,input[type="checkbox"]') ? 'change' : 'input';
+        field.addEventListener(eventName, function () {
+          state.fields[key] = field.value;
+          persist();
+          updateDynamicFields();
+        });
+      });
+      document.querySelectorAll('[data-check]').forEach(function (checkbox) {
+        const key = checkbox.dataset.check;
+        checkbox.checked = !!state.checks[key];
+        checkbox.addEventListener('change', function () { state.checks[key] = checkbox.checked; persist(); });
+      });
+
+      function checkGroup(name, silent) {
+        const group = document.querySelector('[data-check-group="' + name + '"]');
+        if (!group) return { score: 0, total: 0 };
+        const questions = Array.from(group.querySelectorAll('[data-answer]'));
+        let score = 0;
+        questions.forEach(function (field) {
+          const accepted = field.dataset.answer.split('|').map(normalise);
+          const correct = accepted.includes(normalise(field.value));
+          if (correct) score += 1;
+          if (!silent) {
+            field.classList.toggle('correct', correct);
+            field.classList.toggle('wrong', !correct);
+          }
+        });
+        state.scores[name] = score;
+        state.checks['group-' + name] = score === questions.length;
+        persist();
+        updateScoreboard();
+        if (!silent) {
+          const good = document.getElementById(name + 'Good');
+          const retry = document.getElementById(name + 'Try');
+          if (good) {
+            good.textContent = score === questions.length ? 'Excellent — ' + score + '/' + questions.length + ' correct.' : '';
+            good.classList.toggle('show', score === questions.length);
+          }
+          if (retry) {
+            retry.textContent = score === questions.length ? '' : 'You have ' + score + '/' + questions.length + '. Recheck the evidence and the verb form, then try again.';
+            retry.classList.toggle('show', score !== questions.length);
+          }
+        }
+        return { score: score, total: questions.length };
+      }
+      document.querySelectorAll('[data-check-button]').forEach(function (button) {
+        button.addEventListener('click', function () { checkGroup(button.dataset.checkButton, false); });
+      });
+
+      const itemLabels = {};
+      document.querySelectorAll('.sequence-chip[data-item]').forEach(function (button) { itemLabels[button.dataset.item] = button.textContent.trim(); });
+      function renderSequence(name) {
+        const builder = document.querySelector('[data-sequence-name="' + name + '"]');
+        if (!builder) return;
+        const sequence = state.sequences[name] || [];
+        const output = document.getElementById(name + 'Output');
+        output.innerHTML = '';
+        if (!sequence.length) output.innerHTML = '<span class="placeholder">Your ' + (name === 'criteria' ? 'ordered factors' : 'predicted countries') + ' will appear here.</span>';
+        sequence.forEach(function (item, index) {
+          const chip = document.createElement('span');
+          chip.className = 'placed-chip';
+          chip.innerHTML = '<b>' + (index + 1) + '</b> ' + (itemLabels[item] || item);
+          output.appendChild(chip);
+        });
+        builder.querySelectorAll('.sequence-chip').forEach(function (button) { button.disabled = sequence.includes(button.dataset.item); });
+        if (name === 'countries') {
+          const taiwanIndex = sequence.indexOf('Taiwan');
+          const sentence = document.getElementById('countrySentence');
+          sentence.classList.toggle('show', taiwanIndex !== -1);
+          document.getElementById('taiwanRankPosition').textContent = taiwanIndex === -1 ? '—' : '#' + (taiwanIndex + 1);
+        }
+      }
+      document.querySelectorAll('.sequence-builder').forEach(function (builder) {
+        const name = builder.dataset.sequenceName;
+        builder.querySelectorAll('.sequence-chip').forEach(function (button) {
+          button.addEventListener('click', function () {
+            if (!state.sequences[name].includes(button.dataset.item)) state.sequences[name].push(button.dataset.item);
+            renderSequence(name); persist();
+          });
+        });
+      });
+      document.querySelectorAll('[data-reset-sequence]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          state.sequences[button.dataset.resetSequence] = [];
+          renderSequence(button.dataset.resetSequence); persist();
+        });
+      });
+
+      document.querySelectorAll('[data-reveal]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const target = document.getElementById(button.dataset.reveal);
+          const shown = target.classList.toggle('show');
+          if (button.dataset.reveal === 'magongResult') button.textContent = shown ? 'Hide Taiwan’s position' : 'Reveal Taiwan’s position';
+          else if (button.dataset.reveal === 'homeData') button.textContent = shown ? 'Hide the evidence table' : 'Show the evidence table';
+        });
+      });
+
+      function updateTaiwanScore() {
+        let total = 0;
+        document.querySelectorAll('[data-factor-score]').forEach(function (slider) {
+          const value = Number(slider.value);
+          total += value;
+          document.getElementById('score-' + slider.dataset.factorScore).textContent = value;
+        });
+        document.getElementById('taiwanScore').textContent = total + '/30';
+        let sentence = 'In your model, Taiwan could be developing as a welcoming destination.';
+        if (total >= 23) sentence = 'Given your scores, Taiwan must be a strong contender in your own model.';
+        else if (total >= 15) sentence = 'In your model, Taiwan might be a strong contender.';
+        document.getElementById('taiwanScoreSentence').textContent = sentence;
+      }
+      document.querySelectorAll('[data-factor-score]').forEach(function (slider) { slider.addEventListener('input', updateTaiwanScore); });
+
+      function updatePhraseBadges(fieldId, prefix) {
+        const field = document.getElementById(fieldId);
+        if (!field) return;
+        const text = normalise(field.value);
+        ['Could','Might','Must'].forEach(function (name) {
+          const badge = document.getElementById(prefix + name);
+          if (badge) badge.classList.toggle('on', text.includes(name.toLowerCase() + ' be'));
+        });
+      }
+      function updateDynamicFields() {
+        document.querySelectorAll('[data-word-counter]').forEach(function (field) {
+          const badge = document.getElementById(field.dataset.wordCounter);
+          if (badge) badge.textContent = wordCount(field.value) + ' words';
+        });
+        updatePhraseBadges('homeWriting', 'home');
+        updatePhraseBadges('exitSentence', 'exit');
+        updateTaiwanScore();
+      }
+
+      function updateScoreboard() {
+        document.getElementById('test1Score').textContent = Number.isFinite(state.scores.test1) ? state.scores.test1 : '—';
+        document.getElementById('test2Score').textContent = Number.isFinite(state.scores.test2) ? state.scores.test2 : '—';
+      }
+
+      const discussionQuestions = [
+        'Why might Taipei rank highly for safety but not appear in the overall welcoming top ten?',
+        'What are your thoughts on Holafly’s rankings?',
+        'What is the most welcoming place you have visited, and what evidence supports your view?',
+        'Have you ever struggled to find tourist information while travelling? What could have helped?',
+        'How easy might it be to get by speaking English in your town or city?',
+        'What might visitors say people in Taiwan are known for?',
+        'Which Taiwanese city could be the most welcoming to first-time visitors?',
+        'What could Magong’s #2 result tell us—and what can it not tell us?',
+        'Which place you have visited must be among the most relaxing, based on your experience?',
+        'What do you like to do on your first day in a new city?',
+        'Which cities have been the most fun to explore, and why?',
+        'Which city do you most want to visit? What might make it welcoming?',
+        'What are the main tourist attractions in your town or city?',
+        'Could online mentions create an unfair ranking? Explain one possible bias.',
+        'If Taiwan wanted to lead a country-level welcome index, what might it improve first?'
+      ];
+      let lastQuestion = -1;
+      document.getElementById('drawQuestion').addEventListener('click', function () {
+        let next = Math.floor(Math.random() * discussionQuestions.length);
+        if (discussionQuestions.length > 1 && next === lastQuestion) next = (next + 1) % discussionQuestions.length;
+        lastQuestion = next;
+        document.getElementById('drawnQuestion').textContent = discussionQuestions[next];
+      });
+
+      function updateProgress() {
+        let points = 0;
+        if ((state.sequences.criteria || []).length === 6) points++;
+        if (state.checks['group-test1']) points++;
+        if (wordCount(state.fields.firstPrediction) >= 6) points++;
+        if (state.checks['group-vocab']) points++;
+        if (state.checks['group-reading']) points++;
+        if (state.checks['group-form']) points++;
+        if (state.checks['group-test2']) points++;
+        if ((state.sequences.countries || []).length === 5 && wordCount(state.fields.countryReason) >= 8) points++;
+        if (state.checks.usedCould && state.checks.usedMight && state.checks.usedMust) points++;
+        const exit = normalise(state.fields.exitSentence);
+        if (exit.includes('could be') && exit.includes('might be') && exit.includes('must be')) points++;
+        if (state.lessonComplete) points = 10;
+        const percent = Math.round(points / 10 * 100);
+        document.getElementById('headerProgress').value = percent;
+        document.getElementById('headerProgressText').textContent = percent + '% complete';
+        document.getElementById('sideProgressText').textContent = percent + '%';
+        document.getElementById('sideProgressFill').style.width = percent + '%';
+        document.getElementById('lessonCompleteMessage').classList.toggle('show', !!state.lessonComplete);
+        document.getElementById('homeworkCompleteMessage').classList.toggle('show', !!state.homeworkComplete);
+      }
+
+      function setTeacherMode(on) {
+        document.body.classList.toggle('teacher-on', on);
+        const desktop = document.getElementById('teacherToggle');
+        desktop.setAttribute('aria-pressed', String(on));
+        desktop.setAttribute('aria-checked', String(on));
+        document.getElementById('teacherToggleMobile').textContent = on ? 'Hide notes' : 'Notes';
+      }
+      document.getElementById('teacherToggle').addEventListener('click', function () { setTeacherMode(!document.body.classList.contains('teacher-on')); });
+      document.getElementById('teacherToggleMobile').addEventListener('click', function () { setTeacherMode(!document.body.classList.contains('teacher-on')); });
+
+      let remaining = 80 * 60;
+      let timerId = null;
+      function renderTimer() {
+        const minutes = Math.floor(remaining / 60);
+        const seconds = remaining % 60;
+        const value = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+        document.getElementById('timerDesktop').textContent = value;
+        document.getElementById('timerMobile').textContent = value;
+      }
+      function updateTimerButtons() {
+        const label = timerId ? 'Pause' : (remaining < 80 * 60 ? 'Resume' : 'Start');
+        document.getElementById('timerToggle').textContent = label;
+        document.getElementById('timerToggleMobile').textContent = label;
+      }
+      function toggleTimer() {
+        if (timerId) { clearInterval(timerId); timerId = null; updateTimerButtons(); return; }
+        timerId = setInterval(function () {
+          if (remaining <= 0) {
+            clearInterval(timerId); timerId = null; updateTimerButtons(); showToast('80 minutes complete — finish the exit ticket.'); return;
+          }
+          remaining -= 1; renderTimer();
+        }, 1000);
+        updateTimerButtons();
+      }
+      document.getElementById('timerToggle').addEventListener('click', toggleTimer);
+      document.getElementById('timerToggleMobile').addEventListener('click', toggleTimer);
+      document.getElementById('timerReset').addEventListener('click', function () { if (timerId) clearInterval(timerId); timerId = null; remaining = 80 * 60; renderTimer(); updateTimerButtons(); });
+
+      document.getElementById('printLesson').addEventListener('click', function () { window.print(); });
+      document.getElementById('completeLesson').addEventListener('click', function () { state.lessonComplete = true; persist(); showToast('Class lesson marked complete.'); });
+      document.getElementById('completeHomework').addEventListener('click', function () { state.homeworkComplete = true; persist(); showToast('Homework marked complete.'); });
+      document.getElementById('copyHomework').addEventListener('click', async function () {
+        const brief = 'GRAHAMIELTS HOMEWORK — JAPANESE TOURISTS ARE THE MOST POLITE — SURVEY\n\n1. Open and read the Engoo article.\n2. Review: polite, tour, operator, tipper, spender, adventurous.\n3. Complete the true/false and modal-deduction checks in the lesson file.\n4. Write 100–130 words answering: What can this survey reasonably suggest about tourist behaviour? Include one number, one limitation, and could be, might be, must be.\n5. Answer: Which finding surprised you most, and why?\n\nArticle: https://engoo.com/app/daily-news/article/japanese-tourists-are-the-most-polite-survey/JUAvkqYwEfG8gxdxdmaZkQ';
+        try { await navigator.clipboard.writeText(brief); showToast('Homework brief copied.'); }
+        catch (error) { showToast('Copy was blocked; use the homework section on screen.'); }
+      });
+      document.getElementById('resetWork').addEventListener('click', function () {
+        const confirmed = window.confirm('Reset all saved answers and scores for this lesson on this device?');
+        if (!confirmed) return;
+        try { localStorage.removeItem(STORAGE_KEY); } catch (error) {}
+        window.location.reload();
+      });
+
+      const agendaLinks = Array.from(document.querySelectorAll('.agenda a'));
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            agendaLinks.forEach(function (link) { link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id); });
+          });
+        }, { rootMargin: '-18% 0px -70% 0px' });
+        agendaLinks.map(function (link) { return document.querySelector(link.getAttribute('href')); }).filter(Boolean).forEach(function (section) { observer.observe(section); });
+      }
+
+      renderSequence('criteria');
+      renderSequence('countries');
+      updateTaiwanScore();
+      updateDynamicFields();
+      updateScoreboard();
+      updateProgress();
+      renderTimer();
+    })();
+  </script>
+</body>
+</html>
