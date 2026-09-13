@@ -1,0 +1,44 @@
+{
+  "student": "Candice",
+  "updated": "2026-09-13",
+  "documents": [
+    {
+      "file": "trial-report.html",
+      "label": "| After your trial | GrahamIELTS",
+      "kind": "Trial report",
+      "added": "2026-09-13",
+      "is_index": false
+    },
+    {
+      "file": "homework.html",
+      "label": "| Homework | GrahamIELTS",
+      "kind": "Homework",
+      "added": "2026-09-13",
+      "is_index": false
+    },
+    {
+      "file": "workbook.html",
+      "label": "Your Speaking Units",
+      "kind": "Workbook",
+      "added": "2026-09-13",
+      "is_index": false,
+      "picks": [
+        {
+          "unit": "02",
+          "reason": ""
+        },
+        {
+          "unit": "06",
+          "reason": ""
+        },
+        {
+          "unit": "07",
+          "reason": ""
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "ielts": "yes"
+  }
+}
